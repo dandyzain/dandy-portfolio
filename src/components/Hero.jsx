@@ -64,6 +64,35 @@ export default function Hero({ onOpenCVModal }) {
     return () => clearInterval(interval);
   }, [rotatingWords, language]);
 
+  // Code Snippet Card dynamic cycling state
+  const [codeIndex, setCodeIndex] = useState(0);
+
+  const codeSnippets = [
+    {
+      stack: ["'React'", "'Laravel'", "'Flutter'"],
+      passion: language === 'id' ? "'Aplikasi performa tinggi'" : "'High-performance apps'",
+    },
+    {
+      stack: ["'Next.js'", "'Express.js'", "'Vue.js'"],
+      passion: language === 'id' ? "'Sistem misi-kritis'" : "'Mission-critical systems'",
+    },
+    {
+      stack: ["'Tailwind'", "'Kotlin'", "'REST APIs'"],
+      passion: language === 'id' ? "'Platform GIS & Telemetri'" : "'GIS & Network telemetry'",
+    },
+    {
+      stack: ["'Docker'", "'Node.js'", "'PostgreSQL'"],
+      passion: language === 'id' ? "'Arsitektur scalable'" : "'Clean, scalable code'",
+    },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCodeIndex((prev) => (prev + 1) % codeSnippets.length);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, [codeSnippets.length]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -367,21 +396,113 @@ export default function Hero({ onOpenCVModal }) {
                 </div>
               </div>
 
-              {/* Code Snippet Box */}
-              <div className="rounded-2xl bg-slate-900 p-4 text-xs font-mono text-slate-300 shadow-inner mb-6">
-                <div className="flex items-center gap-1.5 mb-3">
-                  <div className="w-3 h-3 rounded-full bg-rose-500" />
-                  <div className="w-3 h-3 rounded-full bg-amber-400" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                  <span className="text-[10px] text-slate-400 ml-2 font-sans">dandy.config.js</span>
+              {/* Dynamic Animated Code Snippet Box */}
+              <motion.div 
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="rounded-2xl bg-slate-900/95 dark:bg-slate-950 p-4 text-xs font-mono text-slate-300 shadow-xl shadow-slate-950/20 mb-6 border border-slate-800 relative overflow-hidden group"
+              >
+                {/* Subtle ambient gradient highlight border */}
+                <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+
+                {/* Terminal Header */}
+                <div className="flex items-center justify-between mb-3 border-b border-slate-800/80 pb-2.5">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-rose-500/90 hover:opacity-100 cursor-pointer" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-amber-400/90 hover:opacity-100 cursor-pointer" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/90 hover:opacity-100 cursor-pointer" />
+                    <span className="text-[10px] text-slate-400 ml-2 font-mono flex items-center gap-1">
+                      <Code2 size={11} className="text-indigo-400" />
+                      dandy.config.js
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-[9px] font-mono text-emerald-400 font-semibold tracking-wider">LIVE</span>
+                  </div>
                 </div>
-                <p className="text-purple-400">const <span className="text-sky-300">developer</span> = &#123;</p>
-                <p className="pl-4 text-slate-300">name: <span className="text-emerald-300">'Dandy Rahmat Zain'</span>,</p>
-                <p className="pl-4 text-slate-300">stack: [<span className="text-emerald-300">'React'</span>, <span className="text-emerald-300">'Laravel'</span>, <span className="text-emerald-300">'Flutter'</span>],</p>
-                <p className="pl-4 text-slate-300">passion: <span className="text-emerald-300">'High-performance apps'</span>,</p>
-                <p className="pl-4 text-slate-300">readyForHire: <span className="text-amber-300">true</span></p>
-                <p className="text-purple-400">&#125;;</p>
-              </div>
+
+                {/* Code Content with Line Numbers & Animations */}
+                <div className="space-y-1 text-[11px] sm:text-xs font-mono leading-relaxed overflow-x-auto">
+                  {/* Line 1 */}
+                  <div className="flex items-center">
+                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">1</span>
+                    <p className="text-purple-400">const <span className="text-sky-300">developer</span> = &#123;</p>
+                  </div>
+
+                  {/* Line 2 */}
+                  <div className="flex items-center">
+                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">2</span>
+                    <p className="pl-3 text-slate-300">name: <span className="text-emerald-300">'Dandy Rahmat Zain'</span>,</p>
+                  </div>
+
+                  {/* Line 3: Dynamic Animated Stack */}
+                  <div className="flex items-center">
+                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">3</span>
+                    <div className="pl-3 text-slate-300 flex items-center flex-nowrap whitespace-nowrap">
+                      <span>stack: [</span>
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={`code-stack-${codeIndex}`}
+                          initial={{ y: 6, opacity: 0, filter: 'blur(2px)' }}
+                          animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+                          exit={{ y: -6, opacity: 0, filter: 'blur(2px)' }}
+                          transition={{ duration: 0.28 }}
+                          className="inline-flex items-center mx-1"
+                        >
+                          {codeSnippets[codeIndex].stack.map((item, i) => (
+                            <React.Fragment key={i}>
+                              <span className="text-emerald-300">{item}</span>
+                              {i < codeSnippets[codeIndex].stack.length - 1 && <span className="text-slate-300 mr-1.5">,</span>}
+                            </React.Fragment>
+                          ))}
+                        </motion.span>
+                      </AnimatePresence>
+                      <span>],</span>
+                    </div>
+                  </div>
+
+                  {/* Line 4: Dynamic Animated Passion */}
+                  <div className="flex items-center">
+                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">4</span>
+                    <div className="pl-3 text-slate-300 flex items-center flex-nowrap whitespace-nowrap">
+                      <span className="mr-1.5">passion:</span>
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={`code-passion-${language}-${codeIndex}`}
+                          initial={{ y: 6, opacity: 0, filter: 'blur(2px)' }}
+                          animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+                          exit={{ y: -6, opacity: 0, filter: 'blur(2px)' }}
+                          transition={{ duration: 0.28 }}
+                          className="text-emerald-300"
+                        >
+                          {codeSnippets[codeIndex].passion}
+                        </motion.span>
+                      </AnimatePresence>
+                      <span>,</span>
+                    </div>
+                  </div>
+
+                  {/* Line 5: Ready for Hire with Pulsing Terminal Cursor */}
+                  <div className="flex items-center">
+                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">5</span>
+                    <p className="pl-3 text-slate-300 flex items-center">
+                      <span>readyForHire: <span className="text-amber-300 font-semibold">true</span></span>
+                      <motion.span 
+                        animate={{ opacity: [1, 0, 1] }}
+                        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                        className="inline-block w-1.5 h-3.5 bg-emerald-400 ml-1.5 align-middle shadow-sm shadow-emerald-400"
+                      />
+                    </p>
+                  </div>
+
+                  {/* Line 6 */}
+                  <div className="flex items-center">
+                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">6</span>
+                    <p className="text-purple-400">&#125;;</p>
+                  </div>
+                </div>
+              </motion.div>
 
               {/* Animated Stats Grid */}
               <div className="grid grid-cols-2 gap-3">
