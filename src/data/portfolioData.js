@@ -912,14 +912,14 @@ export const portfolioData = {
       },
       hero: {
         greeting: "Hello world, I am",
-        headlineStart: "Crafting Mission-Critical &",
-        headlineHighlight: "Modern Digital Systems",
+        headlineStart: "Crafting Mission-Critical",
+        headlineHighlight: "Modern Systems",
         headlineRotating: [
-          "Modern Digital Systems",
-          "Scalable Web Applications",
-          "Submarine Cable GIS",
-          "Telecom Network Centers",
-          "High-Performance APIs"
+          "Modern Systems",
+          "Web Apps",
+          "GIS Platforms",
+          "Cloud APIs",
+          "Telecom NOC"
         ],
         activeAt: "Active at PT. Infrastruktur Telekomunikasi Indonesia",
         exploreProjects: "Explore Projects",
@@ -1091,14 +1091,14 @@ export const portfolioData = {
       },
       hero: {
         greeting: "Halo dunia, perkenalkan saya",
-        headlineStart: "Membangun Sistem Misi-Kritis &",
-        headlineHighlight: "Solusi Digital Modern",
+        headlineStart: "Membangun Sistem Misi-Kritis",
+        headlineHighlight: "Sistem Modern",
         headlineRotating: [
-          "Solusi Digital Modern",
-          "Aplikasi Web Scalable",
-          "Sistem Web GIS Laut",
-          "Pusat Operasi Jaringan",
-          "Arsitektur API Cepat"
+          "Sistem Modern",
+          "Aplikasi Web",
+          "Platform GIS",
+          "Layanan API",
+          "Pusat Jaringan"
         ],
         activeAt: "Aktif di PT. Infrastruktur Telekomunikasi Indonesia",
         exploreProjects: "Jelajahi Proyek",

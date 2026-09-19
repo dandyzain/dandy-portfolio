@@ -115,13 +115,13 @@ export default function Hero({ onOpenCVModal }) {
               <span className="text-indigo-600 dark:text-indigo-400 font-bold">Dandy Zain</span>
             </motion.div>
 
-            {/* Animated Headline */}
+            {/* Animated Headline: 2 clean intentional lines that never break awkwardly */}
             <motion.h1 
               variants={itemVariants}
-              className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white leading-[1.18] tracking-tight mb-5"
+              className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] text-slate-900 dark:text-white leading-[1.16] tracking-tight mb-5"
             >
-              {/* Word-by-word spring entrance */}
-              <span className="inline">
+              {/* Line 1: Primary Action (Crafting Mission-Critical) */}
+              <span className="block mb-1 sm:mb-1.5">
                 {t.headlineStart.split(' ').map((word, wIdx) => (
                   <motion.span
                     key={`${word}-${wIdx}-${language}`}
@@ -143,61 +143,72 @@ export default function Hero({ onOpenCVModal }) {
                     {word}
                   </motion.span>
                 ))}
-              </span>{' '}
+              </span>
 
-              {/* Dynamic Rotating & Moving Phrase Container with 3D Flip & Aurora Shimmer */}
-              <span className="relative inline-block align-baseline" style={{ perspective: '1000px' }}>
-                <AnimatePresence mode="wait">
-                  <motion.span 
-                    key={`rotating-${language}-${currentWordIndex}`}
-                    initial={{ y: 26, opacity: 0, rotateX: -60, filter: 'blur(5px)' }}
-                    animate={{ 
-                      y: 0, 
-                      opacity: 1, 
-                      rotateX: 0, 
-                      filter: 'blur(0px)',
-                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                    }}
-                    exit={{ y: -26, opacity: 0, rotateX: 60, filter: 'blur(5px)' }}
-                    transition={{
-                      y: { type: "spring", stiffness: 180, damping: 18 },
-                      rotateX: { type: "spring", stiffness: 180, damping: 18 },
-                      opacity: { duration: 0.28 },
-                      filter: { duration: 0.22 },
-                      backgroundPosition: {
-                        duration: 6,
-                        repeat: Infinity,
-                        ease: "linear"
-                      }
-                    }}
-                    whileHover={{
-                      scale: 1.02,
-                      transition: { type: "spring", stiffness: 300, damping: 15 }
-                    }}
-                    className="relative inline-flex items-center bg-[length:200%_auto] bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 via-pink-500 to-indigo-600 cursor-default"
-                  >
-                    <span>{rotatingWords[currentWordIndex]}</span>
-
-                    {/* Animated Neon Pulse Cursor */}
-                    <motion.span 
-                      animate={{ opacity: [1, 0.2, 1] }}
-                      transition={{ duration: 0.9, repeat: Infinity, ease: "easeInOut" }}
-                      className="inline-block w-1 sm:w-1.5 h-7 sm:h-9 lg:h-11 ml-1.5 sm:ml-2 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 rounded-full align-middle shadow-md shadow-indigo-500/40"
-                    />
-                  </motion.span>
-                </AnimatePresence>
-
-                {/* Animated decorative gradient underline sweep */}
+              {/* Line 2: Ampersand + Short Dynamic Rotating Words */}
+              <span className="inline-flex items-center flex-nowrap gap-x-2.5">
                 <motion.span 
-                  initial={{ scaleX: 0, opacity: 0 }}
-                  animate={{ scaleX: 1, opacity: 1 }}
-                  transition={{ 
-                    delay: 0.65, 
-                    duration: 0.85, 
-                    ease: [0.16, 1, 0.3, 1] 
-                  }}
-                  className="block h-1.5 sm:h-2 mt-1.5 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-left shadow-sm shadow-indigo-500/30"
-                />
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.28, type: "spring", stiffness: 140, damping: 12 }}
+                  className="inline-block text-slate-900 dark:text-white"
+                >
+                  &
+                </motion.span>
+
+                <span className="relative inline-block align-baseline whitespace-nowrap" style={{ perspective: '1000px' }}>
+                  <AnimatePresence mode="wait">
+                    <motion.span 
+                      key={`rotating-${language}-${currentWordIndex}`}
+                      initial={{ y: 24, opacity: 0, rotateX: -55, filter: 'blur(4px)' }}
+                      animate={{ 
+                        y: 0, 
+                        opacity: 1, 
+                        rotateX: 0, 
+                        filter: 'blur(0px)',
+                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                      }}
+                      exit={{ y: -24, opacity: 0, rotateX: 55, filter: 'blur(4px)' }}
+                      transition={{
+                        y: { type: "spring", stiffness: 190, damping: 19 },
+                        rotateX: { type: "spring", stiffness: 190, damping: 19 },
+                        opacity: { duration: 0.24 },
+                        filter: { duration: 0.2 },
+                        backgroundPosition: {
+                          duration: 6,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }
+                      }}
+                      whileHover={{
+                        scale: 1.02,
+                        transition: { type: "spring", stiffness: 300, damping: 15 }
+                      }}
+                      className="relative inline-flex items-center whitespace-nowrap bg-[length:200%_auto] bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 via-pink-500 to-indigo-600 cursor-default"
+                    >
+                      <span>{rotatingWords[currentWordIndex]}</span>
+
+                      {/* Animated Neon Pulse Cursor */}
+                      <motion.span 
+                        animate={{ opacity: [1, 0.2, 1] }}
+                        transition={{ duration: 0.9, repeat: Infinity, ease: "easeInOut" }}
+                        className="inline-block w-1 sm:w-1.5 h-6 sm:h-8 lg:h-10 ml-1.5 sm:ml-2 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 rounded-full align-middle shadow-md shadow-indigo-500/40"
+                      />
+                    </motion.span>
+                  </AnimatePresence>
+
+                  {/* Animated decorative gradient underline sweep */}
+                  <motion.span 
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    animate={{ scaleX: 1, opacity: 1 }}
+                    transition={{ 
+                      delay: 0.65, 
+                      duration: 0.85, 
+                      ease: [0.16, 1, 0.3, 1] 
+                    }}
+                    className="block h-1.5 sm:h-2 mt-1 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-left shadow-sm shadow-indigo-500/30"
+                  />
+                </span>
               </span>
             </motion.h1>
 
