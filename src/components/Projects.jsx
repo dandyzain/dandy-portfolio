@@ -5,7 +5,8 @@ import {
   X, 
   ArrowUpRight,
   ExternalLink,
-  Gitlab
+  Gitlab,
+  Github
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
@@ -134,10 +135,26 @@ export default function Projects() {
                         href={project.gitlabUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                         className="p-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 text-orange-600 hover:scale-110 transition-transform shadow-sm inline-flex items-center justify-center"
                         title={t.openGitLab}
                       >
                         <Gitlab size={15} />
+                      </a>
+                    </div>
+                  )}
+
+                  {project.githubUrl && (
+                    <div className="absolute top-4 right-4">
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="p-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-900 dark:text-white hover:scale-110 transition-transform shadow-sm inline-flex items-center justify-center"
+                        title={t.openGitHub}
+                      >
+                        <Github size={15} />
                       </a>
                     </div>
                   )}
@@ -292,21 +309,38 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between gap-3">
-                  {activeModalProject.gitlabUrl ? (
-                    <motion.a
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      href={activeModalProject.gitlabUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold transition-colors"
-                    >
-                      <Gitlab size={15} />
-                      <span>{t.modal.openGitLabButton}</span>
-                      <ExternalLink size={13} />
-                    </motion.a>
-                  ) : <div />}
+                <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    {activeModalProject.gitlabUrl && (
+                      <motion.a
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                        href={activeModalProject.gitlabUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-2xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold transition-colors shadow-sm"
+                      >
+                        <Gitlab size={15} />
+                        <span>{t.modal.openGitLabButton}</span>
+                        <ExternalLink size={13} />
+                      </motion.a>
+                    )}
+
+                    {activeModalProject.githubUrl && (
+                      <motion.a
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                        href={activeModalProject.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-2xl bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-700 text-white text-xs font-bold transition-colors shadow-sm"
+                      >
+                        <Github size={15} />
+                        <span>{t.modal.openGitHubButton}</span>
+                        <ExternalLink size={13} />
+                      </motion.a>
+                    )}
+                  </div>
 
                   <motion.button
                     whileHover={{ scale: 1.05 }}

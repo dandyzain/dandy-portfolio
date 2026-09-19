@@ -540,6 +540,286 @@ export const portfolioData = {
         ]
       },
       linkText: "Open Research Tool"
+    },
+    {
+      id: 11,
+      title: "Wings FMCG Distribution & E-Commerce Platform",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "Wings Distribution Consumer Goods",
+      githubUrl: "https://github.com/dandyzain/wings.git",
+      description: {
+        en: "A robust FMCG consumer goods digital ordering and distribution catalog system inspired by Wings Group. Features multi-tier product hierarchies, dynamic cart management, multi-vendor merchant onboarding (Penjual), simulated e-money payment workflows, and automated sales reporting.",
+        id: "Sistem katalog pemesanan digital dan distribusi produk FMCG yang terinspirasi dari Wings Group. Dilengkapi hierarki kategori produk berjenjang, keranjang belanja interaktif, modul merchant multi-vendor (Penjual), simulasi transaksi e-money, serta pelaporan audit penjualan otomatis."
+      },
+      image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel 8", "Livewire", "MySQL", "Bootstrap", "E-Money Mock", "REST API"],
+      color: "sky",
+      features: {
+        en: [
+          "Hierarchical FMCG product catalog with slug-based SEO routing and real-time inventory checks.",
+          "Interactive shopping cart with dynamic order quantity recalculation using Livewire.",
+          "Vendor merchant portal allowing sellers to upload SKU images, set pricing, and track incoming orders.",
+          "Multi-tier payment simulation supporting simulated e-money balance deductions and transaction logging.",
+          "Automated periodic sales reports with date range filtering and order status tracking."
+        ],
+        id: [
+          "Katalog produk FMCG berjenjang dengan routing SEO berbasis slug dan pengecekan stok real-time.",
+          "Keranjang belanja interaktif dengan kalkulasi ulang total pesanan dinamis menggunakan Livewire.",
+          "Portal pedagang/mitra untuk unggah foto SKU, pengaturan harga, dan pemantauan pesanan masuk.",
+          "Simulasi pembayaran multi-metode dengan pengurangan saldo e-money dan rekam jejak transaksi.",
+          "Laporan rekapitulasi transaksi penjualan periodik dengan filter rentang tanggal dan status order."
+        ]
+      },
+      linkText: "GitHub Repository"
+    },
+    {
+      id: 12,
+      title: "KINO Employee Performance Appraisal DSS (TOPSIS)",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT. Kino Indonesia Tbk",
+      githubUrl: "https://github.com/dandyzain/KINO-Web-APP.git",
+      description: {
+        en: "A Decision Support System (DSS / SPK) engineered for PT. Kino Indonesia Tbk to evaluate employee performance objectively using the TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution) algorithm. Features configurable criteria weighting, normalized decision matrices, and period ranking reports.",
+        id: "Sistem Pendukung Keputusan (SPK) penilaian kinerja karyawan di PT. Kino Indonesia Tbk menggunakan algoritma TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution). Menyediakan pembobotan kriteria dinamis, kalkulasi matriks keputusan ternormalisasi, dan laporan perangkingan periodik."
+      },
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel 8", "TOPSIS Algorithm", "MySQL", "Bootstrap", "Decision Support System"],
+      color: "lavender",
+      features: {
+        en: [
+          "Algorithmic decision engine implementing TOPSIS vector normalization, ideal positive, and ideal negative solutions.",
+          "HR administration module to manage employee directories across departments and operational divisions.",
+          "Dynamic criteria management with custom benefit and cost weight distributions.",
+          "Periodic appraisal runs generating rank-ordered preference scores (V value) for merit promotion.",
+          "Printable evaluation summary reports with breakdown of intermediate normalization calculations."
+        ],
+        id: [
+          "Engine algoritma TOPSIS dengan kalkulasi normalisasi vektor, solusi ideal positif (A+), dan ideal negatif (A-).",
+          "Modul administrasi HR untuk pendataan direktori karyawan lintas divisi dan departemen.",
+          "Manajemen kriteria penilaian fleksibel dengan pembobotan tipe benefit dan cost.",
+          "Eksekusi penilaian berkala dengan pemeringkatan nilai preferensi (V) untuk rekomendasi promosi/kinerja.",
+          "Cetak rekapitulasi hasil evaluasi lengkap dengan transparansi detail perhitungan matematis."
+        ]
+      },
+      linkText: "GitHub Repository"
+    },
+    {
+      id: 13,
+      title: "Apotek ABC Pharmacy Inventory & POS System",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "Apotek ABC Healthcare",
+      githubUrl: "https://github.com/dandyzain/Web-Apotik.git",
+      description: {
+        en: "A full-scale pharmacy management and point-of-sale (POS) web system. Regulates pharmaceutical supplies, batch expiry tracking, physical rack/cabinet storage mapping, supplier purchase orders, cashier sales transactions, and audit reporting.",
+        id: "Sistem informasi manajemen apotek dan point-of-sale (POS) komprehensif. Mengatur sirkulasi persediaan obat, pemantauan masa kedaluwarsa, pemetaan lokasi rak/lemari penyimpanan, pengadaan dari distributor/pemasok, kasir penjualan, dan laporan transaksi akuntansi."
+      },
+      image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel 8", "MySQL", "Bootstrap", "DataTables", "Inventory Management", "POS"],
+      color: "mint",
+      features: {
+        en: [
+          "Comprehensive medicine cataloging with unit metrics, categories, dosages, and stock threshold alerts.",
+          "Storage unit mapping tracking exact cabinet and shelf positions for rapid medication retrieval.",
+          "Supplier procurement pipeline managing purchase orders and incoming inventory balance increments.",
+          "Cashier POS interface with automated invoice generation and customer transaction logs.",
+          "Audit reports detailing periodic financial revenue, fast-moving medications, and inventory adjustments."
+        ],
+        id: [
+          "Katalog obat terstruktur dengan satuan unit, klasifikasi kategori, dosis, dan batas peringatan stok minimum.",
+          "Pemetaan lokasi unit penyimpanan lemari dan rak fisik untuk percepatan pengambilan obat.",
+          "Alur pengadaan dari pemasok dengan pencatatan faktur pembelian dan penambahan stok otomatis.",
+          "Antarmuka kasir (POS) dengan kalkulasi transaksi cepat dan pencetakan struk penjualan.",
+          "Laporan audit berkala mencakup omzet pendapatan, obat paling laris, dan rekap penyesuaian stok."
+        ]
+      },
+      linkText: "GitHub Repository"
+    },
+    {
+      id: 14,
+      title: "UMKM Kota Cirebon Digital Marketplace & Directory",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "Dinas Koperasi & UMKM Kota Cirebon",
+      githubUrl: "https://github.com/dandyzain/UMKM-Kota-Cirebon.git",
+      description: {
+        en: "A localized digital marketplace and community business directory created to empower Micro, Small, and Medium Enterprises (MSMEs / UMKM) across Cirebon City. Enables culinary, batik, and artisan sellers to showcase products, accept orders, and manage sales digitally.",
+        id: "Platform marketplace digital dan direktori pelaku usaha lokal yang dibangun untuk memberdayakan Usaha Mikro, Kecil, dan Menengah (UMKM) se-Kota Cirebon. Memfasilitasi perajin kuliner, batik, dan kriya lokal untuk memajang produk, melayani pesanan, dan mencatat transaksi secara digital."
+      },
+      image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel 8", "Livewire", "MySQL", "Bootstrap", "E-Commerce", "Local Business"],
+      color: "peach",
+      features: {
+        en: [
+          "Digital storefront directory categorizing culinary specialties, traditional Cirebonese batik, and handicrafts.",
+          "Merchant portal enabling local business owners to manage product variants, pricing, and orders independently.",
+          "Interactive customer shopping cart powered by reactive Laravel Livewire components.",
+          "Order receipt and payment confirmation pipeline with seller status notifications.",
+          "Administrative monitoring dashboard evaluating MSME growth and product traction."
+        ],
+        id: [
+          "Direktori etalase digital UMKM dengan klasifikasi kuliner khas, batik Cirebonan, dan produk kriya.",
+          "Portal mitra mandiri bagi pelaku usaha untuk mengelola varian produk, harga, dan pesanan masuk.",
+          "Keranjang belanja interaktif pelanggan dengan komponen reaktif Laravel Livewire.",
+          "Alur konfirmasi pembayaran dan bukti transaksi dengan pembaruan status pengiriman.",
+          "Dashboard pemantauan pertumbuhan UMKM dan statistik produk lokal terpopuler."
+        ]
+      },
+      linkText: "GitHub Repository"
+    },
+    {
+      id: 15,
+      title: "SMKN 2 Kuningan Library Circulation System",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "SMK Negeri 2 Kuningan",
+      githubUrl: "https://github.com/dandyzain/Perpustakaan-Sekolah.git",
+      description: {
+        en: "An institutional library management and circulation system built for SMK Negeri 2 Kuningan. Automates member registration, book cataloging with cover imagery, barcode-friendly borrowing and return processing, overdue fines calculation, and Excel reporting.",
+        id: "Sistem informasi sirkulasi dan manajemen perpustakaan sekolah yang dibangun untuk SMK Negeri 2 Kuningan. Mengotomatisasi pendaftaran anggota, katalog buku dengan sampul digital, pencatatan peminjaman dan pengembalian, kalkulasi denda keterlambatan, serta ekspor laporan Excel."
+      },
+      image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80",
+      tags: ["PHP Native", "MySQL", "Bootstrap", "Excel Export", "Library Circulation"],
+      color: "butter",
+      features: {
+        en: [
+          "Member card management storing student identifiers, classes, and contact records.",
+          "Book collection indexing with digital cover uploads, categorization, and physical inventory tracking.",
+          "Fast-track circulation counter handling loan timestamps, return deadlines, and automatic overdue fine formulas.",
+          "One-click spreadsheet export generating Excel inventory balance and loan history sheets.",
+          "Printable official library administration reports for periodic school accreditation audits."
+        ],
+        id: [
+          "Manajemen kartu anggota perpustakaan mencakup data NIS siswa, jurusan, dan kontak.",
+          "Pendataan inventaris buku dengan upload sampul digital, kategori keilmuan, dan stok ketersediaan.",
+          "Loket sirkulasi peminjaman dan pengembalian buku dengan kalkulasi otomatis denda keterlambatan.",
+          "Ekspor rekapitulasi inventaris dan buku pinjaman ke format Microsoft Excel dengan satu klik.",
+          "Cetak format laporan resmi administrasi perpustakaan untuk kebutuhan pelaporan akreditasi sekolah."
+        ]
+      },
+      linkText: "GitHub Repository"
+    },
+    {
+      id: 16,
+      title: "BPN Land Registration & PTSL Admin Portal",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "Badan Pertanahan Nasional (BPN)",
+      githubUrl: "https://github.com/dandyzain/Pendaftaran-Tanah.git",
+      description: {
+        en: "A land administration information system tailored for Badan Pertanahan Nasional (BPN) supporting PTSL (Pendaftaran Tanah Sistematis Lengkap). Manages village land parcel clusters, committee adjudication teams, ownership search, and official Lampiran 13 legal documentation.",
+        id: "Sistem informasi administrasi pendaftaran tanah yang dikembangkan untuk Badan Pertanahan Nasional (BPN) dalam mendukung program PTSL (Pendaftaran Tanah Sistematis Lengkap). Mengelola klaster data desa, tim panitia adjudikasi, pencarian status bidang tanah, serta format resmi Lampiran 13 yuridis."
+      },
+      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
+      tags: ["PHP Native", "MySQL", "Bootstrap", "Session Auth", "Legal Administration", "PTSL"],
+      color: "emerald",
+      features: {
+        en: [
+          "Village parcel cluster registry recording land status, applicant identity, and location coordinates.",
+          "Adjudication committee management structuring surveyor teams and administrative verifiers.",
+          "High-speed parcel search engine querying national land records by applicant name or parcel number.",
+          "Automated generation of official BPN legal documents including standardized Lampiran 13 dossiers.",
+          "Role-based access control protecting state land legal data integrity."
+        ],
+        id: [
+          "Registrasi klaster data bidang tanah desa dengan rekam data pemohon dan bukti alas hak.",
+          "Manajemen susunan panitia adjudikasi PTSL untuk tim yuridis dan tim pengukuran fisik.",
+          "Mesin pencarian cepat berkas tanah berdasarkan nomor berkas, nama pemohon, atau desa.",
+          "Generator otomatis format yuridis resmi Badan Pertanahan Nasional termasuk Lampiran 13.",
+          "Autentikasi keamanan data berbasis hak akses untuk menjaga kerahasiaan berkas pertanahan."
+        ]
+      },
+      linkText: "GitHub Repository"
+    },
+    {
+      id: 17,
+      title: "PLN Post-Paid Electricity Billing & Payment Portal",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "Perusahaan Listrik Negara (PLN) / UKK",
+      githubUrl: "https://github.com/dandyzain/Pembayaran-Listrik.git",
+      description: {
+        en: "A full-featured post-paid electricity utility billing and cashier payment portal developed for the national vocational competency assessment (UKK/Ujikom). Handles power tariff structures, monthly meter readings, automated bill calculation with penalties, payment transactions, and receipt printing.",
+        id: "Portal sistem penagihan dan pembayaran loket listrik pascabayar PLN yang dikembangkan untuk Uji Kompetensi Keahlian (UKK) Rekayasa Perangkat Lunak. Mengelola golongan tarif daya, pencatatan meteran berkala, kalkulasi tagihan dan denda keterlambatan otomatis, transaksi loket, serta cetak struk pembayaran resmi."
+      },
+      image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80",
+      tags: ["CodeIgniter 3", "MySQL", "Bootstrap", "DataTables", "Billing Gateway", "MVC"],
+      color: "cyan",
+      features: {
+        en: [
+          "Tiered power tariff management structuring daya categories (VA) and cost per kWh formulas.",
+          "Customer monthly meter usage logging with initial/final readings and delta consumption auditing.",
+          "Automated billing generator applying tariff rates, administrative charges, and overdue penalties.",
+          "Cashier payment processing gateway logging operator credentials, payment timestamps, and change calculations.",
+          "Official PLN transaction receipt printing and periodic financial reconciliation reports."
+        ],
+        id: [
+          "Manajemen golongan tarif daya listrik (VA) beserta formula penentuan tarif dasar per kWh.",
+          "Pencatatan meteran penggunaan bulanan pelanggan dengan input meter awal, meter akhir, dan kalkulasi pemakaian.",
+          "Generator tagihan otomatis yang menerapkan beban tarif, biaya admin, dan denda keterlambatan.",
+          "Loket kasir pembayaran tagihan dengan validasi operator, pencatatan waktu transaksi, dan penghitungan kembalian.",
+          "Pencetakan struk pembayaran resmi dan laporan rekapitulasi penerimaan kas loket periodik."
+        ]
+      },
+      linkText: "GitHub Repository"
+    },
+    {
+      id: 18,
+      title: "Indosehat Clinical Service & Patient QR Management",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "Klinik Pratama Indosehat",
+      githubUrl: "https://github.com/dandyzain/Web-Indosehat.git",
+      description: {
+        en: "An integrated healthcare clinic and patient intake administration system. Streamlines online patient appointments, multi-branch clinic directory management (master_klinik), dynamic Endroid QR-code digital patient card generation, and automated medical checkup report exports with DomPDF.",
+        id: "Sistem informasi manajemen pelayanan klinik kesehatan dan administrasi pasien terpadu. Menyederhanakan pendaftaran pasien daring, direktori cabang klinik (master_klinik), penerbitan kartu berobat digital dengan QR-Code dinamis (Endroid QR-Code), serta cetak laporan rekam medis via DomPDF."
+      },
+      image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80",
+      tags: ["CodeIgniter 3", "MySQL", "Argon Dashboard", "DomPDF", "Endroid QR-Code", "Healthcare"],
+      color: "lavender",
+      features: {
+        en: [
+          "Online patient self-registration portal capturing demographic records, complaints, and target clinic selection.",
+          "Multi-branch clinic master database regulating service capacities, doctors on duty, and clinical operational data.",
+          "Dynamic Endroid QR-Code generation embedding encrypted patient identification for instant front-desk check-in.",
+          "Automated medical checkup and consultation report export engine using DomPDF formatting.",
+          "Modern administrative interface built upon the Argon Dashboard UI design system."
+        ],
+        id: [
+          "Portal pendaftaran mandiri pasien online mencakup data demografis, riwayat keluhan, dan pilihan cabang klinik.",
+          "Master data multi-cabang klinik untuk pengaturan kapasitas layanan, jadwal dokter, dan operasional poli.",
+          "Penerbitan kartu pasien digital berbasis QR-Code dinamis (Endroid QR-Code) untuk verifikasi cepat di loket.",
+          "Ekspor surat keterangan medis dan rekapitulasi data pemeriksaan pasien otomatis dengan DomPDF.",
+          "Antarmuka admin responsif dan modern berbasis sistem desain Argon Dashboard."
+        ]
+      },
+      linkText: "GitHub Repository"
     }
   ],
 
@@ -722,11 +1002,13 @@ export const portfolioData = {
         categories: ["All", "Telkominfra", "Full Stack", "Mobile", "AI & Web"],
         studyCase: "Explore Case Study",
         openGitLab: "GitLab Repository",
+        openGitHub: "GitHub Repository",
         modal: {
           aboutProject: "About This Project:",
           keyFeatures: "Key Features & Implementation:",
           techUsed: "Technologies Used:",
           openGitLabButton: "Open on GitLab",
+          openGitHubButton: "Open on GitHub",
           close: "Close Details"
         }
       },
@@ -892,11 +1174,13 @@ export const portfolioData = {
         categories: ["Semua", "Telkominfra", "Full Stack", "Mobile", "AI & Web"],
         studyCase: "Pelajari Studi Kasus",
         openGitLab: "Repositori GitLab",
+        openGitHub: "Repositori GitHub",
         modal: {
           aboutProject: "Tentang Proyek:",
           keyFeatures: "Fitur & Implementasi Utama:",
           techUsed: "Teknologi yang Digunakan:",
           openGitLabButton: "Buka di GitLab",
+          openGitHubButton: "Buka di GitHub",
           close: "Tutup Rincian"
         }
       },
