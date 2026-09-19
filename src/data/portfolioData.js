@@ -23,22 +23,22 @@ export const portfolioData = {
     },
     bio: {
       en: [
-        "I am a Developer with experience in web and mobile application development. I specialize in building robust applications using Laravel and Express.js for backend architectures, alongside modern JavaScript frameworks like React, Next.js, Vue, and Nuxt for frontend development.",
+        "I am a Developer with experience in web and mobile application development. I specialize in building robust enterprise applications using Laravel and Express.js for backend architectures, alongside modern JavaScript frameworks like React, Next.js, Vue, and Nuxt for frontend development.",
+        "At PT Infrastruktur Telekomunikasi Indonesia (Telkominfra), I actively engineer and maintain mission-critical telecommunications web applications including nationwide submarine cable monitoring (LION), radio access network monitoring (NOC-RAN), tower site assessment (TSA), and workforce asset management (AssetMgmt WFM).",
         "On the mobile side, I build cross-platform and native applications using Flutter and Kotlin, ensuring smooth performance and intuitive UX across multiple platforms.",
-        "I enjoy tackling technical challenges and finding innovative solutions to build fast, responsive, and reliable software. With a comprehensive full-stack approach, I manage projects from database design to frontend polish, including API integration, cloud deployment, and performance optimization.",
-        "I actively leverage Artificial Intelligence (AI) for deep technical research, system architecture design, and accelerating modern software engineering workflows."
+        "With a comprehensive full-stack approach, I manage projects from database architecture to frontend polish, API integration, and cloud deployment. I also leverage Artificial Intelligence (AI) to accelerate software development workflows."
       ],
       id: [
         "Saya adalah Developer dengan pengalaman dalam perancangan dan pengembangan aplikasi web serta mobile. Keahlian backend saya berfokus pada Laravel dan Express.js untuk arsitektur API yang tangguh, aman, dan scalable, serta framework modern seperti React, Next.js, Vue, dan Nuxt untuk sisi frontend.",
+        "Di PT Infrastruktur Telekomunikasi Indonesia (Telkominfra), saya aktif merancang dan mengelola aplikasi web misi-kritis termasuk pemantauan kabel bawah laut nasional (LION), monitoring radio access network (NOC-RAN), audit aktivitas menara (TSA), dan manajemen aset & work force (AssetMgmt WFM).",
         "Di platform mobile, saya mengembangkan aplikasi menggunakan Flutter dan Kotlin native, memastikan performa tinggi serta pengalaman pengguna yang mulus di berbagai sistem operasi.",
-        "Saya senang memecahkan tantangan teknis dan menemukan solusi inovatif untuk menciptakan aplikasi yang cepat, responsif, dan mudah digunakan. Dengan pendekatan full-stack menyeluruh, saya menangani proyek dari hulu ke hilir.",
-        "Saya juga aktif mengintegrasikan kecerdasan buatan (AI) untuk riset teknis, perancangan arsitektur sistem, dan otomatisasi alur kerja rekayasa perangkat lunak modern."
+        "Dengan pendekatan full-stack menyeluruh, saya menangani proyek dari hulu ke hilir. Saya juga aktif mengintegrasikan kecerdasan buatan (AI) untuk riset teknis dan percepatan alur kerja rekayasa perangkat lunak modern."
       ]
     },
     stats: [
       { label: { en: "Years Experience", id: "Tahun Pengalaman" }, value: "4+" },
       { label: { en: "Completed Projects", id: "Proyek Selesai" }, value: "25+" },
-      { label: { en: "Mastered Stacks", id: "Teknologi Dikuasai" }, value: "15+" },
+      { label: { en: "Telkominfra Apps", id: "Aplikasi Telkom" }, value: "7" },
       { label: { en: "Active Companies", id: "Perusahaan Aktif" }, value: "2" },
     ]
   },
@@ -60,24 +60,24 @@ export const portfolioData = {
       type: "Full-time",
       color: "lavender",
       description: {
-        en: "Responsible for system architecture, internal telecom web portal engineering, and high-volume API integrations to support the nationwide network infrastructure operations of Telkom Group.",
-        id: "Bertanggung jawab atas arsitektur sistem perangkat lunak, pengembangan portal web internal, serta integrasi API telekomunikasi berskala besar untuk mendukung operasional infrastruktur jaringan Telkom Group."
+        en: "Responsible for full-stack engineering of mission-critical telecom infrastructure systems (LION, NOC-RAN, AssetMgmt WFM, TSA, RENATA, WBS, and KEPO) supporting nationwide cellular towers, submarine fiber optic cables, and workforce operations of Telkom Group.",
+        id: "Bertanggung jawab penuh atas rekayasa full-stack sistem infrastruktur telekomunikasi misi-kritis (LION, NOC-RAN, AssetMgmt WFM, TSA, RENATA, WBS, dan KEPO) yang mendukung operasional menara seluler nasional, kabel fiber optik laut, dan tenaga kerja lapangan Telkom Group."
       },
       highlights: {
         en: [
-          "Engineered telecom infrastructure monitoring dashboards and inventory tracking using React.js and Laravel.",
-          "Developed high-throughput RESTful APIs for real-time network device telemetry and health checks.",
-          "Optimized high-concurrency database queries, reducing analytical dashboard load times by up to 40%.",
-          "Enforced CI/CD pipelines and standardized code quality practices across engineering teams."
+          "Developed GIS mapping and automated maritime hazard proximity alerts (100m, 1km, 2km buffer) for submarine cables in LION NOC Submarine.",
+          "Architected Preventive Maintenance (PM) & Corrective Maintenance (CM) Work Force Management order pipelines with QR code & GPS tracking.",
+          "Processed real-time high-throughput cellular BTS, eNodeB, and gNodeB alarm telemetry in NOC-RAN with Redis caching.",
+          "Modernized legacy systems with Docker containerization, Kubernetes manifests, and Laravel/Vue architecture standards."
         ],
         id: [
-          "Membangun dashboard monitoring dan manajemen inventaris infrastruktur telekomunikasi dengan React.js dan Laravel.",
-          "Mengembangkan RESTful APIs berkecepatan tinggi untuk integrasi telemetri perangkat jaringan secara real-time.",
-          "Mengoptimalkan query database relasional berskala data tinggi guna mempercepat waktu muat halaman analitik hingga 40%.",
-          "Menerapkan best practice CI/CD dan standarisasi penulisan kode tim developer."
+          "Membangun visualisasi Web GIS dan notifikasi peringatan bahaya kapal (buffer 100m, 1km, 2km) untuk kabel laut di LION NOC Submarine.",
+          "Merancang alur order Work Force Management Preventive Maintenance (PM) & Corrective Maintenance (CM) dengan QR code & pelacakan GPS.",
+          "Memproses telemetri alarm Base Station (BTS), eNodeB, dan gNodeB secara real-time di NOC-RAN dengan integrasi Redis caching.",
+          "Memodernisasi sistem warisan dengan kontainerisasi Docker, konfigurasi Kubernetes, dan standarisasi arsitektur Laravel/Vue."
         ]
       },
-      techStack: ["Laravel", "React.js", "Tailwind CSS", "MySQL", "REST API", "Docker", "Git"]
+      techStack: ["Laravel", "Vue.js", "Leaflet GIS", "MySQL", "Oracle DB", "Redis", "Docker", "Kubernetes", "Git"]
     },
     {
       id: "bay-pacific",
@@ -188,18 +188,18 @@ export const portfolioData = {
     frontend: [
       { name: "React.js", level: 95, tag: "Primary" },
       { name: "Next.js", level: 90, tag: "SSR / App Router" },
+      { name: "Vue.js / Nuxt.js", level: 90, tag: "Enterprise Frontend" },
       { name: "Tailwind CSS", level: 95, tag: "Styling" },
-      { name: "Vue.js / Nuxt.js", level: 85, tag: "Secondary" },
-      { name: "JavaScript / TypeScript", level: 90, tag: "Core Language" },
-      { name: "HTML5 / Semantic CSS", level: 95, tag: "Foundation" },
+      { name: "JavaScript / TypeScript", level: 92, tag: "Core Language" },
+      { name: "Leaflet GIS Mapping", level: 88, tag: "Geospatial" },
     ],
     backend: [
-      { name: "Laravel (PHP)", level: 92, tag: "Enterprise Backend" },
+      { name: "Laravel (PHP)", level: 95, tag: "Enterprise Core" },
       { name: "Express.js / Node.js", level: 88, tag: "API & Microservices" },
-      { name: "PHP", level: 90, tag: "Modern PHP 8+" },
-      { name: "RESTful APIs", level: 95, tag: "Architecture" },
-      { name: "MySQL / PostgreSQL", level: 88, tag: "Database" },
-      { name: "Redis", level: 80, tag: "Caching & Queues" },
+      { name: "PHP (7.x - 8.x)", level: 94, tag: "Enterprise Backend" },
+      { name: "RESTful APIs", level: 96, tag: "Architecture" },
+      { name: "MySQL / Oracle DB", level: 90, tag: "Databases" },
+      { name: "Redis", level: 88, tag: "Caching & Queues" },
     ],
     mobile: [
       { name: "Flutter (Dart)", level: 88, tag: "Cross-Platform" },
@@ -208,50 +208,249 @@ export const portfolioData = {
       { name: "Mobile UI/UX", level: 88, tag: "Responsive Design" },
     ],
     aiAndTools: [
-      { name: "AI Integration & Prompting", level: 90, tag: "LLM / Automation" },
-      { name: "Data Analytics", level: 82, tag: "Insights" },
-      { name: "Git & GitHub Workflow", level: 92, tag: "Version Control" },
-      { name: "Systems Thinking", level: 88, tag: "Architecture" },
-      { name: "Docker & Laragon", level: 85, tag: "Dev Environment" },
-      { name: "Postman / API Testing", level: 90, tag: "Quality Assurance" },
+      { name: "Docker & Kubernetes", level: 86, tag: "DevOps & K8s" },
+      { name: "Git & GitLab CI/CD", level: 94, tag: "Version Control" },
+      { name: "AI Integration & Prompting", level: 90, tag: "Automation" },
+      { name: "Data Analytics", level: 84, tag: "Insights" },
+      { name: "Systems Thinking", level: 90, tag: "Architecture" },
+      { name: "Postman / API Testing", level: 92, tag: "QA & Documentation" },
     ]
   },
 
   projects: [
     {
       id: 1,
-      title: "Telkominfra Network Monitoring System",
-      category: "Full Stack",
+      title: "Asset Management & WFM System v2.1",
+      category: "Telkominfra",
       role: {
-        en: "Lead Full Stack Developer",
-        id: "Lead Full Stack Developer"
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
       },
-      client: "PT Infrastruktur Telekomunikasi Indonesia",
+      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      gitlabUrl: "https://gitlab.com/telkominfraapps/assetmgmt_v2.1",
       description: {
-        en: "An intelligent telecom telemetry monitoring platform visualizing live network node status across Indonesian regions with automated incident alerts.",
-        id: "Platform pemantauan telekomunikasi cerdas yang memvisualisasikan kondisi ribuan node jaringan di seluruh Indonesia secara live dengan peringatan insiden otomatis."
+        en: "Enterprise Asset Management and Work Force Management (WFM) platform for Telkominfra. Manages field Preventive Maintenance (PM) and Corrective Maintenance (CM) orders, QR code asset tagging, GPS location stamping, and automated Twilio dispatching.",
+        id: "Platform Enterprise Asset Management dan Work Force Management (WFM) Telkominfra. Mengelola siklus order Preventive Maintenance (PM) dan Corrective Maintenance (CM), pemindaian label QR-code aset fisik di menara, pelacakan koordinat GPS teknisi, dan integrasi notifikasi otomatis Twilio."
       },
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
-      tags: ["React.js", "Laravel", "Tailwind CSS", "MySQL", "WebSockets"],
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel", "Vue.js", "Oracle DB", "MySQL", "QR-Code", "Twilio", "Geolocation"],
       color: "lavender",
       features: {
         en: [
-          "Interactive geographic BTS node distribution map with real-time connectivity states.",
-          "Instant automated alert trigger notifications when telemetry anomalies occur.",
-          "Automated monthly SLA performance and uptime reporting in PDF & Excel formats.",
-          "Granular Role-Based Access Control (RBAC) for field maintenance engineers."
+          "Automated Work Force Management (WFM) order pipeline for PM and CM nationwide schedules.",
+          "Mobile-friendly physical asset scanning using dynamic QR-code generation and validation.",
+          "Technician GPS geolocation tracking with geofence validation for tower site visits.",
+          "High-volume Oracle Database integration using server-side DataTables and Excel exports."
         ],
         id: [
-          "Peta interaktif sebaran node BTS dengan status konektivitas live.",
-          "Sistem notifikasi alert otomatis saat terjadi anomali transmisi.",
-          "Ekspor laporan performa uptime bulanan format PDF & Excel.",
-          "Role-based access control (RBAC) bertingkat untuk tim teknisi lapangan."
+          "Manajemen alur kerja order Work Force Management (WFM) untuk jadwal PM dan CM menara nasional.",
+          "Pemindaian aset fisik berbasis mobile dengan generator dan validator QR-code dinamis.",
+          "Pelacakan koordinat GPS teknisi dengan validasi geofence saat kunjungan menara.",
+          "Integrasi Oracle Database volume tinggi dengan server-side DataTables dan ekspor laporan berkala."
         ]
       },
-      linkText: "Internal Enterprise App"
+      linkText: "GitLab Repository"
     },
     {
       id: 2,
+      title: "LION — NOC Submarine Cable Monitoring",
+      category: "Telkominfra",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      gitlabUrl: "https://gitlab.com/telkominfraapps/lion",
+      description: {
+        en: "Real-time GIS Marine Traffic and Subsea Cable Monitoring Platform. Visualizes Indonesian archipelago submarine fiber-optic cables (SKKL) with KML/KMZ overlay and automated buffer hazard detection (100m, 1km, 2km radius) against marine vessels.",
+        id: "Sistem Web GIS pemantauan kabel bawah laut dan lalu lintas maritim nasional (NOC Submarine). Memvisualisasikan jalur Sistem Komunikasi Kabel Laut (SKKL) via overlay KML/KMZ serta deteksi peringatan zona bahaya otomatis (radius 100m, 1km, 2km) terhadap pergerakan kapal laut."
+      },
+      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel", "Vue.js", "Leaflet GIS", "Rotated Marker", "KML/KMZ", "Redis", "MySQL"],
+      color: "sky",
+      features: {
+        en: [
+          "Interactive Leaflet geospatial map overlaying subsea cable lines across Indonesian seas.",
+          "KML/KMZ geographic file parser and renderer with dynamic cable segment coordinate mapping.",
+          "Real-time vessel proximity buffer zones (100m, 1km, 2km) alerting against anchor hazards.",
+          "High-performance caching with Redis for rapid multi-vessel telemetry updates."
+        ],
+        id: [
+          "Peta geospasial Leaflet interaktif yang memetakan jalur kabel serat optik bawah laut di perairan Indonesia.",
+          "Modul uploader dan parser file KML/KMZ untuk render koordinat rute kabel secara dinamis.",
+          "Zona penyangga (buffer radius 100m, 1km, 2km) peringatan dini ancaman labuh jangkar kapal laut.",
+          "Caching berkecepatan tinggi dengan Redis untuk pembaruan telemetri banyak kapal secara bersamaan."
+        ]
+      },
+      linkText: "GitLab Repository"
+    },
+    {
+      id: 3,
+      title: "NOC-RAN — Radio Access Network Center",
+      category: "Telkominfra",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      gitlabUrl: "https://gitlab.com/telkominfraapps/noc-ran",
+      description: {
+        en: "Nationwide Radio Access Network (RAN) Operations Center monitoring thousands of Base Station (BTS), eNodeB (4G), and gNodeB (5G) nodes across Telkom Group operational territories with real-time alarm telemetry and incident heatmap analysis.",
+        id: "Pusat operasi monitoring jaringan akses radio seluler (NOC-RAN) nasional. Memantau kesehatan ribuan node Base Station (BTS), eNodeB (4G), dan gNodeB (5G) di seluruh wilayah operasional Telkom Group dengan telemetri alarm anomali real-time dan pemetaan geografis insiden."
+      },
+      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel", "Vue.js", "Leaflet GIS", "Redis", "High-Throughput Telemetry", "MySQL"],
+      color: "mint",
+      features: {
+        en: [
+          "Real-time operational dashboard visualizing cellular tower statuses across all Indonesian regions.",
+          "Automated incident alert engine filtering critical network faults and outage triggers.",
+          "Batch CSV and Excel ingestion pipeline for bulk telecommunication node configurations.",
+          "Containerized architecture prepared for high availability enterprise deployment."
+        ],
+        id: [
+          "Dashboard operasional real-time yang memvisualisasikan status menara seluler di seluruh wilayah Indonesia.",
+          "Mesin peringatan anomali otomatis yang menyaring kegagalan transmisi kritis jaringan.",
+          "Pipeline import data massal CSV dan Excel untuk konfigurasi ribuan node perangkat telekomunikasi.",
+          "Arsitektur ter-kontainerisasi siap pakai untuk ketersediaan tinggi di level enterprise."
+        ]
+      },
+      linkText: "GitLab Repository"
+    },
+    {
+      id: 4,
+      title: "RENATA — HR Talent & E-Learning Portal",
+      category: "Telkominfra",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      gitlabUrl: "https://gitlab.com/telkominfraapps/renata",
+      description: {
+        en: "Comprehensive Enterprise HR-Tech Platform managing end-to-end recruitment pipelines, applicant tracking, internal employee LMS/E-Learning course modules, and technical competency matrices.",
+        id: "Platform Enterprise HR-Tech terpadu Telkominfra untuk manajemen rekrutmen karyawan, pelacakan proses lamaran kerja, modul pembelajaran E-Learning / LMS internal, serta pemetaan matriks kompetensi keahlian staf teknis."
+      },
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel", "Vue.js", "JWT Auth", "Spatie Permission", "Oracle DataTables", "Redis"],
+      color: "peach",
+      features: {
+        en: [
+          "End-to-end job vacancy publishing and candidate application tracking workflow (ATS).",
+          "Integrated corporate E-Learning portal with video lessons, quiz assessments, and progress tracking.",
+          "Role-Based Access Control (RBAC) powered by Spatie with secure JWT session tokens.",
+          "Staff technical skills taxonomy and competency assessment matrices for internal promotions."
+        ],
+        id: [
+          "Alur kerja publikasi lowongan kerja dan pelacakan lamaran kandidat terintegrasi (ATS).",
+          "Portal E-Learning korporat internal dengan materi video, kuis evaluasi, dan pelacakan progres belajar.",
+          "Sistem hak akses bertingkat (RBAC) Spatie Permission dengan keamanan token autentikasi JWT.",
+          "Taksonomi keahlian teknis karyawan dan evaluasi matriks kompetensi untuk pengembangan karier."
+        ]
+      },
+      linkText: "GitLab Repository"
+    },
+    {
+      id: 5,
+      title: "WBS — Telkominfra Whistleblowing System",
+      category: "Telkominfra",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      gitlabUrl: "https://gitlab.com/telkominfraapps/wbs",
+      description: {
+        en: "Secure Corporate Governance and Compliance Reporting Channel. Provides confidential, encrypted whistleblowing submission for corporate fraud, ethical violations, and compliance audits with automated officer routing.",
+        id: "Saluran pelaporan tata kelola perusahaan (*Good Corporate Governance*) dan kepatuhan hukum Telkominfra. Menyediakan kanal pengaduan pelanggaran, kecurangan (anti-fraud), dan pelanggaran kode etik secara anonim dan terenkripsi dengan alur investigasi berjenjang."
+      },
+      image: "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel", "Vue.js", "Notification Service", "Captcha", "Audit Logs", "MySQL"],
+      color: "butter",
+      features: {
+        en: [
+          "Anonymous reporting workflow with encrypted ticket identification tokens for whistleblowers.",
+          "Tiered compliance officer investigation dashboard with confidential evidence attachments.",
+          "Instant notification dispatching to authorized internal audit committees upon report filing.",
+          "Spam resilience with multi-layer Captcha and brute-force rate limiting protections."
+        ],
+        id: [
+          "Alur pelaporan anonim dengan token identifikasi tiket terenkripsi untuk pelapor (whistleblower).",
+          "Dashboard investigasi komite audit internal dengan manajemen lampiran bukti rahasia.",
+          "Notifikasi instan otomatis kepada tim kepatuhan dan manajemen saat laporan baru masuk.",
+          "Perlindungan keamanan berlapis dengan integrasi Captcha dan pembatasan frekuensi pengiriman (rate limiting)."
+        ]
+      },
+      linkText: "GitLab Repository"
+    },
+    {
+      id: 6,
+      title: "KEPO — Knowledge Enterprise & Doc Repository",
+      category: "Telkominfra",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      gitlabUrl: "https://gitlab.com/telkominfraapps/kepo",
+      description: {
+        en: "Centralized Knowledge Enterprise and Institutional Document Repository Portal. Facilitates technical SOP access, policy versioning, automated PDF watermarking, and rapid document discovery for nationwide engineering staff.",
+        id: "Portal repositori manajemen pengetahuan dan arsip dokumen institusional Telkominfra. Memfasilitasi akses cepat SOP teknis, manajemen versi kebijakan, otomatisasi watermarking PDF via Browsershot/DomPDF, dan pencarian dokumen instan bagi ribuan staf operasional."
+      },
+      image: "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel", "Vue.js", "Spatie Browsershot", "DomPDF", "PhpSpreadsheet", "Redis"],
+      color: "lavender",
+      features: {
+        en: [
+          "Categorized digital archive for Standard Operating Procedures (SOP), work instructions, and telecom standards.",
+          "Automated dynamic PDF watermarking with user identity stamping to prevent unauthorized leaks.",
+          "Full-text search indexing across technical manuals and operational engineering files.",
+          "Document approval cycles and version history tracking for corporate policy updates."
+        ],
+        id: [
+          "Arsip digital terstruktur untuk Standard Operating Procedure (SOP), instruksi kerja, dan standar telekomunikasi.",
+          "Watermarking PDF dinamis otomatis dengan identitas pengunduh untuk mencegah kebocoran dokumen internal.",
+          "Pencarian cepat berbasis indeks kategori dokumen dan panduan teknis rekayasa lapangan.",
+          "Siklus persetujuan dokumen bertingkat dan pelacakan riwayat versi pembaruan kebijakan."
+        ]
+      },
+      linkText: "GitLab Repository"
+    },
+    {
+      id: 7,
+      title: "TSA — Tower Site Activity & Assessment",
+      category: "Telkominfra",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      gitlabUrl: "https://gitlab.com/telkominfraapps/tsa",
+      description: {
+        en: "Field Telecommunication Tower Site Audit and Activity Management System. Tracks contractor maintenance visits, telemetry event imports, and real-time operational status with containerized Kubernetes deployment.",
+        id: "Sistem audit dan manajemen aktivitas kunjungan menara telekomunikasi lapangan (TSA). Melacak pencatatan kunjungan teknisi kontraktor, histori aktivitas pemeliharaan, impor data event telemetri, serta orkestrasi container dengan Kubernetes."
+      },
+      image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80",
+      tags: ["CodeIgniter", "PHP", "Kubernetes", "Docker", "Event Import", "MySQL"],
+      color: "mint",
+      features: {
+        en: [
+          "Operational activity logging and site assessment tracking for thousands of telecom towers.",
+          "Batch telemetry event data importer supporting operational performance benchmarking.",
+          "Dockerized container builds orchestrated on Kubernetes clusters for continuous uptime.",
+          "Custom administrative reporting dashboards monitoring field technical milestones."
+        ],
+        id: [
+          "Pencatatan log aktivitas operasional dan histori audit fisik untuk ribuan menara telekomunikasi.",
+          "Modul import data event telemetri berkala untuk tolok ukur performa operasional infrastruktur.",
+          "Build container Docker ter-orkestrasi pada cluster Kubernetes untuk stabilitas uptime maksimal.",
+          "Dashboard pelaporan KPI operasional untuk memonitor pencapaian target pemeliharaan teknisi."
+        ]
+      },
+      linkText: "GitLab Repository"
+    },
+    {
+      id: 8,
       title: "Bay Pacific SaaS Cloud Manager",
       category: "Full Stack",
       role: {
@@ -281,7 +480,7 @@ export const portfolioData = {
       linkText: "Client SaaS Product"
     },
     {
-      id: 3,
+      id: 9,
       title: "Smart City Citizen Portal Mobile App",
       category: "Mobile",
       role: {
@@ -311,7 +510,7 @@ export const portfolioData = {
       linkText: "Smart City App"
     },
     {
-      id: 4,
+      id: 10,
       title: "AI Research & Brainstorming Engine",
       category: "AI & Web",
       role: {
@@ -339,36 +538,6 @@ export const portfolioData = {
         ]
       },
       linkText: "Open Research Tool"
-    },
-    {
-      id: 5,
-      title: "High-Speed Native Ad Tech Widget Engine",
-      category: "Frontend",
-      role: {
-        en: "Frontend Developer",
-        id: "Frontend Developer"
-      },
-      client: "Advertnative Inc.",
-      description: {
-        en: "An ultra-lightweight modular ad rendering engine (<30kb) distributed across national news portals delivering millions of smooth daily impressions.",
-        id: "Mesin rendering widget iklan native modular ultra-ringan (<30kb) yang disematkan pada ratusan portal berita nasional dengan jutaan impresi per hari."
-      },
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-      tags: ["React.js", "JavaScript ES6", "CSS3", "Webpack"],
-      color: "butter",
-      features: {
-        en: [
-          "Intelligent viewport lazy loading utilizing Intersection Observer APIs.",
-          "Zero heavy third-party dependencies with cross-browser compatibility.",
-          "Adblock-resilient telemetry and privacy-first impression analytics."
-        ],
-        id: [
-          "Lazy-loading pintar dengan Intersection Observer API.",
-          "Cross-browser compatibility hingga versi peramban lama tanpa ketergantungan berat.",
-          "Pelacakan metrik klik dan impresi tahan-adblocker dengan privacy compliance."
-        ]
-      },
-      linkText: "High Scale Web Engine"
     }
   ],
 
@@ -461,8 +630,8 @@ export const portfolioData = {
       },
       hero: {
         greeting: "Hello world, I am",
-        headlineStart: "Crafting Digital Experiences with",
-        headlineHighlight: "Precision & Creativity",
+        headlineStart: "Crafting Mission-Critical &",
+        headlineHighlight: "Modern Digital Systems",
         activeAt: "Active at Telkominfra & Bay Pacific",
         exploreProjects: "Explore Projects",
         viewCV: "View / Print CV",
@@ -476,32 +645,32 @@ export const portfolioData = {
       about: {
         badge: "About Me",
         title: "Dedicated to High Quality Code & Impactful Solutions",
-        subtitle: "Bridging powerful computational architecture with elegant, human-centered digital experiences.",
+        subtitle: "Bridging powerful telecommunication architecture with elegant, human-centered digital experiences.",
         professionalSummary: "Professional Summary",
         principlesTitle: "Core Engineering Principles:",
         principles: [
-          "Clean & Maintainable Architecture",
-          "Performance-First Mindset",
-          "Cross-Platform Scalability",
+          "Clean & Scalable Architecture",
+          "Mission-Critical Reliability",
+          "Geospatial & Real-Time Telemetry",
           "Continuous Learning & AI Adoption"
         ],
         workLocation: "Primary Location",
         cards: [
           {
+            title: "Telecom & Enterprise Solutions",
+            desc: "Engineering national telecom portals (LION Submarine Cable GIS, NOC-RAN Radio Access, Asset Management WFM, TSA) for Telkom Group."
+          },
+          {
             title: "Full Stack Web Mastery",
-            desc: "End-to-end web engineering using Laravel, Express.js, React.js, Next.js, and Tailwind CSS with a laser focus on clean architecture and optimal latency."
+            desc: "End-to-end web engineering using Laravel, Express.js, React.js, Next.js, and Vue.js with a laser focus on clean architecture and low latency."
           },
           {
             title: "Mobile App Development",
-            desc: "Specializing in Flutter cross-platform and Kotlin native Android with solid state management and responsive 60fps UX across mobile devices."
+            desc: "Specializing in Flutter cross-platform and Kotlin native Android with responsive 60fps UX across mobile devices."
           },
           {
-            title: "AI-Augmented Engineering",
-            desc: "Harnessing AI capabilities for technical research, system modeling, process automation, and high-velocity software engineering."
-          },
-          {
-            title: "API & Performance Scalability",
-            desc: "Experienced with network device telemetry, Redis caching strategies, and large-scale relational database query optimization."
+            title: "DevOps & Cloud Orchestration",
+            desc: "Containerized application workflows utilizing Docker, Kubernetes orchestration, Redis caching, and CI/CD pipelines."
           }
         ]
       },
@@ -523,37 +692,39 @@ export const portfolioData = {
           frontend: "Frontend",
           backend: "Backend & DB",
           mobile: "Mobile (Flutter & Kotlin)",
-          aiAndTools: "AI & DevOps Tools"
+          aiAndTools: "DevOps & Tools"
         },
         groups: {
           frontend: {
-            title: "Frontend Web Development",
-            desc: "Crafting aesthetic, modular, and interactive interfaces with modern JavaScript & TypeScript ecosystems."
+            title: "Frontend & Web GIS Development",
+            desc: "Crafting aesthetic, modular, and interactive interfaces with React, Next.js, Vue, and Leaflet Geospatial mapping."
           },
           backend: {
-            title: "Backend & Database Architecture",
-            desc: "Designing secure business logic, high-throughput transaction processing, and standardized REST APIs."
+            title: "Backend & Telecom Architecture",
+            desc: "Designing secure business logic, high-throughput transaction processing, and standardized REST APIs using Laravel and Express."
           },
           mobile: {
             title: "Cross-Platform & Native Mobile",
             desc: "Building smooth smartphone apps for Android & iOS using Flutter and Kotlin with efficient memory utilization."
           },
           aiAndTools: {
-            title: "AI, DevOps & Workflow Tools",
-            desc: "AI prompt engineering, Git version control, Docker containerization, and Systems Thinking methodologies."
+            title: "DevOps, Kubernetes & Workflow Tools",
+            desc: "Container orchestration (Docker/K8s), Git/GitLab CI/CD, AI prompt engineering, and Systems Thinking methodologies."
           }
         }
       },
       projects: {
         badge: "Portfolio Showcase",
-        title: "Featured Projects & Case Studies",
-        subtitle: "Real-world productions spanning telecom monitoring, multi-tenant SaaS, intelligent AI tooling, and mobile apps.",
-        categories: ["All", "Full Stack", "Mobile", "AI & Web", "Frontend"],
+        title: "Featured Enterprise Projects & Case Studies",
+        subtitle: "Real-world productions spanning Telkominfra telecommunication platforms, multi-tenant SaaS, and mobile applications.",
+        categories: ["All", "Telkominfra", "Full Stack", "Mobile", "AI & Web"],
         studyCase: "Explore Case Study",
+        openGitLab: "GitLab Repository",
         modal: {
           aboutProject: "About This Project:",
           keyFeatures: "Key Features & Implementation:",
           techUsed: "Technologies Used:",
+          openGitLabButton: "Open on GitLab",
           close: "Close Details"
         }
       },
@@ -585,9 +756,9 @@ export const portfolioData = {
         emailPlaceholder: "name@company.com",
         topicLabel: "Inquiry Topic / Service Needed",
         topicOptions: [
-          { value: "Full Stack Web Development", label: "Full Stack Web Development (React / Next.js / Laravel)" },
+          { value: "Enterprise Telecom & Web Development", label: "Enterprise Telecom & Web Development (Laravel / React / Vue)" },
           { value: "Mobile App Development", label: "Mobile App Development (Flutter / Kotlin)" },
-          { value: "AI Integration & Automation", label: "AI Integration & Automation" },
+          { value: "Full Stack Web Development", label: "Full Stack Web Development (Next.js / Express)" },
           { value: "Full-time / Remote Opportunity", label: "Career Opportunity (Full-time / Remote)" },
           { value: "Technical Consulting", label: "Technical & Architectural Consulting" }
         ],
@@ -629,8 +800,8 @@ export const portfolioData = {
       },
       hero: {
         greeting: "Halo dunia, perkenalkan saya",
-        headlineStart: "Membangun Solusi Digital dengan",
-        headlineHighlight: "Presisi & Kreativitas",
+        headlineStart: "Membangun Sistem Misi-Kritis &",
+        headlineHighlight: "Solusi Digital Modern",
         activeAt: "Aktif di Telkominfra & Bay Pacific",
         exploreProjects: "Jelajahi Proyek",
         viewCV: "Lihat / Cetak CV",
@@ -644,32 +815,32 @@ export const portfolioData = {
       about: {
         badge: "Tentang Saya",
         title: "Dedikasi Menghadirkan Kode Berkualitas & Solusi Berdampak",
-        subtitle: "Menghubungkan logika komputasi yang kuat dengan pengalaman visual yang elegan.",
+        subtitle: "Menghubungkan logika telekomunikasi yang tangguh dengan pengalaman visual digital yang elegan.",
         professionalSummary: "Ringkasan Profesional",
         principlesTitle: "Prinsip Rekayasa Perangkat Lunak:",
         principles: [
-          "Clean & Maintainable Code",
-          "Performance-First Mindset",
-          "Cross-Platform Scalability",
+          "Clean & Scalable Architecture",
+          "Mission-Critical Reliability",
+          "Geospatial & Real-Time Telemetry",
           "Continuous Learning & AI Adoption"
         ],
         workLocation: "Lokasi Kerja",
         cards: [
           {
+            title: "Solusi Telekomunikasi & Enterprise",
+            desc: "Rekayasa aplikasi nasional (LION GIS Kabel Laut, NOC-RAN Seluler, Asset Management WFM, TSA) untuk Telkom Group."
+          },
+          {
             title: "Full Stack Web Mastery",
-            desc: "Pengembangan end-to-end dengan Laravel, Express.js, React.js, Next.js, dan Tailwind CSS. Fokus pada arsitektur bersih dan performa tinggi."
+            desc: "Pengembangan end-to-end dengan Laravel, Express.js, React.js, Next.js, dan Vue.js. Fokus pada arsitektur bersih dan latensi rendah."
           },
           {
             title: "Mobile App Development",
-            desc: "Spesialisasi dalam Flutter cross-platform dan Kotlin native Android dengan state management rapi dan pengalaman pengguna 60fps yang responsif."
+            desc: "Spesialisasi dalam Flutter cross-platform dan Kotlin native Android dengan performa 60fps yang responsif di berbagai perangkat smartphone."
           },
           {
-            title: "AI-Augmented Engineering",
-            desc: "Memanfaatkan kecerdasan buatan untuk riset teknis, pemetaan sistem, otomasi tugas, dan perancangan arsitektur berdaya saing tinggi."
-          },
-          {
-            title: "Optimasi Skalabilitas & API",
-            desc: "Terbiasa mengintegrasikan telemetri perangkat jaringan, caching Redis, dan perbaikan query database berkecepatan tinggi."
+            title: "DevOps & Orkestrasi Cloud",
+            desc: "Alur kerja aplikasi ter-kontainerisasi dengan Docker, orkestrasi Kubernetes, Redis caching, dan pipeline otomatisasi CI/CD."
           }
         ]
       },
@@ -691,37 +862,39 @@ export const portfolioData = {
           frontend: "Frontend",
           backend: "Backend & DB",
           mobile: "Mobile (Flutter & Kotlin)",
-          aiAndTools: "AI & Engineering Tools"
+          aiAndTools: "DevOps & Tools"
         },
         groups: {
           frontend: {
-            title: "Frontend Web Development",
-            desc: "Menciptakan antarmuka yang estetis, modular, responsif, dan kaya interaksi dengan ekosistem JavaScript/TypeScript terdepan."
+            title: "Frontend & Web GIS Development",
+            desc: "Menciptakan antarmuka yang estetis, modular, responsif, dan kaya interaksi dengan React, Next.js, Vue, dan pemetaan Leaflet GIS."
           },
           backend: {
-            title: "Backend & Database Architecture",
-            desc: "Membangun logika bisnis yang aman, pemrosesan transaksi berkecepatan tinggi, dan integrasi API terstandar."
+            title: "Backend & Arsitektur Telekomunikasi",
+            desc: "Membangun logika bisnis yang aman, pemrosesan transaksi berkecepatan tinggi, dan integrasi API terstandar dengan Laravel dan Express."
           },
           mobile: {
             title: "Cross-Platform & Native Mobile",
             desc: "Pengalaman membangun aplikasi smartphone Android & iOS dengan Flutter dan Kotlin yang efisien dalam penggunaan memori."
           },
           aiAndTools: {
-            title: "AI, DevOps & Workflow Tools",
-            desc: "Automasi kecerdasan buatan, kontrol versi Git, containerization Docker, dan metodologi Systems Thinking."
+            title: "DevOps, Kubernetes & Workflow Tools",
+            desc: "Orkestrasi kontainer (Docker/K8s), Git/GitLab CI/CD, prompt engineering kecerdasan buatan, dan metodologi Systems Thinking."
           }
         }
       },
       projects: {
         badge: "Showcase Portofolio",
-        title: "Proyek Pilihan & Studi Kasus",
-        subtitle: "Kumpulan proyek nyata yang mencakup enterprise telecom, platform SaaS, aplikasi cerdas, dan mobile application.",
-        categories: ["Semua", "Full Stack", "Mobile", "AI & Web", "Frontend"],
+        title: "Proyek Enterprise & Studi Kasus Pilihan",
+        subtitle: "Kumpulan proyek nyata yang mencakup platform telekomunikasi Telkominfra, aplikasi SaaS multi-tenant, dan mobile application.",
+        categories: ["Semua", "Telkominfra", "Full Stack", "Mobile", "AI & Web"],
         studyCase: "Pelajari Studi Kasus",
+        openGitLab: "Repositori GitLab",
         modal: {
           aboutProject: "Tentang Proyek:",
           keyFeatures: "Fitur & Implementasi Utama:",
           techUsed: "Teknologi yang Digunakan:",
+          openGitLabButton: "Buka di GitLab",
           close: "Tutup Rincian"
         }
       },
@@ -753,9 +926,9 @@ export const portfolioData = {
         emailPlaceholder: "nama@perusahaan.com",
         topicLabel: "Kebutuhan / Topik Diskusi",
         topicOptions: [
-          { value: "Full Stack Web Development", label: "Full Stack Web Development (React / Next.js / Laravel)" },
+          { value: "Enterprise Telecom & Web Development", label: "Enterprise Telecom & Web Development (Laravel / React / Vue)" },
           { value: "Mobile App Development", label: "Mobile App Development (Flutter / Kotlin)" },
-          { value: "AI Integration & Automation", label: "AI Integration & Automation" },
+          { value: "Full Stack Web Development", label: "Full Stack Web Development (Next.js / Express)" },
           { value: "Full-time / Remote Opportunity", label: "Tawaran Posisi Kerja (Full-time / Remote)" },
           { value: "Konsultasi Teknis", label: "Konsultasi Teknis & Arsitektur" }
         ],

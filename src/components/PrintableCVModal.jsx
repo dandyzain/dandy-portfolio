@@ -168,6 +168,39 @@ export default function PrintableCVModal({ isOpen, onClose }) {
                 </div>
               </div>
 
+              {/* Key Enterprise Projects Highlight */}
+              <div className="mb-6">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-900 border-b border-slate-200 pb-1 mb-2">
+                  {language === 'en' ? 'Key Enterprise Projects (Telkominfra)' : 'Proyek Unggulan Enterprise (Telkominfra)'}
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <p className="font-bold text-slate-800">1. Asset Management & WFM System v2.1</p>
+                    <p className="text-[11px] text-slate-600">PM & CM work orders, dynamic QR code tagging, GPS tracking, Oracle DB.</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-800">2. LION — NOC Submarine Cable GIS</p>
+                    <p className="text-[11px] text-slate-600">Web GIS submarine cable mapping, KML/KMZ overlay, vessel hazard buffer alerts.</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-800">3. NOC-RAN — Radio Access Center</p>
+                    <p className="text-[11px] text-slate-600">Nationwide 4G/5G cellular tower monitoring, alarm telemetry, Redis caching.</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-800">4. RENATA — HR Talent & E-Learning</p>
+                    <p className="text-[11px] text-slate-600">Recruitment pipeline, corporate LMS, technical skill competency matrix.</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-800">5. WBS — Whistleblowing System</p>
+                    <p className="text-[11px] text-slate-600">Encrypted compliance incident reporting, tiered investigation workflows.</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-800">6. KEPO & TSA — Docs & Tower Audit</p>
+                    <p className="text-[11px] text-slate-600">Dynamic PDF watermarking repository & tower site activity telemetry audit.</p>
+                  </div>
+                </div>
+              </div>
+
               {/* Pendidikan & Sertifikasi (2 cols) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 <div>

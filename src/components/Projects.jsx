@@ -3,7 +3,9 @@ import {
   FolderGit2, 
   CheckCircle2, 
   X, 
-  ArrowUpRight
+  ArrowUpRight,
+  ExternalLink,
+  Gitlab
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
@@ -22,9 +24,9 @@ export default function Projects() {
   const filteredProjects = activeCategory === 0
     ? projects
     : projects.filter(p => {
-        const cat = categories[activeCategory];
-        return p.category.toLowerCase().includes(cat.toLowerCase()) || 
-               cat.toLowerCase().includes(p.category.toLowerCase());
+        const cat = categories[activeCategory].toLowerCase();
+        const pCat = p.category.toLowerCase();
+        return pCat.includes(cat) || cat.includes(pCat);
       });
 
   const getCardColorTheme = (color) => {
@@ -104,7 +106,7 @@ export default function Projects() {
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                transition={{ duration: 0.35, delay: pIdx * 0.06 }}
+                transition={{ duration: 0.35, delay: pIdx * 0.05 }}
                 whileHover={{ y: -6 }}
                 className={`rounded-4xl border border-slate-200/80 dark:border-slate-700/80 overflow-hidden shadow-pastel-sm hover:shadow-pastel-lg transition-shadow flex flex-col group ${getCardColorTheme(project.color)}`}
               >
@@ -119,11 +121,27 @@ export default function Projects() {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute top-4 left-4">
+                  
+                  <div className="absolute top-4 left-4 flex items-center gap-2">
                     <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-white backdrop-blur-md shadow-sm">
                       {project.category}
                     </span>
                   </div>
+
+                  {project.gitlabUrl && (
+                    <div className="absolute top-4 right-4">
+                      <a
+                        href={project.gitlabUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 text-orange-600 hover:scale-110 transition-transform shadow-sm inline-flex items-center justify-center"
+                        title={t.openGitLab}
+                      >
+                        <Gitlab size={15} />
+                      </a>
+                    </div>
+                  )}
+
                   <div className="absolute bottom-3 left-4 right-4">
                     <span className="text-xs text-slate-200 font-medium truncate block">
                       {project.client}
@@ -206,10 +224,18 @@ export default function Projects() {
                 </button>
 
                 <div className="mb-4">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-pastel-lavender dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
-                    {activeModalProject.category}
-                  </span>
-                  <h3 className="font-display font-bold text-2xl text-slate-900 dark:text-white mt-2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-pastel-lavender dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
+                      {activeModalProject.category}
+                    </span>
+                    {activeModalProject.gitlabUrl && (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-300">
+                        <Gitlab size={13} />
+                        GitLab Enterprise
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="font-display font-bold text-2xl text-slate-900 dark:text-white mt-1">
                     {activeModalProject.title}
                   </h3>
                   <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">
@@ -266,12 +292,27 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700 flex justify-end">
+                <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between gap-3">
+                  {activeModalProject.gitlabUrl ? (
+                    <motion.a
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      href={activeModalProject.gitlabUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold transition-colors"
+                    >
+                      <Gitlab size={15} />
+                      <span>{t.modal.openGitLabButton}</span>
+                      <ExternalLink size={13} />
+                    </motion.a>
+                  ) : <div />}
+
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setActiveModalProject(null)}
-                    className="px-6 py-2.5 rounded-2xl bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition-colors"
+                    className="px-6 py-2.5 rounded-2xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 text-xs font-bold transition-colors"
                   >
                     {t.modal.close}
                   </motion.button>
