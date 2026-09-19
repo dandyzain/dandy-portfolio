@@ -217,19 +217,23 @@ export default function Hero({ onOpenCVModal }) {
             
             {/* Center Visual Bento Card with Subtle Tilt on Hover */}
             <motion.div 
-              whileHover={{ y: -6, rotateY: 4, rotateX: -3 }}
+              whileHover={{ y: -6, rotateY: 3, rotateX: -2 }}
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
-              className="relative w-full max-w-md p-6 sm:p-8 rounded-4xl bg-white/85 dark:bg-slate-800/85 border border-white/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl"
+              className="relative w-full max-w-[460px] p-6 sm:p-8 rounded-4xl bg-white/85 dark:bg-slate-800/85 border border-white/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl"
             >
               
-              {/* Profile Card Header */}
-              <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100 dark:border-slate-700/60">
-                <div className="relative">
+              {/* Profile Card Header with Large Featured Portrait */}
+              <div className="flex flex-col items-center text-center mb-6 pb-6 border-b border-slate-100 dark:border-slate-700/60">
+                <div className="relative mb-4">
+                  {/* Outer ambient colorful glow */}
+                  <div className="absolute -inset-2 rounded-[36px] bg-gradient-to-tr from-indigo-500/25 via-purple-500/20 to-pink-500/25 blur-lg pointer-events-none" />
+
                   <motion.div 
-                    whileHover={{ scale: 1.08, rotate: 3 }}
-                    className="w-20 h-20 sm:w-22 sm:h-22 rounded-3xl bg-gradient-to-tr from-indigo-500 via-purple-400 to-pink-400 p-1 shadow-pastel-md cursor-pointer relative overflow-hidden group"
+                    whileHover={{ scale: 1.05, rotate: 1.5 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                    className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-gradient-to-tr from-indigo-500 via-purple-400 to-pink-400 p-1 shadow-pastel-lg cursor-pointer overflow-hidden group"
                   >
-                    <div className="w-full h-full rounded-[22px] overflow-hidden bg-gradient-to-b from-indigo-50/90 to-purple-100/90 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
+                    <div className="w-full h-full rounded-[22px] overflow-hidden bg-gradient-to-b from-indigo-50/90 via-purple-50/80 to-pink-50/90 dark:from-slate-800 dark:via-slate-900 dark:to-indigo-950 flex items-center justify-center">
                       <img 
                         src={personal.avatar} 
                         alt={personal.fullName}
@@ -237,21 +241,26 @@ export default function Hero({ onOpenCVModal }) {
                       />
                     </div>
                   </motion.div>
-                  <div className="absolute -bottom-1 -right-1 p-1 bg-white dark:bg-slate-900 rounded-full shadow-sm">
-                    <div className="w-4 h-4 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900 animate-pulse" />
+
+                  {/* Status Badge floating on Photo */}
+                  <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-white/95 dark:bg-slate-900/95 rounded-full shadow-md border border-slate-200/80 dark:border-slate-700 flex items-center gap-1.5 backdrop-blur-sm whitespace-nowrap">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[11px] font-bold text-slate-700 dark:text-slate-200">
+                      {language === 'id' ? 'Terbuka untuk Peluang Kerja' : 'Available for Hire'}
+                    </span>
                   </div>
                 </div>
 
-                <div>
-                  <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white">
-                    {personal.fullName}
-                  </h3>
-                  <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">
-                    {personal.role[language]}
-                  </p>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                    B.S. in Computer Science (UCIC)
-                  </p>
+                <h3 className="font-display font-extrabold text-2xl text-slate-900 dark:text-white tracking-tight mt-1">
+                  {personal.fullName}
+                </h3>
+                <p className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 mt-0.5">
+                  {personal.role[language]}
+                </p>
+                <div className="flex items-center gap-2 mt-1 text-[11px] text-slate-500 dark:text-slate-400">
+                  <span>B.S. in Computer Science (UCIC)</span>
+                  <span>•</span>
+                  <span>Jakarta, Indonesia</span>
                 </div>
               </div>
 

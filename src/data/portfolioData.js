@@ -40,7 +40,7 @@ export const portfolioData = {
     stats: [
       { label: { en: "Years Experience", id: "Tahun Pengalaman" }, value: "4+" },
       { label: { en: "Completed Projects", id: "Proyek Selesai" }, value: "25+" },
-      { label: { en: "Telkominfra Apps", id: "Aplikasi Telkom" }, value: "7" },
+      { label: { en: "Enterprise Systems", id: "Sistem Enterprise" }, value: "10+" },
       { label: { en: "Active Companies", id: "Perusahaan Aktif" }, value: "2" },
     ]
   },
