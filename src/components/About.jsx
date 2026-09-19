@@ -68,10 +68,44 @@ export default function About() {
             className="lg:col-span-7 space-y-6"
           >
             <div className="p-8 rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm hover:shadow-pastel-md transition-shadow">
-              <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white mb-4 flex items-center gap-2.5">
-                <span className="w-3 h-3 rounded-full bg-pastel-lavender-accent animate-ping" />
+              
+              {/* Profile Bio Header with Avatar */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-6 pb-6 border-b border-slate-100 dark:border-slate-700/60">
+                <motion.div 
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-indigo-500 via-purple-400 to-pink-400 p-0.5 shadow-pastel-md shrink-0 overflow-hidden"
+                >
+                  <div className="w-full h-full rounded-[22px] overflow-hidden bg-gradient-to-b from-indigo-50/90 to-purple-100/90 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
+                    <img 
+                      src={personal.avatar} 
+                      alt={personal.fullName} 
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <div className="absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900 shadow-xs" />
+                </motion.div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white">
+                      {personal.fullName}
+                    </h3>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                      Developer
+                    </span>
+                  </div>
+                  <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5">
+                    {personal.role[language]} • Telkominfra & Bay Pacific
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 italic">
+                    "{personal.tagline}"
+                  </p>
+                </div>
+              </div>
+
+              <h4 className="font-display font-bold text-lg text-slate-900 dark:text-white mb-4 flex items-center gap-2.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-pastel-lavender-accent animate-ping" />
                 {t.professionalSummary}
-              </h3>
+              </h4>
               
               <div className="space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
                 {personal.bio[language].map((paragraph, index) => (

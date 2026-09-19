@@ -17,6 +17,8 @@ export const portfolioData = {
     email: "dandyzain.personal@gmail.com",
     linkedin: "https://www.linkedin.com/in/dandy-zain-ab380a290",
     github: "https://github.com/dandyzain",
+    avatar: "/images/dandy-profile.png",
+    avatarOriginal: "/images/dandy-original.jpg",
     status: {
       en: "Available for Hire & Collaborations",
       id: "Terbuka untuk Peluang Kerja & Kolaborasi"

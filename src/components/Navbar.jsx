@@ -73,11 +73,17 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
           {/* Brand Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <motion.div 
-              whileHover={{ rotate: 10, scale: 1.08 }}
+              whileHover={{ rotate: 8, scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pastel-lavender-accent to-pink-400 flex items-center justify-center text-white font-display font-bold text-xl shadow-sm"
+              className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pastel-lavender-accent to-pink-400 p-0.5 shadow-sm overflow-hidden flex items-center justify-center shrink-0"
             >
-              DZ
+              <div className="w-full h-full rounded-[14px] overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center">
+                <img 
+                  src={portfolioData.personal.avatar} 
+                  alt={portfolioData.personal.preferredName}
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
             </motion.div>
             <div>
               <div className="flex items-center gap-2">

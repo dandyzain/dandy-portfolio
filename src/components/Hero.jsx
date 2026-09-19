@@ -226,14 +226,18 @@ export default function Hero({ onOpenCVModal }) {
               <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100 dark:border-slate-700/60">
                 <div className="relative">
                   <motion.div 
-                    whileHover={{ scale: 1.1, rotate: 6 }}
-                    className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-indigo-400 via-pastel-lavender-accent to-pink-300 p-1 shadow-pastel-md cursor-pointer"
+                    whileHover={{ scale: 1.08, rotate: 3 }}
+                    className="w-20 h-20 sm:w-22 sm:h-22 rounded-3xl bg-gradient-to-tr from-indigo-500 via-purple-400 to-pink-400 p-1 shadow-pastel-md cursor-pointer relative overflow-hidden group"
                   >
-                    <div className="w-full h-full rounded-[22px] bg-white dark:bg-slate-900 flex items-center justify-center font-display font-extrabold text-3xl text-indigo-600 dark:text-indigo-400">
-                      DZ
+                    <div className="w-full h-full rounded-[22px] overflow-hidden bg-gradient-to-b from-indigo-50/90 to-purple-100/90 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
+                      <img 
+                        src={personal.avatar} 
+                        alt={personal.fullName}
+                        className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      />
                     </div>
                   </motion.div>
-                  <div className="absolute -bottom-1 -right-1 p-1 bg-white dark:bg-slate-900 rounded-full">
+                  <div className="absolute -bottom-1 -right-1 p-1 bg-white dark:bg-slate-900 rounded-full shadow-sm">
                     <div className="w-4 h-4 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900 animate-pulse" />
                   </div>
                 </div>

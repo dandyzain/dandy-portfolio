@@ -91,16 +91,25 @@ export default function PrintableCVModal({ isOpen, onClose }) {
               {/* Header */}
               <div className="border-b-2 border-slate-200 pb-6 mb-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div>
-                    <h1 className="font-display font-extrabold text-3xl text-slate-900 tracking-tight">
-                      {personal.fullName}
-                    </h1>
-                    <p className="text-sm sm:text-base font-bold text-indigo-600 mt-1">
-                      {personal.role[language]}
-                    </p>
-                    <p className="text-xs text-slate-600 italic mt-1 max-w-xl">
-                      "{personal.tagline}"
-                    </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-20 h-24 sm:w-22 sm:h-26 rounded-xl overflow-hidden border border-slate-300 shadow-xs shrink-0 bg-gradient-to-b from-slate-50 to-slate-100 flex items-center justify-center">
+                      <img 
+                        src={personal.avatar} 
+                        alt={personal.fullName} 
+                        className="w-full h-full object-cover object-top"
+                      />
+                    </div>
+                    <div>
+                      <h1 className="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">
+                        {personal.fullName}
+                      </h1>
+                      <p className="text-sm sm:text-base font-bold text-indigo-600 mt-0.5">
+                        {personal.role[language]}
+                      </p>
+                      <p className="text-xs text-slate-600 italic mt-1 max-w-md">
+                        "{personal.tagline}"
+                      </p>
+                    </div>
                   </div>
 
                   {/* Contact Info Header */}
