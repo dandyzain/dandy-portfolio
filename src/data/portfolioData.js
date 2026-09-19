@@ -223,12 +223,12 @@ export const portfolioData = {
     {
       id: 1,
       title: "Asset Management & WFM System v2.1",
-      category: "Telkominfra",
+      category: "Full Stack",
       role: {
         en: "Full Stack Developer",
         id: "Full Stack Developer"
       },
-      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
       gitlabUrl: "https://gitlab.com/telkominfraapps/assetmgmt_v2.1",
       description: {
         en: "Enterprise Asset Management and Work Force Management (WFM) platform for Telkominfra. Manages field Preventive Maintenance (PM) and Corrective Maintenance (CM) orders, QR code asset tagging, GPS location stamping, and automated Twilio dispatching.",
@@ -256,12 +256,12 @@ export const portfolioData = {
     {
       id: 2,
       title: "LION — NOC Submarine Cable Monitoring",
-      category: "Telkominfra",
+      category: "Full Stack",
       role: {
         en: "Full Stack Developer",
         id: "Full Stack Developer"
       },
-      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
       gitlabUrl: "https://gitlab.com/telkominfraapps/lion",
       description: {
         en: "Real-time GIS Marine Traffic and Subsea Cable Monitoring Platform. Visualizes Indonesian archipelago submarine fiber-optic cables (SKKL) with KML/KMZ overlay and automated buffer hazard detection (100m, 1km, 2km radius) against marine vessels.",
@@ -289,12 +289,12 @@ export const portfolioData = {
     {
       id: 3,
       title: "NOC-RAN — Radio Access Network Center",
-      category: "Telkominfra",
+      category: "Full Stack",
       role: {
         en: "Full Stack Developer",
         id: "Full Stack Developer"
       },
-      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
       gitlabUrl: "https://gitlab.com/telkominfraapps/noc-ran",
       description: {
         en: "Nationwide Radio Access Network (RAN) Operations Center monitoring thousands of Base Station (BTS), eNodeB (4G), and gNodeB (5G) nodes across Telkom Group operational territories with real-time alarm telemetry and incident heatmap analysis.",
@@ -322,12 +322,12 @@ export const portfolioData = {
     {
       id: 4,
       title: "RENATA — HR Talent & E-Learning Portal",
-      category: "Telkominfra",
+      category: "Full Stack",
       role: {
         en: "Full Stack Developer",
         id: "Full Stack Developer"
       },
-      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
       gitlabUrl: "https://gitlab.com/telkominfraapps/renata",
       description: {
         en: "Comprehensive Enterprise HR-Tech Platform managing end-to-end recruitment pipelines, applicant tracking, internal employee LMS/E-Learning course modules, and technical competency matrices.",
@@ -355,12 +355,12 @@ export const portfolioData = {
     {
       id: 5,
       title: "WBS — Telkominfra Whistleblowing System",
-      category: "Telkominfra",
+      category: "Full Stack",
       role: {
         en: "Full Stack Developer",
         id: "Full Stack Developer"
       },
-      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
       gitlabUrl: "https://gitlab.com/telkominfraapps/wbs",
       description: {
         en: "Secure Corporate Governance and Compliance Reporting Channel. Provides confidential, encrypted whistleblowing submission for corporate fraud, ethical violations, and compliance audits with automated officer routing.",
@@ -388,12 +388,12 @@ export const portfolioData = {
     {
       id: 6,
       title: "KEPO — Knowledge Enterprise & Doc Repository",
-      category: "Telkominfra",
+      category: "Full Stack",
       role: {
         en: "Full Stack Developer",
         id: "Full Stack Developer"
       },
-      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
       gitlabUrl: "https://gitlab.com/telkominfraapps/kepo",
       description: {
         en: "Centralized Knowledge Enterprise and Institutional Document Repository Portal. Facilitates technical SOP access, policy versioning, automated PDF watermarking, and rapid document discovery for nationwide engineering staff.",
@@ -421,12 +421,12 @@ export const portfolioData = {
     {
       id: 7,
       title: "TSA — Tower Site Activity & Assessment",
-      category: "Telkominfra",
+      category: "Full Stack",
       role: {
         en: "Full Stack Developer",
         id: "Full Stack Developer"
       },
-      client: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
       gitlabUrl: "https://gitlab.com/telkominfraapps/tsa",
       description: {
         en: "Field Telecommunication Tower Site Audit and Activity Management System. Tracks contractor maintenance visits, telemetry event imports, and real-time operational status with containerized Kubernetes deployment.",
@@ -999,7 +999,7 @@ export const portfolioData = {
         badge: "Portfolio Showcase",
         title: "Featured Enterprise Projects & Case Studies",
         subtitle: "Real-world productions spanning Telkominfra telecommunication platforms, multi-tenant SaaS, and mobile applications.",
-        categories: ["All", "Telkominfra", "Full Stack", "Mobile", "AI & Web"],
+        categories: ["All", "Full Stack", "Mobile", "AI & Web"],
         studyCase: "Explore Case Study",
         openGitLab: "GitLab Repository",
         openGitHub: "GitHub Repository",
@@ -1171,7 +1171,7 @@ export const portfolioData = {
         badge: "Showcase Portofolio",
         title: "Proyek Enterprise & Studi Kasus Pilihan",
         subtitle: "Kumpulan proyek nyata yang mencakup platform telekomunikasi Telkominfra, aplikasi SaaS multi-tenant, dan mobile application.",
-        categories: ["Semua", "Telkominfra", "Full Stack", "Mobile", "AI & Web"],
+        categories: ["Semua", "Full Stack", "Mobile", "AI & Web"],
         studyCase: "Pelajari Studi Kasus",
         openGitLab: "Repositori GitLab",
         openGitHub: "Repositori GitHub",
