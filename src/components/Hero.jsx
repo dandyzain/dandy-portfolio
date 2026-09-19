@@ -11,13 +11,15 @@ import {
   Smartphone, 
   Bot, 
   Sparkles,
-  ExternalLink,
   MapPin
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Hero({ onOpenCVModal }) {
+  const { language } = useLanguage();
   const { personal } = portfolioData;
+  const t = portfolioData.translations[language].hero;
 
   return (
     <section id="hero" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-pastel-radial">
@@ -35,16 +37,16 @@ export default function Hero({ onOpenCVModal }) {
             {/* Top Greeting Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-pastel-lavender dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 mb-6">
               <span className="text-base">👋</span>
-              <span>Halo semua, perkenalkan saya</span>
+              <span>{t.greeting}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-pastel-lavender-accent" />
               <span className="text-indigo-600 dark:text-indigo-400 font-bold">Dandy Zain</span>
             </div>
 
             {/* Headline */}
             <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white leading-[1.15] tracking-tight mb-4">
-              Membangun Solusi Digital dengan{' '}
+              {t.headlineStart}{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500">
-                Presisi & Kreativitas
+                {t.headlineHighlight}
               </span>
             </h1>
 
@@ -55,9 +57,9 @@ export default function Hero({ onOpenCVModal }) {
               </p>
               <div className="mt-2 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                 <MapPin size={14} className="text-rose-400" />
-                <span>{personal.location}</span>
+                <span>{personal.location[language]}</span>
                 <span>•</span>
-                <span>Aktif di Telkominfra & Bay Pacific</span>
+                <span>{t.activeAt}</span>
               </div>
             </div>
 
@@ -83,7 +85,7 @@ export default function Hero({ onOpenCVModal }) {
                 href="#projects"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-pastel-md hover:shadow-pastel-lg transition-all duration-200"
               >
-                <span>Jelajahi Proyek</span>
+                <span>{t.exploreProjects}</span>
                 <ArrowDown size={16} />
               </a>
 
@@ -92,7 +94,7 @@ export default function Hero({ onOpenCVModal }) {
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold text-sm border border-slate-200 dark:border-slate-700 shadow-sm transition-all duration-200"
               >
                 <FileText size={16} className="text-indigo-500" />
-                <span>Lihat / Cetak CV</span>
+                <span>{t.viewCV}</span>
               </button>
 
               <a
@@ -102,14 +104,14 @@ export default function Hero({ onOpenCVModal }) {
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm shadow-sm transition-all duration-200"
               >
                 <Phone size={15} />
-                <span>WhatsApp</span>
+                <span>{t.whatsapp}</span>
               </a>
             </div>
 
             {/* Social & Contact Bar */}
             <div className="flex items-center gap-4 text-slate-500 dark:text-slate-400">
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Terhubung:
+                {t.connected}
               </span>
               <a
                 href={personal.linkedin}
@@ -123,7 +125,7 @@ export default function Hero({ onOpenCVModal }) {
               <a
                 href={`mailto:${personal.email}`}
                 className="p-2.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-rose-50 dark:hover:bg-rose-950/60 hover:text-rose-600 dark:hover:text-rose-400 border border-slate-200 dark:border-slate-700 transition-colors shadow-sm"
-                title="Kirim Email"
+                title="Send Email"
               >
                 <Mail size={18} />
               </a>
@@ -164,10 +166,10 @@ export default function Hero({ onOpenCVModal }) {
                     {personal.fullName}
                   </h3>
                   <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">
-                    {personal.role}
+                    {personal.role[language]}
                   </p>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                    S1 Teknik Informatika (UCIC)
+                    B.S. in Computer Science (UCIC)
                   </p>
                 </div>
               </div>
@@ -199,7 +201,7 @@ export default function Hero({ onOpenCVModal }) {
                       {stat.value}
                     </span>
                     <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
-                      {stat.label}
+                      {stat.label[language]}
                     </span>
                   </div>
                 ))}
@@ -210,13 +212,13 @@ export default function Hero({ onOpenCVModal }) {
             {/* Floating Badge 1 - Top Right */}
             <div className="absolute -top-6 -right-4 sm:-right-6 hidden sm:flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-pastel-mint-light dark:bg-slate-800 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 shadow-pastel-md animate-float-slow backdrop-blur-md text-xs font-bold">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-              <span>Full Stack & Mobile Dev</span>
+              <span>{t.roles.fullstack}</span>
             </div>
 
             {/* Floating Badge 2 - Bottom Left */}
             <div className="absolute -bottom-6 -left-4 sm:-left-6 hidden sm:flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-pastel-lavender-light dark:bg-slate-800 text-indigo-800 dark:text-indigo-300 border border-pastel-lavender dark:border-indigo-800 shadow-pastel-md animate-float-reverse backdrop-blur-md text-xs font-bold">
               <Sparkles size={16} className="text-indigo-500" />
-              <span>Telkominfra & Bay Pacific</span>
+              <span>{t.activeAt}</span>
             </div>
 
           </div>

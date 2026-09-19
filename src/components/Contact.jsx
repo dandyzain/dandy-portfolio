@@ -13,9 +13,12 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { portfolioData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Contact({ onOpenCVModal }) {
+  const { language } = useLanguage();
   const { personal } = portfolioData;
+  const t = portfolioData.translations[language].contact;
 
   const [formState, setFormState] = useState({
     name: '',
@@ -46,9 +49,9 @@ export default function Contact({ onOpenCVModal }) {
     });
 
     // Also open user's email client with pre-filled details
-    const subject = encodeURIComponent(`[Portfolio Inquiry] ${formState.service} dari ${formState.name}`);
+    const subject = encodeURIComponent(`[Portfolio Inquiry] ${formState.service} from ${formState.name}`);
     const body = encodeURIComponent(
-      `Halo Dandy,\n\nNama: ${formState.name}\nEmail: ${formState.email}\nLayanan: ${formState.service}\n\nPesan:\n${formState.message}\n\nTerima kasih.`
+      `Hello Dandy,\n\nName: ${formState.name}\nEmail: ${formState.email}\nService Topic: ${formState.service}\n\nMessage:\n${formState.message}\n\nBest regards.`
     );
     window.open(`mailto:${personal.email}?subject=${subject}&body=${body}`, '_blank');
   };
@@ -61,13 +64,13 @@ export default function Contact({ onOpenCVModal }) {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pastel-mint dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-3">
             <MessageSquare size={14} />
-            <span>Mari Berkolaborasi</span>
+            <span>{t.badge}</span>
           </div>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">
-            Hubungi Saya & Diskusikan Proyek Anda
+            {t.title}
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300">
-            Terbuka untuk kesempatan kerja full-time, konsultasi teknis, maupun proyek aplikasi skala menengah & besar.
+            {t.subtitle}
           </p>
         </div>
 
@@ -79,7 +82,7 @@ export default function Contact({ onOpenCVModal }) {
             {/* Contact Information Card */}
             <div className="p-8 rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm">
               <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white mb-6">
-                Saluran Komunikasi Langsung
+                {t.directChannels}
               </h3>
 
               <div className="space-y-4">
@@ -99,7 +102,7 @@ export default function Contact({ onOpenCVModal }) {
                   <button
                     onClick={handleCopyEmail}
                     className="p-2 rounded-xl bg-white dark:bg-slate-800 text-slate-500 hover:text-indigo-600 shadow-sm transition-colors shrink-0 ml-2"
-                    title="Salin Email"
+                    title="Copy Email"
                   >
                     {copied ? <Check size={16} className="text-emerald-500" /> : <Copy size={16} />}
                   </button>
@@ -117,14 +120,14 @@ export default function Contact({ onOpenCVModal }) {
                       <Phone size={18} />
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-emerald-700 dark:text-emerald-400">WhatsApp & Ponsel</span>
+                      <span className="text-[10px] uppercase font-bold text-emerald-700 dark:text-emerald-400">WhatsApp & Phone</span>
                       <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">
                         {personal.phone}
                       </p>
                     </div>
                   </div>
                   <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300 group-hover:translate-x-1 transition-transform">
-                    Kirim Chat →
+                    {t.sendChat}
                   </span>
                 </a>
 
@@ -147,7 +150,7 @@ export default function Contact({ onOpenCVModal }) {
                     </div>
                   </div>
                   <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform">
-                    Buka Profil →
+                    {t.viewProfile}
                   </span>
                 </a>
 
@@ -157,7 +160,7 @@ export default function Contact({ onOpenCVModal }) {
                     <MapPin size={18} />
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400">Alamat Lengkap</span>
+                    <span className="text-[10px] uppercase font-bold text-slate-400">{t.fullAddress}</span>
                     <p className="text-xs text-slate-700 dark:text-slate-300">
                       {personal.address}
                     </p>
@@ -172,7 +175,7 @@ export default function Contact({ onOpenCVModal }) {
                   className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-pastel-lavender hover:bg-indigo-200 text-indigo-900 dark:bg-indigo-950 dark:hover:bg-indigo-900 dark:text-indigo-200 font-bold text-xs sm:text-sm shadow-sm transition-all duration-200"
                 >
                   <FileText size={18} className="text-indigo-600" />
-                  <span>Lihat & Download Curriculum Vitae (PDF)</span>
+                  <span>{t.viewCVPrompt}</span>
                 </button>
               </div>
 
@@ -185,16 +188,16 @@ export default function Contact({ onOpenCVModal }) {
             <div className="p-8 sm:p-10 rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl">
               
               <h3 className="font-display font-bold text-2xl text-slate-900 dark:text-white mb-2">
-                Kirimkan Pesan Anda
+                {t.formTitle}
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-8">
-                Formulir ini akan otomatis menyiapkan draf pesan ke email resmi saya.
+                {t.formSubtitle}
               </p>
 
               {submitted && (
                 <div className="mb-6 p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-xs sm:text-sm font-medium flex items-center gap-2 animate-fadeIn">
                   <Sparkles size={18} className="text-emerald-500 shrink-0" />
-                  <span>Terima kasih! Pesan Anda telah disiapkan. Klien email Anda akan terbuka untuk konfirmasi pengiriman.</span>
+                  <span>{t.successNotice}</span>
                 </div>
               )}
 
@@ -203,14 +206,14 @@ export default function Contact({ onOpenCVModal }) {
                   {/* Name Input */}
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">
-                      Nama Lengkap *
+                      {t.nameLabel}
                     </label>
                     <input
                       type="text"
                       required
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      placeholder="Masukkan nama Anda"
+                      placeholder={t.namePlaceholder}
                       className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all"
                     />
                   </div>
@@ -218,14 +221,14 @@ export default function Contact({ onOpenCVModal }) {
                   {/* Email Input */}
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">
-                      Alamat Email *
+                      {t.emailLabel}
                     </label>
                     <input
                       type="email"
                       required
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      placeholder="nama@perusahaan.com"
+                      placeholder={t.emailPlaceholder}
                       className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all"
                     />
                   </div>
@@ -234,32 +237,32 @@ export default function Contact({ onOpenCVModal }) {
                 {/* Service Category */}
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">
-                    Kebutuhan / Topik Diskusi
+                    {t.topicLabel}
                   </label>
                   <select
                     value={formState.service}
                     onChange={(e) => setFormState({ ...formState, service: e.target.value })}
                     className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all"
                   >
-                    <option value="Full Stack Web Development">Full Stack Web Development (React / Next.js / Laravel)</option>
-                    <option value="Mobile App Development">Mobile App Development (Flutter / Kotlin)</option>
-                    <option value="AI Integration & Automation">AI Integration & Automation</option>
-                    <option value="Full-time / Remote Opportunity">Tawaran Posisi Kerja (Full-time / Remote)</option>
-                    <option value="Konsultasi Teknis">Konsultasi Teknis & Arsitektur</option>
+                    {t.topicOptions.map((opt, idx) => (
+                      <option key={idx} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
                 {/* Message Input */}
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">
-                    Pesan Anda *
+                    {t.messageLabel}
                   </label>
                   <textarea
                     rows={4}
                     required
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    placeholder="Ceritakan proyek, tantangan, atau peluang yang ingin Anda diskusikan..."
+                    placeholder={t.messagePlaceholder}
                     className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all"
                   />
                 </div>
@@ -269,7 +272,7 @@ export default function Contact({ onOpenCVModal }) {
                   className="w-full inline-flex items-center justify-center gap-2 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-pastel-md hover:shadow-pastel-lg transition-all duration-200"
                 >
                   <Send size={16} />
-                  <span>Kirim Pesan Sekarang</span>
+                  <span>{t.sendButton}</span>
                 </button>
               </form>
 

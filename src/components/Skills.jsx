@@ -5,52 +5,55 @@ import {
   Server, 
   Smartphone, 
   BrainCircuit, 
-  Layers, 
-  CheckCircle 
+  Layers 
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Skills() {
+  const { language } = useLanguage();
   const { skills } = portfolioData;
+  const t = portfolioData.translations[language].skills;
+
   const [activeTab, setActiveTab] = useState('all');
 
   const categories = [
-    { id: 'all', label: 'Semua Keahlian', icon: <Sparkles size={16} /> },
-    { id: 'frontend', label: 'Frontend', icon: <Code2 size={16} /> },
-    { id: 'backend', label: 'Backend & DB', icon: <Server size={16} /> },
-    { id: 'mobile', label: 'Mobile (Flutter & Kotlin)', icon: <Smartphone size={16} /> },
-    { id: 'aiAndTools', label: 'AI & Engineering Tools', icon: <BrainCircuit size={16} /> },
+    { id: 'all', label: t.categories.all, icon: <Sparkles size={16} /> },
+    { id: 'frontend', label: t.categories.frontend, icon: <Code2 size={16} /> },
+    { id: 'backend', label: t.categories.backend, icon: <Server size={16} /> },
+    { id: 'mobile', label: t.categories.mobile, icon: <Smartphone size={16} /> },
+    { id: 'aiAndTools', label: t.categories.aiAndTools, icon: <BrainCircuit size={16} /> },
   ];
 
   const skillGroups = [
     {
       id: 'frontend',
-      title: 'Frontend Web Development',
-      description: 'Menciptakan antarmuka yang estetis, modular, responsif, dan kaya interaksi dengan ekosistem JavaScript/TypeScript terdepan.',
+      title: t.groups.frontend.title,
+      description: t.groups.frontend.desc,
       color: 'lavender',
       accent: 'bg-indigo-500',
       items: skills.frontend
     },
     {
       id: 'backend',
-      title: 'Backend & Database Architecture',
-      description: 'Membangun logika bisnis yang aman, pemrosesan transaksi berkecepatan tinggi, dan integrasi API terstandar.',
+      title: t.groups.backend.title,
+      description: t.groups.backend.desc,
       color: 'mint',
       accent: 'bg-emerald-500',
       items: skills.backend
     },
     {
       id: 'mobile',
-      title: 'Cross-Platform & Native Mobile',
-      description: 'Pengalaman membangun aplikasi smartphone Android & iOS dengan Flutter dan Kotlin yang efisien dalam penggunaan memori.',
+      title: t.groups.mobile.title,
+      description: t.groups.mobile.desc,
       color: 'sky',
       accent: 'bg-sky-500',
       items: skills.mobile
     },
     {
       id: 'aiAndTools',
-      title: 'AI, DevOps & Workflow Tools',
-      description: 'Automasi kecerdasan buatan, kontrol versi Git, containerization Docker, dan metodologi Systems Thinking.',
+      title: t.groups.aiAndTools.title,
+      description: t.groups.aiAndTools.desc,
       color: 'peach',
       accent: 'bg-rose-500',
       items: skills.aiAndTools
@@ -69,13 +72,13 @@ export default function Skills() {
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pastel-lavender dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs font-bold uppercase tracking-wider mb-3">
             <Layers size={14} />
-            <span>Keahlian & Tech Stack</span>
+            <span>{t.badge}</span>
           </div>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">
-            Kekuatan Teknis & Perangkat Kerja
+            {t.title}
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300">
-            Kombinasi teknologi modern yang digunakan untuk mewujudkan produk perangkat lunak handal.
+            {t.subtitle}
           </p>
         </div>
 

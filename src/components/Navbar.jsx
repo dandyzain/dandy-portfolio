@@ -6,11 +6,15 @@ import {
   Sun, 
   FileText, 
   Send, 
-  Sparkles 
+  Languages 
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
+  const { language, toggleLanguage } = useLanguage();
+  const t = portfolioData.translations[language].nav;
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -43,12 +47,12 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
   }, []);
 
   const navLinks = [
-    { name: 'Tentang', href: '#about', id: 'about' },
-    { name: 'Pengalaman', href: '#experience', id: 'experience' },
-    { name: 'Keahlian', href: '#skills', id: 'skills' },
-    { name: 'Proyek', href: '#projects', id: 'projects' },
-    { name: 'Edukasi & Sertifikasi', href: '#education', id: 'education' },
-    { name: 'Kontak', href: '#contact', id: 'contact' },
+    { name: t.about, href: '#about', id: 'about' },
+    { name: t.experience, href: '#experience', id: 'experience' },
+    { name: t.skills, href: '#skills', id: 'skills' },
+    { name: t.projects, href: '#projects', id: 'projects' },
+    { name: t.education, href: '#education', id: 'education' },
+    { name: t.contact, href: '#contact', id: 'contact' },
   ];
 
   return (
@@ -74,7 +78,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
                 </span>
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-                  Available
+                  {t.available}
                 </span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">
@@ -101,39 +105,55 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
           </nav>
 
           {/* Right Action Buttons */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2.5">
+            {/* Language Switcher Pill */}
+            <button
+              onClick={toggleLanguage}
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-all shadow-sm text-xs font-bold"
+              title={language === 'en' ? 'Ganti ke Bahasa Indonesia' : 'Switch to English (US)'}
+            >
+              <Languages size={14} className="text-indigo-500" />
+              <span>{language === 'en' ? '🇺🇸 EN' : '🇮🇩 ID'}</span>
+            </button>
+
             {/* Dark Mode Toggle */}
             <button
               onClick={() => setDarkMode(!darkMode)}
               className="p-2.5 rounded-2xl bg-white/80 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-all shadow-sm"
               aria-label="Toggle Dark Mode"
             >
-              {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+              {darkMode ? <Sun size={17} /> : <Moon size={17} />}
             </button>
 
             {/* View CV Button */}
             <button
               onClick={onOpenCVModal}
-              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-semibold bg-pastel-mint-light hover:bg-pastel-mint text-emerald-800 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 transition-all shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl text-xs font-semibold bg-pastel-mint-light hover:bg-pastel-mint text-emerald-800 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 transition-all shadow-sm"
             >
-              <FileText size={15} />
-              <span>Lihat CV</span>
+              <FileText size={14} />
+              <span>{t.viewCV}</span>
             </button>
 
             {/* Direct WhatsApp CTA */}
             <a
-              href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20tertarik%20dengan%20profil%20dan%20portfolio%20Anda.`}
+              href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20tertarik%20dengan%20portfolio%20Anda.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-pastel-sm hover:shadow-pastel-md transition-all duration-200"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-pastel-sm hover:shadow-pastel-md transition-all duration-200"
             >
-              <Send size={14} />
-              <span>Hubungi Saya</span>
+              <Send size={13} />
+              <span>{t.contactMe}</span>
             </a>
           </div>
 
           {/* Mobile Actions Hamburger */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-1.5 md:hidden">
+            <button
+              onClick={toggleLanguage}
+              className="px-2.5 py-1.5 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-bold"
+            >
+              {language === 'en' ? '🇺🇸 EN' : '🇮🇩 ID'}
+            </button>
             <button
               onClick={() => setDarkMode(!darkMode)}
               className="p-2 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 border border-slate-200 dark:border-slate-700"
@@ -179,16 +199,16 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
                   className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-pastel-mint-light text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
                 >
                   <FileText size={16} />
-                  <span>Lihat & Cetak CV</span>
+                  <span>{t.viewCV}</span>
                 </button>
                 <a
-                  href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20tertarik%20dengan%20profil%20dan%20portfolio%20Anda.`}
+                  href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20tertarik%20dengan%20portfolio%20Anda.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-indigo-600 text-white"
                 >
                   <Send size={16} />
-                  <span>WhatsApp Langsung</span>
+                  <span>{t.contactMe}</span>
                 </a>
               </div>
             </div>

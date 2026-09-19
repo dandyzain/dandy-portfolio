@@ -5,13 +5,16 @@ import {
   MapPin, 
   Building2, 
   CheckCircle, 
-  ChevronRight,
-  Sparkles
+  ChevronRight
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Experience() {
+  const { language } = useLanguage();
   const { experiences } = portfolioData;
+  const t = portfolioData.translations[language].experience;
+
   const [selectedId, setSelectedId] = useState(experiences[0].id);
 
   const activeExp = experiences.find(e => e.id === selectedId) || experiences[0];
@@ -54,13 +57,13 @@ export default function Experience() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pastel-mint dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-3">
             <Briefcase size={14} />
-            <span>Riwayat Karier</span>
+            <span>{t.badge}</span>
           </div>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">
-            Pengalaman Kerja Profesional
+            {t.title}
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300">
-            Kiprah dalam membangun produk digital berskala enterprise, infrastruktur telekomunikasi nasional, smart city, hingga ad-tech.
+            {t.subtitle}
           </p>
         </div>
 
@@ -70,7 +73,7 @@ export default function Experience() {
           {/* Left: Interactive Company List (5 cols) */}
           <div className="lg:col-span-5 space-y-3">
             <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2 px-2">
-              Pilih Pengalaman untuk Detail:
+              {t.selectPrompt}
             </p>
             {experiences.map((exp) => {
               const colors = getColorClasses(exp.color);
@@ -97,15 +100,15 @@ export default function Experience() {
                       </p>
                       <div className="flex items-center gap-2 mt-2 text-[11px] text-slate-500 dark:text-slate-400">
                         <Calendar size={12} />
-                        <span>{exp.period}</span>
+                        <span>{exp.period[language]}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="shrink-0 flex items-center gap-1">
-                    {exp.duration === 'Aktif' && (
+                    {exp.duration[language] === (language === 'en' ? 'Active' : 'Aktif') && (
                       <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
-                        Aktif
+                        {t.activeBadge}
                       </span>
                     )}
                     <ChevronRight 
@@ -142,7 +145,7 @@ export default function Experience() {
                 <div className="text-right text-xs text-slate-500 dark:text-slate-400 space-y-1">
                   <div className="flex items-center gap-1.5 justify-end font-medium">
                     <Calendar size={14} className="text-slate-400" />
-                    <span>{activeExp.period}</span>
+                    <span>{activeExp.period[language]}</span>
                   </div>
                   <div className="flex items-center gap-1.5 justify-end">
                     <MapPin size={14} className="text-slate-400" />
@@ -154,17 +157,17 @@ export default function Experience() {
               {/* Description */}
               <div className="py-6">
                 <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {activeExp.description}
+                  {activeExp.description[language]}
                 </p>
               </div>
 
               {/* Key Contributions / Highlights */}
               <div className="space-y-3 mb-6">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                  Kontribusi Kunci & Pencapaian:
+                  {t.contributions}
                 </h4>
                 <div className="space-y-2.5">
-                  {activeExp.highlights.map((highlight, idx) => (
+                  {activeExp.highlights[language].map((highlight, idx) => (
                     <div key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
                       <CheckCircle size={16} className="text-emerald-500 shrink-0 mt-0.5" />
                       <span className="leading-normal">{highlight}</span>
@@ -176,7 +179,7 @@ export default function Experience() {
               {/* Tech Stack Used in this role */}
               <div className="pt-6 border-t border-slate-100 dark:border-slate-700">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
-                  Teknologi yang Digunakan:
+                  {t.techUsed}
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {activeExp.techStack.map((tech, idx) => (

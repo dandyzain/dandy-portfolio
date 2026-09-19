@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 import { 
   FolderGit2, 
-  ExternalLink, 
   CheckCircle2, 
   X, 
-  Layers, 
-  Sparkles,
   ArrowUpRight
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Projects() {
+  const { language } = useLanguage();
   const { projects } = portfolioData;
-  const [activeCategory, setActiveCategory] = useState('All');
+  const t = portfolioData.translations[language].projects;
+
+  const [activeCategory, setActiveCategory] = useState(0);
   const [activeModalProject, setActiveModalProject] = useState(null);
 
-  const categories = ['All', 'Full Stack', 'Mobile', 'AI & Web', 'Frontend'];
+  const categories = t.categories;
 
-  const filteredProjects = activeCategory === 'All'
+  const filteredProjects = activeCategory === 0
     ? projects
-    : projects.filter(p => p.category.toLowerCase().includes(activeCategory.toLowerCase()));
+    : projects.filter(p => {
+        const cat = categories[activeCategory];
+        return p.category.toLowerCase().includes(cat.toLowerCase()) || 
+               cat.toLowerCase().includes(p.category.toLowerCase());
+      });
 
   const getCardColorTheme = (color) => {
     switch (color) {
@@ -45,24 +50,24 @@ export default function Projects() {
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pastel-peach dark:bg-rose-950 text-rose-800 dark:text-rose-300 text-xs font-bold uppercase tracking-wider mb-3">
             <FolderGit2 size={14} />
-            <span>Showcase Portofolio</span>
+            <span>{t.badge}</span>
           </div>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">
-            Proyek Pilihan & Studi Kasus
+            {t.title}
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300">
-            Kumpulan proyek nyata yang mencakup enterprise telecom, platform SaaS, aplikasi cerdas, dan mobile application.
+            {t.subtitle}
           </p>
         </div>
 
         {/* Filter Buttons */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          {categories.map((cat) => (
+          {categories.map((cat, idx) => (
             <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
+              key={idx}
+              onClick={() => setActiveCategory(idx)}
               className={`px-4 py-2 rounded-2xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
-                activeCategory === cat
+                activeCategory === idx
                   ? 'bg-indigo-600 text-white shadow-pastel-md'
                   : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700'
               }`}
@@ -107,7 +112,7 @@ export default function Projects() {
                     {project.title}
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
-                    {project.description}
+                    {project.description[language]}
                   </p>
                 </div>
 
@@ -123,7 +128,7 @@ export default function Projects() {
                       </span>
                     ))}
                     {project.tags.length > 4 && (
-                      <span className="px-2 py-0.5 rounded-lg text-[11px] font-medium bg-slate-100 dark:bg-slate-700 text-slate-500">
+                      <span className="px-2.5 py-0.5 rounded-lg text-[11px] font-medium bg-slate-100 dark:bg-slate-700 text-slate-500">
                         +{project.tags.length - 4}
                       </span>
                     )}
@@ -134,7 +139,7 @@ export default function Projects() {
                     onClick={() => setActiveModalProject(project)}
                     className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-2xl bg-pastel-lavender-light hover:bg-pastel-lavender text-indigo-700 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-indigo-300 text-xs font-bold transition-colors"
                   >
-                    <span>Pelajari Studi Kasus</span>
+                    <span>{t.studyCase}</span>
                     <ArrowUpRight size={15} />
                   </button>
                 </div>
@@ -164,7 +169,7 @@ export default function Projects() {
                   {activeModalProject.title}
                 </h3>
                 <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">
-                  Klien: {activeModalProject.client} • Peran: {activeModalProject.role}
+                  {language === 'en' ? 'Client' : 'Klien'}: {activeModalProject.client} • {language === 'en' ? 'Role' : 'Peran'}: {activeModalProject.role[language]}
                 </p>
               </div>
 
@@ -179,19 +184,19 @@ export default function Projects() {
               <div className="space-y-4">
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
-                    Tentang Proyek:
+                    {t.modal.aboutProject}
                   </h4>
                   <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {activeModalProject.description}
+                    {activeModalProject.description[language]}
                   </p>
                 </div>
 
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                    Fitur & Implementasi Utama:
+                    {t.modal.keyFeatures}
                   </h4>
                   <div className="space-y-2">
-                    {activeModalProject.features.map((feat, idx) => (
+                    {activeModalProject.features[language].map((feat, idx) => (
                       <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
                         <CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5" />
                         <span>{feat}</span>
@@ -202,15 +207,15 @@ export default function Projects() {
 
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                    Teknologi yang Digunakan:
+                    {t.modal.techUsed}
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {activeModalProject.tags.map((t, idx) => (
+                    {activeModalProject.tags.map((tTag, idx) => (
                       <span
                         key={idx}
                         className="px-3 py-1 rounded-xl text-xs font-semibold bg-pastel-lavender-light dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 border border-pastel-lavender dark:border-slate-600"
                       >
-                        {t}
+                        {tTag}
                       </span>
                     ))}
                   </div>
@@ -222,7 +227,7 @@ export default function Projects() {
                   onClick={() => setActiveModalProject(null)}
                   className="px-6 py-2.5 rounded-2xl bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition-colors"
                 >
-                  Tutup Rincian
+                  {t.modal.close}
                 </button>
               </div>
 

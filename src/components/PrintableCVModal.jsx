@@ -3,23 +3,20 @@ import {
   X, 
   Printer, 
   Download, 
-  ExternalLink, 
   Mail, 
   Phone, 
   MapPin, 
-  Linkedin, 
-  Building2, 
-  Calendar, 
-  GraduationCap, 
-  Award, 
-  CheckCircle2 
+  Linkedin 
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function PrintableCVModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
-  const { personal, experiences, skills, education, certifications } = portfolioData;
+  const { language } = useLanguage();
+  const { personal, experiences, education, certifications } = portfolioData;
+  const t = portfolioData.translations[language].cvModal;
 
   const handlePrint = () => {
     window.print();
@@ -36,7 +33,7 @@ export default function PrintableCVModal({ isOpen, onClose }) {
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-emerald-500" />
             <h3 className="font-display font-bold text-sm sm:text-base text-slate-800 dark:text-white">
-              Curriculum Vitae Preview — Dandy Rahmat Zain
+              {t.title}
             </h3>
           </div>
 
@@ -45,17 +42,17 @@ export default function PrintableCVModal({ isOpen, onClose }) {
               href="/cv-dandy-rahmat-zain.pdf"
               download="CV-Dandy-Rahmat-Zain.pdf"
               className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 text-xs font-bold transition-all"
-              title="Unduh File PDF Asli"
+              title={t.downloadOriginal}
             >
               <Download size={15} />
-              <span className="hidden sm:inline">Unduh PDF Asli</span>
+              <span className="hidden sm:inline">{t.downloadOriginal}</span>
             </a>
             <button
               onClick={handlePrint}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm transition-all"
             >
               <Printer size={15} />
-              <span>Cetak / Simpan PDF</span>
+              <span>{t.printSave}</span>
             </button>
             <button
               onClick={onClose}
@@ -77,7 +74,7 @@ export default function PrintableCVModal({ isOpen, onClose }) {
                   {personal.fullName}
                 </h1>
                 <p className="text-sm sm:text-base font-bold text-indigo-600 mt-1">
-                  {personal.role}
+                  {personal.role[language]}
                 </p>
                 <p className="text-xs text-slate-600 italic mt-1 max-w-xl">
                   "{personal.tagline}"
@@ -88,7 +85,7 @@ export default function PrintableCVModal({ isOpen, onClose }) {
               <div className="text-xs text-slate-600 space-y-1.5 sm:text-right shrink-0">
                 <div className="flex items-center sm:justify-end gap-1.5">
                   <MapPin size={12} className="text-rose-500" />
-                  <span>{personal.location}</span>
+                  <span>{personal.location[language]}</span>
                 </div>
                 <div className="flex items-center sm:justify-end gap-1.5">
                   <Phone size={12} className="text-emerald-500" />
@@ -109,17 +106,17 @@ export default function PrintableCVModal({ isOpen, onClose }) {
           {/* Ringkasan Profil */}
           <div className="mb-6">
             <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-900 border-b border-slate-200 pb-1 mb-2">
-              Ringkasan Profesional
+              {t.summaryTitle}
             </h2>
             <p className="text-xs leading-relaxed text-slate-700">
-              {personal.bio.join(' ')}
+              {personal.bio[language].join(' ')}
             </p>
           </div>
 
           {/* Pengalaman Kerja */}
           <div className="mb-6">
             <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-900 border-b border-slate-200 pb-1 mb-3">
-              Pengalaman Kerja
+              {t.experienceTitle}
             </h2>
             <div className="space-y-4">
               {experiences.map((exp, idx) => (
@@ -129,11 +126,11 @@ export default function PrintableCVModal({ isOpen, onClose }) {
                       <span className="font-bold text-slate-900 text-sm">{exp.role}</span>
                       <span className="text-slate-500 font-medium"> — {exp.company}</span>
                     </div>
-                    <span className="text-slate-500 font-medium">{exp.period}</span>
+                    <span className="text-slate-500 font-medium">{exp.period[language]}</span>
                   </div>
-                  <p className="text-slate-600 mt-1 leading-relaxed">{exp.description}</p>
+                  <p className="text-slate-600 mt-1 leading-relaxed">{exp.description[language]}</p>
                   <ul className="mt-1.5 space-y-0.5 list-disc list-inside text-slate-700">
-                    {exp.highlights.slice(0, 3).map((hl, hIdx) => (
+                    {exp.highlights[language].slice(0, 3).map((hl, hIdx) => (
                       <li key={hIdx} className="leading-normal">{hl}</li>
                     ))}
                   </ul>
@@ -153,13 +150,13 @@ export default function PrintableCVModal({ isOpen, onClose }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
             <div>
               <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-900 border-b border-slate-200 pb-1 mb-2">
-                Pendidikan Formal
+                {t.educationTitle}
               </h2>
               <div className="space-y-3">
                 {education.map((edu, idx) => (
                   <div key={idx} className="text-xs">
                     <p className="font-bold text-slate-900">{edu.institution}</p>
-                    <p className="text-indigo-600 font-semibold">{edu.degree}</p>
+                    <p className="text-indigo-600 font-semibold">{edu.degree[language]}</p>
                     <p className="text-slate-500 text-[11px]">{edu.period} • {edu.location}</p>
                   </div>
                 ))}
@@ -168,7 +165,7 @@ export default function PrintableCVModal({ isOpen, onClose }) {
 
             <div>
               <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-900 border-b border-slate-200 pb-1 mb-2">
-                Sertifikasi Utama
+                {t.certificationsTitle}
               </h2>
               <div className="space-y-1.5">
                 {certifications.slice(0, 6).map((cert, idx) => (
@@ -184,7 +181,7 @@ export default function PrintableCVModal({ isOpen, onClose }) {
           {/* Keahlian Teknis */}
           <div>
             <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-900 border-b border-slate-200 pb-1 mb-2">
-              Keahlian Teknis Utama
+              {t.skillsTitle}
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
               <div>
