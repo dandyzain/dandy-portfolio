@@ -919,7 +919,7 @@ export const portfolioData = {
           "Web Apps",
           "GIS Platforms",
           "Cloud APIs",
-          "Telecom NOC"
+          "Enterprise Apps"
         ],
         activeAt: "Active at PT. Infrastruktur Telekomunikasi Indonesia",
         exploreProjects: "Explore Projects",
@@ -1098,7 +1098,7 @@ export const portfolioData = {
           "Aplikasi Web",
           "Platform GIS",
           "Layanan API",
-          "Pusat Jaringan"
+          "Sistem Enterprise"
         ],
         activeAt: "Aktif di PT. Infrastruktur Telekomunikasi Indonesia",
         exploreProjects: "Jelajahi Proyek",
