@@ -9,6 +9,7 @@ import {
   Mail, 
   CheckCircle2
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -35,8 +36,14 @@ export default function About() {
     <section id="about" className="py-24 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Section Header with Scroll Reveal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pastel-lavender dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs font-bold uppercase tracking-wider mb-3">
             <User size={14} />
             <span>{t.badge}</span>
@@ -47,16 +54,22 @@ export default function About() {
           <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
             {t.subtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left: Bio & Narrative (7 cols) */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="p-8 rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="lg:col-span-7 space-y-6"
+          >
+            <div className="p-8 rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm hover:shadow-pastel-md transition-shadow">
               <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white mb-4 flex items-center gap-2.5">
-                <span className="w-3 h-3 rounded-full bg-pastel-lavender-accent" />
+                <span className="w-3 h-3 rounded-full bg-pastel-lavender-accent animate-ping" />
                 {t.professionalSummary}
               </h3>
               
@@ -69,16 +82,23 @@ export default function About() {
               {/* Key Principles Checklist */}
               <div className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-700/60 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {t.principles.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200">
+                  <motion.div 
+                    key={idx} 
+                    whileHover={{ x: 4 }}
+                    className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 cursor-default"
+                  >
                     <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
                     <span>{item}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
 
             {/* Quick Contact & Location Info Card */}
-            <div className="p-6 rounded-3xl bg-pastel-gradient-1 border border-slate-200/60 dark:border-slate-700/60 flex flex-wrap items-center justify-between gap-4">
+            <motion.div 
+              whileHover={{ y: -3 }}
+              className="p-6 rounded-3xl bg-pastel-gradient-1 border border-slate-200/60 dark:border-slate-700/60 flex flex-wrap items-center justify-between gap-4 shadow-sm"
+            >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center text-rose-500 shadow-sm">
                   <MapPin size={20} />
@@ -88,33 +108,43 @@ export default function About() {
                   <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100">{personal.address}</p>
                 </div>
               </div>
-              <a
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 href={`mailto:${personal.email}`}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:shadow-sm transition-all"
               >
                 <Mail size={14} />
                 <span>{personal.email}</span>
-              </a>
-            </div>
-          </div>
+              </motion.a>
+            </motion.div>
+          </motion.div>
 
-          {/* Right: 4 Strength Cards (5 cols) */}
+          {/* Right: 4 Strength Cards (5 cols) with Stagger and Spring */}
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
             {t.cards.map((card, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className={`p-6 rounded-3xl border shadow-sm transition-all duration-300 hover:shadow-pastel-md hover:-translate-y-1 ${cardBgs[idx]}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                whileHover={{ y: -5, scale: 1.02 }}
+                className={`p-6 rounded-3xl border shadow-sm transition-shadow ${cardBgs[idx]}`}
               >
-                <div className="w-12 h-12 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center shadow-sm mb-4">
+                <motion.div 
+                  whileHover={{ rotate: 12, scale: 1.1 }}
+                  className="w-12 h-12 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center shadow-sm mb-4 cursor-pointer"
+                >
                   {cardIcons[idx]}
-                </div>
+                </motion.div>
                 <h4 className="font-display font-bold text-base text-slate-900 dark:text-white mb-2">
                   {card.title}
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   {card.desc}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
 

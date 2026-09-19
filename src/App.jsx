@@ -9,7 +9,9 @@ import EducationCerts from './components/EducationCerts';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import PrintableCVModal from './components/PrintableCVModal';
+import BackgroundOrbs from './components/BackgroundOrbs';
 import { FileText, MessageCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { portfolioData } from './data/portfolioData';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
@@ -28,8 +30,11 @@ function PortfolioContent() {
   }, [darkMode]);
 
   return (
-    <div className="min-h-screen bg-pastel-bg-light dark:bg-pastel-bg-dark text-slate-800 dark:text-slate-100 transition-colors duration-300 relative">
+    <div className="min-h-screen bg-pastel-bg-light dark:bg-pastel-bg-dark text-slate-800 dark:text-slate-100 transition-colors duration-300 relative selection:bg-indigo-200 selection:text-indigo-900">
       
+      {/* Ambient Floating Pastel Orbs */}
+      <BackgroundOrbs />
+
       {/* Top Navbar */}
       <Navbar 
         darkMode={darkMode} 
@@ -51,26 +56,38 @@ function PortfolioContent() {
       {/* Footer */}
       <Footer />
 
-      {/* Floating Action Quick Access (Bottom Right) */}
+      {/* Floating Action Quick Access (Bottom Right) with Spring Motion */}
       <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5 no-print">
-        <button
+        <motion.button
+          whileHover={{ scale: 1.08, x: -3 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => setIsCVModalOpen(true)}
-          className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs shadow-pastel-md border border-pastel-lavender dark:border-slate-700 hover:scale-105 transition-all"
+          className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs shadow-pastel-md border border-pastel-lavender dark:border-slate-700 transition-shadow"
           title={language === 'en' ? 'View Complete CV' : 'Lihat CV Lengkap'}
         >
           <FileText size={15} className="text-indigo-600" />
           <span className="hidden sm:inline">{language === 'en' ? 'CV Document' : 'CV Dokumen'}</span>
-        </button>
+        </motion.button>
 
-        <a
+        <motion.a
+          whileHover={{ scale: 1.12, rotate: 6 }}
+          whileTap={{ scale: 0.92 }}
+          animate={{
+            boxShadow: [
+              "0 4px 14px rgba(16, 185, 129, 0.3)",
+              "0 6px 20px rgba(16, 185, 129, 0.5)",
+              "0 4px 14px rgba(16, 185, 129, 0.3)",
+            ]
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20melihat%20portfolio%20web%20Anda.`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 p-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-pastel-md hover:scale-110 transition-all"
+          className="flex items-center gap-2 p-3.5 rounded-full bg-emerald-500 text-white shadow-pastel-md"
           title="Chat WhatsApp"
         >
           <MessageCircle size={22} />
-        </a>
+        </motion.a>
       </div>
 
       {/* Printable / Viewable CV Modal */}

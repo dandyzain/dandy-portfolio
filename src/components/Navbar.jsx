@@ -8,6 +8,7 @@ import {
   Send, 
   Languages 
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -56,7 +57,10 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
   ];
 
   return (
-    <header 
+    <motion.header 
+      initial={{ y: -70, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? 'glass-pastel py-3 shadow-pastel-sm' 
@@ -68,9 +72,13 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
           
           {/* Brand Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pastel-lavender-accent to-pink-400 flex items-center justify-center text-white font-display font-bold text-xl shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3">
+            <motion.div 
+              whileHover={{ rotate: 10, scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pastel-lavender-accent to-pink-400 flex items-center justify-center text-white font-display font-bold text-xl shadow-sm"
+            >
               DZ
-            </div>
+            </motion.div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-display font-bold text-lg text-slate-800 dark:text-white tracking-tight">
@@ -87,55 +95,73 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
             </div>
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 bg-white/70 dark:bg-slate-900/60 p-1.5 rounded-full border border-slate-200/60 dark:border-slate-800 shadow-sm backdrop-blur-md">
-            {navLinks.map((link) => (
-              <a
-                key={link.id}
-                href={link.href}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
-                  activeSection === link.id
-                    ? 'bg-pastel-lavender-accent text-white shadow-sm'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
+          {/* Desktop Navigation with Animated Spring Indicator */}
+          <nav className="hidden md:flex items-center gap-1 bg-white/70 dark:bg-slate-900/60 p-1.5 rounded-full border border-slate-200/60 dark:border-slate-800 shadow-sm backdrop-blur-md relative">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors duration-200 z-10 ${
+                    isActive
+                      ? 'text-white'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavIndicator"
+                      className="absolute inset-0 rounded-full bg-pastel-lavender-accent shadow-sm -z-10"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  {link.name}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Right Action Buttons */}
           <div className="hidden lg:flex items-center gap-2.5">
             {/* Language Switcher Pill */}
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={toggleLanguage}
               className="inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-all shadow-sm text-xs font-bold"
               title={language === 'en' ? 'Ganti ke Bahasa Indonesia' : 'Switch to English (US)'}
             >
               <Languages size={14} className="text-indigo-500" />
               <span>{language === 'en' ? '🇺🇸 EN' : '🇮🇩 ID'}</span>
-            </button>
+            </motion.button>
 
             {/* Dark Mode Toggle */}
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05, rotate: 15 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setDarkMode(!darkMode)}
               className="p-2.5 rounded-2xl bg-white/80 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-all shadow-sm"
               aria-label="Toggle Dark Mode"
             >
               {darkMode ? <Sun size={17} /> : <Moon size={17} />}
-            </button>
+            </motion.button>
 
             {/* View CV Button */}
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={onOpenCVModal}
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl text-xs font-semibold bg-pastel-mint-light hover:bg-pastel-mint text-emerald-800 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 transition-all shadow-sm"
             >
               <FileText size={14} />
               <span>{t.viewCV}</span>
-            </button>
+            </motion.button>
 
             {/* Direct WhatsApp CTA */}
-            <a
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20tertarik%20dengan%20portfolio%20Anda.`}
               target="_blank"
               rel="noopener noreferrer"
@@ -143,79 +169,93 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
             >
               <Send size={13} />
               <span>{t.contactMe}</span>
-            </a>
+            </motion.a>
           </div>
 
           {/* Mobile Actions Hamburger */}
           <div className="flex items-center gap-1.5 md:hidden">
-            <button
+            <motion.button
+              whileTap={{ scale: 0.9 }}
               onClick={toggleLanguage}
               className="px-2.5 py-1.5 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-bold"
             >
               {language === 'en' ? '🇺🇸 EN' : '🇮🇩 ID'}
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.9 }}
               onClick={() => setDarkMode(!darkMode)}
               className="p-2 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 border border-slate-200 dark:border-slate-700"
               aria-label="Toggle Dark Mode"
             >
               {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.9 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
+            </motion.button>
           </div>
 
         </div>
 
-        {/* Mobile Dropdown Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden mt-4 p-4 rounded-3xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-xl backdrop-blur-xl animate-fadeIn">
-            <div className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-2.5 rounded-2xl text-sm font-medium transition-colors ${
-                    activeSection === link.id
-                      ? 'bg-pastel-lavender-accent text-white font-semibold'
-                      : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              ))}
-              <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenCVModal();
-                  }}
-                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-pastel-mint-light text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
-                >
-                  <FileText size={16} />
-                  <span>{t.viewCV}</span>
-                </button>
-                <a
-                  href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20tertarik%20dengan%20portfolio%20Anda.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-indigo-600 text-white"
-                >
-                  <Send size={16} />
-                  <span>{t.contactMe}</span>
-                </a>
+        {/* Mobile Dropdown Menu with Spring Animation */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0, scale: 0.95 }}
+              animate={{ opacity: 1, height: 'auto', scale: 1 }}
+              exit={{ opacity: 0, height: 0, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden mt-4 p-4 rounded-3xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-xl backdrop-blur-xl overflow-hidden"
+            >
+              <div className="flex flex-col gap-2">
+                {navLinks.map((link, idx) => (
+                  <motion.a
+                    key={link.id}
+                    href={link.href}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: idx * 0.05 }}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`px-4 py-2.5 rounded-2xl text-sm font-medium transition-colors ${
+                      activeSection === link.id
+                        ? 'bg-pastel-lavender-accent text-white font-semibold'
+                        : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+                    }`}
+                  >
+                    {link.name}
+                  </motion.a>
+                ))}
+                <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenCVModal();
+                    }}
+                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-pastel-mint-light text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                  >
+                    <FileText size={16} />
+                    <span>{t.viewCV}</span>
+                  </button>
+                  <a
+                    href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20tertarik%20dengan%20portfolio%20Anda.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-indigo-600 text-white"
+                  >
+                    <Send size={16} />
+                    <span>{t.contactMe}</span>
+                  </a>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
-    </header>
+    </motion.header>
   );
 }
