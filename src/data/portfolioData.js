@@ -854,46 +854,538 @@ export const portfolioData = {
 
   certifications: [
     {
+      id: "google-ai-specialization",
+      title: "Google AI Professional Certificate",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "June 2024",
+      credentialId: "V9MG55EU17VW",
+      credentialUrl: "https://coursera.org/verify/professional-cert/V9MG55EU17VW",
+      file: "/certificate/[Google AI] - V9MG55EU17VW.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "AI & Innovation", id: "AI & Inovasi" },
+      isSpecialization: true,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "7-course professional specialization covering AI fundamentals, prompt engineering, research, data analysis, and building custom AI solutions.",
+        id: "Spesialisasi 7 kursus mendalam mencakup fundamental AI, prompt engineering, riset, analisis data, dan rekayasa solusi AI."
+      }
+    },
+    {
+      id: "google-it-automation-specialization",
+      title: "Google IT Automation with Python Professional Certificate",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "July 2024",
+      credentialId: "19U4JNAKP7M3",
+      credentialUrl: "https://coursera.org/verify/professional-cert/19U4JNAKP7M3",
+      file: "/certificate/[Google IT Automation With Python] - 19U4JNAKP7M3.pdf",
+      fileType: "pdf",
+      category: "python",
+      categoryLabel: { en: "Google & Python", id: "Google & Python" },
+      isSpecialization: true,
+      badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
+      description: {
+        en: "Comprehensive 7-course program covering Python scripting, Git/GitHub, OS interaction, troubleshooting, cloud configuration, and real-world task automation.",
+        id: "Program 7 kursus komprehensif menguasai scripting Python, Git/GitHub, interaksi OS, troubleshooting sistem, konfigurasi cloud, dan otomasi skala besar."
+      }
+    },
+    {
+      id: "hki-kino",
+      title: "Surat Pencatatan Hak Cipta (HKI) - Aplikasi KINO",
+      issuer: "Kementerian Hukum dan Hak Asasi Manusia (Kemenkumham RI)",
+      platform: "Direktorat Jenderal Kekayaan Intelektual",
+      issueDate: "August 2023",
+      credentialId: "000495613 / EC00202362673",
+      file: "/certificate/[HKI] - Aplikasi Penilaian Kinerja Online.pdf",
+      fileType: "pdf",
+      category: "hki",
+      categoryLabel: { en: "Intellectual Property (HKI)", id: "Hak Cipta (HKI)" },
+      isSpecialization: false,
+      badgeColor: "bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300",
+      description: {
+        en: "Official Intellectual Property Certificate (Copyright) for computer program 'Aplikasi Penilaian Kinerja Karyawan Online (KINO)' granted by Kemenkumham RI.",
+        id: "Surat Pencatatan Ciptaan resmi Kementerian Hukum & HAM RI untuk Program Komputer Aplikasi Penilaian Kinerja Karyawan Online (KINO) selama 50 tahun."
+      }
+    },
+    {
+      id: "msib-citiasia",
+      title: "MSIB Kampus Merdeka: Mobile Developer Intern",
+      issuer: "Kemendikbudristek & PT Citi Asia Internasional",
+      platform: "Kampus Merdeka Mandiri",
+      issueDate: "December 2022",
+      credentialId: "3109160",
+      file: "/certificate/[MSIB] - Dandy Rahmat Zain.pdf",
+      fileType: "pdf",
+      category: "industry",
+      categoryLabel: { en: "Industry Internship", id: "Magang Industri" },
+      isSpecialization: false,
+      badgeColor: "bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300",
+      description: {
+        en: "Certified 5-month internship in Smart Cities & Smart Enterprises: Solution and Innovation Development as a Mobile Developer.",
+        id: "Sertifikasi magang 5 bulan Smart Cities & Smart Enterprises: Solution and Innovation Development sebagai Mobile Developer."
+      }
+    },
+    {
+      id: "msib-evaluation",
+      title: "Lembar Evaluasi Final Magang MSIB Batch 3 (Score 410 / A)",
+      issuer: "PT Citi Asia Internasional",
+      platform: "Evaluation Sheet",
+      issueDate: "December 2022",
+      credentialId: "Score: 410",
+      file: "/certificate/Lembar Penilaian Final Evaluation - Dandy Rahmat Zain.pdf",
+      fileType: "pdf",
+      category: "industry",
+      categoryLabel: { en: "Evaluation & Score", id: "Evaluasi & Nilai" },
+      isSpecialization: false,
+      badgeColor: "bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300",
+      description: {
+        en: "Final evaluation sheet for Mobile Apps Development (80), ICT Problem Solving (80), HCI (90), Project Management (80), and Soft Skills (80).",
+        id: "Lembar penilaian akhir magang mencakup Mobile Apps Development, ICT Problem Solving, HCI, Project Management, dan Soft Skills."
+      }
+    },
+    {
+      id: "trainocate-design-thinking",
+      title: "Pelatihan Design Thinking untuk Unit IT",
+      issuer: "Trainocate Indonesia",
+      platform: "Professional IT Training",
+      issueDate: "August 2024",
+      credentialId: "TRN-218930181855-PBZMDV",
+      file: "/certificate/[Trainocate] - Pelatihan Design Thinking untuk Unit IT - Dandy Rahmat Zain.pdf",
+      fileType: "pdf",
+      category: "industry",
+      categoryLabel: { en: "Methodology & Design", id: "Metodologi & Desain" },
+      isSpecialization: false,
+      badgeColor: "bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300",
+      description: {
+        en: "Intensive corporate training on Design Thinking principles tailored for enterprise IT units and product engineering teams.",
+        id: "Pelatihan korporat intensif prinsip Design Thinking untuk unit teknologi informasi dan perancangan produk enterprise."
+      }
+    },
+    {
+      id: "revou-data-analytics",
+      title: "Intro to Data Analytics (DAMC)",
+      issuer: "RevoU (PT Revolusi Cita Edukasi)",
+      platform: "RevoU Mini Course",
+      issueDate: "August 2024",
+      file: "/certificate/[REVO U] - DAMC - Dandy Rahmat Zain.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "Data & Analytics", id: "Data & Analisis" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Certified 2-week course mastering foundational data analytics, data storytelling, and business metrics synthesis.",
+        id: "Kursus tersertifikasi 2 minggu mendalami dasar data analytics, visualisasi data, dan sintesis metrik bisnis."
+      }
+    },
+    {
+      id: "google-ai-data-analysis",
+      title: "AI for Data Analysis",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "June 2024",
+      credentialId: "56XKL1JJ8X0C",
+      credentialUrl: "https://coursera.org/verify/56XKL1JJ8X0C",
+      file: "/certificate/[Google AI] - 56XKL1JJ8X0C.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Using AI to uncover trends, analyze messy datasets, validate statistical data, and craft predictive business insights.",
+        id: "Penerapan AI untuk menganalisis kumpulan data besar, menemukan tren tersembunyi, dan menyusun insight prediktif."
+      }
+    },
+    {
+      id: "google-ai-app-building",
+      title: "AI for App Building",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "June 2024",
+      credentialId: "RXVZR65LLIR9",
+      credentialUrl: "https://coursera.org/verify/RXVZR65LLIR9",
+      file: "/certificate/[Google AI] - RXVZR65LLIR9.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Designing and building custom intelligent software solutions, integrating AI APIs, and automating logic flows.",
+        id: "Merancang dan membangun aplikasi cerdas kustom, integrasi API AI, dan otomatisasi alur logika perangkat lunak."
+      }
+    },
+    {
+      id: "google-ai-fundamentals",
+      title: "AI Fundamentals",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "May 2024",
+      credentialId: "VC0ZTNQLBGW4",
+      credentialUrl: "https://coursera.org/verify/VC0ZTNQLBGW4",
+      file: "/certificate/[Google AI] - VC0ZTNQLBGW4.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Core concepts of artificial intelligence, machine learning, neural networks, ethics, and modern generative AI frameworks.",
+        id: "Prinsip inti kecerdasan buatan, machine learning, jaringan saraf tiruan, etika, dan ekosistem generative AI."
+      }
+    },
+    {
+      id: "google-ai-research",
       title: "AI for Research and Insights",
-      issuer: "LinkedIn Learning / Professional Certificate",
-      category: "AI & Innovation",
-      badgeColor: "bg-pastel-lavender/60 text-indigo-700 dark:text-indigo-300"
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "May 2024",
+      credentialId: "QHZHH80Q8P5Y",
+      credentialUrl: "https://coursera.org/verify/QHZHH80Q8P5Y",
+      file: "/certificate/[Google AI] - QHZHH80Q8P5Y.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Leveraging generative AI tools for literature synthesis, deep technical research, benchmark evaluation, and factual validation.",
+        id: "Pemanfaatan AI generatif untuk sintesis riset teknis, analisis literatur komparatif, dan validasi data."
+      }
     },
     {
+      id: "google-ai-content",
+      title: "AI for Content Creation",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "June 2024",
+      credentialId: "NYV7DKYT8ZUT",
+      credentialUrl: "https://coursera.org/verify/NYV7DKYT8ZUT",
+      file: "/certificate/[Google AI] - NYV7DKYT8ZUT.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Generating tailored technical documentation, marketing copy, and multi-modal creative digital assets using AI.",
+        id: "Pembuatan dokumentasi teknis, konten digital terstruktur, dan aset multimedia menggunakan AI."
+      }
+    },
+    {
+      id: "google-ai-brainstorming",
       title: "AI for Brainstorming and Planning",
-      issuer: "Professional AI Certificate",
-      category: "AI & Innovation",
-      badgeColor: "bg-pastel-peach/60 text-rose-700 dark:text-rose-300"
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "May 2024",
+      credentialId: "PYKJV2JG0FOG",
+      credentialUrl: "https://coursera.org/verify/PYKJV2JG0FOG",
+      file: "/certificate/[Google AI] - PYKJV2JG0FOG.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Facilitating ideation workshops, rapid project architecture planning, and scenario modeling with generative AI models.",
+        id: "Memfasilitasi ideasi, perencanaan arsitektur proyek cepat, dan pemodelan skenario berbasis model AI."
+      }
     },
     {
-      title: "Thinking In Systems",
-      issuer: "System Architecture & Problem Solving",
-      category: "Methodology",
-      badgeColor: "bg-pastel-mint/60 text-emerald-700 dark:text-emerald-300"
+      id: "google-ai-writing",
+      title: "AI for Writing and Communicating",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "June 2024",
+      credentialId: "UKX8NYUM8Z7V",
+      credentialUrl: "https://coursera.org/verify/UKX8NYUM8Z7V",
+      file: "/certificate/[Google AI] - UKX8NYUM8Z7V.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Refining corporate communications, executive summaries, and clear technical RFC proposals with AI writing assistance.",
+        id: "Penyusunan komunikasi teknis, ringkasan eksekutif, dan proposal sistem dengan asistensi AI."
+      }
     },
     {
+      id: "google-python-crash-course",
+      title: "Crash Course on Python",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "July 2024",
+      credentialId: "NYLCCJSYRMFG",
+      credentialUrl: "https://coursera.org/verify/NYLCCJSYRMFG",
+      file: "/certificate/[Google IT Automation With Python] - NYLCCJSYRMFG.pdf",
+      fileType: "pdf",
+      category: "python",
+      categoryLabel: { en: "Google & Python", id: "Google & Python" },
+      isSpecialization: false,
+      badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
+      description: {
+        en: "Core Python programming constructs, OOP design patterns, data structures, and script writing fundamentals.",
+        id: "Fondasi pemrograman Python, struktur data, konsep OOP, dan penulisan skrip otomasi komputer."
+      }
+    },
+    {
+      id: "google-python-os",
+      title: "Using Python to Interact with the Operating System",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "July 2024",
+      credentialId: "697IVI3WL8P2",
+      credentialUrl: "https://coursera.org/verify/697IVI3WL8P2",
+      file: "/certificate/[Google IT Automation With Python] - 697IVI3WL8P2.pdf",
+      fileType: "pdf",
+      category: "python",
+      categoryLabel: { en: "Google & Python", id: "Google & Python" },
+      isSpecialization: false,
+      badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
+      description: {
+        en: "File system manipulation, process management, regular expressions, system logging, and Bash/Python interoperability.",
+        id: "Manipulasi sistem berkas, pengelolaan proses OS, regex, pembacaan log server, dan otomasi shell."
+      }
+    },
+    {
+      id: "google-git-github",
       title: "Introduction to Git and GitHub",
-      issuer: "Google / Tech Foundation",
-      category: "Software Engineering",
-      badgeColor: "bg-pastel-sky/60 text-sky-700 dark:text-sky-300"
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "July 2024",
+      credentialId: "YS4Y9VVP24FZ",
+      credentialUrl: "https://coursera.org/verify/YS4Y9VVP24FZ",
+      file: "/certificate/[Google IT Automation With Python] - YS4Y9VVP24FZ.pdf",
+      fileType: "pdf",
+      category: "python",
+      categoryLabel: { en: "Software Engineering", id: "Rekayasa Perangkat Lunak" },
+      isSpecialization: false,
+      badgeColor: "bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300",
+      description: {
+        en: "Version control mastery, branching workflows, remote repositories, merge conflict resolution, and collaborative pull requests.",
+        id: "Penguasaan kontrol versi Git, alur branching, manajemen repositori remote, dan resolusi konflik merge."
+      }
     },
     {
+      id: "google-troubleshooting-debugging",
+      title: "Troubleshooting and Debugging Techniques",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "July 2024",
+      credentialId: "MNKKHYQUYU6X",
+      credentialUrl: "https://coursera.org/verify/MNKKHYQUYU6X",
+      file: "/certificate/[Google IT Automation With Python] - MNKKHYQUYU6X.pdf",
+      fileType: "pdf",
+      category: "python",
+      categoryLabel: { en: "Google & Python", id: "Google & Python" },
+      isSpecialization: false,
+      badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
+      description: {
+        en: "Root-cause analysis, binary search debugging, performance profiling, memory leak investigation, and system stabilization.",
+        id: "Analisis akar masalah, debugging binary search, profiling performa sistem, dan isolasi bottleneck komputasi."
+      }
+    },
+    {
+      id: "google-config-management-cloud",
+      title: "Configuration Management and the Cloud",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "July 2024",
+      credentialId: "5KCXN4PQNJ4R",
+      credentialUrl: "https://coursera.org/verify/5KCXN4PQNJ4R",
+      file: "/certificate/[Google IT Automation With Python] - 5KCXN4PQNJ4R.pdf",
+      fileType: "pdf",
+      category: "python",
+      categoryLabel: { en: "DevOps & Cloud", id: "DevOps & Cloud" },
+      isSpecialization: false,
+      badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
+      description: {
+        en: "Deploying and managing infrastructure as code (IaC), Puppet automation, and Google Cloud Platform (GCP) virtualization.",
+        id: "Otomasi konfigurasi infrastruktur skala besar (IaC), Puppet, dan orkestrasi virtual server pada cloud."
+      }
+    },
+    {
+      id: "google-automating-real-world",
       title: "Automating Real-World Tasks with Python",
-      issuer: "Google IT Automation Series",
-      category: "Automation & Scripting",
-      badgeColor: "bg-pastel-butter/60 text-amber-800 dark:text-amber-300"
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "July 2024",
+      credentialId: "5UFM8M743DDW",
+      credentialUrl: "https://coursera.org/verify/5UFM8M743DDW",
+      file: "/certificate/[Google IT Automation With Python] - 5UFM8M743DDW.pdf",
+      fileType: "pdf",
+      category: "python",
+      categoryLabel: { en: "Google & Python", id: "Google & Python" },
+      isSpecialization: false,
+      badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
+      description: {
+        en: "Capstoning Qwiklabs projects manipulating REST APIs, processing image batches with Pillow, and generating automated PDF email reports.",
+        id: "Proyek capstone otomasi REST API, pemrosesan batch gambar, dan generator laporan PDF email terjadwal."
+      }
     },
     {
-      title: "Data Analytics Essentials",
-      issuer: "Analytics Foundation",
-      category: "Data & Insights",
-      badgeColor: "bg-pastel-lilac/60 text-purple-700 dark:text-purple-300"
+      id: "google-job-search-ai",
+      title: "Accelerate Your Job Search with AI",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "July 2024",
+      credentialId: "EZZKSNX7VUIY",
+      credentialUrl: "https://coursera.org/verify/EZZKSNX7VUIY",
+      file: "/certificate/[Google IT Automation With Python] - EZZKSNX7VUIY.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "Career & AI", id: "Karier & AI" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Optimizing career portfolios, tailoring technical pitches, and simulating technical interview scenarios with AI assistance.",
+        id: "Optimalisasi portfolio profesional, persiapan wawancara teknis, dan simulasi karier dengan AI."
+      }
     },
     {
-      title: "Make Change Starting With Public Speaking",
-      issuer: "Leadership & Communication",
-      category: "Soft Skills",
-      badgeColor: "bg-pastel-peach/50 text-orange-700 dark:text-orange-300"
+      id: "kmmi-2d-animation",
+      title: "KMMI: Digital 2D Animation",
+      issuer: "Universitas Amikom Yogyakarta & Kemendikbud",
+      platform: "Kredensial Mikro Mahasiswa Indonesia",
+      issueDate: "November 2021",
+      credentialId: "044/PG.REK/AMIKOM/XI/2021",
+      file: "/certificate/[Digital 2D Animation] - Dandy Rahmat Zain.pdf",
+      fileType: "pdf",
+      category: "hki",
+      categoryLabel: { en: "Multimedia & Design", id: "Multimedia & Desain" },
+      isSpecialization: false,
+      badgeColor: "bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300",
+      description: {
+        en: "National micro-credential program covering scriptwriting, digital painting, frame-by-frame animation, and compositing.",
+        id: "Program kredensial mikro nasional mencakup penulisan naskah, digital painting, animasi frame-by-frame, dan compositing."
+      }
+    },
+    {
+      id: "codefirst-ios-android",
+      title: "Coding Live Class: Aplikasi iOS & Android untuk Pemula",
+      issuer: "CodeFirst Cirebon",
+      platform: "Live Coding Class",
+      issueDate: "April 2021",
+      file: "/certificate/[Code First] - Dandy Rahmat Zain.pdf",
+      fileType: "pdf",
+      category: "industry",
+      categoryLabel: { en: "Mobile Engineering", id: "Rekayasa Mobile" },
+      isSpecialization: false,
+      badgeColor: "bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300",
+      description: {
+        en: "Foundational mobile app development workshop focused on cross-platform architectures for iOS and Android.",
+        id: "Workshop pembuatan aplikasi mobile lintas platform untuk pemula membangun aplikasi iOS & Android."
+      }
+    },
+    {
+      id: "undip-tulevix-iot",
+      title: "Webinar & Pelatihan Robotic IoT (TULEVIX)",
+      issuer: "Universitas Diponegoro (UNDIP)",
+      platform: "Spectrum 7.0 HMTLI",
+      issueDate: "November 2021",
+      credentialId: "SK 01.4/SPECTRUM/HMTLI/XI/2021",
+      file: "/certificate/[Tulevix] - Dandy Rahmat Zain 1.pdf",
+      fileType: "pdf",
+      category: "hki",
+      categoryLabel: { en: "IoT & Robotics", id: "IoT & Robotika" },
+      isSpecialization: false,
+      badgeColor: "bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300",
+      description: {
+        en: "Technical workshop exploring Internet of Things (IoT) sensors, microcontroller communication, and robotic automation.",
+        id: "Pelatihan teknis robotika berbasis Internet of Things (IoT), komunikasi mikrokontroler, dan otomasi hardware."
+      }
+    },
+    {
+      id: "ucic-thinking-systems",
+      title: "Thinking In Systems: Alat Berpikir Sehari-hari",
+      issuer: "Universitas Catur Insan Cendekia (UCIC)",
+      platform: "FEB UCIC Webinar",
+      issueDate: "April 2021",
+      credentialId: "369/HIMAJEMEN/UCIC/IV/2021",
+      file: "/certificate/[Thinking In Systems] - Dandy Rahmat Zain.pdf",
+      fileType: "pdf",
+      category: "hki",
+      categoryLabel: { en: "Systems Thinking", id: "Systems Thinking" },
+      isSpecialization: false,
+      badgeColor: "bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300",
+      description: {
+        en: "Systems thinking fundamentals for breaking down complex architectural problems, feedback loops, and holistic design.",
+        id: "Penerapan systems thinking untuk mengurai masalah kompleks, pemodelan umpan balik, dan arsitektur holistik."
+      }
+    },
+    {
+      id: "ucic-scientific-method",
+      title: "Scientific Method untuk Penelitian Informatika",
+      issuer: "Universitas Catur Insan Cendekia (UCIC)",
+      platform: "FTI UCIC Web Series",
+      issueDate: "October 2020",
+      credentialId: "015/S/UCIC-TI/X/2020",
+      file: "/certificate/[Scientific Method] - Dandy Rahmat Zain.pdf",
+      fileType: "pdf",
+      category: "hki",
+      categoryLabel: { en: "Academic Research", id: "Riset Akademik" },
+      isSpecialization: false,
+      badgeColor: "bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300",
+      description: {
+        en: "Methodology of computer science inquiry, quantitative experimental design, data collection, and paper publication standards.",
+        id: "Metodologi penelitian informatika, perancangan eksperimen kuantitatif, dan standar publikasi ilmiah."
+      }
+    },
+    {
+      id: "ucic-public-speaking",
+      title: "Make a Change Starting with Public Speaking",
+      issuer: "BKM Universitas Catur Insan Cendekia",
+      platform: "Leadership Seminar",
+      issueDate: "March 2021",
+      credentialId: "124/SERT-WEBINAR/UCIC/III/2021",
+      file: "/certificate/[Make Change With Public Speaking] - Dandy Rahmat Zain.jpg",
+      fileType: "image",
+      category: "hki",
+      categoryLabel: { en: "Soft Skills & Leadership", id: "Soft Skills & Kepemimpinan" },
+      isSpecialization: false,
+      badgeColor: "bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300",
+      description: {
+        en: "Public speaking and communicative persuasion mastery for project presentations and leadership initiatives.",
+        id: "Pelatihan komunikasi publik, retorika presentasi, dan kepemimpinan dalam mengomunikasikan ide teknologi."
+      }
+    },
+    {
+      id: "usb-scholarship",
+      title: "The Secrets of Getting Scholarships to Study Abroad",
+      issuer: "New USB School",
+      platform: "NUSB School Webinar",
+      issueDate: "July 2022",
+      file: "/certificate/[USB] - Dandy Rahmat Zain 1.pdf",
+      fileType: "pdf",
+      category: "industry",
+      categoryLabel: { en: "Global Education", id: "Edukasi Global" },
+      isSpecialization: false,
+      badgeColor: "bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300",
+      description: {
+        en: "Strategies for securing international scholarships, writing academic motivation essays, and global study preparation.",
+        id: "Strategi lolos beasiswa studi internasional, penulisan esai motivasi akademik, dan kesiapan global."
+      }
+    },
+    {
+      id: "usb-studentpreneur",
+      title: "The Secrets of Successful Student-preneur",
+      issuer: "New USB School",
+      platform: "NUSB School Webinar",
+      issueDate: "July 2022",
+      file: "/certificate/[USB] - Dandy Rahmat Zain 2.pdf",
+      fileType: "pdf",
+      category: "industry",
+      categoryLabel: { en: "Entrepreneurship", id: "Kewirausahaan" },
+      isSpecialization: false,
+      badgeColor: "bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300",
+      description: {
+        en: "Building entrepreneurial digital ventures, product ideation, and business viability modeling while pursuing higher education.",
+        id: "Membangun bisnis digital mahasiswa, validasi produk perangkat lunak, dan model bisnis berkelanjutan."
+      }
     }
   ],
 
@@ -1022,12 +1514,24 @@ export const portfolioData = {
       education: {
         badge: "Education & Credentials",
         title: "Academic Background & Professional Certifications",
-        subtitle: "A computer science degree complemented by verified certifications in AI, systems engineering, and automation.",
+        subtitle: "A computer science degree complemented by 29+ verified certifications in AI, systems engineering, cloud, and intellectual property.",
         academicHistory: "Academic History",
         higherEd: "Higher Education",
         vocationalEd: "Vocational High School",
         certificationsTitle: "Official Certifications & Licenses",
-        verifiedCount: "7 Verified Credentials"
+        verifiedCount: "29 Verified Credentials",
+        showCert: "Show Certificate",
+        viewFile: "Open Document",
+        verifyOnline: "Verify Online",
+        allCategories: "All Certifications",
+        searchPlaceholder: "Search certifications by name, skill, or issuer...",
+        categories: {
+          all: "All (29)",
+          ai: "AI & Data",
+          python: "Google IT & Python",
+          hki: "HKI & Academic",
+          industry: "Industry & Training"
+        }
       },
       contact: {
         badge: "Let's Collaborate",
@@ -1201,12 +1705,24 @@ export const portfolioData = {
       education: {
         badge: "Pendidikan & Kredensial",
         title: "Fondasi Akademik & Sertifikasi Profesional",
-        subtitle: "Kombinasi gelar sarjana ilmu komputer dan sertifikasi spesialisasi yang terus diperbarui.",
+        subtitle: "Gelar sarjana teknik informatika yang diperkuat oleh 29+ sertifikasi resmi dalam bidang AI, otomasi Python, hak cipta (HKI), dan rekayasa enterprise.",
         academicHistory: "Riwayat Akademik",
         higherEd: "Perguruan Tinggi",
         vocationalEd: "Pendidikan Vokasi",
         certificationsTitle: "Sertifikasi & Lisensi Resmi",
-        verifiedCount: "7 Sertifikat Terverifikasi"
+        verifiedCount: "29 Kredensial Terverifikasi",
+        showCert: "Lihat Sertifikat",
+        viewFile: "Buka Dokumen",
+        verifyOnline: "Verifikasi Online",
+        allCategories: "Semua Sertifikat",
+        searchPlaceholder: "Cari sertifikat berdasarkan nama, skill, atau penerbit...",
+        categories: {
+          all: "Semua (29)",
+          ai: "AI & Data",
+          python: "Google IT & Python",
+          hki: "HKI & Akademik",
+          industry: "Pelatihan & Industri"
+        }
       },
       contact: {
         badge: "Mari Berkolaborasi",
