@@ -98,15 +98,76 @@ export default function Hero({ onOpenCVModal }) {
               <span className="text-indigo-600 dark:text-indigo-400 font-bold">Dandy Zain</span>
             </motion.div>
 
-            {/* Headline */}
+            {/* Animated Headline */}
             <motion.h1 
               variants={itemVariants}
-              className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white leading-[1.15] tracking-tight mb-4"
+              className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white leading-[1.18] tracking-tight mb-5"
             >
-              {t.headlineStart}{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500">
+              {/* Word-by-word spring entrance */}
+              <span className="inline">
+                {t.headlineStart.split(' ').map((word, wIdx) => (
+                  <motion.span
+                    key={`${word}-${wIdx}-${language}`}
+                    initial={{ y: 22, opacity: 0, filter: 'blur(4px)' }}
+                    animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+                    transition={{
+                      delay: 0.12 + wIdx * 0.08,
+                      type: "spring",
+                      stiffness: 140,
+                      damping: 12
+                    }}
+                    whileHover={{ 
+                      y: -3, 
+                      scale: 1.05,
+                      transition: { type: "spring", stiffness: 400, damping: 10 } 
+                    }}
+                    className="inline-block mr-2.5 cursor-default hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </span>{' '}
+
+              {/* Animated Aurora Gradient Highlight with Sweeping Underline */}
+              <motion.span 
+                key={`highlight-${language}`}
+                initial={{ opacity: 0, scale: 0.95, filter: 'blur(6px)' }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1,
+                  filter: 'blur(0px)',
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                }}
+                transition={{
+                  opacity: { delay: 0.38, duration: 0.5 },
+                  scale: { delay: 0.38, type: "spring", stiffness: 120, damping: 12 },
+                  filter: { delay: 0.38, duration: 0.4 },
+                  backgroundPosition: {
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }
+                }}
+                whileHover={{
+                  scale: 1.02,
+                  transition: { type: "spring", stiffness: 300, damping: 15 }
+                }}
+                className="relative inline-block bg-[length:200%_auto] bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 via-pink-500 to-indigo-600 cursor-default"
+              >
                 {t.headlineHighlight}
-              </span>
+
+                {/* Animated decorative gradient underline sweep */}
+                <motion.span 
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={{ scaleX: 1, opacity: 1 }}
+                  transition={{ 
+                    delay: 0.65, 
+                    duration: 0.85, 
+                    ease: [0.16, 1, 0.3, 1] 
+                  }}
+                  className="block h-1.5 sm:h-2 mt-1.5 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-left shadow-sm shadow-indigo-500/30"
+                />
+              </motion.span>
             </motion.h1>
 
             {/* LinkedIn Tagline & Subtitle */}
