@@ -13,7 +13,7 @@ import {
   Sparkles,
   MapPin
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -46,6 +46,23 @@ export default function Hero({ onOpenCVModal }) {
   const { language } = useLanguage();
   const { personal } = portfolioData;
   const t = portfolioData.translations[language].hero;
+
+  const rotatingWords = t.headlineRotating || [t.headlineHighlight];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+
+  // Reset index when language changes
+  useEffect(() => {
+    setCurrentWordIndex(0);
+  }, [language]);
+
+  // Cycle through rotating words
+  useEffect(() => {
+    if (!rotatingWords || rotatingWords.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prev) => (prev + 1) % rotatingWords.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [rotatingWords, language]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -128,33 +145,47 @@ export default function Hero({ onOpenCVModal }) {
                 ))}
               </span>{' '}
 
-              {/* Animated Aurora Gradient Highlight with Sweeping Underline */}
-              <motion.span 
-                key={`highlight-${language}`}
-                initial={{ opacity: 0, scale: 0.95, filter: 'blur(6px)' }}
-                animate={{ 
-                  opacity: 1, 
-                  scale: 1,
-                  filter: 'blur(0px)',
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                }}
-                transition={{
-                  opacity: { delay: 0.38, duration: 0.5 },
-                  scale: { delay: 0.38, type: "spring", stiffness: 120, damping: 12 },
-                  filter: { delay: 0.38, duration: 0.4 },
-                  backgroundPosition: {
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }
-                }}
-                whileHover={{
-                  scale: 1.02,
-                  transition: { type: "spring", stiffness: 300, damping: 15 }
-                }}
-                className="relative inline-block bg-[length:200%_auto] bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 via-pink-500 to-indigo-600 cursor-default"
-              >
-                {t.headlineHighlight}
+              {/* Dynamic Rotating & Moving Phrase Container with 3D Flip & Aurora Shimmer */}
+              <span className="relative inline-block align-baseline" style={{ perspective: '1000px' }}>
+                <AnimatePresence mode="wait">
+                  <motion.span 
+                    key={`rotating-${language}-${currentWordIndex}`}
+                    initial={{ y: 26, opacity: 0, rotateX: -60, filter: 'blur(5px)' }}
+                    animate={{ 
+                      y: 0, 
+                      opacity: 1, 
+                      rotateX: 0, 
+                      filter: 'blur(0px)',
+                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                    }}
+                    exit={{ y: -26, opacity: 0, rotateX: 60, filter: 'blur(5px)' }}
+                    transition={{
+                      y: { type: "spring", stiffness: 180, damping: 18 },
+                      rotateX: { type: "spring", stiffness: 180, damping: 18 },
+                      opacity: { duration: 0.28 },
+                      filter: { duration: 0.22 },
+                      backgroundPosition: {
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }
+                    }}
+                    whileHover={{
+                      scale: 1.02,
+                      transition: { type: "spring", stiffness: 300, damping: 15 }
+                    }}
+                    className="relative inline-flex items-center bg-[length:200%_auto] bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 via-pink-500 to-indigo-600 cursor-default"
+                  >
+                    <span>{rotatingWords[currentWordIndex]}</span>
+
+                    {/* Animated Neon Pulse Cursor */}
+                    <motion.span 
+                      animate={{ opacity: [1, 0.2, 1] }}
+                      transition={{ duration: 0.9, repeat: Infinity, ease: "easeInOut" }}
+                      className="inline-block w-1 sm:w-1.5 h-7 sm:h-9 lg:h-11 ml-1.5 sm:ml-2 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 rounded-full align-middle shadow-md shadow-indigo-500/40"
+                    />
+                  </motion.span>
+                </AnimatePresence>
 
                 {/* Animated decorative gradient underline sweep */}
                 <motion.span 
@@ -167,7 +198,7 @@ export default function Hero({ onOpenCVModal }) {
                   }}
                   className="block h-1.5 sm:h-2 mt-1.5 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-left shadow-sm shadow-indigo-500/30"
                 />
-              </motion.span>
+              </span>
             </motion.h1>
 
             {/* LinkedIn Tagline & Subtitle */}

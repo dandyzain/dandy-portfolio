@@ -914,6 +914,13 @@ export const portfolioData = {
         greeting: "Hello world, I am",
         headlineStart: "Crafting Mission-Critical &",
         headlineHighlight: "Modern Digital Systems",
+        headlineRotating: [
+          "Modern Digital Systems",
+          "Scalable Web Applications",
+          "Submarine Cable GIS",
+          "Telecom Network Centers",
+          "High-Performance APIs"
+        ],
         activeAt: "Active at PT. Infrastruktur Telekomunikasi Indonesia",
         exploreProjects: "Explore Projects",
         viewCV: "View / Print CV",
@@ -1086,6 +1093,13 @@ export const portfolioData = {
         greeting: "Halo dunia, perkenalkan saya",
         headlineStart: "Membangun Sistem Misi-Kritis &",
         headlineHighlight: "Solusi Digital Modern",
+        headlineRotating: [
+          "Solusi Digital Modern",
+          "Aplikasi Web Scalable",
+          "Sistem Web GIS Laut",
+          "Pusat Operasi Jaringan",
+          "Arsitektur API Cepat"
+        ],
         activeAt: "Aktif di PT. Infrastruktur Telekomunikasi Indonesia",
         exploreProjects: "Jelajahi Proyek",
         viewCV: "Lihat / Cetak CV",
