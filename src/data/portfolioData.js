@@ -1509,6 +1509,14 @@ export const portfolioData = {
           openGitLabButton: "Open on GitLab",
           openGitHubButton: "Open on GitHub",
           close: "Close Details"
+        },
+        pagination: {
+          prev: "Previous",
+          next: "Next",
+          showing: "Showing",
+          of: "of",
+          items: "projects",
+          page: "Page"
         }
       },
       education: {
@@ -1525,6 +1533,14 @@ export const portfolioData = {
         verifyOnline: "Verify Online",
         allCategories: "All Certifications",
         searchPlaceholder: "Search certifications by name, skill, or issuer...",
+        pagination: {
+          prev: "Previous",
+          next: "Next",
+          showing: "Showing",
+          of: "of",
+          items: "certifications",
+          page: "Page"
+        },
         categories: {
           all: "All (29)",
           ai: "AI & Data",
@@ -1700,6 +1716,14 @@ export const portfolioData = {
           openGitLabButton: "Buka di GitLab",
           openGitHubButton: "Buka di GitHub",
           close: "Tutup Rincian"
+        },
+        pagination: {
+          prev: "Sebelumnya",
+          next: "Selanjutnya",
+          showing: "Menampilkan",
+          of: "dari",
+          items: "proyek",
+          page: "Halaman"
         }
       },
       education: {
@@ -1716,6 +1740,14 @@ export const portfolioData = {
         verifyOnline: "Verifikasi Online",
         allCategories: "Semua Sertifikat",
         searchPlaceholder: "Cari sertifikat berdasarkan nama, skill, atau penerbit...",
+        pagination: {
+          prev: "Sebelumnya",
+          next: "Selanjutnya",
+          showing: "Menampilkan",
+          of: "dari",
+          items: "sertifikat",
+          page: "Halaman"
+        },
         categories: {
           all: "Semua (29)",
           ai: "AI & Data",

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { 
   GraduationCap, 
   Award, 
@@ -19,15 +19,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
 import CertificateModal from './CertificateModal';
+import Pagination from './Pagination';
+
+const CERTS_PER_PAGE = 6;
 
 export default function EducationCerts() {
   const { language } = useLanguage();
   const { education, certifications } = portfolioData;
   const t = portfolioData.translations[language].education;
 
-  // Filter and search state
+  // Filter, search, and pagination state
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Modal preview state
   const [selectedCert, setSelectedCert] = useState(null);
@@ -56,6 +60,31 @@ export default function EducationCerts() {
       return matchesCategory && matchesSearch;
     });
   }, [certifications, activeCategory, searchQuery, language]);
+
+  const totalPages = Math.ceil(filteredCerts.length / CERTS_PER_PAGE);
+
+  const handleCategoryChange = (catId) => {
+    setActiveCategory(catId);
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (val) => {
+    setSearchQuery(val);
+    setCurrentPage(1);
+  };
+
+  // Adjust page if current page exceeds total pages
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(1);
+    }
+  }, [totalPages, currentPage]);
+
+  // Paginated slice for current page
+  const paginatedCerts = useMemo(() => {
+    const start = (currentPage - 1) * CERTS_PER_PAGE;
+    return filteredCerts.slice(start, start + CERTS_PER_PAGE);
+  }, [filteredCerts, currentPage]);
 
   const categories = [
     { id: 'all', label: t.categories?.all || (language === 'en' ? 'All (29)' : 'Semua (29)') },
@@ -142,7 +171,7 @@ export default function EducationCerts() {
         </div>
 
         {/* Part 2: Official Certifications & Licenses Showcase */}
-        <div>
+        <div id="certifications-showcase" className="scroll-mt-24">
           {/* Section Sub-Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
@@ -172,7 +201,7 @@ export default function EducationCerts() {
               {categories.map((cat) => (
                 <button
                   key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
+                  onClick={() => handleCategoryChange(cat.id)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
                     activeCategory === cat.id
                       ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
@@ -190,13 +219,13 @@ export default function EducationCerts() {
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder={t.searchPlaceholder || 'Search certifications...'}
                 className="w-full pl-9 pr-4 py-1.5 text-xs rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 transition-all"
               />
               {searchQuery && (
                 <button
-                  onClick={() => setSearchQuery('')}
+                  onClick={() => handleSearchChange('')}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 hover:text-slate-600"
                 >
                   ✕
@@ -213,101 +242,113 @@ export default function EducationCerts() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {filteredCerts.map((cert, idx) => (
-                <motion.div
-                  key={cert.id || idx}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.35, delay: (idx % 6) * 0.05 }}
-                  whileHover={{ y: -4 }}
-                  className="p-5 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm hover:shadow-pastel-md transition-all flex flex-col justify-between group"
-                >
-                  {/* Card Top: Badges & Title */}
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${cert.badgeColor}`}>
-                        {cert.categoryLabel ? cert.categoryLabel[language] : cert.category}
-                      </span>
-                      {cert.isSpecialization ? (
-                        <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 flex items-center gap-1">
-                          <Award size={10} />
-                          Specialization
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {paginatedCerts.map((cert, idx) => (
+                  <motion.div
+                    key={cert.id || idx}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: (idx % 6) * 0.04 }}
+                    whileHover={{ y: -4 }}
+                    className="p-5 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm hover:shadow-pastel-md transition-all flex flex-col justify-between group"
+                  >
+                    {/* Card Top: Badges & Title */}
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${cert.badgeColor}`}>
+                          {cert.categoryLabel ? cert.categoryLabel[language] : cert.category}
                         </span>
-                      ) : (
-                        <Sparkles size={13} className="text-amber-400" />
-                      )}
-                    </div>
-
-                    <h4 className="font-display font-bold text-base text-slate-900 dark:text-white leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                      {cert.title}
-                    </h4>
-
-                    {cert.description && (
-                      <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
-                        {cert.description[language]}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Card Middle: Issuer & Metadata */}
-                  <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 space-y-1.5">
-                    <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-300">
-                      <span className="flex items-center gap-1.5 font-medium truncate">
-                        <Building2 size={13} className="text-indigo-500 shrink-0" />
-                        <span className="truncate">{cert.issuer}</span>
-                      </span>
-                      {cert.issueDate && (
-                        <span className="text-[11px] text-slate-400 shrink-0 ml-2">
-                          {cert.issueDate}
-                        </span>
-                      )}
-                    </div>
-
-                    {cert.credentialId && (
-                      <div className="text-[10px] font-mono text-slate-400 truncate">
-                        ID: {cert.credentialId}
+                        {cert.isSpecialization ? (
+                          <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 flex items-center gap-1">
+                            <Award size={10} />
+                            Specialization
+                          </span>
+                        ) : (
+                          <Sparkles size={13} className="text-amber-400" />
+                        )}
                       </div>
-                    )}
-                  </div>
 
-                  {/* Card Bottom: Show Certificate & Quick Action Buttons */}
-                  <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between gap-2">
-                    <button
-                      onClick={() => handleOpenCertificate(cert)}
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-colors"
-                      title="Preview certificate soft file"
-                    >
-                      <Eye size={14} />
-                      <span>{t.showCert || 'Show Certificate'}</span>
-                    </button>
+                      <h4 className="font-display font-bold text-base text-slate-900 dark:text-white leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        {cert.title}
+                      </h4>
 
-                    {cert.credentialUrl && (
+                      {cert.description && (
+                        <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
+                          {cert.description[language]}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Card Middle: Issuer & Metadata */}
+                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 space-y-1.5">
+                      <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-300">
+                        <span className="flex items-center gap-1.5 font-medium truncate">
+                          <Building2 size={13} className="text-indigo-500 shrink-0" />
+                          <span className="truncate">{cert.issuer}</span>
+                        </span>
+                        {cert.issueDate && (
+                          <span className="text-[11px] text-slate-400 shrink-0 ml-2">
+                            {cert.issueDate}
+                          </span>
+                        )}
+                      </div>
+
+                      {cert.credentialId && (
+                        <div className="text-[10px] font-mono text-slate-400 truncate">
+                          ID: {cert.credentialId}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Card Bottom: Show Certificate & Quick Action Buttons */}
+                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between gap-2">
+                      <button
+                        onClick={() => handleOpenCertificate(cert)}
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-colors"
+                        title="Preview certificate soft file"
+                      >
+                        <Eye size={14} />
+                        <span>{t.showCert || 'Show Certificate'}</span>
+                      </button>
+
+                      {cert.credentialUrl && (
+                        <a
+                          href={cert.credentialUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-xl bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                          title="Verify credential online"
+                        >
+                          <ShieldCheck size={15} />
+                        </a>
+                      )}
+
                       <a
-                        href={cert.credentialUrl}
+                        href={encodeURI(cert.file)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2 rounded-xl bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                        title="Verify credential online"
+                        title="Open file directly"
                       >
-                        <ShieldCheck size={15} />
+                        <ExternalLink size={14} />
                       </a>
-                    )}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
 
-                    <a
-                      href={encodeURI(cert.file)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-xl bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                      title="Open file directly"
-                    >
-                      <ExternalLink size={14} />
-                    </a>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+              {/* Certifications Pagination */}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+                totalItems={filteredCerts.length}
+                itemsPerPage={CERTS_PER_PAGE}
+                labels={t.pagination}
+                sectionId="certifications-showcase"
+              />
+            </>
           )}
         </div>
 
