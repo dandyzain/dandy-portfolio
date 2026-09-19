@@ -94,7 +94,7 @@ export default function About() {
                     </span>
                   </div>
                   <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5">
-                    {personal.role[language]} • Telkominfra & Bay Pacific
+                    {personal.role[language]} • PT. Infrastruktur Telekomunikasi Indonesia
                   </p>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 italic">
                     "{personal.tagline}"

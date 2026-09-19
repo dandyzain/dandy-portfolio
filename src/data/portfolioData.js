@@ -3,8 +3,8 @@ export const portfolioData = {
     fullName: "Dandy Rahmat Zain",
     preferredName: "Dandy Zain",
     role: {
-      en: "Full Stack & Mobile Developer",
-      id: "Full Stack & Mobile Developer"
+      en: "Full Stack Developer",
+      id: "Full Stack Developer"
     },
     tagline: "Quality Code, Inspired Design: Shaping the Digital World with Precision and Creativity.",
     location: {
@@ -25,14 +25,14 @@ export const portfolioData = {
     },
     bio: {
       en: [
-        "I am a Developer with experience in web and mobile application development. I specialize in building robust enterprise applications using Laravel and Express.js for backend architectures, alongside modern JavaScript frameworks like React, Next.js, Vue, and Nuxt for frontend development.",
-        "At PT Infrastruktur Telekomunikasi Indonesia (Telkominfra), I actively engineer and maintain mission-critical telecommunications web applications including nationwide submarine cable monitoring (LION), radio access network monitoring (NOC-RAN), tower site assessment (TSA), and workforce asset management (AssetMgmt WFM).",
+        "I am a Full Stack Developer with experience in web and mobile application development. I specialize in building robust enterprise applications using Laravel and Express.js for backend architectures, alongside modern JavaScript frameworks like React, Next.js, Vue, and Nuxt for frontend development.",
+        "At PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra), I actively engineer and maintain mission-critical telecommunications web applications including nationwide submarine cable monitoring (LION), radio access network monitoring (NOC-RAN), tower site assessment (TSA), and workforce asset management (AssetMgmt WFM).",
         "On the mobile side, I build cross-platform and native applications using Flutter and Kotlin, ensuring smooth performance and intuitive UX across multiple platforms.",
         "With a comprehensive full-stack approach, I manage projects from database architecture to frontend polish, API integration, and cloud deployment. I also leverage Artificial Intelligence (AI) to accelerate software development workflows."
       ],
       id: [
-        "Saya adalah Developer dengan pengalaman dalam perancangan dan pengembangan aplikasi web serta mobile. Keahlian backend saya berfokus pada Laravel dan Express.js untuk arsitektur API yang tangguh, aman, dan scalable, serta framework modern seperti React, Next.js, Vue, dan Nuxt untuk sisi frontend.",
-        "Di PT Infrastruktur Telekomunikasi Indonesia (Telkominfra), saya aktif merancang dan mengelola aplikasi web misi-kritis termasuk pemantauan kabel bawah laut nasional (LION), monitoring radio access network (NOC-RAN), audit aktivitas menara (TSA), dan manajemen aset & work force (AssetMgmt WFM).",
+        "Saya adalah Full Stack Developer dengan pengalaman dalam perancangan dan pengembangan aplikasi web serta mobile. Keahlian backend saya berfokus pada Laravel dan Express.js untuk arsitektur API yang tangguh, aman, dan scalable, serta framework modern seperti React, Next.js, Vue, dan Nuxt untuk sisi frontend.",
+        "Di PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra), saya aktif merancang dan mengelola aplikasi web misi-kritis termasuk pemantauan kabel bawah laut nasional (LION), monitoring radio access network (NOC-RAN), audit aktivitas menara (TSA), dan manajemen aset & work force (AssetMgmt WFM).",
         "Di platform mobile, saya mengembangkan aplikasi menggunakan Flutter dan Kotlin native, memastikan performa tinggi serta pengalaman pengguna yang mulus di berbagai sistem operasi.",
         "Dengan pendekatan full-stack menyeluruh, saya menangani proyek dari hulu ke hilir. Saya juga aktif mengintegrasikan kecerdasan buatan (AI) untuk riset teknis dan percepatan alur kerja rekayasa perangkat lunak modern."
       ]
@@ -41,14 +41,14 @@ export const portfolioData = {
       { label: { en: "Years Experience", id: "Tahun Pengalaman" }, value: "4+" },
       { label: { en: "Completed Projects", id: "Proyek Selesai" }, value: "25+" },
       { label: { en: "Enterprise Systems", id: "Sistem Enterprise" }, value: "10+" },
-      { label: { en: "Active Companies", id: "Perusahaan Aktif" }, value: "2" },
+      { label: { en: "Client Satisfaction", id: "Kepuasan Klien" }, value: "99%" },
     ]
   },
 
   experiences: [
     {
       id: "telkominfra",
-      company: "PT Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      company: "PT. Infrastruktur Telekomunikasi Indonesia",
       role: "Full Stack Developer",
       period: {
         en: "February 2024 - Present",
@@ -86,12 +86,12 @@ export const portfolioData = {
       company: "PT. Bay Pacific Software Group",
       role: "Full Stack Developer",
       period: {
-        en: "October 2023 - Present",
-        id: "Oktober 2023 - Sekarang"
+        en: "October 2023 - February 2024",
+        id: "Oktober 2023 - Februari 2024"
       },
       duration: {
-        en: "Active",
-        id: "Aktif"
+        en: "5 mos",
+        id: "5 bln"
       },
       location: "Yogyakarta, Indonesia (Remote/Hybrid)",
       type: "Full-time",
@@ -634,13 +634,13 @@ export const portfolioData = {
         greeting: "Hello world, I am",
         headlineStart: "Crafting Mission-Critical &",
         headlineHighlight: "Modern Digital Systems",
-        activeAt: "Active at Telkominfra & Bay Pacific",
+        activeAt: "Active at PT. Infrastruktur Telekomunikasi Indonesia",
         exploreProjects: "Explore Projects",
         viewCV: "View / Print CV",
         whatsapp: "WhatsApp",
         connected: "CONNECT:",
         roles: {
-          fullstack: "Full Stack & Mobile Dev",
+          fullstack: "Full Stack Developer",
           experience: "4+ Years Experience"
         }
       },
@@ -779,7 +779,7 @@ export const portfolioData = {
         skillsTitle: "Core Technical Skills"
       },
       footer: {
-        tagline: "Full Stack & Mobile Developer committed to clean code, high performance scalability, and inspired design.",
+        tagline: "Full Stack Developer committed to clean code, high performance scalability, and inspired design.",
         quickLinks: "Quick Navigation",
         quickConsult: "Direct Consultation",
         quickConsultDesc: "Looking to discuss project availability or schedule an interview?",
@@ -804,13 +804,13 @@ export const portfolioData = {
         greeting: "Halo dunia, perkenalkan saya",
         headlineStart: "Membangun Sistem Misi-Kritis &",
         headlineHighlight: "Solusi Digital Modern",
-        activeAt: "Aktif di Telkominfra & Bay Pacific",
+        activeAt: "Aktif di PT. Infrastruktur Telekomunikasi Indonesia",
         exploreProjects: "Jelajahi Proyek",
         viewCV: "Lihat / Cetak CV",
         whatsapp: "WhatsApp",
         connected: "TERHUBUNG:",
         roles: {
-          fullstack: "Full Stack & Mobile Dev",
+          fullstack: "Full Stack Developer",
           experience: "4+ Tahun Pengalaman"
         }
       },
@@ -949,7 +949,7 @@ export const portfolioData = {
         skillsTitle: "Keahlian Teknis Utama"
       },
       footer: {
-        tagline: "Full Stack & Mobile Developer dengan komitmen pada kode bersih, skalabilitas performa, dan desain yang menginspirasi.",
+        tagline: "Full Stack Developer dengan komitmen pada kode bersih, skalabilitas performa, dan desain yang menginspirasi.",
         quickLinks: "Navigasi Halaman",
         quickConsult: "Konsultasi Cepat",
         quickConsultDesc: "Ingin berdiskusi langsung perihal ketersediaan proyek atau jadwal wawancara?",

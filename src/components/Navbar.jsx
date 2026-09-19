@@ -96,7 +96,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
                 </span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">
-                Full Stack & Mobile Dev
+                Full Stack Developer
               </p>
             </div>
           </a>
