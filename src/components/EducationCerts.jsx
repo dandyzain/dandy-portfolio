@@ -40,7 +40,6 @@ export default function EducationCerts() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedCert(null);
   };
 
   // Filtered certifications
