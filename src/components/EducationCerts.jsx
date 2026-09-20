@@ -139,12 +139,12 @@ export default function EducationCerts() {
                 className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm hover:shadow-pastel-md transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-start justify-between gap-2 mb-3">
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-pastel-lavender-light dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-pastel-lavender-light dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 whitespace-nowrap">
                       {idx === 0 ? t.higherEd : t.vocationalEd}
                     </span>
-                    <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
-                      <Calendar size={13} />
+                    <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium whitespace-nowrap">
+                      <Calendar size={13} className="shrink-0" />
                       <span>{edu.period}</span>
                     </div>
                   </div>

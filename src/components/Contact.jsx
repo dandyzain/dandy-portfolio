@@ -134,18 +134,18 @@ export default function Contact({ onOpenCVModal }) {
                   rel="noopener noreferrer"
                   className="flex items-center justify-between p-3.5 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100/60 dark:hover:bg-emerald-900/40 transition-colors group"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
                     <div className="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm">
                       <Phone size={18} />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <span className="text-[10px] uppercase font-bold text-emerald-700 dark:text-emerald-400">WhatsApp & Phone</span>
-                      <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">
+                      <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 truncate">
                         {personal.phone}
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300 group-hover:translate-x-1 transition-transform">
+                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300 group-hover:translate-x-1 transition-transform shrink-0 ml-2">
                     {t.sendChat}
                   </span>
                 </motion.a>
@@ -159,18 +159,18 @@ export default function Contact({ onOpenCVModal }) {
                   rel="noopener noreferrer"
                   className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-100 dark:border-slate-700 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/40 transition-colors group"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
                     <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm">
                       <Linkedin size={18} />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <span className="text-[10px] uppercase font-bold text-slate-400">LinkedIn Profile</span>
-                      <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">
+                      <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 truncate">
                         in/dandy-zain-ab380a290
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform">
+                  <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform shrink-0 ml-2">
                     {t.viewProfile}
                   </span>
                 </motion.a>
@@ -180,9 +180,9 @@ export default function Contact({ onOpenCVModal }) {
                   <div className="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-950 text-rose-500 flex items-center justify-center shrink-0">
                     <MapPin size={18} />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <span className="text-[10px] uppercase font-bold text-slate-400">{t.fullAddress}</span>
-                    <p className="text-xs text-slate-700 dark:text-slate-300">
+                    <p className="text-xs text-slate-700 dark:text-slate-300 leading-snug">
                       {personal.address}
                     </p>
                   </div>
@@ -195,9 +195,9 @@ export default function Contact({ onOpenCVModal }) {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={onOpenCVModal}
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-pastel-lavender hover:bg-indigo-200 text-indigo-900 dark:bg-indigo-950 dark:hover:bg-indigo-900 dark:text-indigo-200 font-bold text-xs sm:text-sm shadow-sm transition-all duration-200"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3.5 rounded-2xl bg-pastel-lavender hover:bg-indigo-200 text-indigo-900 dark:bg-indigo-950 dark:hover:bg-indigo-900 dark:text-indigo-200 font-bold text-xs sm:text-sm shadow-sm transition-all duration-200 text-center"
                 >
-                  <FileText size={18} className="text-indigo-600" />
+                  <FileText size={18} className="text-indigo-600 shrink-0" />
                   <span>{t.viewCVPrompt}</span>
                 </motion.button>
               </div>

@@ -14,6 +14,7 @@ import {
   FileText
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import PdfViewer from './PdfViewer';
 
 export default function CertificateModal({ isOpen, onClose, certificate }) {
   const { language } = useLanguage();
@@ -115,18 +116,18 @@ export default function CertificateModal({ isOpen, onClose, certificate }) {
               </div>
 
               {/* Actions */}
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-1 sm:gap-2 shrink-0">
                 {activeCert.credentialUrl && (
                   <a
                     href={activeCert.credentialUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-300 text-xs font-semibold hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-colors border border-indigo-200 dark:border-indigo-800/60"
-                    title="Verify online credential"
+                    className="inline-flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-300 text-xs font-semibold hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-colors border border-indigo-200 dark:border-indigo-800/60"
+                    title={language === 'en' ? 'Verify Online Credential' : 'Verifikasi Kredensial Online'}
                   >
                     <ShieldCheck size={14} className="text-indigo-500" />
                     <span className="hidden md:inline">{language === 'en' ? 'Verify Online' : 'Verifikasi Online'}</span>
-                    <ExternalLink size={12} />
+                    <ExternalLink size={12} className="hidden sm:inline" />
                   </a>
                 )}
 
@@ -134,8 +135,8 @@ export default function CertificateModal({ isOpen, onClose, certificate }) {
                   href={encodedFile}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-                  title="Open full document in new tab"
+                  className="inline-flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                  title={language === 'en' ? 'Open full file in new tab' : 'Buka file di tab baru'}
                 >
                   <ExternalLink size={14} />
                   <span className="hidden sm:inline">{language === 'en' ? 'Open Full File' : 'Buka File'}</span>
@@ -145,17 +146,17 @@ export default function CertificateModal({ isOpen, onClose, certificate }) {
                   href={encodedFile}
                   download
                   className="inline-flex items-center gap-1.5 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-                  title="Download file"
+                  title={language === 'en' ? 'Download file' : 'Unduh file'}
                 >
-                  <Download size={15} />
+                  <Download size={14} />
                 </a>
 
                 <button
                   onClick={onClose}
-                  className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ml-1"
-                  title="Close modal"
+                  className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  aria-label="Close modal"
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
               </div>
             </div>
@@ -172,26 +173,11 @@ export default function CertificateModal({ isOpen, onClose, certificate }) {
                 </div>
               ) : (
                 <div className="w-full h-full flex flex-col items-center">
-                  <iframe
-                    src={`${encodedFile}#toolbar=0&navpanes=0&scrollbar=1`}
-                    title={activeCert.title}
-                    className="w-full h-[58vh] sm:h-[68vh] rounded-xl border border-slate-800 bg-slate-900 shadow-2xl"
+                  <PdfViewer 
+                    fileUrl={encodedFile} 
+                    title={activeCert.title} 
+                    language={language} 
                   />
-                  {/* Fallback bar below iframe */}
-                  <div className="w-full flex items-center justify-between px-2 pt-2 text-xs text-slate-400">
-                    <span className="text-[11px] truncate">
-                      {language === 'en' ? 'PDF preview rendering via browser engine' : 'Pratinjau PDF dirender langsung dari arsip'}
-                    </span>
-                    <a
-                      href={encodedFile}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 underline font-medium shrink-0 ml-2"
-                    >
-                      <FileText size={12} />
-                      {language === 'en' ? 'Open in new tab if needed' : 'Buka di tab baru jika diperlukan'}
-                    </a>
-                  </div>
                 </div>
               )}
             </div>

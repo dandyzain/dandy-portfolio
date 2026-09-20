@@ -20,6 +20,25 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
+  const handleNavClick = (e, sectionId) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    
+    setTimeout(() => {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        const navOffset = 75;
+        const elementPosition = el.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 60);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -110,6 +129,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
                 <a
                   key={link.id}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.id)}
                   className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors duration-200 z-10 ${
                     isActive
                       ? 'text-white'
@@ -216,47 +236,47 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
               initial={{ opacity: 0, height: 0, scale: 0.95 }}
               animate={{ opacity: 1, height: 'auto', scale: 1 }}
               exit={{ opacity: 0, height: 0, scale: 0.95 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
               className="md:hidden mt-4 p-4 rounded-3xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-xl backdrop-blur-xl overflow-hidden"
             >
-              <div className="flex flex-col gap-2">
-                {navLinks.map((link, idx) => (
-                  <motion.a
+              <div className="flex flex-col gap-1.5">
+                {navLinks.map((link) => (
+                  <button
                     key={link.id}
-                    href={link.href}
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: idx * 0.05 }}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`px-4 py-2.5 rounded-2xl text-sm font-medium transition-colors ${
+                    type="button"
+                    onClick={(e) => handleNavClick(e, link.id)}
+                    className={`w-full text-left px-4 py-2.5 rounded-2xl text-sm font-medium transition-colors flex items-center justify-between ${
                       activeSection === link.id
-                        ? 'bg-pastel-lavender-accent text-white font-semibold'
+                        ? 'bg-pastel-lavender-accent text-white font-semibold shadow-sm'
                         : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
                     }`}
                   >
-                    {link.name}
-                  </motion.a>
+                    <span>{link.name}</span>
+                    {activeSection === link.id && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                    )}
+                  </button>
                 ))}
                 <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
                   <button
+                    type="button"
                     onClick={() => {
                       setMobileMenuOpen(false);
                       onOpenCVModal();
                     }}
-                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-pastel-mint-light text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-pastel-mint-light text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 transition-colors"
                   >
                     <FileText size={16} />
                     <span>{t.viewCV}</span>
                   </button>
-                  <a
-                    href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20tertarik%20dengan%20portfolio%20Anda.`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-indigo-600 text-white"
+                  <button
+                    type="button"
+                    onClick={(e) => handleNavClick(e, 'contact')}
+                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-colors"
                   >
                     <Send size={16} />
                     <span>{t.contactMe}</span>
-                  </a>
+                  </button>
                 </div>
               </div>
             </motion.div>
