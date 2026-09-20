@@ -221,39 +221,6 @@ export const portfolioData = {
 
   projects: [
     {
-      id: 1,
-      title: "Asset Management & WFM System v2.1",
-      category: "Full Stack",
-      role: {
-        en: "Full Stack Developer",
-        id: "Full Stack Developer"
-      },
-      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
-      gitlabUrl: "https://gitlab.com/telkominfraapps/assetmgmt_v2.1",
-      description: {
-        en: "Enterprise Asset Management and Work Force Management (WFM) platform for Telkominfra. Manages field Preventive Maintenance (PM) and Corrective Maintenance (CM) orders, QR code asset tagging, GPS location stamping, and automated Twilio dispatching.",
-        id: "Platform Enterprise Asset Management dan Work Force Management (WFM) Telkominfra. Mengelola siklus order Preventive Maintenance (PM) dan Corrective Maintenance (CM), pemindaian label QR-code aset fisik di menara, pelacakan koordinat GPS teknisi, dan integrasi notifikasi otomatis Twilio."
-      },
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
-      tags: ["Laravel", "Vue.js", "Oracle DB", "MySQL", "QR-Code", "Twilio", "Geolocation"],
-      color: "lavender",
-      features: {
-        en: [
-          "Automated Work Force Management (WFM) order pipeline for PM and CM nationwide schedules.",
-          "Mobile-friendly physical asset scanning using dynamic QR-code generation and validation.",
-          "Technician GPS geolocation tracking with geofence validation for tower site visits.",
-          "High-volume Oracle Database integration using server-side DataTables and Excel exports."
-        ],
-        id: [
-          "Manajemen alur kerja order Work Force Management (WFM) untuk jadwal PM dan CM menara nasional.",
-          "Pemindaian aset fisik berbasis mobile dengan generator dan validator QR-code dinamis.",
-          "Pelacakan koordinat GPS teknisi dengan validasi geofence saat kunjungan menara.",
-          "Integrasi Oracle Database volume tinggi dengan server-side DataTables dan ekspor laporan berkala."
-        ]
-      },
-      linkText: "GitLab Repository"
-    },
-    {
       id: 2,
       title: "LION — NOC Submarine Cable Monitoring",
       category: "Full Stack",
@@ -282,6 +249,39 @@ export const portfolioData = {
           "Modul uploader dan parser file KML/KMZ untuk render koordinat rute kabel secara dinamis.",
           "Zona penyangga (buffer radius 100m, 1km, 2km) peringatan dini ancaman labuh jangkar kapal laut.",
           "Caching berkecepatan tinggi dengan Redis untuk pembaruan telemetri banyak kapal secara bersamaan."
+        ]
+      },
+      linkText: "GitLab Repository"
+    },
+    {
+      id: 1,
+      title: "Asset Management & WFM System v2.1",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      gitlabUrl: "https://gitlab.com/telkominfraapps/assetmgmt_v2.1",
+      description: {
+        en: "Enterprise Asset Management and Work Force Management (WFM) platform for Telkominfra. Manages field Preventive Maintenance (PM) and Corrective Maintenance (CM) orders, QR code asset tagging, GPS location stamping, and automated Twilio dispatching.",
+        id: "Platform Enterprise Asset Management dan Work Force Management (WFM) Telkominfra. Mengelola siklus order Preventive Maintenance (PM) dan Corrective Maintenance (CM), pemindaian label QR-code aset fisik di menara, pelacakan koordinat GPS teknisi, dan integrasi notifikasi otomatis Twilio."
+      },
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel", "Vue.js", "Oracle DB", "MySQL", "QR-Code", "Twilio", "Geolocation"],
+      color: "lavender",
+      features: {
+        en: [
+          "Automated Work Force Management (WFM) order pipeline for PM and CM nationwide schedules.",
+          "Mobile-friendly physical asset scanning using dynamic QR-code generation and validation.",
+          "Technician GPS geolocation tracking with geofence validation for tower site visits.",
+          "High-volume Oracle Database integration using server-side DataTables and Excel exports."
+        ],
+        id: [
+          "Manajemen alur kerja order Work Force Management (WFM) untuk jadwal PM dan CM menara nasional.",
+          "Pemindaian aset fisik berbasis mobile dengan generator dan validator QR-code dinamis.",
+          "Pelacakan koordinat GPS teknisi dengan validasi geofence saat kunjungan menara.",
+          "Integrasi Oracle Database volume tinggi dengan server-side DataTables dan ekspor laporan berkala."
         ]
       },
       linkText: "GitLab Repository"
@@ -318,6 +318,104 @@ export const portfolioData = {
         ]
       },
       linkText: "GitLab Repository"
+    },
+    {
+      id: 12,
+      title: "KINO Employee Performance Appraisal DSS (TOPSIS)",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT. Kino Indonesia Tbk",
+      githubUrl: "https://github.com/dandyzain/KINO-Web-APP.git",
+      description: {
+        en: "A Decision Support System (DSS / SPK) engineered for PT. Kino Indonesia Tbk to evaluate employee performance objectively using the TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution) algorithm. Features configurable criteria weighting, normalized decision matrices, and period ranking reports.",
+        id: "Sistem Pendukung Keputusan (SPK) penilaian kinerja karyawan di PT. Kino Indonesia Tbk menggunakan algoritma TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution). Menyediakan pembobotan kriteria dinamis, kalkulasi matriks keputusan ternormalisasi, dan laporan perangkingan periodik."
+      },
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel 8", "TOPSIS Algorithm", "MySQL", "Bootstrap", "Decision Support System"],
+      color: "lavender",
+      features: {
+        en: [
+          "Algorithmic decision engine implementing TOPSIS vector normalization, ideal positive, and ideal negative solutions.",
+          "HR administration module to manage employee directories across departments and operational divisions.",
+          "Dynamic criteria management with custom benefit and cost weight distributions.",
+          "Periodic appraisal runs generating rank-ordered preference scores (V value) for merit promotion.",
+          "Printable evaluation summary reports with breakdown of intermediate normalization calculations."
+        ],
+        id: [
+          "Engine algoritma TOPSIS dengan kalkulasi normalisasi vektor, solusi ideal positif (A+), dan ideal negatif (A-).",
+          "Modul administrasi HR untuk pendataan direktori karyawan lintas divisi dan departemen.",
+          "Manajemen kriteria penilaian fleksibel dengan pembobotan tipe benefit dan cost.",
+          "Eksekusi penilaian berkala dengan pemeringkatan nilai preferensi (V) untuk rekomendasi promosi/kinerja.",
+          "Cetak rekapitulasi hasil evaluasi lengkap dengan transparansi detail perhitungan matematis."
+        ]
+      },
+      linkText: "GitHub Repository"
+    },
+    {
+      id: 7,
+      title: "TSA — Tower Site Activity & Assessment",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      gitlabUrl: "https://gitlab.com/telkominfraapps/tsa",
+      description: {
+        en: "Field Telecommunication Tower Site Audit and Activity Management System. Tracks contractor maintenance visits, telemetry event imports, and real-time operational status with containerized Kubernetes deployment.",
+        id: "Sistem audit dan manajemen aktivitas kunjungan menara telekomunikasi lapangan (TSA). Melacak pencatatan kunjungan teknisi kontraktor, histori aktivitas pemeliharaan, impor data event telemetri, serta orkestrasi container dengan Kubernetes."
+      },
+      image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80",
+      tags: ["CodeIgniter", "PHP", "Kubernetes", "Docker", "Event Import", "MySQL"],
+      color: "mint",
+      features: {
+        en: [
+          "Operational activity logging and site assessment tracking for thousands of telecom towers.",
+          "Batch telemetry event data importer supporting operational performance benchmarking.",
+          "Dockerized container builds orchestrated on Kubernetes clusters for continuous uptime.",
+          "Custom administrative reporting dashboards monitoring field technical milestones."
+        ],
+        id: [
+          "Pencatatan log aktivitas operasional dan histori audit fisik untuk ribuan menara telekomunikasi.",
+          "Modul import data event telemetri berkala untuk tolok ukur performa operasional infrastruktur.",
+          "Build container Docker ter-orkestrasi pada cluster Kubernetes untuk stabilitas uptime maksimal.",
+          "Dashboard pelaporan KPI operasional untuk memonitor pencapaian target pemeliharaan teknisi."
+        ]
+      },
+      linkText: "GitLab Repository"
+    },
+    {
+      id: 9,
+      title: "Smart City Citizen Portal Mobile App",
+      category: "Mobile",
+      role: {
+        en: "Mobile Developer",
+        id: "Mobile Developer"
+      },
+      client: "Citiasia Inc.",
+      description: {
+        en: "A citizen-facing civic service mobile application streamlining public infrastructure incident reporting, digital permits, and municipal emergency helplines.",
+        id: "Aplikasi mobile layanan publik untuk mempermudah warga dalam melaporkan permasalahan infrastruktur kota, perizinan daring, dan direktori info darurat daerah."
+      },
+      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
+      tags: ["Flutter", "Kotlin", "Firebase", "Google Maps SDK", "REST API"],
+      color: "sky",
+      features: {
+        en: [
+          "Public facility incident reporting with high-precision camera geotagging.",
+          "Automated push notifications tracking civic ticket processing stages.",
+          "Cross-platform iOS and Android support with sub-1.5 second cold app launch time."
+        ],
+        id: [
+          "Pelaporan keluhan fasilitas umum dengan foto ber-geotagging akurat.",
+          "Pemberitahuan push otomatis saat status laporan diproses dinas terkait.",
+          "Tersedia untuk Android dan iOS dengan waktu buka aplikasi di bawah 1.5 detik."
+        ]
+      },
+      linkText: "Smart City App"
     },
     {
       id: 4,
@@ -386,6 +484,36 @@ export const portfolioData = {
       linkText: "GitLab Repository"
     },
     {
+      id: 8,
+      title: "Bay Pacific SaaS Cloud Manager",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT. Bay Pacific Software Group",
+      description: {
+        en: "A multi-tenant enterprise business operation platform featuring automated subscription billing, modular CRM tools, and cross-team collaboration.",
+        id: "Aplikasi SaaS multi-tenant untuk manajemen operasional bisnis, tagihan otomatis, dan kolaborasi antar tim perusahaan dalam satu platform terpadu."
+      },
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+      tags: ["Next.js", "Express.js", "PostgreSQL", "Tailwind CSS", "Stripe API"],
+      color: "mint",
+      features: {
+        en: [
+          "Isolated, secure multi-tenant relational database architecture.",
+          "Financial analytics dashboard with automated recurring invoicing schedules.",
+          "Modern OAuth2 authentication with Two-Factor Verification (2FA)."
+        ],
+        id: [
+          "Arsitektur database multi-tenant yang aman dan terisolasi.",
+          "Modul analitik finansial dan otomatisasi faktur berkala.",
+          "Sistem autentikasi modern OAuth2 dan Two-Factor Authentication (2FA)."
+        ]
+      },
+      linkText: "Client SaaS Product"
+    },
+    {
       id: 6,
       title: "KEPO — Knowledge Enterprise & Doc Repository",
       category: "Full Stack",
@@ -417,99 +545,6 @@ export const portfolioData = {
         ]
       },
       linkText: "GitLab Repository"
-    },
-    {
-      id: 7,
-      title: "TSA — Tower Site Activity & Assessment",
-      category: "Full Stack",
-      role: {
-        en: "Full Stack Developer",
-        id: "Full Stack Developer"
-      },
-      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
-      gitlabUrl: "https://gitlab.com/telkominfraapps/tsa",
-      description: {
-        en: "Field Telecommunication Tower Site Audit and Activity Management System. Tracks contractor maintenance visits, telemetry event imports, and real-time operational status with containerized Kubernetes deployment.",
-        id: "Sistem audit dan manajemen aktivitas kunjungan menara telekomunikasi lapangan (TSA). Melacak pencatatan kunjungan teknisi kontraktor, histori aktivitas pemeliharaan, impor data event telemetri, serta orkestrasi container dengan Kubernetes."
-      },
-      image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80",
-      tags: ["CodeIgniter", "PHP", "Kubernetes", "Docker", "Event Import", "MySQL"],
-      color: "mint",
-      features: {
-        en: [
-          "Operational activity logging and site assessment tracking for thousands of telecom towers.",
-          "Batch telemetry event data importer supporting operational performance benchmarking.",
-          "Dockerized container builds orchestrated on Kubernetes clusters for continuous uptime.",
-          "Custom administrative reporting dashboards monitoring field technical milestones."
-        ],
-        id: [
-          "Pencatatan log aktivitas operasional dan histori audit fisik untuk ribuan menara telekomunikasi.",
-          "Modul import data event telemetri berkala untuk tolok ukur performa operasional infrastruktur.",
-          "Build container Docker ter-orkestrasi pada cluster Kubernetes untuk stabilitas uptime maksimal.",
-          "Dashboard pelaporan KPI operasional untuk memonitor pencapaian target pemeliharaan teknisi."
-        ]
-      },
-      linkText: "GitLab Repository"
-    },
-    {
-      id: 8,
-      title: "Bay Pacific SaaS Cloud Manager",
-      category: "Full Stack",
-      role: {
-        en: "Full Stack Developer",
-        id: "Full Stack Developer"
-      },
-      client: "PT. Bay Pacific Software Group",
-      description: {
-        en: "A multi-tenant enterprise business operation platform featuring automated subscription billing, modular CRM tools, and cross-team collaboration.",
-        id: "Aplikasi SaaS multi-tenant untuk manajemen operasional bisnis, tagihan otomatis, dan kolaborasi antar tim perusahaan dalam satu platform terpadu."
-      },
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-      tags: ["Next.js", "Express.js", "PostgreSQL", "Tailwind CSS", "Stripe API"],
-      color: "mint",
-      features: {
-        en: [
-          "Isolated, secure multi-tenant relational database architecture.",
-          "Financial analytics dashboard with automated recurring invoicing schedules.",
-          "Modern OAuth2 authentication with Two-Factor Verification (2FA)."
-        ],
-        id: [
-          "Arsitektur database multi-tenant yang aman dan terisolasi.",
-          "Modul analitik finansial dan otomatisasi faktur berkala.",
-          "Sistem autentikasi modern OAuth2 dan Two-Factor Authentication (2FA)."
-        ]
-      },
-      linkText: "Client SaaS Product"
-    },
-    {
-      id: 9,
-      title: "Smart City Citizen Portal Mobile App",
-      category: "Mobile",
-      role: {
-        en: "Mobile Developer",
-        id: "Mobile Developer"
-      },
-      client: "Citiasia Inc.",
-      description: {
-        en: "A citizen-facing civic service mobile application streamlining public infrastructure incident reporting, digital permits, and municipal emergency helplines.",
-        id: "Aplikasi mobile layanan publik untuk mempermudah warga dalam melaporkan permasalahan infrastruktur kota, perizinan daring, dan direktori info darurat daerah."
-      },
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
-      tags: ["Flutter", "Kotlin", "Firebase", "Google Maps SDK", "REST API"],
-      color: "sky",
-      features: {
-        en: [
-          "Public facility incident reporting with high-precision camera geotagging.",
-          "Automated push notifications tracking civic ticket processing stages.",
-          "Cross-platform iOS and Android support with sub-1.5 second cold app launch time."
-        ],
-        id: [
-          "Pelaporan keluhan fasilitas umum dengan foto ber-geotagging akurat.",
-          "Pemberitahuan push otomatis saat status laporan diproses dinas terkait.",
-          "Tersedia untuk Android dan iOS dengan waktu buka aplikasi di bawah 1.5 detik."
-        ]
-      },
-      linkText: "Smart City App"
     },
     {
       id: 10,
@@ -577,36 +612,36 @@ export const portfolioData = {
       linkText: "GitHub Repository"
     },
     {
-      id: 12,
-      title: "KINO Employee Performance Appraisal DSS (TOPSIS)",
+      id: 18,
+      title: "Indosehat Clinical Service & Patient QR Management",
       category: "Full Stack",
       role: {
         en: "Full Stack Developer",
         id: "Full Stack Developer"
       },
-      client: "PT. Kino Indonesia Tbk",
-      githubUrl: "https://github.com/dandyzain/KINO-Web-APP.git",
+      client: "Klinik Pratama Indosehat",
+      githubUrl: "https://github.com/dandyzain/Web-Indosehat.git",
       description: {
-        en: "A Decision Support System (DSS / SPK) engineered for PT. Kino Indonesia Tbk to evaluate employee performance objectively using the TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution) algorithm. Features configurable criteria weighting, normalized decision matrices, and period ranking reports.",
-        id: "Sistem Pendukung Keputusan (SPK) penilaian kinerja karyawan di PT. Kino Indonesia Tbk menggunakan algoritma TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution). Menyediakan pembobotan kriteria dinamis, kalkulasi matriks keputusan ternormalisasi, dan laporan perangkingan periodik."
+        en: "An integrated healthcare clinic and patient intake administration system. Streamlines online patient appointments, multi-branch clinic directory management (master_klinik), dynamic Endroid QR-code digital patient card generation, and automated medical checkup report exports with DomPDF.",
+        id: "Sistem informasi manajemen pelayanan klinik kesehatan dan administrasi pasien terpadu. Menyederhanakan pendaftaran pasien daring, direktori cabang klinik (master_klinik), penerbitan kartu berobat digital dengan QR-Code dinamis (Endroid QR-Code), serta cetak laporan rekam medis via DomPDF."
       },
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
-      tags: ["Laravel 8", "TOPSIS Algorithm", "MySQL", "Bootstrap", "Decision Support System"],
+      image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80",
+      tags: ["CodeIgniter 3", "MySQL", "Argon Dashboard", "DomPDF", "Endroid QR-Code", "Healthcare"],
       color: "lavender",
       features: {
         en: [
-          "Algorithmic decision engine implementing TOPSIS vector normalization, ideal positive, and ideal negative solutions.",
-          "HR administration module to manage employee directories across departments and operational divisions.",
-          "Dynamic criteria management with custom benefit and cost weight distributions.",
-          "Periodic appraisal runs generating rank-ordered preference scores (V value) for merit promotion.",
-          "Printable evaluation summary reports with breakdown of intermediate normalization calculations."
+          "Online patient self-registration portal capturing demographic records, complaints, and target clinic selection.",
+          "Multi-branch clinic master database regulating service capacities, doctors on duty, and clinical operational data.",
+          "Dynamic Endroid QR-Code generation embedding encrypted patient identification for instant front-desk check-in.",
+          "Automated medical checkup and consultation report export engine using DomPDF formatting.",
+          "Modern administrative interface built upon the Argon Dashboard UI design system."
         ],
         id: [
-          "Engine algoritma TOPSIS dengan kalkulasi normalisasi vektor, solusi ideal positif (A+), dan ideal negatif (A-).",
-          "Modul administrasi HR untuk pendataan direktori karyawan lintas divisi dan departemen.",
-          "Manajemen kriteria penilaian fleksibel dengan pembobotan tipe benefit dan cost.",
-          "Eksekusi penilaian berkala dengan pemeringkatan nilai preferensi (V) untuk rekomendasi promosi/kinerja.",
-          "Cetak rekapitulasi hasil evaluasi lengkap dengan transparansi detail perhitungan matematis."
+          "Portal pendaftaran mandiri pasien online mencakup data demografis, riwayat keluhan, dan pilihan cabang klinik.",
+          "Master data multi-cabang klinik untuk pengaturan kapasitas layanan, jadwal dokter, dan operasional poli.",
+          "Penerbitan kartu pasien digital berbasis QR-Code dinamis (Endroid QR-Code) untuk verifikasi cepat di loket.",
+          "Ekspor surat keterangan medis dan rekapitulasi data pemeriksaan pasien otomatis dengan DomPDF.",
+          "Antarmuka admin responsif dan modern berbasis sistem desain Argon Dashboard."
         ]
       },
       linkText: "GitHub Repository"
@@ -682,41 +717,6 @@ export const portfolioData = {
       linkText: "GitHub Repository"
     },
     {
-      id: 15,
-      title: "SMKN 2 Kuningan Library Circulation System",
-      category: "Full Stack",
-      role: {
-        en: "Full Stack Developer",
-        id: "Full Stack Developer"
-      },
-      client: "SMK Negeri 2 Kuningan",
-      githubUrl: "https://github.com/dandyzain/Perpustakaan-Sekolah.git",
-      description: {
-        en: "An institutional library management and circulation system built for SMK Negeri 2 Kuningan. Automates member registration, book cataloging with cover imagery, barcode-friendly borrowing and return processing, overdue fines calculation, and Excel reporting.",
-        id: "Sistem informasi sirkulasi dan manajemen perpustakaan sekolah yang dibangun untuk SMK Negeri 2 Kuningan. Mengotomatisasi pendaftaran anggota, katalog buku dengan sampul digital, pencatatan peminjaman dan pengembalian, kalkulasi denda keterlambatan, serta ekspor laporan Excel."
-      },
-      image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80",
-      tags: ["PHP Native", "MySQL", "Bootstrap", "Excel Export", "Library Circulation"],
-      color: "butter",
-      features: {
-        en: [
-          "Member card management storing student identifiers, classes, and contact records.",
-          "Book collection indexing with digital cover uploads, categorization, and physical inventory tracking.",
-          "Fast-track circulation counter handling loan timestamps, return deadlines, and automatic overdue fine formulas.",
-          "One-click spreadsheet export generating Excel inventory balance and loan history sheets.",
-          "Printable official library administration reports for periodic school accreditation audits."
-        ],
-        id: [
-          "Manajemen kartu anggota perpustakaan mencakup data NIS siswa, jurusan, dan kontak.",
-          "Pendataan inventaris buku dengan upload sampul digital, kategori keilmuan, dan stok ketersediaan.",
-          "Loket sirkulasi peminjaman dan pengembalian buku dengan kalkulasi otomatis denda keterlambatan.",
-          "Ekspor rekapitulasi inventaris dan buku pinjaman ke format Microsoft Excel dengan satu klik.",
-          "Cetak format laporan resmi administrasi perpustakaan untuk kebutuhan pelaporan akreditasi sekolah."
-        ]
-      },
-      linkText: "GitHub Repository"
-    },
-    {
       id: 16,
       title: "BPN Land Registration & PTSL Admin Portal",
       category: "Full Stack",
@@ -787,36 +787,36 @@ export const portfolioData = {
       linkText: "GitHub Repository"
     },
     {
-      id: 18,
-      title: "Indosehat Clinical Service & Patient QR Management",
+      id: 15,
+      title: "SMKN 2 Kuningan Library Circulation System",
       category: "Full Stack",
       role: {
         en: "Full Stack Developer",
         id: "Full Stack Developer"
       },
-      client: "Klinik Pratama Indosehat",
-      githubUrl: "https://github.com/dandyzain/Web-Indosehat.git",
+      client: "SMK Negeri 2 Kuningan",
+      githubUrl: "https://github.com/dandyzain/Perpustakaan-Sekolah.git",
       description: {
-        en: "An integrated healthcare clinic and patient intake administration system. Streamlines online patient appointments, multi-branch clinic directory management (master_klinik), dynamic Endroid QR-code digital patient card generation, and automated medical checkup report exports with DomPDF.",
-        id: "Sistem informasi manajemen pelayanan klinik kesehatan dan administrasi pasien terpadu. Menyederhanakan pendaftaran pasien daring, direktori cabang klinik (master_klinik), penerbitan kartu berobat digital dengan QR-Code dinamis (Endroid QR-Code), serta cetak laporan rekam medis via DomPDF."
+        en: "An institutional library management and circulation system built for SMK Negeri 2 Kuningan. Automates member registration, book cataloging with cover imagery, barcode-friendly borrowing and return processing, overdue fines calculation, and Excel reporting.",
+        id: "Sistem informasi sirkulasi dan manajemen perpustakaan sekolah yang dibangun untuk SMK Negeri 2 Kuningan. Mengotomatisasi pendaftaran anggota, katalog buku dengan sampul digital, pencatatan peminjaman dan pengembalian, kalkulasi denda keterlambatan, serta ekspor laporan Excel."
       },
-      image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80",
-      tags: ["CodeIgniter 3", "MySQL", "Argon Dashboard", "DomPDF", "Endroid QR-Code", "Healthcare"],
-      color: "lavender",
+      image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80",
+      tags: ["PHP Native", "MySQL", "Bootstrap", "Excel Export", "Library Circulation"],
+      color: "butter",
       features: {
         en: [
-          "Online patient self-registration portal capturing demographic records, complaints, and target clinic selection.",
-          "Multi-branch clinic master database regulating service capacities, doctors on duty, and clinical operational data.",
-          "Dynamic Endroid QR-Code generation embedding encrypted patient identification for instant front-desk check-in.",
-          "Automated medical checkup and consultation report export engine using DomPDF formatting.",
-          "Modern administrative interface built upon the Argon Dashboard UI design system."
+          "Member card management storing student identifiers, classes, and contact records.",
+          "Book collection indexing with digital cover uploads, categorization, and physical inventory tracking.",
+          "Fast-track circulation counter handling loan timestamps, return deadlines, and automatic overdue fine formulas.",
+          "One-click spreadsheet export generating Excel inventory balance and loan history sheets.",
+          "Printable official library administration reports for periodic school accreditation audits."
         ],
         id: [
-          "Portal pendaftaran mandiri pasien online mencakup data demografis, riwayat keluhan, dan pilihan cabang klinik.",
-          "Master data multi-cabang klinik untuk pengaturan kapasitas layanan, jadwal dokter, dan operasional poli.",
-          "Penerbitan kartu pasien digital berbasis QR-Code dinamis (Endroid QR-Code) untuk verifikasi cepat di loket.",
-          "Ekspor surat keterangan medis dan rekapitulasi data pemeriksaan pasien otomatis dengan DomPDF.",
-          "Antarmuka admin responsif dan modern berbasis sistem desain Argon Dashboard."
+          "Manajemen kartu anggota perpustakaan mencakup data NIS siswa, jurusan, dan kontak.",
+          "Pendataan inventaris buku dengan upload sampul digital, kategori keilmuan, dan stok ketersediaan.",
+          "Loket sirkulasi peminjaman dan pengembalian buku dengan kalkulasi otomatis denda keterlambatan.",
+          "Ekspor rekapitulasi inventaris dan buku pinjaman ke format Microsoft Excel dengan satu klik.",
+          "Cetak format laporan resmi administrasi perpustakaan untuk kebutuhan pelaporan akreditasi sekolah."
         ]
       },
       linkText: "GitHub Repository"
@@ -964,20 +964,22 @@ export const portfolioData = {
       }
     },
     {
-      id: "revou-data-analytics",
-      title: "Intro to Data Analytics (DAMC)",
-      issuer: "RevoU (PT Revolusi Cita Edukasi)",
-      platform: "RevoU Mini Course",
-      issueDate: "August 2024",
-      file: "/certificate/[REVO U] - DAMC - Dandy Rahmat Zain.pdf",
+      id: "google-ai-app-building",
+      title: "AI for App Building",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "June 2024",
+      credentialId: "RXVZR65LLIR9",
+      credentialUrl: "https://coursera.org/verify/RXVZR65LLIR9",
+      file: "/certificate/[Google AI] - RXVZR65LLIR9.pdf",
       fileType: "pdf",
       category: "ai",
-      categoryLabel: { en: "Data & Analytics", id: "Data & Analisis" },
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
       isSpecialization: false,
       badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
       description: {
-        en: "Certified 2-week course mastering foundational data analytics, data storytelling, and business metrics synthesis.",
-        id: "Kursus tersertifikasi 2 minggu mendalami dasar data analytics, visualisasi data, dan sintesis metrik bisnis."
+        en: "Designing and building custom intelligent software solutions, integrating AI APIs, and automating logic flows.",
+        id: "Merancang dan membangun aplikasi cerdas kustom, integrasi API AI, dan otomatisasi alur logika perangkat lunak."
       }
     },
     {
@@ -1000,25 +1002,6 @@ export const portfolioData = {
       }
     },
     {
-      id: "google-ai-app-building",
-      title: "AI for App Building",
-      issuer: "Google Career Certificates",
-      platform: "Coursera",
-      issueDate: "June 2024",
-      credentialId: "RXVZR65LLIR9",
-      credentialUrl: "https://coursera.org/verify/RXVZR65LLIR9",
-      file: "/certificate/[Google AI] - RXVZR65LLIR9.pdf",
-      fileType: "pdf",
-      category: "ai",
-      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
-      isSpecialization: false,
-      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
-      description: {
-        en: "Designing and building custom intelligent software solutions, integrating AI APIs, and automating logic flows.",
-        id: "Merancang dan membangun aplikasi cerdas kustom, integrasi API AI, dan otomatisasi alur logika perangkat lunak."
-      }
-    },
-    {
       id: "google-ai-fundamentals",
       title: "AI Fundamentals",
       issuer: "Google Career Certificates",
@@ -1038,98 +1021,60 @@ export const portfolioData = {
       }
     },
     {
-      id: "google-ai-research",
-      title: "AI for Research and Insights",
-      issuer: "Google Career Certificates",
-      platform: "Coursera",
-      issueDate: "May 2024",
-      credentialId: "QHZHH80Q8P5Y",
-      credentialUrl: "https://coursera.org/verify/QHZHH80Q8P5Y",
-      file: "/certificate/[Google AI] - QHZHH80Q8P5Y.pdf",
-      fileType: "pdf",
-      category: "ai",
-      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
-      isSpecialization: false,
-      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
-      description: {
-        en: "Leveraging generative AI tools for literature synthesis, deep technical research, benchmark evaluation, and factual validation.",
-        id: "Pemanfaatan AI generatif untuk sintesis riset teknis, analisis literatur komparatif, dan validasi data."
-      }
-    },
-    {
-      id: "google-ai-content",
-      title: "AI for Content Creation",
-      issuer: "Google Career Certificates",
-      platform: "Coursera",
-      issueDate: "June 2024",
-      credentialId: "NYV7DKYT8ZUT",
-      credentialUrl: "https://coursera.org/verify/NYV7DKYT8ZUT",
-      file: "/certificate/[Google AI] - NYV7DKYT8ZUT.pdf",
-      fileType: "pdf",
-      category: "ai",
-      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
-      isSpecialization: false,
-      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
-      description: {
-        en: "Generating tailored technical documentation, marketing copy, and multi-modal creative digital assets using AI.",
-        id: "Pembuatan dokumentasi teknis, konten digital terstruktur, dan aset multimedia menggunakan AI."
-      }
-    },
-    {
-      id: "google-ai-brainstorming",
-      title: "AI for Brainstorming and Planning",
-      issuer: "Google Career Certificates",
-      platform: "Coursera",
-      issueDate: "May 2024",
-      credentialId: "PYKJV2JG0FOG",
-      credentialUrl: "https://coursera.org/verify/PYKJV2JG0FOG",
-      file: "/certificate/[Google AI] - PYKJV2JG0FOG.pdf",
-      fileType: "pdf",
-      category: "ai",
-      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
-      isSpecialization: false,
-      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
-      description: {
-        en: "Facilitating ideation workshops, rapid project architecture planning, and scenario modeling with generative AI models.",
-        id: "Memfasilitasi ideasi, perencanaan arsitektur proyek cepat, dan pemodelan skenario berbasis model AI."
-      }
-    },
-    {
-      id: "google-ai-writing",
-      title: "AI for Writing and Communicating",
-      issuer: "Google Career Certificates",
-      platform: "Coursera",
-      issueDate: "June 2024",
-      credentialId: "UKX8NYUM8Z7V",
-      credentialUrl: "https://coursera.org/verify/UKX8NYUM8Z7V",
-      file: "/certificate/[Google AI] - UKX8NYUM8Z7V.pdf",
-      fileType: "pdf",
-      category: "ai",
-      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
-      isSpecialization: false,
-      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
-      description: {
-        en: "Refining corporate communications, executive summaries, and clear technical RFC proposals with AI writing assistance.",
-        id: "Penyusunan komunikasi teknis, ringkasan eksekutif, dan proposal sistem dengan asistensi AI."
-      }
-    },
-    {
-      id: "google-python-crash-course",
-      title: "Crash Course on Python",
+      id: "google-automating-real-world",
+      title: "Automating Real-World Tasks with Python",
       issuer: "Google Career Certificates",
       platform: "Coursera",
       issueDate: "July 2024",
-      credentialId: "NYLCCJSYRMFG",
-      credentialUrl: "https://coursera.org/verify/NYLCCJSYRMFG",
-      file: "/certificate/[Google IT Automation With Python] - NYLCCJSYRMFG.pdf",
+      credentialId: "5UFM8M743DDW",
+      credentialUrl: "https://coursera.org/verify/5UFM8M743DDW",
+      file: "/certificate/[Google IT Automation With Python] - 5UFM8M743DDW.pdf",
       fileType: "pdf",
       category: "python",
       categoryLabel: { en: "Google & Python", id: "Google & Python" },
       isSpecialization: false,
       badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
       description: {
-        en: "Core Python programming constructs, OOP design patterns, data structures, and script writing fundamentals.",
-        id: "Fondasi pemrograman Python, struktur data, konsep OOP, dan penulisan skrip otomasi komputer."
+        en: "Capstoning Qwiklabs projects manipulating REST APIs, processing image batches with Pillow, and generating automated PDF email reports.",
+        id: "Proyek capstone otomasi REST API, pemrosesan batch gambar, dan generator laporan PDF email terjadwal."
+      }
+    },
+    {
+      id: "google-config-management-cloud",
+      title: "Configuration Management and the Cloud",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "July 2024",
+      credentialId: "5KCXN4PQNJ4R",
+      credentialUrl: "https://coursera.org/verify/5KCXN4PQNJ4R",
+      file: "/certificate/[Google IT Automation With Python] - 5KCXN4PQNJ4R.pdf",
+      fileType: "pdf",
+      category: "python",
+      categoryLabel: { en: "DevOps & Cloud", id: "DevOps & Cloud" },
+      isSpecialization: false,
+      badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
+      description: {
+        en: "Deploying and managing infrastructure as code (IaC), Puppet automation, and Google Cloud Platform (GCP) virtualization.",
+        id: "Otomasi konfigurasi infrastruktur skala besar (IaC), Puppet, dan orkestrasi virtual server pada cloud."
+      }
+    },
+    {
+      id: "google-troubleshooting-debugging",
+      title: "Troubleshooting and Debugging Techniques",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "July 2024",
+      credentialId: "MNKKHYQUYU6X",
+      credentialUrl: "https://coursera.org/verify/MNKKHYQUYU6X",
+      file: "/certificate/[Google IT Automation With Python] - MNKKHYQUYU6X.pdf",
+      fileType: "pdf",
+      category: "python",
+      categoryLabel: { en: "Google & Python", id: "Google & Python" },
+      isSpecialization: false,
+      badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
+      description: {
+        en: "Root-cause analysis, binary search debugging, performance profiling, memory leak investigation, and system stabilization.",
+        id: "Analisis akar masalah, debugging binary search, profiling performa sistem, dan isolasi bottleneck komputasi."
       }
     },
     {
@@ -1171,60 +1116,132 @@ export const portfolioData = {
       }
     },
     {
-      id: "google-troubleshooting-debugging",
-      title: "Troubleshooting and Debugging Techniques",
+      id: "google-python-crash-course",
+      title: "Crash Course on Python",
       issuer: "Google Career Certificates",
       platform: "Coursera",
       issueDate: "July 2024",
-      credentialId: "MNKKHYQUYU6X",
-      credentialUrl: "https://coursera.org/verify/MNKKHYQUYU6X",
-      file: "/certificate/[Google IT Automation With Python] - MNKKHYQUYU6X.pdf",
+      credentialId: "NYLCCJSYRMFG",
+      credentialUrl: "https://coursera.org/verify/NYLCCJSYRMFG",
+      file: "/certificate/[Google IT Automation With Python] - NYLCCJSYRMFG.pdf",
       fileType: "pdf",
       category: "python",
       categoryLabel: { en: "Google & Python", id: "Google & Python" },
       isSpecialization: false,
       badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
       description: {
-        en: "Root-cause analysis, binary search debugging, performance profiling, memory leak investigation, and system stabilization.",
-        id: "Analisis akar masalah, debugging binary search, profiling performa sistem, dan isolasi bottleneck komputasi."
+        en: "Core Python programming constructs, OOP design patterns, data structures, and script writing fundamentals.",
+        id: "Fondasi pemrograman Python, struktur data, konsep OOP, dan penulisan skrip otomasi komputer."
       }
     },
     {
-      id: "google-config-management-cloud",
-      title: "Configuration Management and the Cloud",
-      issuer: "Google Career Certificates",
-      platform: "Coursera",
-      issueDate: "July 2024",
-      credentialId: "5KCXN4PQNJ4R",
-      credentialUrl: "https://coursera.org/verify/5KCXN4PQNJ4R",
-      file: "/certificate/[Google IT Automation With Python] - 5KCXN4PQNJ4R.pdf",
+      id: "codefirst-ios-android",
+      title: "Coding Live Class: Aplikasi iOS & Android untuk Pemula",
+      issuer: "CodeFirst Cirebon",
+      platform: "Live Coding Class",
+      issueDate: "April 2021",
+      file: "/certificate/[Code First] - Dandy Rahmat Zain.pdf",
       fileType: "pdf",
-      category: "python",
-      categoryLabel: { en: "DevOps & Cloud", id: "DevOps & Cloud" },
+      category: "industry",
+      categoryLabel: { en: "Mobile Engineering", id: "Rekayasa Mobile" },
       isSpecialization: false,
-      badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
+      badgeColor: "bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300",
       description: {
-        en: "Deploying and managing infrastructure as code (IaC), Puppet automation, and Google Cloud Platform (GCP) virtualization.",
-        id: "Otomasi konfigurasi infrastruktur skala besar (IaC), Puppet, dan orkestrasi virtual server pada cloud."
+        en: "Foundational mobile app development workshop focused on cross-platform architectures for iOS and Android.",
+        id: "Workshop pembuatan aplikasi mobile lintas platform untuk pemula membangun aplikasi iOS & Android."
       }
     },
     {
-      id: "google-automating-real-world",
-      title: "Automating Real-World Tasks with Python",
+      id: "revou-data-analytics",
+      title: "Intro to Data Analytics (DAMC)",
+      issuer: "RevoU (PT Revolusi Cita Edukasi)",
+      platform: "RevoU Mini Course",
+      issueDate: "August 2024",
+      file: "/certificate/[REVO U] - DAMC - Dandy Rahmat Zain.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "Data & Analytics", id: "Data & Analisis" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Certified 2-week course mastering foundational data analytics, data storytelling, and business metrics synthesis.",
+        id: "Kursus tersertifikasi 2 minggu mendalami dasar data analytics, visualisasi data, dan sintesis metrik bisnis."
+      }
+    },
+    {
+      id: "google-ai-research",
+      title: "AI for Research and Insights",
       issuer: "Google Career Certificates",
       platform: "Coursera",
-      issueDate: "July 2024",
-      credentialId: "5UFM8M743DDW",
-      credentialUrl: "https://coursera.org/verify/5UFM8M743DDW",
-      file: "/certificate/[Google IT Automation With Python] - 5UFM8M743DDW.pdf",
+      issueDate: "May 2024",
+      credentialId: "QHZHH80Q8P5Y",
+      credentialUrl: "https://coursera.org/verify/QHZHH80Q8P5Y",
+      file: "/certificate/[Google AI] - QHZHH80Q8P5Y.pdf",
       fileType: "pdf",
-      category: "python",
-      categoryLabel: { en: "Google & Python", id: "Google & Python" },
+      category: "ai",
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
       isSpecialization: false,
-      badgeColor: "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300",
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
       description: {
-        en: "Capstoning Qwiklabs projects manipulating REST APIs, processing image batches with Pillow, and generating automated PDF email reports.",
-        id: "Proyek capstone otomasi REST API, pemrosesan batch gambar, dan generator laporan PDF email terjadwal."
+        en: "Leveraging generative AI tools for literature synthesis, deep technical research, benchmark evaluation, and factual validation.",
+        id: "Pemanfaatan AI generatif untuk sintesis riset teknis, analisis literatur komparatif, dan validasi data."
+      }
+    },
+    {
+      id: "google-ai-brainstorming",
+      title: "AI for Brainstorming and Planning",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "May 2024",
+      credentialId: "PYKJV2JG0FOG",
+      credentialUrl: "https://coursera.org/verify/PYKJV2JG0FOG",
+      file: "/certificate/[Google AI] - PYKJV2JG0FOG.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Facilitating ideation workshops, rapid project architecture planning, and scenario modeling with generative AI models.",
+        id: "Memfasilitasi ideasi, perencanaan arsitektur proyek cepat, dan pemodelan skenario berbasis model AI."
+      }
+    },
+    {
+      id: "google-ai-content",
+      title: "AI for Content Creation",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "June 2024",
+      credentialId: "NYV7DKYT8ZUT",
+      credentialUrl: "https://coursera.org/verify/NYV7DKYT8ZUT",
+      file: "/certificate/[Google AI] - NYV7DKYT8ZUT.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Generating tailored technical documentation, marketing copy, and multi-modal creative digital assets using AI.",
+        id: "Pembuatan dokumentasi teknis, konten digital terstruktur, dan aset multimedia menggunakan AI."
+      }
+    },
+    {
+      id: "google-ai-writing",
+      title: "AI for Writing and Communicating",
+      issuer: "Google Career Certificates",
+      platform: "Coursera",
+      issueDate: "June 2024",
+      credentialId: "UKX8NYUM8Z7V",
+      credentialUrl: "https://coursera.org/verify/UKX8NYUM8Z7V",
+      file: "/certificate/[Google AI] - UKX8NYUM8Z7V.pdf",
+      fileType: "pdf",
+      category: "ai",
+      categoryLabel: { en: "AI & Machine Learning", id: "AI & Machine Learning" },
+      isSpecialization: false,
+      badgeColor: "bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300",
+      description: {
+        en: "Refining corporate communications, executive summaries, and clear technical RFC proposals with AI writing assistance.",
+        id: "Penyusunan komunikasi teknis, ringkasan eksekutif, dan proposal sistem dengan asistensi AI."
       }
     },
     {
@@ -1244,41 +1261,6 @@ export const portfolioData = {
       description: {
         en: "Optimizing career portfolios, tailoring technical pitches, and simulating technical interview scenarios with AI assistance.",
         id: "Optimalisasi portfolio profesional, persiapan wawancara teknis, dan simulasi karier dengan AI."
-      }
-    },
-    {
-      id: "kmmi-2d-animation",
-      title: "KMMI: Digital 2D Animation",
-      issuer: "Universitas Amikom Yogyakarta & Kemendikbud",
-      platform: "Kredensial Mikro Mahasiswa Indonesia",
-      issueDate: "November 2021",
-      credentialId: "044/PG.REK/AMIKOM/XI/2021",
-      file: "/certificate/[Digital 2D Animation] - Dandy Rahmat Zain.pdf",
-      fileType: "pdf",
-      category: "hki",
-      categoryLabel: { en: "Multimedia & Design", id: "Multimedia & Desain" },
-      isSpecialization: false,
-      badgeColor: "bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300",
-      description: {
-        en: "National micro-credential program covering scriptwriting, digital painting, frame-by-frame animation, and compositing.",
-        id: "Program kredensial mikro nasional mencakup penulisan naskah, digital painting, animasi frame-by-frame, dan compositing."
-      }
-    },
-    {
-      id: "codefirst-ios-android",
-      title: "Coding Live Class: Aplikasi iOS & Android untuk Pemula",
-      issuer: "CodeFirst Cirebon",
-      platform: "Live Coding Class",
-      issueDate: "April 2021",
-      file: "/certificate/[Code First] - Dandy Rahmat Zain.pdf",
-      fileType: "pdf",
-      category: "industry",
-      categoryLabel: { en: "Mobile Engineering", id: "Rekayasa Mobile" },
-      isSpecialization: false,
-      badgeColor: "bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300",
-      description: {
-        en: "Foundational mobile app development workshop focused on cross-platform architectures for iOS and Android.",
-        id: "Workshop pembuatan aplikasi mobile lintas platform untuk pemula membangun aplikasi iOS & Android."
       }
     },
     {
@@ -1336,6 +1318,24 @@ export const portfolioData = {
       }
     },
     {
+      id: "kmmi-2d-animation",
+      title: "KMMI: Digital 2D Animation",
+      issuer: "Universitas Amikom Yogyakarta & Kemendikbud",
+      platform: "Kredensial Mikro Mahasiswa Indonesia",
+      issueDate: "November 2021",
+      credentialId: "044/PG.REK/AMIKOM/XI/2021",
+      file: "/certificate/[Digital 2D Animation] - Dandy Rahmat Zain.pdf",
+      fileType: "pdf",
+      category: "hki",
+      categoryLabel: { en: "Multimedia & Design", id: "Multimedia & Desain" },
+      isSpecialization: false,
+      badgeColor: "bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300",
+      description: {
+        en: "National micro-credential program covering scriptwriting, digital painting, frame-by-frame animation, and compositing.",
+        id: "Program kredensial mikro nasional mencakup penulisan naskah, digital painting, animasi frame-by-frame, dan compositing."
+      }
+    },
+    {
       id: "ucic-public-speaking",
       title: "Make a Change Starting with Public Speaking",
       issuer: "BKM Universitas Catur Insan Cendekia",
@@ -1354,23 +1354,6 @@ export const portfolioData = {
       }
     },
     {
-      id: "usb-scholarship",
-      title: "The Secrets of Getting Scholarships to Study Abroad",
-      issuer: "New USB School",
-      platform: "NUSB School Webinar",
-      issueDate: "July 2022",
-      file: "/certificate/[USB] - Dandy Rahmat Zain 1.pdf",
-      fileType: "pdf",
-      category: "industry",
-      categoryLabel: { en: "Global Education", id: "Edukasi Global" },
-      isSpecialization: false,
-      badgeColor: "bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300",
-      description: {
-        en: "Strategies for securing international scholarships, writing academic motivation essays, and global study preparation.",
-        id: "Strategi lolos beasiswa studi internasional, penulisan esai motivasi akademik, dan kesiapan global."
-      }
-    },
-    {
       id: "usb-studentpreneur",
       title: "The Secrets of Successful Student-preneur",
       issuer: "New USB School",
@@ -1385,6 +1368,23 @@ export const portfolioData = {
       description: {
         en: "Building entrepreneurial digital ventures, product ideation, and business viability modeling while pursuing higher education.",
         id: "Membangun bisnis digital mahasiswa, validasi produk perangkat lunak, dan model bisnis berkelanjutan."
+      }
+    },
+    {
+      id: "usb-scholarship",
+      title: "The Secrets of Getting Scholarships to Study Abroad",
+      issuer: "New USB School",
+      platform: "NUSB School Webinar",
+      issueDate: "July 2022",
+      file: "/certificate/[USB] - Dandy Rahmat Zain 1.pdf",
+      fileType: "pdf",
+      category: "industry",
+      categoryLabel: { en: "Global Education", id: "Edukasi Global" },
+      isSpecialization: false,
+      badgeColor: "bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300",
+      description: {
+        en: "Strategies for securing international scholarships, writing academic motivation essays, and global study preparation.",
+        id: "Strategi lolos beasiswa studi internasional, penulisan esai motivasi akademik, dan kesiapan global."
       }
     }
   ],

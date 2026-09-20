@@ -320,9 +320,16 @@ export default function Projects() {
                       <h3 className="font-display font-bold text-xl sm:text-2xl text-slate-900 dark:text-white">
                         {activeModalProject.title}
                       </h3>
-                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">
-                        {language === 'en' ? 'Client' : 'Klien'}: {activeModalProject.client} • {language === 'en' ? 'Role' : 'Peran'}: {activeModalProject.role[language]}
-                      </p>
+                      <div className="mt-2 space-y-1 text-xs">
+                        <p className="text-slate-600 dark:text-slate-300">
+                          <span className="font-semibold text-slate-400 dark:text-slate-500">{language === 'en' ? 'Client: ' : 'Perusahaan / Klien: '}</span>
+                          <span className="font-medium text-slate-800 dark:text-slate-200">{activeModalProject.client}</span>
+                        </p>
+                        <p className="text-slate-600 dark:text-slate-300">
+                          <span className="font-semibold text-slate-400 dark:text-slate-500">{language === 'en' ? 'Role: ' : 'Peran: '}</span>
+                          <span className="font-semibold text-indigo-600 dark:text-indigo-400">{activeModalProject.role[language]}</span>
+                        </p>
+                      </div>
                     </div>
 
                     <div className="rounded-2xl overflow-hidden h-48 sm:h-64 shadow-md bg-slate-100 dark:bg-slate-800">

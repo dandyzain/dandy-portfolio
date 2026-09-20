@@ -173,12 +173,16 @@ export default function PrintableCVModal({ isOpen, onClose }) {
                 <div className="space-y-4">
                   {experiences.map((exp, idx) => (
                     <div key={idx} className="text-xs">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <span className="font-bold text-slate-900 text-sm">{exp.role}</span>
-                          <span className="text-slate-500 font-medium"> — {exp.company}</span>
+                      <div className="mb-1.5 space-y-0.5">
+                        <div className="font-bold text-slate-900 text-sm leading-snug">
+                          {exp.role}
                         </div>
-                        <span className="text-slate-500 font-medium">{exp.period[language]}</span>
+                        <div className="text-slate-700 font-medium text-xs">
+                          {exp.company}
+                        </div>
+                        <div className="text-slate-400 font-medium text-[11px]">
+                          {exp.period[language]}
+                        </div>
                       </div>
                       <p className="text-slate-600 mt-1 leading-relaxed">{exp.description[language]}</p>
                       <ul className="mt-1.5 space-y-0.5 list-disc list-inside text-slate-700">
