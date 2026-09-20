@@ -55,6 +55,6 @@ Portfolio web interaktif dan Curriculum Vitae modern untuk **Dandy Rahmat Zain**
 
 ## 📬 Kontak
 
-- **Email**: [dandyzain.personal@gmail.com](mailto:dandyzain.personal@gmail.com)
+- **Email**: [dandyzain.work@gmail.com](mailto:dandyzain.work@gmail.com)
 - **WhatsApp**: [+62 878-2504-9777](https://wa.me/6287825049777)
 - **LinkedIn**: [linkedin.com/in/dandy-zain-ab380a290](https://www.linkedin.com/in/dandy-zain-ab380a290)

@@ -14,7 +14,7 @@ export const portfolioData = {
     address: "Jl. Warakas Gg. 8, Tanjung Priok, Jakarta Utara, DKI Jakarta, Indonesia",
     phone: "+62 878-2504-9777",
     rawPhone: "6287825049777",
-    email: "dandyzain.personal@gmail.com",
+    email: "dandyzain.work@gmail.com",
     linkedin: "https://www.linkedin.com/in/dandy-zain-ab380a290",
     github: "https://github.com/dandyzain",
     avatar: "/images/dandy-profile.png",
