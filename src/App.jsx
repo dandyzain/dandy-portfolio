@@ -57,18 +57,20 @@ function PortfolioContent() {
       <Footer />
 
       {/* Floating Action Quick Access (Bottom Right) with Spring Motion */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5 no-print">
+      <div className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2.5 no-print">
+        {/* Desktop-only CV quick action button (hidden on mobile to prevent blocking card content) */}
         <motion.button
           whileHover={{ scale: 1.08, x: -3 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsCVModalOpen(true)}
-          className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs shadow-pastel-md border border-pastel-lavender dark:border-slate-700 transition-shadow"
+          className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs shadow-pastel-md border border-pastel-lavender dark:border-slate-700 transition-shadow"
           title={language === 'en' ? 'View Complete CV' : 'Lihat CV Lengkap'}
         >
           <FileText size={15} className="text-indigo-600" />
-          <span className="hidden sm:inline">{language === 'en' ? 'CV Document' : 'CV Dokumen'}</span>
+          <span>{language === 'en' ? 'CV Document' : 'CV Dokumen'}</span>
         </motion.button>
 
+        {/* WhatsApp Floating Button */}
         <motion.a
           whileHover={{ scale: 1.12, rotate: 6 }}
           whileTap={{ scale: 0.92 }}
@@ -83,7 +85,7 @@ function PortfolioContent() {
           href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20melihat%20portfolio%20web%20Anda.`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 p-3.5 rounded-full bg-emerald-500 text-white shadow-pastel-md"
+          className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-500 text-white shadow-pastel-md"
           title="Chat WhatsApp"
         >
           <MessageCircle size={22} />

@@ -118,7 +118,7 @@ export default function Skills() {
         </div>
 
         {/* Skills Cards Grid with Stagger & Animated Progress Bars */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
           <AnimatePresence mode="popLayout">
             {filteredGroups.map((group, gIdx) => (
               <motion.div
@@ -129,7 +129,7 @@ export default function Skills() {
                 exit={{ opacity: 0, scale: 0.95, y: 15 }}
                 transition={{ duration: 0.4, delay: gIdx * 0.08 }}
                 whileHover={{ y: -4 }}
-                className="p-8 rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm hover:shadow-pastel-md transition-shadow"
+                className="p-5 sm:p-8 rounded-3xl sm:rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm hover:shadow-pastel-md transition-shadow"
               >
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white">

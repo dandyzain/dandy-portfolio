@@ -96,7 +96,7 @@ export default function Experience() {
                   whileHover={{ scale: 1.02, x: 4 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setSelectedId(exp.id)}
-                  className={`w-full text-left p-5 rounded-3xl transition-colors duration-200 flex items-start justify-between border ${
+                  className={`w-full text-left p-4 sm:p-5 rounded-2xl sm:rounded-3xl transition-colors duration-200 flex items-start justify-between border ${
                     isSelected
                       ? 'bg-white dark:bg-slate-800 shadow-pastel-md border-indigo-300 dark:border-indigo-600 ring-2 ring-indigo-500/20'
                       : 'bg-white/60 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 border-slate-200/60 dark:border-slate-700/60'
@@ -153,31 +153,31 @@ export default function Experience() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -15, scale: 0.98 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                className="p-8 sm:p-10 rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl"
+                className="p-5 sm:p-8 lg:p-10 rounded-3xl sm:rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl"
               >
                 
                 {/* Card Header */}
-                <div className="flex flex-wrap items-start justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-700">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pb-5 sm:pb-6 border-b border-slate-100 dark:border-slate-700">
                   <div>
                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold border mb-2 ${getColorClasses(activeExp.color).badge}`}>
                       {activeExp.type}
                     </span>
-                    <h3 className="font-display font-bold text-2xl text-slate-900 dark:text-white">
+                    <h3 className="font-display font-bold text-xl sm:text-2xl text-slate-900 dark:text-white">
                       {activeExp.role}
                     </h3>
-                    <div className="flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 mt-1">
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-400 mt-1">
                       <Building2 size={16} />
                       <span>{activeExp.company}</span>
                     </div>
                   </div>
 
-                  <div className="text-right text-xs text-slate-500 dark:text-slate-400 space-y-1">
-                    <div className="flex items-center gap-1.5 justify-end font-medium">
-                      <Calendar size={14} className="text-slate-400" />
+                  <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-x-4 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
+                    <div className="flex items-center gap-1.5 font-medium">
+                      <Calendar size={14} className="text-slate-400 shrink-0" />
                       <span>{activeExp.period[language]}</span>
                     </div>
-                    <div className="flex items-center gap-1.5 justify-end">
-                      <MapPin size={14} className="text-slate-400" />
+                    <div className="flex items-center gap-1.5">
+                      <MapPin size={14} className="text-slate-400 shrink-0" />
                       <span>{activeExp.location}</span>
                     </div>
                   </div>

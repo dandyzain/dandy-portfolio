@@ -71,11 +71,11 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
         <div className="flex items-center justify-between">
           
           {/* Brand Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group min-w-0">
             <motion.div 
               whileHover={{ rotate: 8, scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pastel-lavender-accent to-pink-400 p-0.5 shadow-sm overflow-hidden flex items-center justify-center shrink-0"
+              className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pastel-lavender-accent to-pink-400 p-0.5 shadow-sm overflow-hidden flex items-center justify-center shrink-0"
             >
               <div className="w-full h-full rounded-[14px] overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center">
                 <img 
@@ -84,18 +84,19 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
                   className="w-full h-full object-cover object-top"
                 />
               </div>
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white dark:border-slate-800 sm:hidden" />
             </motion.div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <span className="font-display font-bold text-lg text-slate-800 dark:text-white tracking-tight">
+                <span className="font-display font-bold text-base sm:text-lg text-slate-800 dark:text-white tracking-tight whitespace-nowrap">
                   {portfolioData.personal.preferredName}
                 </span>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
                   {t.available}
                 </span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">
+              <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block truncate">
                 Full Stack Developer
               </p>
             </div>
@@ -178,30 +179,31 @@ export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
             </motion.a>
           </div>
 
-          {/* Mobile Actions Hamburger */}
-          <div className="flex items-center gap-1.5 md:hidden">
+          {/* Mobile Actions */}
+          <div className="flex items-center gap-1 sm:gap-1.5 md:hidden shrink-0">
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={toggleLanguage}
-              className="px-2.5 py-1.5 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-bold"
+              className="px-2 py-1.5 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-bold"
+              aria-label="Switch Language"
             >
               {language === 'en' ? '🇺🇸 EN' : '🇮🇩 ID'}
             </motion.button>
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setDarkMode(!darkMode)}
-              className="p-2 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 border border-slate-200 dark:border-slate-700"
+              className="p-1.5 sm:p-2 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 border border-slate-200 dark:border-slate-700"
               aria-label="Toggle Dark Mode"
             >
-              {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+              {darkMode ? <Sun size={17} /> : <Moon size={17} />}
             </motion.button>
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
+              className="p-1.5 sm:p-2 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
               aria-label="Toggle Menu"
             >
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </motion.button>
           </div>
 

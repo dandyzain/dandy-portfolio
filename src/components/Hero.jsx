@@ -73,15 +73,15 @@ export default function Hero({ onOpenCVModal }) {
       passion: language === 'id' ? "'Aplikasi performa tinggi'" : "'High-performance apps'",
     },
     {
-      stack: ["'Next.js'", "'Express.js'", "'Vue.js'"],
+      stack: ["'Next.js'", "'Express'", "'Vue'"],
       passion: language === 'id' ? "'Sistem misi-kritis'" : "'Mission-critical systems'",
     },
     {
-      stack: ["'Tailwind'", "'Kotlin'", "'REST APIs'"],
-      passion: language === 'id' ? "'Platform GIS & Telemetri'" : "'GIS & Network telemetry'",
+      stack: ["'Tailwind'", "'Kotlin'", "'REST'"],
+      passion: language === 'id' ? "'Platform GIS & Telemetri'" : "'GIS & Telemetry'",
     },
     {
-      stack: ["'Docker'", "'Node.js'", "'PostgreSQL'"],
+      stack: ["'Docker'", "'Node.js'", "'Postgres'"],
       passion: language === 'id' ? "'Arsitektur scalable'" : "'Clean, scalable code'",
     },
   ];
@@ -114,9 +114,9 @@ export default function Hero({ onOpenCVModal }) {
   };
 
   return (
-    <section id="hero" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-pastel-radial">
+    <section id="hero" className="relative pt-28 pb-16 md:pt-40 md:pb-28 overflow-hidden bg-pastel-radial">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           
           {/* Left Column: Intro & Headline with Stagger Animation */}
           <motion.div 
@@ -130,12 +130,12 @@ export default function Hero({ onOpenCVModal }) {
             <motion.div 
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-pastel-lavender dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 mb-6 cursor-default"
+              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-pastel-lavender dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 mb-5 cursor-default"
             >
               <motion.span 
                 animate={{ rotate: [0, 20, -10, 20, 0] }}
                 transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 3 }}
-                className="text-base inline-block origin-bottom-right"
+                className="text-sm sm:text-base inline-block origin-bottom-right"
               >
                 👋
               </motion.span>
@@ -144,12 +144,12 @@ export default function Hero({ onOpenCVModal }) {
               <span className="text-indigo-600 dark:text-indigo-400 font-bold">Dandy Zain</span>
             </motion.div>
 
-            {/* Animated Headline: 2 clean intentional lines that never break awkwardly */}
+            {/* Animated Headline: Clean intentional lines */}
             <motion.h1 
               variants={itemVariants}
-              className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] text-slate-900 dark:text-white leading-[1.16] tracking-tight mb-5"
+              className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] text-slate-900 dark:text-white leading-[1.18] sm:leading-[1.16] tracking-tight mb-5"
             >
-              {/* Line 1: Primary Action (Crafting Mission-Critical) */}
+              {/* Line 1: Primary Action */}
               <span className="block mb-1 sm:mb-1.5">
                 {t.headlineStart.split(' ').map((word, wIdx) => (
                   <motion.span
@@ -167,7 +167,7 @@ export default function Hero({ onOpenCVModal }) {
                       scale: 1.05,
                       transition: { type: "spring", stiffness: 400, damping: 10 } 
                     }}
-                    className="inline-block mr-2.5 cursor-default hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                    className="inline-block mr-2 sm:mr-2.5 cursor-default hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                   >
                     {word}
                   </motion.span>
@@ -175,7 +175,7 @@ export default function Hero({ onOpenCVModal }) {
               </span>
 
               {/* Line 2: Ampersand + Short Dynamic Rotating Words */}
-              <span className="inline-flex items-center flex-nowrap gap-x-2.5">
+              <span className="inline-flex items-center flex-nowrap gap-x-2 sm:gap-x-2.5">
                 <motion.span 
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -235,77 +235,82 @@ export default function Hero({ onOpenCVModal }) {
                       duration: 0.85, 
                       ease: [0.16, 1, 0.3, 1] 
                     }}
-                    className="block h-1.5 sm:h-2 mt-1 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-left shadow-sm shadow-indigo-500/30"
+                    className="block h-1 sm:h-1.5 mt-1 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-left shadow-sm shadow-indigo-500/30"
                   />
                 </span>
               </span>
             </motion.h1>
 
-            {/* LinkedIn Tagline & Subtitle */}
+            {/* LinkedIn Tagline & Subtitle Box */}
             <motion.div 
               variants={itemVariants}
               whileHover={{ y: -2 }}
-              className="p-4 rounded-2xl bg-white/75 dark:bg-slate-800/75 border border-slate-200/80 dark:border-slate-700/80 backdrop-blur-md shadow-sm mb-6 w-full"
+              className="p-3.5 sm:p-4 rounded-2xl bg-white/75 dark:bg-slate-800/75 border border-slate-200/80 dark:border-slate-700/80 backdrop-blur-md shadow-sm mb-6 w-full"
             >
-              <p className="text-sm sm:text-base italic text-indigo-900 dark:text-indigo-200 font-medium">
+              <p className="text-xs sm:text-sm md:text-base italic text-indigo-900 dark:text-indigo-200 font-medium leading-relaxed">
                 "{personal.tagline}"
               </p>
-              <div className="mt-2 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                <MapPin size={14} className="text-rose-400 shrink-0" />
-                <span>{personal.location[language]}</span>
-                <span>•</span>
-                <span>{t.activeAt}</span>
+              <div className="mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-700/60 flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 text-xs text-slate-500 dark:text-slate-400">
+                <span className="flex items-center gap-1.5 font-medium">
+                  <MapPin size={13} className="text-rose-400 shrink-0" />
+                  <span>{personal.location[language]}</span>
+                </span>
+                <span className="hidden sm:inline text-slate-300 dark:text-slate-600">•</span>
+                <span className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                  <span>{t.activeAt}</span>
+                </span>
               </div>
             </motion.div>
 
             {/* Dynamic Skills Pills Stack */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-2 mb-8">
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-1.5 sm:gap-2 mb-7">
               {[
-                { icon: <Code2 size={14} />, text: "React.js & Next.js", bg: "bg-pastel-lavender-light dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-pastel-lavender dark:border-indigo-800" },
-                { icon: <Layers size={14} />, text: "Laravel & Express.js", bg: "bg-pastel-mint-light dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-pastel-mint dark:border-emerald-800" },
-                { icon: <Smartphone size={14} />, text: "Flutter & Kotlin Native", bg: "bg-pastel-sky-light dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 border-pastel-sky dark:border-sky-800" },
-                { icon: <Bot size={14} />, text: "AI Integration", bg: "bg-pastel-peach-light dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border-pastel-peach dark:border-rose-800" },
+                { icon: <Code2 size={13} />, text: "React & Next.js", bg: "bg-pastel-lavender-light dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-pastel-lavender dark:border-indigo-800" },
+                { icon: <Layers size={13} />, text: "Laravel & Express", bg: "bg-pastel-mint-light dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-pastel-mint dark:border-emerald-800" },
+                { icon: <Smartphone size={13} />, text: "Flutter & Kotlin", bg: "bg-pastel-sky-light dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 border-pastel-sky dark:border-sky-800" },
+                { icon: <Bot size={13} />, text: "AI Integration", bg: "bg-pastel-peach-light dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border-pastel-peach dark:border-rose-800" },
               ].map((pill, idx) => (
                 <motion.span
                   key={idx}
-                  whileHover={{ scale: 1.08, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border shadow-xs cursor-default ${pill.bg}`}
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold border shadow-xs cursor-default ${pill.bg}`}
                 >
                   {pill.icon} {pill.text}
                 </motion.span>
               ))}
             </motion.div>
 
-            {/* Action Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 mb-10 w-full sm:w-auto">
+            {/* Action Buttons: Responsive 2-Col Grid on Mobile + Full-Width WhatsApp */}
+            <motion.div variants={itemVariants} className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3 mb-8 w-full sm:w-auto">
               <motion.a
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.96 }}
                 href="#projects"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-pastel-md hover:shadow-pastel-lg transition-all duration-200"
+                className="col-span-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-3 sm:py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs sm:text-sm shadow-pastel-md hover:shadow-pastel-lg transition-all duration-200 text-center"
               >
                 <span>{t.exploreProjects}</span>
-                <ArrowDown size={16} />
+                <ArrowDown size={15} />
               </motion.a>
 
               <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.96 }}
                 onClick={onOpenCVModal}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold text-sm border border-slate-200 dark:border-slate-700 shadow-sm transition-all duration-200"
+                className="col-span-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-3 sm:py-3.5 rounded-2xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold text-xs sm:text-sm border border-slate-200 dark:border-slate-700 shadow-sm transition-all duration-200 text-center"
               >
-                <FileText size={16} className="text-indigo-500" />
+                <FileText size={15} className="text-indigo-500 shrink-0" />
                 <span>{t.viewCV}</span>
               </motion.button>
 
               <motion.a
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.96 }}
                 href={`https://wa.me/${personal.rawPhone}?text=Halo%20Dandy,%20saya%20tertarik%20bekerja%20sama%20dengan%20Anda.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm shadow-sm transition-all duration-200"
+                className="col-span-2 sm:col-auto inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs sm:text-sm shadow-sm transition-all duration-200 text-center"
               >
                 <Phone size={15} />
                 <span>{t.whatsapp}</span>
@@ -313,28 +318,30 @@ export default function Hero({ onOpenCVModal }) {
             </motion.div>
 
             {/* Social & Contact Bar */}
-            <motion.div variants={itemVariants} className="flex items-center gap-4 text-slate-500 dark:text-slate-400">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 text-slate-500 dark:text-slate-400">
+              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                 {t.connected}
               </span>
-              {[
-                { href: personal.linkedin, icon: <Linkedin size={18} />, title: "LinkedIn Profile" },
-                { href: `mailto:${personal.email}`, icon: <Mail size={18} />, title: "Send Email" },
-                { href: "https://github.com/dandyzain", icon: <Github size={18} />, title: "GitHub" },
-              ].map((s, idx) => (
-                <motion.a
-                  key={idx}
-                  whileHover={{ scale: 1.15, y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-600 dark:hover:text-indigo-400 border border-slate-200 dark:border-slate-700 transition-colors shadow-sm"
-                  title={s.title}
-                >
-                  {s.icon}
-                </motion.a>
-              ))}
+              <div className="flex items-center gap-2">
+                {[
+                  { href: personal.linkedin, icon: <Linkedin size={16} />, title: "LinkedIn Profile" },
+                  { href: `mailto:${personal.email}`, icon: <Mail size={16} />, title: "Send Email" },
+                  { href: "https://github.com/dandyzain", icon: <Github size={16} />, title: "GitHub" },
+                ].map((s, idx) => (
+                  <motion.a
+                    key={idx}
+                    whileHover={{ scale: 1.15, y: -3 }}
+                    whileTap={{ scale: 0.95 }}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 sm:p-2.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-600 dark:hover:text-indigo-400 border border-slate-200 dark:border-slate-700 transition-colors shadow-sm"
+                    title={s.title}
+                  >
+                    {s.icon}
+                  </motion.a>
+                ))}
+              </div>
             </motion.div>
 
           </motion.div>
@@ -351,7 +358,7 @@ export default function Hero({ onOpenCVModal }) {
             <motion.div 
               whileHover={{ y: -6, rotateY: 3, rotateX: -2 }}
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
-              className="relative w-full max-w-[460px] p-6 sm:p-8 rounded-4xl bg-white/85 dark:bg-slate-800/85 border border-white/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl"
+              className="relative w-full max-w-[460px] p-4 sm:p-8 rounded-3xl sm:rounded-4xl bg-white/85 dark:bg-slate-800/85 border border-white/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl"
             >
               
               {/* Profile Card Header with Large Featured Portrait */}
@@ -400,7 +407,7 @@ export default function Hero({ onOpenCVModal }) {
               <motion.div 
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="rounded-2xl bg-slate-900/95 dark:bg-slate-950 p-4 text-xs font-mono text-slate-300 shadow-xl shadow-slate-950/20 mb-6 border border-slate-800 relative overflow-hidden group"
+                className="rounded-2xl bg-slate-900/95 dark:bg-slate-950 p-3 sm:p-4 text-xs font-mono text-slate-300 shadow-xl shadow-slate-950/20 mb-6 border border-slate-800 relative overflow-hidden group"
               >
                 {/* Subtle ambient gradient highlight border */}
                 <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
@@ -423,7 +430,7 @@ export default function Hero({ onOpenCVModal }) {
                 </div>
 
                 {/* Code Content with Line Numbers & Animations */}
-                <div className="space-y-1 text-[11px] sm:text-xs font-mono leading-relaxed overflow-x-auto">
+                <div className="space-y-1 text-[10.5px] sm:text-xs font-mono leading-relaxed overflow-x-auto scrollbar-none">
                   {/* Line 1 */}
                   <div className="flex items-center">
                     <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">1</span>

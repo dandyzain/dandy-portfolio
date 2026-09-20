@@ -67,36 +67,36 @@ export default function About() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="lg:col-span-7 space-y-6"
           >
-            <div className="p-8 rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm hover:shadow-pastel-md transition-shadow">
+            <div className="p-5 sm:p-8 rounded-3xl sm:rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm hover:shadow-pastel-md transition-shadow">
               
               {/* Profile Bio Header with Avatar */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-6 pb-6 border-b border-slate-100 dark:border-slate-700/60">
+              <div className="flex flex-row items-center gap-4 sm:gap-5 mb-5 sm:mb-6 pb-5 sm:pb-6 border-b border-slate-100 dark:border-slate-700/60">
                 <motion.div 
                   whileHover={{ scale: 1.05, rotate: 2 }}
-                  className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-indigo-500 via-purple-400 to-pink-400 p-0.5 shadow-pastel-md shrink-0 overflow-hidden"
+                  className="relative w-16 h-16 sm:w-24 sm:h-24 rounded-2xl sm:rounded-3xl bg-gradient-to-tr from-indigo-500 via-purple-400 to-pink-400 p-0.5 shadow-pastel-md shrink-0 overflow-hidden"
                 >
-                  <div className="w-full h-full rounded-[22px] overflow-hidden bg-gradient-to-b from-indigo-50/90 to-purple-100/90 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
+                  <div className="w-full h-full rounded-[14px] sm:rounded-[22px] overflow-hidden bg-gradient-to-b from-indigo-50/90 to-purple-100/90 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
                     <img 
                       src={personal.avatar} 
                       alt={personal.fullName} 
                       className="w-full h-full object-cover object-top"
                     />
                   </div>
-                  <div className="absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900 shadow-xs" />
+                  <div className="absolute bottom-1 right-1 w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900 shadow-xs" />
                 </motion.div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white">
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="font-display font-bold text-lg sm:text-xl text-slate-900 dark:text-white truncate">
                       {personal.fullName}
                     </h3>
                     <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
                       Developer
                     </span>
                   </div>
-                  <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5">
+                  <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5 leading-snug">
                     {personal.role[language]} • PT. Infrastruktur Telekomunikasi Indonesia
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 italic">
+                  <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1 italic line-clamp-2">
                     "{personal.tagline}"
                   </p>
                 </div>
@@ -131,25 +131,25 @@ export default function About() {
             {/* Quick Contact & Location Info Card */}
             <motion.div 
               whileHover={{ y: -3 }}
-              className="p-6 rounded-3xl bg-pastel-gradient-1 border border-slate-200/60 dark:border-slate-700/60 flex flex-wrap items-center justify-between gap-4 shadow-sm"
+              className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-pastel-gradient-1 border border-slate-200/60 dark:border-slate-700/60 flex flex-wrap items-center justify-between gap-4 shadow-sm"
             >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center text-rose-500 shadow-sm">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-10 h-10 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center text-rose-500 shadow-sm shrink-0">
                   <MapPin size={20} />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-[11px] uppercase tracking-wider font-bold text-slate-400">{t.workLocation}</span>
-                  <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100">{personal.address}</p>
+                  <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 truncate">{personal.address}</p>
                 </div>
               </div>
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href={`mailto:${personal.email}`}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:shadow-sm transition-all"
+                className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-white dark:bg-slate-800 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:shadow-sm transition-all max-w-full truncate"
               >
-                <Mail size={14} />
-                <span>{personal.email}</span>
+                <Mail size={14} className="shrink-0" />
+                <span className="truncate">{personal.email}</span>
               </motion.a>
             </motion.div>
           </motion.div>
@@ -164,7 +164,7 @@ export default function About() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className={`p-6 rounded-3xl border shadow-sm transition-shadow ${cardBgs[idx]}`}
+                className={`p-5 sm:p-6 rounded-2xl sm:rounded-3xl border shadow-sm transition-shadow ${cardBgs[idx]}`}
               >
                 <motion.div 
                   whileHover={{ rotate: 12, scale: 1.1 }}

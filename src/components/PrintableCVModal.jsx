@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { 
   X, 
   Printer, 
@@ -17,14 +18,33 @@ export default function PrintableCVModal({ isOpen, onClose }) {
   const { personal, experiences, education, certifications } = portfolioData;
   const t = portfolioData.translations[language].cvModal;
 
+  // Close modal on Escape key press & prevent background scroll
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   const handlePrint = () => {
     window.print();
   };
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 no-print">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 no-print">
           
           {/* Backdrop with Fade Animation */}
           <motion.div
@@ -32,7 +52,7 @@ export default function PrintableCVModal({ isOpen, onClose }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-md"
+            className="fixed inset-0 bg-black/60 backdrop-blur-md cursor-pointer"
           />
 
           {/* Modal Container with Spring Scale Animation */}
@@ -41,37 +61,37 @@ export default function PrintableCVModal({ isOpen, onClose }) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="relative z-10 w-full max-w-4xl max-h-[92vh] flex flex-col rounded-4xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden"
+            className="relative z-10 w-full max-w-4xl max-h-[92vh] flex flex-col rounded-3xl sm:rounded-4xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden"
           >
             
             {/* Top Action Bar (hidden in print) */}
-            <div className="flex items-center justify-between px-6 py-4 bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shrink-0">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
-                <h3 className="font-display font-bold text-sm sm:text-base text-slate-800 dark:text-white">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shrink-0 gap-2">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                <h3 className="font-display font-bold text-xs sm:text-base text-slate-800 dark:text-white truncate">
                   {t.title}
                 </h3>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 shrink-0">
                 <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="/cv-dandy-rahmat-zain.pdf"
                   download="CV-Dandy-Rahmat-Zain.pdf"
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 text-xs font-bold transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 text-xs font-bold transition-all"
                   title={t.downloadOriginal}
                 >
-                  <Download size={15} />
+                  <Download size={14} />
                   <span className="hidden sm:inline">{t.downloadOriginal}</span>
                 </motion.a>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handlePrint}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm transition-all"
                 >
-                  <Printer size={15} />
+                  <Printer size={14} />
                   <span>{t.printSave}</span>
                 </motion.button>
                 <motion.button
@@ -79,6 +99,7 @@ export default function PrintableCVModal({ isOpen, onClose }) {
                   whileTap={{ scale: 0.9 }}
                   onClick={onClose}
                   className="p-2 rounded-xl bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                  aria-label="Close CV Modal"
                 >
                   <X size={18} />
                 </motion.button>
@@ -86,7 +107,7 @@ export default function PrintableCVModal({ isOpen, onClose }) {
             </div>
 
             {/* CV Document Body (Scrollable inside modal, fully visible in print) */}
-            <div className="p-6 sm:p-10 overflow-y-auto bg-white text-slate-900" id="printable-cv">
+            <div className="p-4 sm:p-8 md:p-10 overflow-y-auto bg-white text-slate-900" id="printable-cv">
               
               {/* Header */}
               <div className="border-b-2 border-slate-200 pb-6 mb-6">
@@ -272,6 +293,7 @@ export default function PrintableCVModal({ isOpen, onClose }) {
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

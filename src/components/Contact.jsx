@@ -81,7 +81,7 @@ export default function Contact({ onOpenCVModal }) {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
           {/* Left Column: Direct Contacts & CV CTA (5 cols) */}
           <motion.div 
@@ -93,7 +93,7 @@ export default function Contact({ onOpenCVModal }) {
           >
             
             {/* Contact Information Card */}
-            <div className="p-8 rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm hover:shadow-pastel-md transition-shadow">
+            <div className="p-5 sm:p-8 rounded-3xl sm:rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-sm hover:shadow-pastel-md transition-shadow">
               <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white mb-6">
                 {t.directChannels}
               </h3>
@@ -214,12 +214,12 @@ export default function Contact({ onOpenCVModal }) {
             transition={{ duration: 0.6 }}
             className="lg:col-span-7"
           >
-            <div className="p-8 sm:p-10 rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl">
+            <div className="p-5 sm:p-8 lg:p-10 rounded-3xl sm:rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl">
               
-              <h3 className="font-display font-bold text-2xl text-slate-900 dark:text-white mb-2">
+              <h3 className="font-display font-bold text-xl sm:text-2xl text-slate-900 dark:text-white mb-2">
                 {t.formTitle}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-8">
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-6 sm:mb-8">
                 {t.formSubtitle}
               </p>
 
