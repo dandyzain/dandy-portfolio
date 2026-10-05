@@ -320,6 +320,43 @@ export const portfolioData = {
       linkText: "GitLab Repository"
     },
     {
+      id: 19,
+      title: "TaskFlow — Collaborative Kanban & Team Performance Platform",
+      category: "Full Stack",
+      role: {
+        en: "Creator & Lead Full Stack Developer",
+        id: "Creator & Lead Full Stack Developer"
+      },
+      client: "Independent SaaS Platform",
+      githubUrl: "https://github.com/dandyzain/taskflow",
+      gitlabUrl: "https://gitlab.com/dandyzain.personal/taskflow",
+      userGuideUrl: "/projects/taskflow/TaskFlow-User-Guide.pdf",
+      description: {
+        en: "Modern collaborative project management and Kanban board application built with Next.js 15 and React 19. Features an elegant pastel UI design system, drag-and-drop workflow powered by @dnd-kit with Fractional Indexing optimization, employee performance analytics (KPI metrics, velocity trend, team leaderboard, on-time delivery rates, and CSV export), multi-board workspaces, and secure RBAC authentication.",
+        id: "Aplikasi manajemen proyek & papan Kanban kolaboratif modern berbasis Next.js 15 dan React 19 dengan tema warna pastel elegan. Dilengkapi alur kerja drag-and-drop ditenagai @dnd-kit dengan optimasi Fractional Indexing, modul analitik & pelaporan kinerja karyawan (metrik KPI, tren velocity SVG, leaderboard tim, evaluasi on-time delivery, ekspor CSV), multi-board per workspace, serta otentikasi aman RBAC."
+      },
+      image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80",
+      tags: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "@dnd-kit", "Prisma ORM", "SQLite", "Server Actions", "Radix UI"],
+      color: "mint",
+      features: {
+        en: [
+          "Interactive multi-column Kanban board powered by @dnd-kit with smooth collision detection and Fractional Indexing card reordering.",
+          "Comprehensive Employee Performance & Reporting dashboard with task completion KPIs, 7-day velocity trends, and team leaderboard.",
+          "Workload distribution monitoring (Optimal, Light, Heavy, Overloaded) with on-time delivery rates and one-click CSV export.",
+          "Custom pastel design system with seamless Dark/Light mode theme switching and optimistic UI state updates.",
+          "Enterprise-grade Role-Based Access Control (RBAC) with JWT session cookies, bcrypt hashing, and multi-workspace support."
+        ],
+        id: [
+          "Papan Kanban interaktif multi-kolom ditenagai @dnd-kit dengan deteksi tabrakan presisi dan optimasi urutan kartu Fractional Indexing.",
+          "Dashboard analitik & pelaporan kinerja karyawan komprehensif dengan KPI tugas, tren velocity 7 hari, dan leaderboard tim.",
+          "Monitoring distribusi beban kerja tim (Optimal, Ringan, Berat, Overloaded) dengan tingkat on-time delivery dan ekspor CSV 1 klik.",
+          "Desain antarmuka bertema warna pastel modern dengan peralihan mode Gelap/Terang yang mulus serta update Optimistic UI.",
+          "Autentikasi aman & Role-Based Access Control (RBAC) berbasis cookie JWT, enkripsi sandi bcrypt, dan dukungan multi-workspace."
+        ]
+      },
+      linkText: "GitHub & GitLab Repository"
+    },
+    {
       id: 12,
       title: "KINO Employee Performance Appraisal DSS (TOPSIS)",
       category: "Full Stack",

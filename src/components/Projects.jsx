@@ -7,7 +7,8 @@ import {
   ArrowUpRight,
   ExternalLink,
   Gitlab,
-  Github
+  Github,
+  FileText
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
@@ -174,8 +175,8 @@ export default function Projects() {
                     </span>
                   </div>
 
-                  {project.gitlabUrl && (
-                    <div className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4">
+                  <div className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 flex items-center gap-1.5 z-10">
+                    {project.gitlabUrl && (
                       <a
                         href={project.gitlabUrl}
                         target="_blank"
@@ -186,11 +187,9 @@ export default function Projects() {
                       >
                         <Gitlab size={15} />
                       </a>
-                    </div>
-                  )}
+                    )}
 
-                  {project.githubUrl && (
-                    <div className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4">
+                    {project.githubUrl && (
                       <a
                         href={project.githubUrl}
                         target="_blank"
@@ -201,8 +200,8 @@ export default function Projects() {
                       >
                         <Github size={15} />
                       </a>
-                    </div>
-                  )}
+                    )}
+                  </div>
 
                   <div className="absolute bottom-3 left-4 right-4">
                     <span className="text-xs text-slate-200 font-medium truncate block">
@@ -301,7 +300,13 @@ export default function Projects() {
                       {activeModalProject.gitlabUrl && (
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-300">
                           <Gitlab size={13} />
-                          GitLab Enterprise
+                          GitLab
+                        </span>
+                      )}
+                      {activeModalProject.githubUrl && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+                          <Github size={13} />
+                          GitHub
                         </span>
                       )}
                     </div>
@@ -411,6 +416,21 @@ export default function Projects() {
                         >
                           <Github size={14} />
                           <span>{t.modal.openGitHubButton}</span>
+                          <ExternalLink size={12} />
+                        </motion.a>
+                      )}
+
+                      {activeModalProject.userGuideUrl && (
+                        <motion.a
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.97 }}
+                          href={activeModalProject.userGuideUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold transition-colors shadow-sm"
+                        >
+                          <FileText size={14} />
+                          <span>{language === 'en' ? 'User Guide (PDF)' : 'Panduan Pengguna (PDF)'}</span>
                           <ExternalLink size={12} />
                         </motion.a>
                       )}
