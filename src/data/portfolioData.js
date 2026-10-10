@@ -287,6 +287,43 @@ export const portfolioData = {
       linkText: "GitLab Repository"
     },
     {
+      id: 20,
+      title: "FinTrack AI — Personal Finance & OCR Receipt Scanner",
+      category: "AI & Web",
+      role: {
+        en: "Lead Full Stack & Mobile Engineer",
+        id: "Lead Full Stack & Mobile Engineer"
+      },
+      client: "FinTech SaaS & Open-Source",
+      liveUrl: "https://finance-tracker-taupe-six.vercel.app",
+      githubUrl: "https://github.com/dandyzain/fintrack",
+      gitlabUrl: "https://gitlab.com/dandyzain.personal/fintrack",
+      description: {
+        en: "Production-ready Personal Finance & Expense Tracker engineered with a Turborepo monorepo architecture. Features automated physical receipt scanning powered by Vision AI (Google Gemini Flash & OpenAI Vision with strict Zod parsing), atomic wallet balance mutations (Prisma $transaction), Recharts Bento financial analytics, and a cross-platform React Native Expo mobile app.",
+        id: "Aplikasi Personal Finance & Expense Tracker tingkat lanjut siap produksi dengan arsitektur monorepo Turborepo. Dilengkapi fitur pemindaian struk belanja fisik otomatis berbasis Vision AI (Google Gemini Flash & OpenAI Vision dengan validasi ketat Zod), mutasi saldo dompet atomik (Prisma $transaction), dasbor analitik finansial Bento Recharts, serta aplikasi mobile Expo React Native."
+      },
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+      tags: ["Next.js 14", "React Native (Expo)", "Google Gemini Flash", "Vision AI", "Prisma ORM", "PostgreSQL", "Recharts", "Tailwind CSS", "Zod", "Turborepo"],
+      color: "sky",
+      features: {
+        en: [
+          "Vision AI Receipt OCR: Automated extraction of merchant, date, tax, line items, and category via Google Gemini 1.5 Flash with strict Zod parsing.",
+          "Turborepo Monorepo Architecture: Unified codebase housing Next.js 14 Web App, React Native Expo Mobile App, and shared database/types packages.",
+          "Atomic Transaction Integrity: Zero balance discrepancies using Prisma $transaction and multi-wallet balance ledger management.",
+          "Bento Finance Dashboard: Real-time Recharts pulse wave daily cash flow, financial health gauge meter (0-100), and budget burn rates.",
+          "Live Production Deployment: Hosted on Vercel with automated CI/CD and Supabase cloud PostgreSQL storage."
+        ],
+        id: [
+          "OCR Vision AI Struk Belanja: Ekstraksi otomatis merchant, tanggal, pajak, item belanja, dan kategori via Google Gemini 1.5 Flash dengan parser Zod ketat.",
+          "Arsitektur Monorepo Turborepo: Kode terpadu mengintegrasikan Web Next.js 14, Mobile Expo React Native, serta paket database & tipe bersama.",
+          "Integritas Transaksi Atomik: Jaminan saldo akurat tanpa diskrepansi dengan Prisma $transaction dan manajemen multi-kantong dompet.",
+          "Dasbor Bento Finansial: Grafik gelombang arus kas harian Recharts real-time, pengukur kesehatan finansial (0-100), dan pagu anggaran bulanan.",
+          "Deployment Live Produksi: Berjalan aktif di Vercel Production dengan CI/CD otomatis serta database cloud PostgreSQL Supabase."
+        ]
+      },
+      linkText: "Live Demo & Repositories"
+    },
+    {
       id: 3,
       title: "NOC-RAN — Radio Access Network Center",
       category: "Full Stack",
@@ -1539,12 +1576,14 @@ export const portfolioData = {
         studyCase: "Explore Case Study",
         openGitLab: "GitLab Repository",
         openGitHub: "GitHub Repository",
+        openLive: "Open Live Demo",
         modal: {
           aboutProject: "About This Project:",
           keyFeatures: "Key Features & Implementation:",
           techUsed: "Technologies Used:",
           openGitLabButton: "Open on GitLab",
           openGitHubButton: "Open on GitHub",
+          openLiveButton: "Open Live App",
           close: "Close Details"
         },
         pagination: {
@@ -1746,12 +1785,14 @@ export const portfolioData = {
         studyCase: "Pelajari Studi Kasus",
         openGitLab: "Repositori GitLab",
         openGitHub: "Repositori GitHub",
+        openLive: "Buka Live Demo",
         modal: {
           aboutProject: "Tentang Proyek:",
           keyFeatures: "Fitur & Implementasi Utama:",
           techUsed: "Teknologi yang Digunakan:",
           openGitLabButton: "Buka di GitLab",
           openGitHubButton: "Buka di GitHub",
+          openLiveButton: "Kunjungi Live App",
           close: "Tutup Rincian"
         },
         pagination: {

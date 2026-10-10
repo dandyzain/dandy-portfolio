@@ -176,6 +176,19 @@ export default function Projects() {
                   </div>
 
                   <div className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 flex items-center gap-1.5 z-10">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="p-1.5 rounded-full bg-emerald-600/90 text-white hover:scale-110 hover:bg-emerald-600 transition-all shadow-sm inline-flex items-center justify-center"
+                        title={t.openLive || (language === 'en' ? 'Open Live Demo' : 'Buka Live Demo')}
+                      >
+                        <ExternalLink size={15} />
+                      </a>
+                    )}
+
                     {project.gitlabUrl && (
                       <a
                         href={project.gitlabUrl}
@@ -297,6 +310,18 @@ export default function Projects() {
                       <span className="px-3 py-1 rounded-full text-xs font-bold bg-pastel-lavender dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
                         {activeModalProject.category}
                       </span>
+                      {activeModalProject.liveUrl && (
+                        <a
+                          href={activeModalProject.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 hover:bg-emerald-200 transition"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                          <span>Live Demo</span>
+                          <ExternalLink size={11} />
+                        </a>
+                      )}
                       {activeModalProject.gitlabUrl && (
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-300">
                           <Gitlab size={13} />
@@ -390,6 +415,20 @@ export default function Projects() {
                   {/* Fixed Footer */}
                   <div className="px-5 sm:px-6 py-3.5 sm:py-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-sm flex flex-wrap items-center justify-between gap-3 shrink-0">
                     <div className="flex flex-wrap items-center gap-2">
+                      {activeModalProject.liveUrl && (
+                        <motion.a
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.97 }}
+                          href={activeModalProject.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors shadow-sm"
+                        >
+                          <ExternalLink size={14} />
+                          <span>{t.modal.openLiveButton || (language === 'en' ? 'Open Live App' : 'Kunjungi Live App')}</span>
+                        </motion.a>
+                      )}
+
                       {activeModalProject.gitlabUrl && (
                         <motion.a
                           whileHover={{ scale: 1.03 }}
