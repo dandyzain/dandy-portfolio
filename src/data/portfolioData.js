@@ -462,6 +462,43 @@ export const portfolioData = {
       linkText: "GitLab Repository"
     },
     {
+      id: 21,
+      title: "FinTrack Mobile — Vision AI OCR Receipt Scanner App",
+      category: "Mobile",
+      role: {
+        en: "Mobile App Developer",
+        id: "Mobile App Developer"
+      },
+      client: "FinTech SaaS & Open-Source Mobile",
+      liveUrl: "https://finance-tracker-taupe-six.vercel.app",
+      githubUrl: "https://github.com/dandyzain/fintrack",
+      gitlabUrl: "https://gitlab.com/dandyzain.personal/fintrack",
+      description: {
+        en: "Cross-platform mobile personal finance application built with React Native and Expo SDK 51. Features real-time camera viewfinder capture, hardware flash control, automated image downscaling & compression (Expo Image Manipulator), TanStack Query asynchronous state management, NativeWind styling, and seamless multipart receipt uploading to Gemini Vision AI for instant itemized expense recording.",
+        id: "Aplikasi mobile personal finance cross-platform berbasis React Native dan Expo SDK 51. Dilengkapi integrasi kamera fisik (Expo Camera) dengan kontrol lampu flash, kompresi gambar otomatis (Expo Image Manipulator), manajemen data asynchronous TanStack Query, styling NativeWind, serta pengunggahan struk belanja fisik multipart ke Gemini Vision AI untuk pencatatan transaksi instan."
+      },
+      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
+      tags: ["React Native", "Expo SDK 51", "Expo Camera", "TanStack Query", "NativeWind", "TypeScript", "Vision AI OCR", "EAS Build (APK)", "Lucide Icons"],
+      color: "lavender",
+      features: {
+        en: [
+          "Expo Camera Viewfinder: Interactive receipt capture framing with aspect-ratio lock, camera permission handling, and hardware torch toggle.",
+          "Client-Side Smart Compression: Automatically downscales captured receipts to 1200px max width with 0.7 JPEG compression via Expo Image Manipulator.",
+          "Multipart Vision AI Pipeline: Streams lightweight image buffers to cloud Gemini 1.5 Flash endpoints with resilient error fallbacks.",
+          "TanStack Query State Sync: Optimistic cache invalidation, smooth pull-to-refresh feeds, and seamless background wallet balance updates.",
+          "Ready-to-Deploy EAS Build: Automated standalone Android APK compilation pipeline configured via eas.json for rapid direct sideloading."
+        ],
+        id: [
+          "Integrasi Kamera Expo: Viewfinder penangkap struk interaktif dengan penguncian rasio aspek, manajemen izin kamera, dan kontrol senter flash.",
+          "Kompresi Cerdas Sisi Klien: Downscaling otomatis struk foto ke lebar maksimal 1200px dengan kompresi JPEG 0.7 melalui Expo Image Manipulator.",
+          "Pipeline Vision AI Multipart: Pengiriman buffer gambar ringan ke endpoint cloud Gemini 1.5 Flash dengan mekanisme fallback yang tangguh.",
+          "Sinkronisasi State TanStack Query: Invalidasi cache optimistik, animasi pull-to-refresh mulus, dan pembaruan saldo dompet otomatis di latar belakang.",
+          "Build EAS Siap Kompilasi: Konfigurasi kompilasi APK Android mandiri melalui eas.json untuk instalasi langsung pada perangkat pengguna."
+        ]
+      },
+      linkText: "Live Companion & Repositories"
+    },
+    {
       id: 9,
       title: "Smart City Citizen Portal Mobile App",
       category: "Mobile",
