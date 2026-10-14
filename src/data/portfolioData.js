@@ -324,6 +324,43 @@ export const portfolioData = {
       linkText: "Live Demo & Repositories"
     },
     {
+      id: 22,
+      title: "Cortex RAG — Enterprise Knowledge Base & Semantic Search Engine",
+      category: "AI & Web",
+      role: {
+        en: "Lead AI & Full Stack Engineer",
+        id: "Lead AI & Full Stack Engineer"
+      },
+      client: "Enterprise AI Platform",
+      liveUrl: "https://enterprise-rag-platform-two.vercel.app",
+      githubUrl: "https://github.com/dandyzain/enterprise-rag-platform",
+      gitlabUrl: "https://gitlab.com/dandyzain.personal/enterprise-rag-platform",
+      description: {
+        en: "Production-ready enterprise semantic search and Retrieval-Augmented Generation (RAG) platform built with Next.js 16 (Turbopack) and Tailwind CSS v4. Features hybrid search combining dense vector embeddings with BM25 sparse lexical retrieval via Reciprocal Rank Fusion (RRF, k=60), two-stage cross-encoder re-ranking, multi-page PDF ingestion with recursive chunking, strict citation grounding with zero-hallucination guardrails, and Vercel AI SDK real-time streaming.",
+        id: "Platform pencarian semantik enterprise dan Retrieval-Augmented Generation (RAG) siap produksi berbasis Next.js 16 (Turbopack) dan Tailwind CSS v4. Dilengkapi pencarian hibrida yang menggabungkan dense vector embeddings dengan BM25 sparse lexical retrieval melalui Reciprocal Rank Fusion (RRF, k=60), re-ranking two-stage cross-encoder, ekstraksi dokumen PDF multi-halaman dengan recursive chunking, validasi strict grounding bebas halusinasi, serta streaming respons real-time Vercel AI SDK."
+      },
+      image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
+      tags: ["Next.js 16", "React 19", "pgvector", "BM25 Hybrid Search", "RRF Fusion", "Vercel AI SDK", "Prisma ORM", "Tailwind CSS v4", "Docker", "TypeScript"],
+      color: "mint",
+      features: {
+        en: [
+          "Hybrid Search Engine: Combines dense vector cosine similarity (1536-dim) and BM25 sparse lexical retrieval via Reciprocal Rank Fusion (RRF, k=60) for 100% exact keyword & semantic recall.",
+          "Strict Grounding Guardrails: Sentence-by-sentence factuality auditor against retrieved source chunks with 0-100% groundedness scoring to eliminate LLM hallucinations.",
+          "Recursive Document Chunking: Intelligent 500-700 token windowing with 100-token semantic overlap supporting multi-page PDF parsing (pdf-parse) and TXT/MD files.",
+          "Two-Stage Cross-Encoder Re-Ranking: Evaluates top-15 retrieved candidates for phrase congruence, entity matching, and contextual relevance.",
+          "Live Production Cloud Deployment: Hosted on Vercel Edge/Serverless with BYOK (Bring-Your-Own-Key) quota support, multilingual i18n, and Docker containerization."
+        ],
+        id: [
+          "Mesin Pencarian Hibrida: Menggabungkan kesamaan kosinus dense vector (1536-dim) dan BM25 sparse lexical retrieval via Reciprocal Rank Fusion (RRF, k=60) untuk akurasi pencarian semantik dan kata kunci 100%.",
+          "Guardrail Strict Grounding: Auditor faktualitas kalimat-demi-kalimat terhadap potongan dokumen rujukan dengan skor groundedness 0-100% untuk mencegah halusinasi AI.",
+          "Recursive Document Chunking: Pemecahan cerdas 500-700 token dengan overlap 100 token mendukung ekstraksi PDF multi-halaman (pdf-parse) dan berkas TXT/MD.",
+          "Re-Ranking Two-Stage Cross-Encoder: Menyaring 15 kandidat teratas berdasarkan kesesuaian frasa, keselarasan entitas, dan relevansi konteks.",
+          "Deployment Cloud Produksi: Berjalan live di Vercel Edge/Serverless dengan dukungan BYOK (Bring-Your-Own-Key), sistem multi-bahasa i18n, dan containerization Docker."
+        ]
+      },
+      linkText: "Live Demo & Repositories"
+    },
+    {
       id: 3,
       title: "NOC-RAN — Radio Access Network Center",
       category: "Full Stack",
