@@ -402,9 +402,9 @@ export const portfolioData = {
         id: "Creator & Lead Full Stack Developer"
       },
       client: "Independent SaaS Platform",
+      liveUrl: "https://taskflow-production-41d9.up.railway.app",
       githubUrl: "https://github.com/dandyzain/taskflow",
       gitlabUrl: "https://gitlab.com/dandyzain.personal/taskflow",
-      userGuideUrl: "/projects/taskflow/TaskFlow-User-Guide.pdf",
       description: {
         en: "Modern collaborative project management and Kanban board application built with Next.js 15 and React 19. Features an elegant pastel UI design system, drag-and-drop workflow powered by @dnd-kit with Fractional Indexing optimization, employee performance analytics (KPI metrics, velocity trend, team leaderboard, on-time delivery rates, and CSV export), multi-board workspaces, and secure RBAC authentication.",
         id: "Aplikasi manajemen proyek & papan Kanban kolaboratif modern berbasis Next.js 15 dan React 19 dengan tema warna pastel elegan. Dilengkapi alur kerja drag-and-drop ditenagai @dnd-kit dengan optimasi Fractional Indexing, modul analitik & pelaporan kinerja karyawan (metrik KPI, tren velocity SVG, leaderboard tim, evaluasi on-time delivery, ekspor CSV), multi-board per workspace, serta otentikasi aman RBAC."
@@ -428,7 +428,7 @@ export const portfolioData = {
           "Autentikasi aman & Role-Based Access Control (RBAC) berbasis cookie JWT, enkripsi sandi bcrypt, dan dukungan multi-workspace."
         ]
       },
-      linkText: "GitHub & GitLab Repository"
+      linkText: "Live Demo & Repositories"
     },
     {
       id: 12,
