@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { 
   ArrowDown, 
   FileText, 
@@ -16,6 +16,8 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
+
+const ThreeDModel = lazy(() => import('./ThreeDModel'));
 
 // Animated Counter Component
 function Counter({ value, duration = 2 }) {
@@ -42,11 +44,12 @@ function Counter({ value, duration = 2 }) {
   return <span>{count}{suffix}</span>;
 }
 
-export default function Hero({ onOpenCVModal }) {
+export default function Hero({ onOpenCVModal, darkMode = false }) {
   const { language } = useLanguage();
   const { personal } = portfolioData;
   const t = portfolioData.translations[language].hero;
 
+  const [activeHeroView, setActiveHeroView] = useState('3d');
   const rotatingWords = t.headlineRotating || [t.headlineHighlight];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
@@ -358,176 +361,265 @@ export default function Hero({ onOpenCVModal }) {
             <motion.div 
               whileHover={{ y: -6, rotateY: 3, rotateX: -2 }}
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
-              className="relative w-full max-w-[460px] p-4 sm:p-8 rounded-3xl sm:rounded-4xl bg-white/85 dark:bg-slate-800/85 border border-white/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl"
+              className="relative w-full max-w-[460px] p-4 sm:p-7 rounded-3xl sm:rounded-4xl bg-white/85 dark:bg-slate-800/85 border border-white/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl"
             >
               
-              {/* Profile Card Header with Large Featured Portrait */}
-              <div className="flex flex-col items-center text-center mb-6 pb-6 border-b border-slate-100 dark:border-slate-700/60">
-                <div className="relative mb-4">
-                  {/* Outer ambient colorful glow */}
-                  <div className="absolute -inset-2 rounded-[36px] bg-gradient-to-tr from-indigo-500/25 via-purple-500/20 to-pink-500/25 blur-lg pointer-events-none" />
-
-                  <motion.div 
-                    whileHover={{ scale: 1.05, rotate: 1.5 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                    className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-gradient-to-tr from-indigo-500 via-purple-400 to-pink-400 p-1 shadow-pastel-lg cursor-pointer overflow-hidden group"
-                  >
-                    <div className="w-full h-full rounded-[22px] overflow-hidden bg-gradient-to-b from-indigo-50/90 via-purple-50/80 to-pink-50/90 dark:from-slate-800 dark:via-slate-900 dark:to-indigo-950 flex items-center justify-center">
-                      <img 
-                        src={personal.avatar} 
-                        alt={personal.fullName}
-                        className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                  </motion.div>
-
-                  {/* Status Badge floating on Photo */}
-                  <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-white/95 dark:bg-slate-900/95 rounded-full shadow-md border border-slate-200/80 dark:border-slate-700 flex items-center gap-1.5 backdrop-blur-sm whitespace-nowrap">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[11px] font-bold text-slate-700 dark:text-slate-200">
-                      {language === 'id' ? 'Terbuka untuk Peluang Kerja' : 'Available for Hire'}
-                    </span>
-                  </div>
-                </div>
-
-                <h3 className="font-display font-extrabold text-2xl text-slate-900 dark:text-white tracking-tight mt-1">
-                  {personal.fullName}
-                </h3>
-                <p className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 mt-0.5">
-                  {personal.role[language]}
-                </p>
-                <div className="flex items-center gap-2 mt-1 text-[11px] text-slate-500 dark:text-slate-400">
-                  <span>B.S. in Computer Science (UCIC)</span>
-                  <span>•</span>
-                  <span>Jakarta, Indonesia</span>
-                </div>
+              {/* Segmented View Switcher: 3D Model vs Profile & Code */}
+              <div className="flex items-center justify-between p-1 rounded-2xl bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-700/80 mb-5 shadow-xs">
+                <button
+                  type="button"
+                  onClick={() => setActiveHeroView('3d')}
+                  className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2 px-3 rounded-xl text-xs font-bold transition-all duration-200 ${
+                    activeHeroView === '3d'
+                      ? 'bg-white dark:bg-indigo-600 text-indigo-700 dark:text-white shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  <Sparkles size={14} className={activeHeroView === '3d' ? 'text-indigo-600 dark:text-amber-300' : 'text-slate-400'} />
+                  <span>{language === 'id' ? '3D Model Animation' : '3D Model Animation'}</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveHeroView('profile')}
+                  className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2 px-3 rounded-xl text-xs font-bold transition-all duration-200 ${
+                    activeHeroView === 'profile'
+                      ? 'bg-white dark:bg-indigo-600 text-indigo-700 dark:text-white shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  <Code2 size={14} className={activeHeroView === 'profile' ? 'text-indigo-600 dark:text-white' : 'text-slate-400'} />
+                  <span>{language === 'id' ? 'Profil & Kode' : 'Profile & Code'}</span>
+                </button>
               </div>
 
-              {/* Dynamic Animated Code Snippet Box */}
-              <motion.div 
-                whileHover={{ y: -2 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="rounded-2xl bg-slate-900/95 dark:bg-slate-950 p-3 sm:p-4 text-xs font-mono text-slate-300 shadow-xl shadow-slate-950/20 mb-6 border border-slate-800 relative overflow-hidden group"
-              >
-                {/* Subtle ambient gradient highlight border */}
-                <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
-
-                {/* Terminal Header */}
-                <div className="flex items-center justify-between mb-3 border-b border-slate-800/80 pb-2.5">
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-rose-500/90 hover:opacity-100 cursor-pointer" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-amber-400/90 hover:opacity-100 cursor-pointer" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/90 hover:opacity-100 cursor-pointer" />
-                    <span className="text-[10px] text-slate-400 ml-2 font-mono flex items-center gap-1">
-                      <Code2 size={11} className="text-indigo-400" />
-                      dandy.config.js
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-[9px] font-mono text-emerald-400 font-semibold tracking-wider">LIVE</span>
-                  </div>
-                </div>
-
-                {/* Code Content with Line Numbers & Animations */}
-                <div className="space-y-1 text-[10.5px] sm:text-xs font-mono leading-relaxed overflow-x-auto scrollbar-none">
-                  {/* Line 1 */}
-                  <div className="flex items-center">
-                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">1</span>
-                    <p className="text-purple-400">const <span className="text-sky-300">developer</span> = &#123;</p>
-                  </div>
-
-                  {/* Line 2 */}
-                  <div className="flex items-center">
-                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">2</span>
-                    <p className="pl-3 text-slate-300">name: <span className="text-emerald-300">'Dandy Rahmat Zain'</span>,</p>
-                  </div>
-
-                  {/* Line 3: Dynamic Animated Stack */}
-                  <div className="flex items-center">
-                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">3</span>
-                    <div className="pl-3 text-slate-300 flex items-center flex-nowrap whitespace-nowrap">
-                      <span>stack: [</span>
-                      <AnimatePresence mode="wait">
-                        <motion.span
-                          key={`code-stack-${codeIndex}`}
-                          initial={{ y: 6, opacity: 0, filter: 'blur(2px)' }}
-                          animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-                          exit={{ y: -6, opacity: 0, filter: 'blur(2px)' }}
-                          transition={{ duration: 0.28 }}
-                          className="inline-flex items-center mx-1"
-                        >
-                          {codeSnippets[codeIndex].stack.map((item, i) => (
-                            <React.Fragment key={i}>
-                              <span className="text-emerald-300">{item}</span>
-                              {i < codeSnippets[codeIndex].stack.length - 1 && <span className="text-slate-300 mr-1.5">,</span>}
-                            </React.Fragment>
-                          ))}
-                        </motion.span>
-                      </AnimatePresence>
-                      <span>],</span>
-                    </div>
-                  </div>
-
-                  {/* Line 4: Dynamic Animated Passion */}
-                  <div className="flex items-center">
-                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">4</span>
-                    <div className="pl-3 text-slate-300 flex items-center flex-nowrap whitespace-nowrap">
-                      <span className="mr-1.5">passion:</span>
-                      <AnimatePresence mode="wait">
-                        <motion.span
-                          key={`code-passion-${language}-${codeIndex}`}
-                          initial={{ y: 6, opacity: 0, filter: 'blur(2px)' }}
-                          animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-                          exit={{ y: -6, opacity: 0, filter: 'blur(2px)' }}
-                          transition={{ duration: 0.28 }}
-                          className="text-emerald-300"
-                        >
-                          {codeSnippets[codeIndex].passion}
-                        </motion.span>
-                      </AnimatePresence>
-                      <span>,</span>
-                    </div>
-                  </div>
-
-                  {/* Line 5: Ready for Hire with Pulsing Terminal Cursor */}
-                  <div className="flex items-center">
-                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">5</span>
-                    <p className="pl-3 text-slate-300 flex items-center">
-                      <span>readyForHire: <span className="text-amber-300 font-semibold">true</span></span>
-                      <motion.span 
-                        animate={{ opacity: [1, 0, 1] }}
-                        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                        className="inline-block w-1.5 h-3.5 bg-emerald-400 ml-1.5 align-middle shadow-sm shadow-emerald-400"
-                      />
-                    </p>
-                  </div>
-
-                  {/* Line 6 */}
-                  <div className="flex items-center">
-                    <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">6</span>
-                    <p className="text-purple-400">&#125;;</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Animated Stats Grid */}
-              <div className="grid grid-cols-2 gap-3">
-                {personal.stats.map((stat, idx) => (
-                  <motion.div 
-                    key={idx} 
-                    whileHover={{ scale: 1.04, y: -2 }}
-                    className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-100 dark:border-slate-700 text-center"
+              <AnimatePresence mode="wait">
+                {activeHeroView === '3d' ? (
+                  <motion.div
+                    key="hero-view-3d"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.25 }}
+                    className="flex flex-col"
                   >
-                    <span className="block font-display font-bold text-2xl text-slate-900 dark:text-white">
-                      <Counter value={stat.value} />
-                    </span>
-                    <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
-                      {stat.label[language]}
-                    </span>
+                    {/* 3D Model Interactive WebGL Canvas */}
+                    <div className="rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700/60 bg-gradient-to-b from-indigo-50/40 via-purple-50/20 to-transparent dark:from-slate-900/80 dark:to-slate-950/80 shadow-inner mb-3">
+                      <Suspense fallback={
+                        <div className="w-full h-[320px] sm:h-[380px] md:h-[400px] flex flex-col items-center justify-center gap-3">
+                          <div className="w-8 h-8 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
+                          <span className="text-xs font-semibold text-slate-400">Loading 3D WebGL Engine...</span>
+                        </div>
+                      }>
+                        <ThreeDModel isDarkMode={darkMode} language={language} />
+                      </Suspense>
+                    </div>
+
+                    {/* Quick Tech Badge Line under 3D model */}
+                    <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 px-1 mb-4 pb-3 border-b border-slate-100 dark:border-slate-700/60 font-mono">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-indigo-500 animate-ping" />
+                        <span className="text-indigo-600 dark:text-indigo-400 font-semibold">Three.js WebGL</span>
+                      </span>
+                      <span>Next.js 15 • DAG • BullMQ</span>
+                    </div>
+
+                    {/* Animated Stats Grid */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {personal.stats.map((stat, idx) => (
+                        <motion.div 
+                          key={idx} 
+                          whileHover={{ scale: 1.04, y: -2 }}
+                          className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-100 dark:border-slate-700 text-center"
+                        >
+                          <span className="block font-display font-bold text-2xl text-slate-900 dark:text-white">
+                            <Counter value={stat.value} />
+                          </span>
+                          <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+                            {stat.label[language]}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
                   </motion.div>
-                ))}
-              </div>
+                ) : (
+                  <motion.div
+                    key="hero-view-profile"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    {/* Profile Card Header with Large Featured Portrait */}
+                    <div className="flex flex-col items-center text-center mb-6 pb-6 border-b border-slate-100 dark:border-slate-700/60">
+                      <div className="relative mb-4">
+                        {/* Outer ambient colorful glow */}
+                        <div className="absolute -inset-2 rounded-[36px] bg-gradient-to-tr from-indigo-500/25 via-purple-500/20 to-pink-500/25 blur-lg pointer-events-none" />
+
+                        <motion.div 
+                          whileHover={{ scale: 1.05, rotate: 1.5 }}
+                          transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                          className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-gradient-to-tr from-indigo-500 via-purple-400 to-pink-400 p-1 shadow-pastel-lg cursor-pointer overflow-hidden group"
+                        >
+                          <div className="w-full h-full rounded-[22px] overflow-hidden bg-gradient-to-b from-indigo-50/90 via-purple-50/80 to-pink-50/90 dark:from-slate-800 dark:via-slate-900 dark:to-indigo-950 flex items-center justify-center">
+                            <img 
+                              src={personal.avatar} 
+                              alt={personal.fullName}
+                              className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                            />
+                          </div>
+                        </motion.div>
+
+                        {/* Status Badge floating on Photo */}
+                        <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-white/95 dark:bg-slate-900/95 rounded-full shadow-md border border-slate-200/80 dark:border-slate-700 flex items-center gap-1.5 backdrop-blur-sm whitespace-nowrap">
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="text-[11px] font-bold text-slate-700 dark:text-slate-200">
+                            {language === 'id' ? 'Terbuka untuk Peluang Kerja' : 'Available for Hire'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <h3 className="font-display font-extrabold text-2xl text-slate-900 dark:text-white tracking-tight mt-1">
+                        {personal.fullName}
+                      </h3>
+                      <p className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 mt-0.5">
+                        {personal.role[language]}
+                      </p>
+                      <div className="flex items-center gap-2 mt-1 text-[11px] text-slate-500 dark:text-slate-400">
+                        <span>B.S. in Computer Science (UCIC)</span>
+                        <span>•</span>
+                        <span>Jakarta, Indonesia</span>
+                      </div>
+                    </div>
+
+                    {/* Dynamic Animated Code Snippet Box */}
+                    <motion.div 
+                      whileHover={{ y: -2 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="rounded-2xl bg-slate-900/95 dark:bg-slate-950 p-3 sm:p-4 text-xs font-mono text-slate-300 shadow-xl shadow-slate-950/20 mb-6 border border-slate-800 relative overflow-hidden group"
+                    >
+                      {/* Subtle ambient gradient highlight border */}
+                      <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+
+                      {/* Terminal Header */}
+                      <div className="flex items-center justify-between mb-3 border-b border-slate-800/80 pb-2.5">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-2.5 h-2.5 rounded-full bg-rose-500/90 hover:opacity-100 cursor-pointer" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-amber-400/90 hover:opacity-100 cursor-pointer" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/90 hover:opacity-100 cursor-pointer" />
+                          <span className="text-[10px] text-slate-400 ml-2 font-mono flex items-center gap-1">
+                            <Code2 size={11} className="text-indigo-400" />
+                            dandy.config.js
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          <span className="text-[9px] font-mono text-emerald-400 font-semibold tracking-wider">LIVE</span>
+                        </div>
+                      </div>
+
+                      {/* Code Content with Line Numbers & Animations */}
+                      <div className="space-y-1 text-[10.5px] sm:text-xs font-mono leading-relaxed overflow-x-auto scrollbar-none">
+                        {/* Line 1 */}
+                        <div className="flex items-center">
+                          <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">1</span>
+                          <p className="text-purple-400">const <span className="text-sky-300">developer</span> = &#123;</p>
+                        </div>
+
+                        {/* Line 2 */}
+                        <div className="flex items-center">
+                          <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">2</span>
+                          <p className="pl-3 text-slate-300">name: <span className="text-emerald-300">'Dandy Rahmat Zain'</span>,</p>
+                        </div>
+
+                        {/* Line 3: Dynamic Animated Stack */}
+                        <div className="flex items-center">
+                          <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">3</span>
+                          <div className="pl-3 text-slate-300 flex items-center flex-nowrap whitespace-nowrap">
+                            <span>stack: [</span>
+                            <AnimatePresence mode="wait">
+                              <motion.span
+                                key={`code-stack-${codeIndex}`}
+                                initial={{ y: 6, opacity: 0, filter: 'blur(2px)' }}
+                                animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+                                exit={{ y: -6, opacity: 0, filter: 'blur(2px)' }}
+                                transition={{ duration: 0.28 }}
+                                className="inline-flex items-center mx-1"
+                              >
+                                {codeSnippets[codeIndex].stack.map((item, i) => (
+                                  <React.Fragment key={i}>
+                                    <span className="text-emerald-300">{item}</span>
+                                    {i < codeSnippets[codeIndex].stack.length - 1 && <span className="text-slate-300 mr-1.5">,</span>}
+                                  </React.Fragment>
+                                ))}
+                              </motion.span>
+                            </AnimatePresence>
+                            <span>],</span>
+                          </div>
+                        </div>
+
+                        {/* Line 4: Dynamic Animated Passion */}
+                        <div className="flex items-center">
+                          <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">4</span>
+                          <div className="pl-3 text-slate-300 flex items-center flex-nowrap whitespace-nowrap">
+                            <span className="mr-1.5">passion:</span>
+                            <AnimatePresence mode="wait">
+                              <motion.span
+                                key={`code-passion-${language}-${codeIndex}`}
+                                initial={{ y: 6, opacity: 0, filter: 'blur(2px)' }}
+                                animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+                                exit={{ y: -6, opacity: 0, filter: 'blur(2px)' }}
+                                transition={{ duration: 0.28 }}
+                                className="text-emerald-300"
+                              >
+                                {codeSnippets[codeIndex].passion}
+                              </motion.span>
+                            </AnimatePresence>
+                            <span>,</span>
+                          </div>
+                        </div>
+
+                        {/* Line 5: Ready for Hire with Pulsing Terminal Cursor */}
+                        <div className="flex items-center">
+                          <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">5</span>
+                          <p className="pl-3 text-slate-300 flex items-center">
+                            <span>readyForHire: <span className="text-amber-300 font-semibold">true</span></span>
+                            <motion.span 
+                              animate={{ opacity: [1, 0, 1] }}
+                              transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                              className="inline-block w-1.5 h-3.5 bg-emerald-400 ml-1.5 align-middle shadow-sm shadow-emerald-400"
+                            />
+                          </p>
+                        </div>
+
+                        {/* Line 6 */}
+                        <div className="flex items-center">
+                          <span className="text-slate-600 select-none w-4 text-right mr-2 text-[10px]">6</span>
+                          <p className="text-purple-400">&#125;;</p>
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Animated Stats Grid */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {personal.stats.map((stat, idx) => (
+                        <motion.div 
+                          key={idx} 
+                          whileHover={{ scale: 1.04, y: -2 }}
+                          className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-100 dark:border-slate-700 text-center"
+                        >
+                          <span className="block font-display font-bold text-2xl text-slate-900 dark:text-white">
+                            <Counter value={stat.value} />
+                          </span>
+                          <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+                            {stat.label[language]}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
             </motion.div>
 
