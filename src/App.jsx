@@ -44,7 +44,7 @@ function PortfolioContent() {
 
       {/* Main Content Sections */}
       <main>
-        <Hero onOpenCVModal={() => setIsCVModalOpen(true)} darkMode={darkMode} />
+        <Hero onOpenCVModal={() => setIsCVModalOpen(true)} />
         <About />
         <Experience />
         <Skills />
