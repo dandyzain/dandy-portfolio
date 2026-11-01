@@ -25,22 +25,22 @@ export const portfolioData = {
     },
     bio: {
       en: [
-        "I am a Full Stack Developer with experience in web and mobile application development. I specialize in building robust enterprise applications using Laravel and Express.js for backend architectures, alongside modern JavaScript frameworks like React, Next.js, Vue, and Nuxt for frontend development.",
+        "I am a Full Stack Developer with experience in web and mobile application development. I specialize in building robust enterprise architectures and distributed systems using Laravel, Express.js, and modern Next.js/React ecosystems, alongside cutting-edge graph workflow orchestration (DAG) and RAG vector search engines.",
         "At PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra), I actively engineer and maintain mission-critical telecommunications web applications including nationwide submarine cable monitoring (LION), radio access network monitoring (NOC-RAN), tower site assessment (TSA), and workforce asset management (AssetMgmt WFM).",
-        "On the mobile side, I build cross-platform and native applications using Flutter and Kotlin, ensuring smooth performance and intuitive UX across multiple platforms.",
+        "On the mobile side, I build cross-platform and native applications using React Native (Expo SDK), Flutter, and Kotlin, ensuring smooth performance and intuitive UX across multiple platforms.",
         "With a comprehensive full-stack approach, I manage projects from database architecture to frontend polish, API integration, and cloud deployment. I also leverage Artificial Intelligence (AI) to accelerate software development workflows."
       ],
       id: [
-        "Saya adalah Full Stack Developer dengan pengalaman dalam perancangan dan pengembangan aplikasi web serta mobile. Keahlian backend saya berfokus pada Laravel dan Express.js untuk arsitektur API yang tangguh, aman, dan scalable, serta framework modern seperti React, Next.js, Vue, dan Nuxt untuk sisi frontend.",
+        "Saya adalah Full Stack Developer dengan pengalaman dalam perancangan dan pengembangan aplikasi web serta mobile. Keahlian saya berfokus pada arsitektur sistem enterprise yang tangguh, aman, dan scalable menggunakan Laravel, Express.js, serta ekosistem modern Next.js/React, dilengkapi otomatisasi alur kerja graf (DAG) dan mesin pencarian semantik RAG.",
         "Di PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra), saya aktif merancang dan mengelola aplikasi web misi-kritis termasuk pemantauan kabel bawah laut nasional (LION), monitoring radio access network (NOC-RAN), audit aktivitas menara (TSA), dan manajemen aset & work force (AssetMgmt WFM).",
-        "Di platform mobile, saya mengembangkan aplikasi menggunakan Flutter dan Kotlin native, memastikan performa tinggi serta pengalaman pengguna yang mulus di berbagai sistem operasi.",
+        "Di platform mobile, saya mengembangkan aplikasi menggunakan React Native (Expo SDK), Flutter, dan Kotlin native, memastikan performa tinggi serta pengalaman pengguna yang mulus di berbagai sistem operasi.",
         "Dengan pendekatan full-stack menyeluruh, saya menangani proyek dari hulu ke hilir. Saya juga aktif mengintegrasikan kecerdasan buatan (AI) untuk riset teknis dan percepatan alur kerja rekayasa perangkat lunak modern."
       ]
     },
     stats: [
       { label: { en: "Years Experience", id: "Tahun Pengalaman" }, value: "4+" },
-      { label: { en: "Completed Projects", id: "Proyek Selesai" }, value: "25+" },
-      { label: { en: "Enterprise Systems", id: "Sistem Enterprise" }, value: "10+" },
+      { label: { en: "Completed Projects", id: "Proyek Selesai" }, value: "30+" },
+      { label: { en: "Enterprise Systems", id: "Sistem Enterprise" }, value: "12+" },
       { label: { en: "Client Satisfaction", id: "Kepuasan Klien" }, value: "99%" },
     ]
   },
@@ -189,27 +189,33 @@ export const portfolioData = {
   skills: {
     frontend: [
       { name: "React.js", level: 95, tag: "Primary" },
-      { name: "Next.js", level: 90, tag: "SSR / App Router" },
+      { name: "Next.js", level: 92, tag: "SSR / App Router" },
       { name: "Vue.js / Nuxt.js", level: 90, tag: "Enterprise Frontend" },
       { name: "Tailwind CSS", level: 95, tag: "Styling" },
       { name: "JavaScript / TypeScript", level: 92, tag: "Core Language" },
+      { name: "React Flow (@xyflow)", level: 88, tag: "Visual DAG Canvas" },
       { name: "Leaflet GIS Mapping", level: 88, tag: "Geospatial" },
     ],
     backend: [
       { name: "Laravel (PHP)", level: 95, tag: "Enterprise Core" },
       { name: "Express.js / Node.js", level: 88, tag: "API & Microservices" },
       { name: "PHP (7.x - 8.x)", level: 94, tag: "Enterprise Backend" },
+      { name: "PostgreSQL & Prisma ORM", level: 90, tag: "Relational & ORM" },
+      { name: "BullMQ & Redis Queue", level: 86, tag: "Job Orchestration" },
       { name: "RESTful APIs", level: 96, tag: "Architecture" },
       { name: "MySQL / Oracle DB", level: 90, tag: "Databases" },
       { name: "Redis", level: 88, tag: "Caching & Queues" },
     ],
     mobile: [
+      { name: "React Native (Expo SDK)", level: 88, tag: "Cross-Platform" },
       { name: "Flutter (Dart)", level: 88, tag: "Cross-Platform" },
       { name: "Kotlin", level: 82, tag: "Android Native" },
       { name: "Firebase Services", level: 85, tag: "Push / Auth" },
       { name: "Mobile UI/UX", level: 88, tag: "Responsive Design" },
     ],
     aiAndTools: [
+      { name: "RAG & Vector Search", level: 88, tag: "AI Retrieval" },
+      { name: "Kahn's DAG Orchestration", level: 88, tag: "Graph Algorithms" },
       { name: "Docker & Kubernetes", level: 86, tag: "DevOps & K8s" },
       { name: "Git & GitLab CI/CD", level: 94, tag: "Version Control" },
       { name: "AI Integration & Prompting", level: 90, tag: "Automation" },
@@ -361,37 +367,41 @@ export const portfolioData = {
       linkText: "Live Demo & Repositories"
     },
     {
-      id: 3,
-      title: "NOC-RAN — Radio Access Network Center",
+      id: 23,
+      title: "NexusFlow — Enterprise Visual Workflow Automation Engine (DAG Platform)",
       category: "Full Stack",
       role: {
-        en: "Full Stack Developer",
-        id: "Full Stack Developer"
+        en: "Creator & Lead Full Stack Architect",
+        id: "Creator & Lead Full Stack Architect"
       },
-      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
-      gitlabUrl: "https://gitlab.com/telkominfraapps/noc-ran",
+      client: "Enterprise Workflow Automation Platform",
+      liveUrl: "https://enterprise-dag-platform.vercel.app",
+      githubUrl: "https://github.com/dandyzain/enterprise-dag-platform",
+      gitlabUrl: "https://gitlab.com/dandyzain.personal/enterprise-dag-platform",
       description: {
-        en: "Nationwide Radio Access Network (RAN) Operations Center monitoring thousands of Base Station (BTS), eNodeB (4G), and gNodeB (5G) nodes across Telkom Group operational territories with real-time alarm telemetry and incident heatmap analysis.",
-        id: "Pusat operasi monitoring jaringan akses radio seluler (NOC-RAN) nasional. Memantau kesehatan ribuan node Base Station (BTS), eNodeB (4G), dan gNodeB (5G) di seluruh wilayah operasional Telkom Group dengan telemetri alarm anomali real-time dan pemetaan geografis insiden."
+        en: "Distributed visual workflow automation and Directed Acyclic Graph (DAG) orchestration engine built with Next.js 15, React 19, and @xyflow/react v12. Features mathematical graph validation using Kahn's Topological Sorting algorithm and DFS 3-Color cycle detection, hardware-grade AES-256-GCM credential encryption, non-blocking BullMQ Redis job queues, dynamic mustache variable interpolation, and bilingual next-intl localization.",
+        id: "Platform otomatisasi alur kerja visual dan orkestrasi Directed Acyclic Graph (DAG) enterprise terdistribusi berbasis Next.js 15, React 19, dan @xyflow/react v12. Dilengkapi validasi graf matematis dengan algoritma Kahn's Topological Sorting dan deteksi siklus DFS 3-Color, enkripsi brankas kredensial standar perangkat keras AES-256-GCM, antrean asynchronous non-blocking BullMQ & Redis, interpolasi variabel dinamis mustache, serta lokalisasi dwibahasa next-intl."
       },
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
-      tags: ["Laravel", "Vue.js", "Leaflet GIS", "Redis", "High-Throughput Telemetry", "MySQL"],
-      color: "mint",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+      tags: ["Next.js 15", "React 19", "@xyflow/react", "DAG Engine", "Kahn's Algorithm", "BullMQ & Redis", "AES-256-GCM", "Prisma ORM", "TypeScript", "next-intl"],
+      color: "lavender",
       features: {
         en: [
-          "Real-time operational dashboard visualizing cellular tower statuses across all Indonesian regions.",
-          "Automated incident alert engine filtering critical network faults and outage triggers.",
-          "Batch CSV and Excel ingestion pipeline for bulk telecommunication node configurations.",
-          "Containerized architecture prepared for high availability enterprise deployment."
+          "Mathematical Graph Orchestration (DAG): Kahn's topological sorting algorithm batches nodes into parallel execution tiers while white/gray/black DFS 3-Color traversal intercepts cyclic dependencies before execution.",
+          "Visual Interactive Canvas: High-performance drag-and-drop node graph canvas built on @xyflow/react v12 with custom node inspectors, real-time live execution replay, and hierarchical auto-layout.",
+          "Hardware-Grade Security Vault: Node.js crypto AES-256-GCM encryption with unique 96-bit IVs and tamper-proof authentication tags protecting API keys and webhook secrets.",
+          "Cascading Variable Interpolation: Dynamic mustache context resolver supporting dot-notation path evaluation across triggers ({{trigger.body}}), upstream steps ({{steps.id.output}}), and decrypted credentials.",
+          "Distributed Queue & Non-Blocking Ingestion: High-throughput HTTP 202 webhook ingestion acknowledging in <10ms decoupled by BullMQ and Redis 7 with automatic non-blocking microtask fallback."
         ],
         id: [
-          "Dashboard operasional real-time yang memvisualisasikan status menara seluler di seluruh wilayah Indonesia.",
-          "Mesin peringatan anomali otomatis yang menyaring kegagalan transmisi kritis jaringan.",
-          "Pipeline import data massal CSV dan Excel untuk konfigurasi ribuan node perangkat telekomunikasi.",
-          "Arsitektur ter-kontainerisasi siap pakai untuk ketersediaan tinggi di level enterprise."
+          "Orkestrasi Graf Matematis (DAG): Algoritma pengurutan topologis Kahn mengelompokkan node ke dalam tier eksekusi paralel serta penelusuran DFS 3-Color (putih/abu-abu/hitam) untuk mencegah loop/siklus sebelum alur kerja dijalankan.",
+          "Kanvas Visual Interaktif: Kanvas drag-and-drop graf berkinerja tinggi ditenagai @xyflow/react v12 dengan inspector konfigurasi node, visualisasi replay eksekusi real-time, dan tata letak otomatis hierarkis.",
+          "Brankas Kredensial Standar Perangkat Keras: Enkripsi AES-256-GCM native Node.js crypto dengan IV 96-bit unik dan autentikasi payload anti-tampering untuk mengamankan API key dan token rahasia.",
+          "Interpolasi Variabel Cascading: Resolusi konteks dinamis sintaks mustache mendukung evaluasi dot-notation lintas trigger ({{trigger.body}}), output step sebelumnya ({{steps.id.output}}), dan kredensial terenkripsi.",
+          "Antrean Terdistribusi & Ingesti Non-Blocking: Ingesti webhook HTTP 202 berkecepatan tinggi (<10ms) didecoupling oleh antrean terdistribusi BullMQ & Redis 7 dengan mekanisme fallback microtask non-blocking."
         ]
       },
-      linkText: "GitLab Repository"
+      linkText: "Live Demo & Repositories"
     },
     {
       id: 19,
@@ -429,6 +439,39 @@ export const portfolioData = {
         ]
       },
       linkText: "Live Demo & Repositories"
+    },
+    {
+      id: 3,
+      title: "NOC-RAN — Radio Access Network Center",
+      category: "Full Stack",
+      role: {
+        en: "Full Stack Developer",
+        id: "Full Stack Developer"
+      },
+      client: "PT. Infrastruktur Telekomunikasi Indonesia (Telkominfra)",
+      gitlabUrl: "https://gitlab.com/telkominfraapps/noc-ran",
+      description: {
+        en: "Nationwide Radio Access Network (RAN) Operations Center monitoring thousands of Base Station (BTS), eNodeB (4G), and gNodeB (5G) nodes across Telkom Group operational territories with real-time alarm telemetry and incident heatmap analysis.",
+        id: "Pusat operasi monitoring jaringan akses radio seluler (NOC-RAN) nasional. Memantau kesehatan ribuan node Base Station (BTS), eNodeB (4G), dan gNodeB (5G) di seluruh wilayah operasional Telkom Group dengan telemetri alarm anomali real-time dan pemetaan geografis insiden."
+      },
+      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+      tags: ["Laravel", "Vue.js", "Leaflet GIS", "Redis", "High-Throughput Telemetry", "MySQL"],
+      color: "mint",
+      features: {
+        en: [
+          "Real-time operational dashboard visualizing cellular tower statuses across all Indonesian regions.",
+          "Automated incident alert engine filtering critical network faults and outage triggers.",
+          "Batch CSV and Excel ingestion pipeline for bulk telecommunication node configurations.",
+          "Containerized architecture prepared for high availability enterprise deployment."
+        ],
+        id: [
+          "Dashboard operasional real-time yang memvisualisasikan status menara seluler di seluruh wilayah Indonesia.",
+          "Mesin peringatan anomali otomatis yang menyaring kegagalan transmisi kritis jaringan.",
+          "Pipeline import data massal CSV dan Excel untuk konfigurasi ribuan node perangkat telekomunikasi.",
+          "Arsitektur ter-kontainerisasi siap pakai untuk ketersediaan tinggi di level enterprise."
+        ]
+      },
+      linkText: "GitLab Repository"
     },
     {
       id: 12,
@@ -1557,6 +1600,8 @@ export const portfolioData = {
         headlineRotating: [
           "Modern Systems",
           "Web Apps",
+          "DAG Orchestration",
+          "RAG Platforms",
           "GIS Platforms",
           "Cloud APIs",
           "Enterprise Apps"
@@ -1590,12 +1635,12 @@ export const portfolioData = {
             desc: "Engineering national telecom portals (LION Submarine Cable GIS, NOC-RAN Radio Access, Asset Management WFM, TSA) for Telkom Group."
           },
           {
-            title: "Full Stack Web Mastery",
-            desc: "End-to-end web engineering using Laravel, Express.js, React.js, Next.js, and Vue.js with a laser focus on clean architecture and low latency."
+            title: "Full Stack Web & Distributed Systems",
+            desc: "End-to-end web engineering using Next.js 15/16, React 19, Laravel, and Express with distributed task queues (BullMQ/Redis) and RAG vector search."
           },
           {
             title: "Mobile App Development",
-            desc: "Specializing in Flutter cross-platform and Kotlin native Android with responsive 60fps UX across mobile devices."
+            desc: "Specializing in React Native (Expo SDK) and Flutter cross-platform with Kotlin native Android for responsive 60fps mobile UX."
           },
           {
             title: "DevOps & Cloud Orchestration",
@@ -1620,25 +1665,25 @@ export const portfolioData = {
           all: "All Skills",
           frontend: "Frontend",
           backend: "Backend & DB",
-          mobile: "Mobile (Flutter & Kotlin)",
+          mobile: "Mobile (React Native & Flutter)",
           aiAndTools: "DevOps & Tools"
         },
         groups: {
           frontend: {
             title: "Frontend & Web GIS Development",
-            desc: "Crafting aesthetic, modular, and interactive interfaces with React, Next.js, Vue, and Leaflet Geospatial mapping."
+            desc: "Crafting aesthetic, modular, and interactive interfaces with React, Next.js, Vue, React Flow, and Leaflet Geospatial mapping."
           },
           backend: {
-            title: "Backend & Telecom Architecture",
-            desc: "Designing secure business logic, high-throughput transaction processing, and standardized REST APIs using Laravel and Express."
+            title: "Backend & Distributed Systems",
+            desc: "Designing secure business logic, high-throughput transaction processing, Prisma/PostgreSQL, and BullMQ queues using Laravel and Node.js."
           },
           mobile: {
             title: "Cross-Platform & Native Mobile",
-            desc: "Building smooth smartphone apps for Android & iOS using Flutter and Kotlin with efficient memory utilization."
+            desc: "Building smooth smartphone apps for Android & iOS using React Native (Expo SDK), Flutter, and Kotlin with efficient memory utilization."
           },
           aiAndTools: {
-            title: "DevOps, Kubernetes & Workflow Tools",
-            desc: "Container orchestration (Docker/K8s), Git/GitLab CI/CD, AI prompt engineering, and Systems Thinking methodologies."
+            title: "DevOps, Graph DAG & AI Tools",
+            desc: "Distributed job queues (BullMQ/Redis), Kahn's DAG orchestration, RAG semantic search, Docker/K8s, and Git CI/CD pipelines."
           }
         }
       },
@@ -1766,6 +1811,8 @@ export const portfolioData = {
         headlineRotating: [
           "Sistem Modern",
           "Aplikasi Web",
+          "Orkestrasi DAG",
+          "Platform RAG",
           "Platform GIS",
           "Layanan API",
           "Sistem Enterprise"
@@ -1799,12 +1846,12 @@ export const portfolioData = {
             desc: "Rekayasa aplikasi nasional (LION GIS Kabel Laut, NOC-RAN Seluler, Asset Management WFM, TSA) untuk Telkom Group."
           },
           {
-            title: "Full Stack Web Mastery",
-            desc: "Pengembangan end-to-end dengan Laravel, Express.js, React.js, Next.js, dan Vue.js. Fokus pada arsitektur bersih dan latensi rendah."
+            title: "Full Stack Web & Sistem Terdistribusi",
+            desc: "Pengembangan end-to-end dengan Next.js 15/16, React 19, Laravel, dan Express. Dilengkapi antrean terdistribusi (BullMQ/Redis) dan retrieval semantik RAG."
           },
           {
             title: "Mobile App Development",
-            desc: "Spesialisasi dalam Flutter cross-platform dan Kotlin native Android dengan performa 60fps yang responsif di berbagai perangkat smartphone."
+            desc: "Spesialisasi dalam React Native (Expo SDK) dan Flutter cross-platform serta Kotlin native Android dengan performa 60fps yang responsif di berbagai perangkat smartphone."
           },
           {
             title: "DevOps & Orkestrasi Cloud",
@@ -1829,25 +1876,25 @@ export const portfolioData = {
           all: "Semua Keahlian",
           frontend: "Frontend",
           backend: "Backend & DB",
-          mobile: "Mobile (Flutter & Kotlin)",
+          mobile: "Mobile (React Native & Flutter)",
           aiAndTools: "DevOps & Tools"
         },
         groups: {
           frontend: {
             title: "Frontend & Web GIS Development",
-            desc: "Menciptakan antarmuka yang estetis, modular, responsif, dan kaya interaksi dengan React, Next.js, Vue, dan pemetaan Leaflet GIS."
+            desc: "Menciptakan antarmuka yang estetis, modular, responsif, dan kaya interaksi dengan React, Next.js, Vue, React Flow, dan pemetaan Leaflet GIS."
           },
           backend: {
-            title: "Backend & Arsitektur Telekomunikasi",
-            desc: "Membangun logika bisnis yang aman, pemrosesan transaksi berkecepatan tinggi, dan integrasi API terstandar dengan Laravel dan Express."
+            title: "Backend & Sistem Terdistribusi",
+            desc: "Membangun logika bisnis yang aman, pemrosesan transaksi berkecepatan tinggi, integrasi Prisma/PostgreSQL, dan antrean BullMQ dengan Laravel dan Node.js."
           },
           mobile: {
             title: "Cross-Platform & Native Mobile",
-            desc: "Pengalaman membangun aplikasi smartphone Android & iOS dengan Flutter dan Kotlin yang efisien dalam penggunaan memori."
+            desc: "Pengalaman membangun aplikasi smartphone Android & iOS dengan React Native (Expo SDK), Flutter, dan Kotlin yang efisien dalam penggunaan memori."
           },
           aiAndTools: {
-            title: "DevOps, Kubernetes & Workflow Tools",
-            desc: "Orkestrasi kontainer (Docker/K8s), Git/GitLab CI/CD, prompt engineering kecerdasan buatan, dan metodologi Systems Thinking."
+            title: "DevOps, Graf DAG & Tools AI",
+            desc: "Antrean terdistribusi (BullMQ/Redis), orkestrasi DAG Kahn, pencarian semantik RAG, kontainer Docker/K8s, dan pipeline Git CI/CD."
           }
         }
       },
