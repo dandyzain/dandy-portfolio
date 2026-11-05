@@ -412,15 +412,15 @@ export const portfolioData = {
         id: "Creator & Lead Full Stack Developer"
       },
       client: "Independent SaaS Platform",
-      liveUrl: "https://taskflow-production-41d9.up.railway.app",
+      liveUrl: "https://taskflow-theta-five-71.vercel.app",
       githubUrl: "https://github.com/dandyzain/taskflow",
       gitlabUrl: "https://gitlab.com/dandyzain.personal/taskflow",
       description: {
-        en: "Modern collaborative project management and Kanban board application built with Next.js 15 and React 19. Features an elegant pastel UI design system, drag-and-drop workflow powered by @dnd-kit with Fractional Indexing optimization, employee performance analytics (KPI metrics, velocity trend, team leaderboard, on-time delivery rates, and CSV export), multi-board workspaces, and secure RBAC authentication.",
-        id: "Aplikasi manajemen proyek & papan Kanban kolaboratif modern berbasis Next.js 15 dan React 19 dengan tema warna pastel elegan. Dilengkapi alur kerja drag-and-drop ditenagai @dnd-kit dengan optimasi Fractional Indexing, modul analitik & pelaporan kinerja karyawan (metrik KPI, tren velocity SVG, leaderboard tim, evaluasi on-time delivery, ekspor CSV), multi-board per workspace, serta otentikasi aman RBAC."
+        en: "Modern collaborative project management and Kanban board application built with Next.js 15 and React 19, deployed on Vercel with Neon Serverless PostgreSQL. Features an elegant pastel UI design system, drag-and-drop workflow powered by @dnd-kit with Fractional Indexing optimization, employee performance analytics (KPI metrics, velocity trend, team leaderboard, on-time delivery rates, and CSV export), multi-board workspaces, and secure RBAC authentication.",
+        id: "Aplikasi manajemen proyek & papan Kanban kolaboratif modern berbasis Next.js 15 dan React 19 yang dideploy di Vercel dengan Neon Serverless PostgreSQL. Dilengkapi alur kerja drag-and-drop ditenagai @dnd-kit dengan optimasi Fractional Indexing, modul analitik & pelaporan kinerja karyawan (metrik KPI, tren velocity SVG, leaderboard tim, evaluasi on-time delivery, ekspor CSV), multi-board per workspace, serta otentikasi aman RBAC."
       },
       image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80",
-      tags: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "@dnd-kit", "Prisma ORM", "SQLite", "Server Actions", "Radix UI"],
+      tags: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "@dnd-kit", "Prisma ORM", "Neon PostgreSQL", "Server Actions", "Radix UI"],
       color: "mint",
       features: {
         en: [
