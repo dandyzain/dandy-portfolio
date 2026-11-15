@@ -22,9 +22,8 @@ function Brand() {
         scrollToSection('hero');
       }}
       className="group flex items-center gap-3"
-      aria-label={portfolioData.personal.fullName}
     >
-      <span className="relative grid h-9 w-9 place-items-center rounded-lg bg-ink font-mono text-[0.8rem] font-semibold tracking-tight text-bg transition-transform duration-fast ease-out group-hover:-rotate-3">
+      <span aria-hidden="true" className="relative grid h-9 w-9 place-items-center rounded-lg bg-ink font-mono text-[0.8rem] font-semibold tracking-tight text-bg transition-transform duration-fast ease-out group-hover:-rotate-3">
         DZ
         <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-signal ring-2 ring-bg" aria-hidden="true" />
       </span>
@@ -119,7 +118,7 @@ export default function Navbar({ onOpenCVModal }) {
             type="button"
             onClick={toggleLanguage}
             className="inline-flex h-9 items-center rounded-lg px-2.5 font-mono text-xs font-semibold text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink"
-            aria-label={ui.common.languageSwitch}
+            aria-label={`EN / ID — ${ui.common.languageSwitch}`}
             title={ui.common.languageSwitch}
           >
             <span className={language === 'en' ? 'text-ink' : 'text-muted'}>EN</span>

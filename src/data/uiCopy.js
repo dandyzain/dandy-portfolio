@@ -122,6 +122,9 @@ export const uiCopy = {
       verifiedNote: 'Original document from the portfolio archive',
       clearSearch: 'Clear search',
       showAll: 'Show all {n} certifications',
+      issuer: 'Issuer',
+      date: 'Issued',
+      credentialId: 'Credential ID',
     },
     contact: {
       eyebrow: 'Contact',
@@ -275,6 +278,9 @@ export const uiCopy = {
       verifiedNote: 'Dokumen asli dari arsip portofolio',
       clearSearch: 'Hapus pencarian',
       showAll: 'Tampilkan semua {n} sertifikasi',
+      issuer: 'Penerbit',
+      date: 'Diterbitkan',
+      credentialId: 'ID kredensial',
     },
     contact: {
       eyebrow: 'Kontak',

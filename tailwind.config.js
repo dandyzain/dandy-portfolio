@@ -30,17 +30,6 @@ export default {
         amber: token('amber'),
         'amber-ink': token('amber-ink'),
         danger: token('danger'),
-        // LEGACY (removed in Phase 7 once every component is migrated)
-        pastel: {
-          lavender: { light: '#F4F5FF', DEFAULT: '#E4E7FF', accent: '#8B9BFA', dark: '#6366F1' },
-          mint: { light: '#F0FDF8', DEFAULT: '#D1FAE5', accent: '#34D399', dark: '#10B981' },
-          peach: { light: '#FFF5F2', DEFAULT: '#FFE4E0', accent: '#FB7185', dark: '#F43F5E' },
-          sky: { light: '#F0F9FF', DEFAULT: '#E0F2FE', accent: '#38BDF8', dark: '#0284C7' },
-          butter: { light: '#FEFCE8', DEFAULT: '#FEF08A', accent: '#FACC15', dark: '#EAB308' },
-          lilac: { light: '#FAF5FF', DEFAULT: '#F3E8FF', accent: '#C084FC', dark: '#9333EA' },
-          card: { light: '#FFFFFF', dark: '#1E2238' },
-          bg: { light: '#FAF9F6', dark: '#0F1222' },
-        },
       },
       fontSize: {
         // Fluid display sizes for editorial headings

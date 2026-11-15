@@ -12,16 +12,21 @@ import EducationCerts from './components/EducationCerts';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import PrintableCVModal from './components/PrintableCVModal';
+import NotFound from './components/NotFound';
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { ProjectFilterProvider } from './context/ProjectFilterContext';
 import { ToastProvider } from './components/ui/Toast';
 import { useCopy } from './hooks/useCopy';
 
+const isHome = () => ['/', '/index.html'].includes(window.location.pathname.replace(/\/+$/, '/') || '/');
+
 function PortfolioContent() {
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
   const { ui } = useCopy();
   const openCV = () => setIsCVModalOpen(true);
+
+  if (!isHome()) return <NotFound />;
 
   return (
     <div className="relative min-h-screen overflow-x-clip">

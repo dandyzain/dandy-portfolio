@@ -143,16 +143,6 @@
   }
 }
 
-/* ---------------- LEGACY (removed in Phase 7) ---------------- */
-.glass-pastel {
-  background: rgb(var(--c-surface) / 0.8);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgb(var(--c-line));
-}
-.bg-pastel-gradient-1 { background: rgb(var(--c-surface-2)); }
-.bg-pastel-radial { background: transparent; }
-
 /* ---------------- Print: clean A4 CV ----------------
    The CV dialog mounts a .print-only copy directly under <body>.
    When printing, every other top-level node is removed from layout. */

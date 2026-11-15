@@ -55,20 +55,20 @@ export default function CertificateModal({ isOpen, onClose, certificate }) {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <dl className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-ink-2">
             <div className="flex items-center gap-1.5">
-              <dt className="sr-only">Issuer</dt>
+              <dt className="sr-only">{c.issuer}</dt>
               <Building2 size={14} aria-hidden="true" />
               <dd>{cert.issuer}</dd>
             </div>
             {cert.issueDate && (
               <div className="flex items-center gap-1.5">
-                <dt className="sr-only">Date</dt>
+                <dt className="sr-only">{c.date}</dt>
                 <CalendarDays size={14} aria-hidden="true" />
                 <dd>{cert.issueDate}</dd>
               </div>
             )}
             {cert.credentialId && (
               <div className="font-mono text-xs text-muted">
-                <dt className="sr-only">Credential ID</dt>
+                <dt className="sr-only">{c.credentialId}</dt>
                 <dd>ID {cert.credentialId}</dd>
               </div>
             )}

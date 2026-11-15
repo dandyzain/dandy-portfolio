@@ -2,28 +2,48 @@
 
 > **Quality Code, Inspired Design: Shaping the Digital World with Precision and Creativity.**
 
-Portfolio web interaktif dan Curriculum Vitae modern untuk **Dandy Rahmat Zain**, Full Stack & Mobile Developer. Dibangun menggunakan **React.js (Vite)** dan **Tailwind CSS** dengan tema warna pastel kreatif.
+Portfolio web interaktif dan Curriculum Vitae modern untuk **Dandy Rahmat Zain**, Full Stack & Mobile Developer. Dibangun dengan **React 18 (Vite)**, **Tailwind CSS**, dan **Framer Motion**, memakai design system **Signal Editorial**.
 
 ---
 
 ## ✨ Fitur Utama
 
-- 🎨 **Creative Pastel UI/UX**: Skema warna pastel lembut (*Lavender, Soft Mint, Peach Rose, Sky Blue, Butter Cream*) dengan dukungan **Dark Mode & Light Mode**.
-- 💼 **Interactive Career Timeline**: Menampilkan riwayat karier di PT Infrastruktur Telekomunikasi Indonesia (Telkominfra), PT. Bay Pacific Software Group, Citiasia Inc., dan Advertnative Inc.
-- ⚡ **Skills & Tech Stack Meters**: Filter visual untuk Frontend, Backend, Mobile (Flutter & Kotlin Native), serta AI & DevOps tools.
-- 📱 **Filterable Project Showcase**: Galeri proyek bento grid dengan modal detail studi kasus interaktif.
-- 🎓 **Education & Certifications**: Data akademik dari Universitas Catur Insan Cendikia (S1 Teknik Informatika), SMKN 2 Kuningan (RPL), dan 7 lisensi sertifikasi profesional terverifikasi.
-- 📄 **Printable CV & PDF Download**: Fitur cetak CV standar format A4 bersih yang terintegrasi dengan `window.print()` dan unduhan PDF asli.
-- 💬 **Contact & WhatsApp CTA**: Form interaktif dengan efek perayaan animasi *confetti* dan tautan langsung ke WhatsApp dan Email.
+- 🧭 **Editorial hero + proof strip**: satu pernyataan yang jelas, dua CTA, dan angka yang bisa dicek (tahun, proyek, sertifikasi).
+- 💼 **Experience timeline**: tab ARIA vertikal di desktop, accordion di mobile, lengkap dengan tautan ke studi kasus terkait.
+- 🧩 **Skills berbasis bukti**: setiap skill menampilkan jumlah proyek yang memakainya dan langsung memfilter bagian Projects.
+- 📁 **Case studies**: 4 proyek unggulan + arsip dengan filter; dialog studi kasus dengan URL yang bisa dibagikan (`?project=lion`), tombol Back/Esc untuk menutup, dan prev/next.
+- 🎓 **Kredensial**: riwayat pendidikan dan 29 sertifikat yang bisa dicari; viewer PDF dimuat hanya saat dibuka.
+- 📄 **CV**: pratinjau, unduh PDF asli, dan cetak A4 yang bersih.
+- 💬 **Kontak**: form dengan validasi yang menyiapkan draf email, kanal langsung (Email, WhatsApp, LinkedIn).
+- 🌗 **Light/Dark & EN/ID**: tema mengikuti sistem dan tersimpan, tanpa kedipan saat load.
+
+---
+
+## 🎨 Design System — Signal Editorial
+
+Struktur editorial (tipografi besar, banyak ruang, studi kasus) dengan aksen "signal" yang terinspirasi dari pekerjaan NOC/GIS: garis "kabel", grid koordinat, dan label monospace.
+
+| Token | Light | Dark | Kegunaan |
+| --- | --- | --- | --- |
+| `bg` | `#F7F6F2` | `#090D18` | Latar halaman |
+| `ink` | `#0E1220` | `#ECEEF3` | Teks utama, tombol utama |
+| `muted` | `#585F72` | `#9199AD` | Teks sekunder (≥ 4.5:1) |
+| `signal` / `signal-ink` | `#14B8A6` / `#0F766E` | `#2DD4BF` / `#5EEAD4` | Aksen dekoratif / aksen untuk teks |
+| `amber` / `amber-ink` | `#F59E0B` / `#B45309` | `#FBBF24` / `#FCD34D` | Highlight sekunder |
+
+- **Token warna** ada di `src/index.css` (CSS variables, channel RGB) dan dipetakan ke Tailwind di `tailwind.config.js`.
+- **Font** (self-hosted via Fontsource): Space Grotesk (heading), Plus Jakarta Sans (body), JetBrains Mono (metadata).
+- **Motion** ada di `src/lib/motion.js`: durasi `instant 100ms · fast 180ms · base 280ms · slow 450ms · story 800ms`, easing `out` untuk masuk. Aturannya: hanya `transform`/`opacity`, reveal sekali, tanpa loop tak berujung, dan `MotionConfig reducedMotion="user"`.
+- **Komponen dasar** ada di `src/components/ui/`: `Button`, `IconButton`, `Chip`, `Section`, `Reveal`, `Counter`, `Dialog` (aksesibel: focus trap, Esc, focus restore, scroll lock), `Toast`.
+- **Konten** tetap di `src/data/portfolioData.js`. Teks antarmuka baru ada di `src/data/uiCopy.js`, dan metadata proyek (slug, unggulan, logo) di `src/data/projectMeta.js`.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18, Tailwind CSS, Lucide React, Canvas Confetti
+- **Frontend**: React 18, Tailwind CSS, Framer Motion, Lucide React, pdf.js
 - **Build Tool**: Vite 5
-- **Icons**: Lucide Icons
-- **Deployment**: Static SPA ready (Vercel, Netlify, GitHub Pages, GitLab Pages)
+- **Deployment**: Vercel (SPA rewrite + cache headers di `vercel.json`)
 
 ---
 
@@ -44,7 +64,7 @@ Portfolio web interaktif dan Curriculum Vitae modern untuk **Dandy Rahmat Zain**
    ```bash
    npm run dev
    ```
-   Buka peramban di `http://localhost:5173/`.
+   Buka peramban di `http://localhost:3000/`.
 
 4. **Build untuk produksi**:
    ```bash

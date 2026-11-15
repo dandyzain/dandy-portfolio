@@ -12,8 +12,8 @@ function rng(seed) {
 
 function motifFor(p) {
   const tags = p.tags.join(' ');
-  if (/Leaflet|KML|Geolocation|Maps SDK|GIS/i.test(tags)) return 'map';
   if (/Telemetry/i.test(tags)) return 'signal';
+  if (/Leaflet|KML|Geolocation|Maps SDK|GIS/i.test(tags)) return 'map';
   if (/DAG|xyflow|RAG|pgvector|Gemini|OpenAI|Vision AI|AI SDK/i.test(tags) || p.category === 'AI & Web') return 'graph';
   if (p.category === 'Mobile') return 'device';
   return 'blocks';
