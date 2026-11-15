@@ -8,7 +8,7 @@ import { useCopy } from '../hooks/useCopy';
 import { useProjects } from '../hooks/useProjects';
 import { openProject, projectPath } from '../lib/projectUrl';
 import { cn } from '../lib/cn';
-import { duration, ease, spring } from '../lib/motion';
+import { drawLine, duration, ease, pop, rowRise, spring, stagger } from '../lib/motion';
 import Section from './ui/Section';
 import Chip from './ui/Chip';
 
@@ -55,23 +55,23 @@ function ExperienceDetail({ exp, related, language, ui, compact = false }) {
       <p className={cn('max-w-prose leading-relaxed text-ink-2', compact ? 'mt-4' : 'mt-6')}>{exp.description[language]}</p>
 
       <h4 className="eyebrow mb-3 mt-8">{ui.contributions}</h4>
-      <ul className="space-y-3">
+      <motion.ul initial="hidden" animate="visible" variants={stagger(0.07, 0.1)} className="space-y-3">
         {exp.highlights[language].map((h) => (
-          <li key={h} className="grid grid-cols-[1rem_1fr] gap-3 text-[0.95rem] leading-relaxed text-ink">
-            <span className="mt-[0.6rem] h-px w-3 bg-signal" aria-hidden="true" />
+          <motion.li key={h} variants={rowRise} className="grid grid-cols-[1rem_1fr] gap-3 text-[0.95rem] leading-relaxed text-ink">
+            <motion.span variants={drawLine} className="mt-[0.6rem] h-px w-3 origin-left bg-signal" aria-hidden="true" />
             {h}
-          </li>
+          </motion.li>
         ))}
-      </ul>
+      </motion.ul>
 
       <h4 className="eyebrow mb-3 mt-8">{ui.stack}</h4>
-      <ul className="flex flex-wrap gap-2">
+      <motion.ul initial="hidden" animate="visible" variants={stagger(0.035, 0.35)} className="flex flex-wrap gap-2">
         {exp.techStack.map((tech) => (
-          <li key={tech}>
+          <motion.li key={tech} variants={pop}>
             <Chip mono>{tech}</Chip>
-          </li>
+          </motion.li>
         ))}
-      </ul>
+      </motion.ul>
 
       {related.length > 0 && (
         <>

@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { AnimatePresence, LayoutGroup, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight, ExternalLink, X } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import { sectionIndex } from '../data/sections';
@@ -11,11 +11,11 @@ import { useProjectFilter } from '../context/ProjectFilterContext';
 import { closeProject, getProjectSlug, onProjectChange, openProject, projectPath } from '../lib/projectUrl';
 import { track } from '../lib/analytics';
 import { cn } from '../lib/cn';
-import { duration, ease, spring } from '../lib/motion';
+import { drawLine, duration, ease, pop, rowRise, stagger, viewportOnce } from '../lib/motion';
+import { useSpotlight } from '../hooks/usePointerFx';
 import Section from './ui/Section';
 import Chip from './ui/Chip';
 import Button from './ui/Button';
-import Reveal from './ui/Reveal';
 import ProjectCover from './ProjectCover';
 import CaseStudyDialog from './CaseStudyDialog';
 
@@ -34,39 +34,69 @@ function caseLink(project) {
   };
 }
 
+// Cover slides in from its side and settles; text rises line by line.
+const coverIn = (flip) => ({
+  hidden: { opacity: 0, x: flip ? 32 : -32, scale: 0.97 },
+  visible: { opacity: 1, x: 0, scale: 1, transition: { duration: duration.story, ease: ease.out } },
+});
+
 function FeaturedProject({ project, index, flip, ui, language }) {
+  const ref = useRef(null);
+  const reduce = useReducedMotion();
+  // Parallax: the cover image drifts inside its frame while the row scrolls by.
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const drift = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [-22, 22]);
+
   return (
-    <Reveal as="article" className="group grid items-center gap-6 lg:grid-cols-12 lg:gap-12">
-      <a
+    <motion.article
+      ref={ref}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce}
+      variants={stagger(0.07)}
+      className="group grid items-center gap-6 lg:grid-cols-12 lg:gap-12"
+    >
+      <motion.a
+        variants={coverIn(flip)}
         {...caseLink(project)}
         className={cn('block overflow-hidden rounded-3xl border border-line shadow-card transition-shadow duration-base hover:shadow-lift lg:col-span-7', flip && 'lg:order-2')}
         aria-label={`${ui.projects.readCase}: ${shortTitle(project.title)}`}
         tabIndex={-1}
       >
-        <ProjectCover project={project} className="aspect-[16/10]" sizes="(min-width: 1024px) 40rem, 100vw" />
-      </a>
-      <div className={cn('lg:col-span-5', flip && 'lg:order-1')}>
-        <p className="eyebrow flex items-center gap-3">
+        <motion.div style={{ y: drift, scale: reduce ? 1 : 1.08 }}>
+          <ProjectCover project={project} className="aspect-[16/10]" sizes="(min-width: 1024px) 40rem, 100vw" />
+        </motion.div>
+      </motion.a>
+      <motion.div variants={stagger(0.06, 0.15)} className={cn('lg:col-span-5', flip && 'lg:order-1')}>
+        <motion.p variants={rowRise} className="eyebrow flex items-center gap-3">
           <span className="text-signal-ink">F/{String(index + 1).padStart(2, '0')}</span>
-          <span aria-hidden="true" className="h-px w-6 bg-line" />
+          <motion.span variants={drawLine} aria-hidden="true" className="h-px w-6 origin-left bg-signal/60" />
           {project.category}
-        </p>
-        <h3 className="mt-3 text-display-md font-semibold">
+        </motion.p>
+        <motion.h3 variants={rowRise} className="mt-3 text-display-md font-semibold">
           <a {...caseLink(project)} className="link-underline">
             {shortTitle(project.title)}
           </a>
-        </h3>
-        {subtitleOf(project.title) && <p className="mt-2 font-medium text-ink-2">{subtitleOf(project.title)}</p>}
-        <p className="mt-4 line-clamp-4 leading-relaxed text-ink-2">{project.description[language]}</p>
-        <p className="mt-4 text-sm text-muted">{clientLabel(project, language)}</p>
-        <ul className="mt-5 flex flex-wrap gap-1.5">
+        </motion.h3>
+        {subtitleOf(project.title) && (
+          <motion.p variants={rowRise} className="mt-2 font-medium text-ink-2">
+            {subtitleOf(project.title)}
+          </motion.p>
+        )}
+        <motion.p variants={rowRise} className="mt-4 line-clamp-4 leading-relaxed text-ink-2">
+          {project.description[language]}
+        </motion.p>
+        <motion.p variants={rowRise} className="mt-4 text-sm text-muted">
+          {clientLabel(project, language)}
+        </motion.p>
+        <motion.ul variants={stagger(0.04)} className="mt-5 flex flex-wrap gap-1.5">
           {project.tags.slice(0, 5).map((tag) => (
-            <li key={tag}>
+            <motion.li key={tag} variants={pop}>
               <Chip mono>{tag}</Chip>
-            </li>
+            </motion.li>
           ))}
-        </ul>
-        <div className="mt-7 flex flex-wrap items-center gap-3">
+        </motion.ul>
+        <motion.div variants={rowRise} className="mt-7 flex flex-wrap items-center gap-3">
           <Button {...caseLink(project)}>
             {ui.projects.readCase}
             <ArrowUpRight size={16} aria-hidden="true" className="transition-transform duration-fast group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
@@ -78,25 +108,29 @@ function FeaturedProject({ project, index, flip, ui, language }) {
               <span className="sr-only">{ui.common.opensInNewTab}</span>
             </Button>
           )}
-        </div>
-      </div>
-    </Reveal>
+        </motion.div>
+      </motion.div>
+    </motion.article>
   );
 }
 
-function ProjectCard({ project, ui, language }) {
+function ProjectCard({ project, ui, language, index = 0 }) {
+  const spotlight = useSpotlight();
   return (
     <motion.li
       layout="position"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0, transition: { duration: duration.base, ease: ease.out } }}
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0, transition: { duration: duration.slow, ease: ease.out, delay: (index % 3) * 0.07 } }}
+      viewport={viewportOnce}
       exit={{ opacity: 0, transition: { duration: duration.fast } }}
       className="list-none"
     >
       <a
         {...caseLink(project)}
-        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-[transform,box-shadow,border-color] duration-base ease-out hover:-translate-y-1 hover:border-ink/25 hover:shadow-lift"
+        {...spotlight}
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-[transform,box-shadow,border-color] duration-base ease-out hover:-translate-y-1 hover:border-ink/25 hover:shadow-lift"
       >
+        <span className="spotlight z-10" aria-hidden="true" />
         <ProjectCover project={project} className="aspect-[16/8] border-b border-line" showLabel={false} sizes="(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 100vw" />
         <div className="flex flex-1 flex-col p-5">
           <p className="font-mono text-[0.68rem] uppercase tracking-wider text-muted">{project.category}</p>
@@ -178,7 +212,7 @@ export default function Projects() {
       <div className="mb-12 flex flex-col gap-4 border-y border-line py-4 sm:flex-row sm:items-center sm:justify-between">
         <div role="group" aria-label={ui.projects.filterLabel} className="flex flex-wrap gap-2">
           {t.projects.categories.map((label, i) => (
-            <Chip key={label} as="button" selected={category === i} onClick={() => setCategory(i)}>
+            <Chip key={label} as="button" pillId="project-filter" selected={category === i} onClick={() => setCategory(i)}>
               {i === 0 ? ui.projects.all : label}
             </Chip>
           ))}
@@ -223,8 +257,8 @@ export default function Projects() {
         <LayoutGroup>
           <motion.ul layout className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <AnimatePresence initial={false} mode="popLayout">
-              {gridItems.map((p) => (
-                <ProjectCard key={p.id} project={p} ui={ui} language={language} />
+              {gridItems.map((p, i) => (
+                <ProjectCard key={p.id} project={p} ui={ui} language={language} index={i} />
               ))}
             </AnimatePresence>
           </motion.ul>
@@ -261,8 +295,8 @@ export default function Projects() {
           </div>
           {showAcademic && (
             <ul id="academic-projects" className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {academic.map((p) => (
-                <ProjectCard key={p.id} project={p} ui={ui} language={language} />
+              {academic.map((p, i) => (
+                <ProjectCard key={p.id} project={p} ui={ui} language={language} index={i} />
               ))}
             </ul>
           )}

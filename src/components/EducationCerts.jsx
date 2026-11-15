@@ -5,7 +5,7 @@ import { portfolioData } from '../data/portfolioData';
 import { sectionIndex } from '../data/sections';
 import { fmt } from '../data/uiCopy';
 import { useCopy } from '../hooks/useCopy';
-import { reveal, stagger, viewportOnce } from '../lib/motion';
+import { reveal, rowRise, stagger, viewportOnce } from '../lib/motion';
 import Section from './ui/Section';
 import Chip from './ui/Chip';
 import Button from './ui/Button';
@@ -88,7 +88,7 @@ export default function EducationCerts() {
           <h3 className="eyebrow mb-4">{c.certifications}</h3>
           <div role="group" aria-label={c.certifications} className="flex flex-wrap gap-2">
             {CATEGORY_IDS.map((id) => (
-              <Chip key={id} as="button" selected={category === id} onClick={() => setCategory(id)}>
+              <Chip key={id} as="button" pillId="cert-filter" selected={category === id} onClick={() => setCategory(id)}>
                 {categoryLabel(id)}
               </Chip>
             ))}
@@ -128,9 +128,15 @@ export default function EducationCerts() {
       {filtered.length === 0 ? (
         <p className="rounded-2xl border border-dashed border-line py-14 text-center text-muted">{c.noResults}</p>
       ) : (
-        <ul className="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-surface">
+        <motion.ul
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={stagger(0.035)}
+          className="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-surface"
+        >
           {visible.map((cert) => (
-            <li key={cert.id} className="group grid gap-3 px-5 py-4 transition-colors hover:bg-surface-2/60 sm:grid-cols-12 sm:items-center sm:gap-6">
+            <motion.li key={cert.id} variants={rowRise} className="group grid gap-3 px-5 py-4 transition-colors hover:bg-surface-2/60 sm:grid-cols-12 sm:items-center sm:gap-6">
               <div className="min-w-0 sm:col-span-7">
                 <div className="flex flex-wrap items-center gap-2">
                   <h4 className="font-sans text-[0.95rem] font-semibold leading-snug">{cert.title}</h4>
@@ -160,9 +166,9 @@ export default function EducationCerts() {
                   </Button>
                 )}
               </div>
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
       )}
 
       {!isFiltering && filtered.length > PREVIEW && (

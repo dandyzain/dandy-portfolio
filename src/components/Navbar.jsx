@@ -10,6 +10,7 @@ import { useActiveSection, scrollToSection } from '../hooks/useActiveSection';
 import { cn } from '../lib/cn';
 import { spring } from '../lib/motion';
 import Button from './ui/Button';
+import Magnetic from './ui/Magnetic';
 import IconButton from './ui/IconButton';
 import Dialog from './ui/Dialog';
 
@@ -140,10 +141,12 @@ export default function Navbar({ onOpenCVModal }) {
             <FileText size={15} aria-hidden="true" />
             {ui.nav.cv}
           </Button>
-          <Button size="sm" href="#contact" onClick={(e) => go(e, 'contact')} className="hidden md:inline-flex">
-            {ui.nav.cta}
-            <ArrowUpRight size={15} aria-hidden="true" className="transition-transform duration-fast group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
-          </Button>
+          <Magnetic className="hidden md:inline-flex" max={5}>
+            <Button size="sm" href="#contact" onClick={(e) => go(e, 'contact')}>
+              {ui.nav.cta}
+              <ArrowUpRight size={15} aria-hidden="true" className="transition-transform duration-fast group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+            </Button>
+          </Magnetic>
           <IconButton
             label={ui.common.menuOpen}
             onClick={() => setMenuOpen(true)}

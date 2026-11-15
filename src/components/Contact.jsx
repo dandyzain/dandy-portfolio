@@ -1,10 +1,10 @@
 import React, { useId, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight, Check, ChevronDown, Copy, FileText, Linkedin, Mail, MapPin, MessageCircle, Send } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Copy, FileText, Linkedin, Mail, MapPin, MessageCircle, Send } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import { sectionIndex, whatsappLink } from '../data/sections';
 import { useCopy } from '../hooks/useCopy';
-import { duration, ease } from '../lib/motion';
+import { duration, ease, rowRise, stagger, viewportOnce } from '../lib/motion';
 import { cn } from '../lib/cn';
 import Section from './ui/Section';
 import Button from './ui/Button';
@@ -149,9 +149,15 @@ export default function Contact({ onOpenCVModal }) {
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-5">
           <h3 className="eyebrow mb-3">{c.channels}</h3>
-          <ul className="divide-y divide-line border-y border-line">
+          <motion.ul
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={stagger(0.07, 0.1)}
+            className="divide-y divide-line border-y border-line"
+          >
             {channels.map(({ label, value, href, icon: Icon, copy }) => (
-              <li key={label} className="flex items-center gap-3 py-4">
+              <motion.li key={label} variants={rowRise} className="flex items-center gap-3 py-4">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-line bg-surface text-ink-2">
                   <Icon size={18} aria-hidden="true" />
                 </span>
@@ -177,9 +183,9 @@ export default function Contact({ onOpenCVModal }) {
                     <Copy size={16} aria-hidden="true" />
                   </button>
                 )}
-              </li>
+              </motion.li>
             ))}
-            <li className="flex items-center gap-3 py-4">
+            <motion.li variants={rowRise} className="flex items-center gap-3 py-4">
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-line bg-surface text-ink-2">
                 <MapPin size={18} aria-hidden="true" />
               </span>
@@ -187,8 +193,8 @@ export default function Contact({ onOpenCVModal }) {
                 <span className="block font-mono text-[0.68rem] uppercase tracking-wider text-muted">{c.location}</span>
                 <span className="font-medium text-ink">{c.timezone}</span>
               </div>
-            </li>
-          </ul>
+            </motion.li>
+          </motion.ul>
 
           <div className="mt-8 rounded-2xl border border-line bg-surface p-5">
             <p className="font-display text-lg font-semibold">{c.cvTitle}</p>
@@ -212,9 +218,24 @@ export default function Contact({ onOpenCVModal }) {
                   role="status"
                   className="py-6"
                 >
-                  <span className="grid h-12 w-12 place-items-center rounded-full bg-signal/15 text-signal-ink">
-                    <Check size={22} aria-hidden="true" />
-                  </span>
+                  <motion.span
+                    initial={{ scale: 0.4, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1, transition: { type: 'spring', stiffness: 380, damping: 18 } }}
+                    className="grid h-12 w-12 place-items-center rounded-full bg-signal/15 text-signal-ink"
+                  >
+                    {/* Checkmark draws itself */}
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <motion.path
+                        d="M5 12.5l4.5 4.5L19 7.5"
+                        stroke="currentColor"
+                        strokeWidth="2.4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1, transition: { duration: duration.slow, ease: ease.out, delay: 0.15 } }}
+                      />
+                    </svg>
+                  </motion.span>
                   <h3 className="mt-5 text-2xl font-semibold">{status === 'done' ? c.doneTitle : c.fallbackTitle}</h3>
                   <p className="mt-2 text-ink-2">{status === 'done' ? c.doneBody : c.fallbackBody}</p>
                   <div className="mt-4 flex flex-wrap items-center gap-2">

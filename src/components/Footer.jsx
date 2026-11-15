@@ -4,6 +4,7 @@ import { portfolioData } from '../data/portfolioData';
 import { SECTIONS } from '../data/sections';
 import { useCopy } from '../hooks/useCopy';
 import { scrollToSection } from '../hooks/useActiveSection';
+import SplitText from './ui/SplitText';
 
 export default function Footer() {
   const { ui, t } = useCopy();
@@ -20,7 +21,7 @@ export default function Footer() {
       <div className="container-page">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-6">
-            <p className="font-display text-display-md font-semibold">{personal.fullName}</p>
+            <SplitText as="p" trigger="view" text={personal.fullName} step={0.08} className="font-display text-display-md font-semibold" />
             <p className="mt-3 max-w-md text-sm leading-relaxed text-ink-2">{t.footer.tagline}</p>
           </div>
 

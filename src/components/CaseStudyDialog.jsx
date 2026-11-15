@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { duration, ease, pop, rowRise, stagger } from '../lib/motion';
 import { ArrowLeft, ArrowRight, ExternalLink, Github, Gitlab, Link2, Lock } from 'lucide-react';
 import { fmt } from '../data/uiCopy';
 import { caseStudies } from '../data/caseStudies';
@@ -14,10 +16,10 @@ import { useToast } from './ui/Toast';
 
 function Block({ title, children }) {
   return (
-    <section className="mt-10 first:mt-0">
+    <motion.section variants={rowRise} className="mt-10 first:mt-0">
       <h3 className="eyebrow mb-3">{title}</h3>
       {children}
-    </section>
+    </motion.section>
   );
 }
 
@@ -102,27 +104,35 @@ export default function CaseStudyDialog({ project, list, onClose, onNavigate }) 
         <article key={project.id}>
           {heroShot ? (
             <figure className="border-b border-line bg-surface-2">
-              <div className="aspect-[16/10] max-h-[28rem] w-full overflow-hidden">
+              <motion.div
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1, transition: { duration: duration.story, ease: ease.out, delay: 0.1 } }}
+                className="aspect-[16/10] max-h-[28rem] w-full overflow-hidden"
+              >
                 <Screenshot shot={heroShot} alt={heroShot.alt[language]} sizes="(min-width: 1024px) 64rem, 100vw" eager />
-              </div>
+              </motion.div>
             </figure>
           ) : (
             <ProjectCover project={project} className="h-44 border-b border-line sm:h-60" showLabel={false} />
           )}
 
           <div className="grid gap-10 px-5 py-8 sm:px-8 lg:grid-cols-12">
-            <div className="lg:col-span-8">
-              {subtitleOf(project.title) && <p className="mb-8 font-display text-xl font-medium text-ink-2 sm:text-2xl">{subtitleOf(project.title)}</p>}
+            <motion.div initial="hidden" animate="visible" variants={stagger(0.08, 0.2)} className="lg:col-span-8">
+              {subtitleOf(project.title) && (
+                <motion.p variants={rowRise} className="mb-8 font-display text-xl font-medium text-ink-2 sm:text-2xl">
+                  {subtitleOf(project.title)}
+                </motion.p>
+              )}
 
               {study?.outcomes?.length > 0 && (
-                <dl className="mb-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+                <motion.dl variants={stagger(0.08)} className="mb-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
                   {study.outcomes.map((o) => (
-                    <div key={o.label.en} className="flex flex-col bg-surface p-5">
+                    <motion.div key={o.label.en} variants={pop} className="flex flex-col bg-surface p-5">
                       <dt className="order-2 mt-1 text-sm text-ink-2">{o.label[language]}</dt>
                       <dd className="font-display text-2xl font-semibold tracking-tight text-signal-ink">{o.value}</dd>
-                    </div>
+                    </motion.div>
                   ))}
-                </dl>
+                </motion.dl>
               )}
 
               <Block title={study ? p.problem : p.context}>
@@ -168,9 +178,13 @@ export default function CaseStudyDialog({ project, list, onClose, onNavigate }) 
                 </Block>
               )}
 
-            </div>
+            </motion.div>
 
-            <aside className="space-y-6 lg:col-span-4 lg:border-l lg:border-line lg:pl-8">
+            <motion.aside
+              initial={{ opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0, transition: { duration: duration.slow, ease: ease.out, delay: 0.3 } }}
+              className="space-y-6 lg:col-span-4 lg:border-l lg:border-line lg:pl-8"
+            >
               <div>
                 <h3 className="eyebrow mb-1.5">{p.role}</h3>
                 <p className="font-medium">{project.role[language]}</p>
@@ -216,7 +230,7 @@ export default function CaseStudyDialog({ project, list, onClose, onNavigate }) 
                   </div>
                 </div>
               )}
-            </aside>
+            </motion.aside>
           </div>
         </article>
       )}

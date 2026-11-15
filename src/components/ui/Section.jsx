@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '../../lib/cn';
-import { reveal, viewportOnce } from '../../lib/motion';
+import { drawLine, reveal, viewportOnce } from '../../lib/motion';
+import SplitText from './SplitText';
 
 /**
  * Editorial section shell: mono index + eyebrow, large heading, optional intro,
@@ -23,12 +24,16 @@ export default function Section({ id, index, eyebrow, title, intro, aside, class
           <div className="lg:col-span-8">
             <p className="eyebrow mb-4 flex items-center gap-3">
               {index && <span className="text-signal-ink">{index}</span>}
-              <span aria-hidden="true" className="h-px w-8 bg-line" />
+              <motion.span aria-hidden="true" variants={drawLine} className="h-px w-8 origin-left bg-signal/60" />
               <span>{eyebrow}</span>
             </p>
-            <h2 id={headingId} className="text-display-lg font-semibold">
-              {title}
-            </h2>
+            {typeof title === 'string' ? (
+              <SplitText as="h2" id={headingId} text={title} className="text-display-lg font-semibold" />
+            ) : (
+              <h2 id={headingId} className="text-display-lg font-semibold">
+                {title}
+              </h2>
+            )}
             {intro && <p className="mt-5 max-w-prose text-base leading-relaxed text-ink-2 sm:text-lg">{intro}</p>}
           </div>
           {aside && <div className="lg:col-span-4 lg:justify-self-end">{aside}</div>}

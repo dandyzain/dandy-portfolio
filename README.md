@@ -35,7 +35,8 @@ Struktur editorial (tipografi besar, banyak ruang, studi kasus) dengan aksen "si
 
 - **Token warna** ada di `src/index.css` (CSS variables, channel RGB) dan dipetakan ke Tailwind di `tailwind.config.js`.
 - **Font** (self-hosted via Fontsource): Space Grotesk (heading), Plus Jakarta Sans (body), JetBrains Mono (metadata).
-- **Motion** ada di `src/lib/motion.js`: durasi `instant 100ms · fast 180ms · base 280ms · slow 450ms · story 800ms`, easing `out` untuk masuk. Aturannya: hanya `transform`/`opacity`, reveal sekali, tanpa loop tak berujung, dan `MotionConfig reducedMotion="user"`.
+- **Motion** ada di `src/lib/motion.js`: durasi `instant 100ms · fast 180ms · base 280ms · slow 450ms · story 800ms`, easing `out` untuk masuk. Aturannya: hanya `transform`/`opacity` (plus stroke SVG untuk "kabel"), reveal sekali, satu-satunya animasi berulang adalah denyut sinyal di hero dan titik status (berhenti saat di luar layar), efek kursor hanya untuk mouse/trackpad, dan `MotionConfig reducedMotion="user"`.
+  - Primitif: `SplitText` (judul muncul per kata), `Magnetic` (tombol tertarik ke kursor), `useTilt` & `useSpotlight` di `src/hooks/usePointerFx.js`, `Chip pillId` (latar filter yang bergeser).
 - **Komponen dasar** ada di `src/components/ui/`: `Button`, `IconButton`, `Chip`, `Section`, `Reveal`, `Counter`, `Dialog` (aksesibel: focus trap, Esc, focus restore, scroll lock), `Toast`.
 - **Konten** tetap di `src/data/portfolioData.js`. Teks antarmuka baru ada di `src/data/uiCopy.js`, dan metadata proyek (slug, unggulan, logo) di `src/data/projectMeta.js`.
 

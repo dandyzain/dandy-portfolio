@@ -1,5 +1,10 @@
 // Motion tokens — the single source for durations, easings and shared variants.
-// Rule: animate transform/opacity only; one-shot reveals; no infinite loops.
+// Rules:
+// - animate transform/opacity only (plus SVG stroke offsets for the "cable");
+// - scroll reveals play once;
+// - the only repeating motion is the hero's ambient signal pulse and the
+//   status dot, both paused off-screen and disabled for reduced motion;
+// - pointer effects (tilt, magnetic, spotlight) only on fine pointers.
 
 export const duration = {
   instant: 0.1,
@@ -41,3 +46,31 @@ export const dialogMotion = {
     exit: { opacity: 0, y: 12, scale: 0.98, transition: { duration: duration.fast, ease: ease.inOut } },
   },
 };
+
+// Word-by-word masked rise for headings (see ui/SplitText).
+export const wordRise = {
+  hidden: { y: '105%' },
+  visible: { y: '0%', transition: { duration: duration.story, ease: ease.out } },
+};
+
+// Rise used for list rows inside a staggered parent.
+export const rowRise = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0, transition: { duration: duration.base + 0.06, ease: ease.out } },
+};
+
+// Small spring "pop" for badges and counts.
+export const pop = {
+  hidden: { opacity: 0, scale: 0.6 },
+  visible: { opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 420, damping: 22 } },
+};
+
+// Horizontal rule that draws from the left.
+export const drawLine = {
+  hidden: { scaleX: 0 },
+  visible: { scaleX: 1, transition: { duration: duration.story, ease: ease.out } },
+};
+
+/** True on devices with a precise, hover-capable pointer (mouse/trackpad). */
+export const finePointer = () =>
+  typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
