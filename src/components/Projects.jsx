@@ -4,11 +4,12 @@ import { ArrowUpRight, ExternalLink, X } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import { sectionIndex } from '../data/sections';
 import { fmt } from '../data/uiCopy';
-import { shortTitle, subtitleOf } from '../data/projectMeta';
+import { clientLabel, shortTitle, subtitleOf } from '../data/projectMeta';
 import { useCopy } from '../hooks/useCopy';
 import { useProjects } from '../hooks/useProjects';
 import { useProjectFilter } from '../context/ProjectFilterContext';
-import { closeProject, getProjectSlug, onProjectChange, openProject } from '../lib/projectUrl';
+import { closeProject, getProjectSlug, onProjectChange, openProject, projectPath } from '../lib/projectUrl';
+import { track } from '../lib/analytics';
 import { cn } from '../lib/cn';
 import { duration, ease, spring } from '../lib/motion';
 import Section from './ui/Section';
@@ -24,7 +25,7 @@ const CATEGORY_VALUES = portfolioData.translations.en.projects.categories;
 
 function caseLink(project) {
   return {
-    href: `?project=${project.slug}`,
+    href: projectPath(project.slug),
     onClick: (e) => {
       if (e.metaKey || e.ctrlKey || e.shiftKey) return; // allow open-in-new-tab
       e.preventDefault();
@@ -42,7 +43,7 @@ function FeaturedProject({ project, index, flip, ui, language }) {
         aria-label={`${ui.projects.readCase}: ${shortTitle(project.title)}`}
         tabIndex={-1}
       >
-        <ProjectCover project={project} className="aspect-[16/10]" />
+        <ProjectCover project={project} className="aspect-[16/10]" sizes="(min-width: 1024px) 40rem, 100vw" />
       </a>
       <div className={cn('lg:col-span-5', flip && 'lg:order-1')}>
         <p className="eyebrow flex items-center gap-3">
@@ -57,7 +58,7 @@ function FeaturedProject({ project, index, flip, ui, language }) {
         </h3>
         {subtitleOf(project.title) && <p className="mt-2 font-medium text-ink-2">{subtitleOf(project.title)}</p>}
         <p className="mt-4 line-clamp-4 leading-relaxed text-ink-2">{project.description[language]}</p>
-        <p className="mt-4 text-sm text-muted">{project.client}</p>
+        <p className="mt-4 text-sm text-muted">{clientLabel(project, language)}</p>
         <ul className="mt-5 flex flex-wrap gap-1.5">
           {project.tags.slice(0, 5).map((tag) => (
             <li key={tag}>
@@ -96,13 +97,13 @@ function ProjectCard({ project, ui, language }) {
         {...caseLink(project)}
         className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-[transform,box-shadow,border-color] duration-base ease-out hover:-translate-y-1 hover:border-ink/25 hover:shadow-lift"
       >
-        <ProjectCover project={project} className="aspect-[16/8] border-b border-line" showLabel={false} />
+        <ProjectCover project={project} className="aspect-[16/8] border-b border-line" showLabel={false} sizes="(min-width: 1024px) 24rem, (min-width: 640px) 50vw, 100vw" />
         <div className="flex flex-1 flex-col p-5">
           <p className="font-mono text-[0.68rem] uppercase tracking-wider text-muted">{project.category}</p>
           <h3 className="mt-1.5 text-lg font-semibold leading-snug">{shortTitle(project.title)}</h3>
           <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2">{project.description[language]}</p>
           <div className="mt-auto flex items-center justify-between gap-3 pt-5">
-            <span className="truncate text-xs text-muted">{project.client}</span>
+            <span className="truncate text-xs text-muted">{clientLabel(project, language)}</span>
             <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-signal-ink">
               <span className="sr-only">{ui.projects.readCase}</span>
               <ArrowUpRight size={16} aria-hidden="true" className="transition-transform duration-fast group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -120,13 +121,17 @@ export default function Projects() {
   const { skill, setSkill } = useProjectFilter();
   const [category, setCategory] = useState(0);
   const [expanded, setExpanded] = useState(false);
+  const [showAcademic, setShowAcademic] = useState(false);
   const [slug, setSlug] = useState(getProjectSlug);
 
   useEffect(() => onProjectChange(setSlug), []);
 
   const featured = useMemo(() => projects.filter((p) => p.featured).sort((a, b) => a.featured - b.featured), [projects]);
-  const archive = useMemo(() => projects.filter((p) => !p.featured), [projects]);
-  const ordered = useMemo(() => [...featured, ...archive], [featured, archive]);
+  // Professional & personal work first; coursework/exam/concept projects are
+  // grouped separately below so they don't dilute the main archive.
+  const archive = useMemo(() => projects.filter((p) => !p.featured && !p.academic), [projects]);
+  const academic = useMemo(() => projects.filter((p) => p.academic), [projects]);
+  const ordered = useMemo(() => [...featured, ...archive, ...academic], [featured, archive, academic]);
 
   const isFiltering = category !== 0 || !!skill;
   const filtered = useMemo(() => {
@@ -143,6 +148,13 @@ export default function Projects() {
   }, [skill]);
 
   const active = slug ? ordered.find((p) => p.slug === slug) || null : null;
+
+  // Keep the tab title in sync and record which case studies get read.
+  useEffect(() => {
+    const base = 'Dandy Rahmat Zain — Full Stack & Mobile Developer';
+    document.title = active ? `${shortTitle(active.title)} — Case study · Dandy Rahmat Zain` : base;
+    if (active) track('case_study_open', { project: active.slug });
+  }, [active]);
   const navList = isFiltering && active && filtered.some((p) => p.id === active.id) ? filtered : ordered;
 
   const gridItems = isFiltering ? filtered : expanded ? archive : archive.slice(0, ARCHIVE_PREVIEW);
@@ -224,6 +236,36 @@ export default function Projects() {
           <Button variant="secondary" onClick={() => setExpanded((v) => !v)} aria-expanded={expanded}>
             {expanded ? ui.projects.showLess : fmt(ui.projects.showMore, { n: archive.length })}
           </Button>
+        </div>
+      )}
+
+      {!isFiltering && academic.length > 0 && (
+        <div className="mt-20 border-t border-line pt-10">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-prose">
+              <h3 className="eyebrow flex items-center gap-3">
+                <span aria-hidden="true" className="h-px w-8 bg-line" />
+                {ui.projects.academicGroup}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-2">{ui.projects.academicIntro}</p>
+            </div>
+            <Button
+              variant="ghost"
+              onClick={() => setShowAcademic((v) => !v)}
+              aria-expanded={showAcademic}
+              aria-controls="academic-projects"
+              className="shrink-0 self-start sm:self-auto"
+            >
+              {showAcademic ? ui.projects.hideAcademic : fmt(ui.projects.showAcademic, { n: academic.length })}
+            </Button>
+          </div>
+          {showAcademic && (
+            <ul id="academic-projects" className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {academic.map((p) => (
+                <ProjectCard key={p.id} project={p} ui={ui} language={language} />
+              ))}
+            </ul>
+          )}
         </div>
       )}
 

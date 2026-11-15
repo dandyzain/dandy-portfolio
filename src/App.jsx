@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MotionConfig } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import SectionRail from './components/SectionRail';
 import MobileContactBar from './components/MobileContactBar';
@@ -9,6 +10,7 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import EducationCerts from './components/EducationCerts';
+import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import PrintableCVModal from './components/PrintableCVModal';
@@ -18,15 +20,26 @@ import { ThemeProvider } from './context/ThemeContext';
 import { ProjectFilterProvider } from './context/ProjectFilterContext';
 import { ToastProvider } from './components/ui/Toast';
 import { useCopy } from './hooks/useCopy';
+import { allProjects } from './hooks/useProjects';
+import { parseRoute } from './lib/projectUrl';
+import { track } from './lib/analytics';
 
-const isHome = () => ['/', '/index.html'].includes(window.location.pathname.replace(/\/+$/, '/') || '/');
+// Known routes: /, /id/, /work/<slug>, /id/work/<slug> (with a real slug).
+const isKnownRoute = () => {
+  const route = parseRoute();
+  if (!route) return false;
+  return !route.slug || allProjects.some((p) => p.slug === route.slug);
+};
 
 function PortfolioContent() {
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
   const { ui } = useCopy();
-  const openCV = () => setIsCVModalOpen(true);
+  const openCV = () => {
+    setIsCVModalOpen(true);
+    track('cv_open');
+  };
 
-  if (!isHome()) return <NotFound />;
+  if (!isKnownRoute()) return <NotFound />;
 
   return (
     <div className="relative min-h-screen overflow-x-clip">
@@ -43,6 +56,7 @@ function PortfolioContent() {
         <Experience />
         <Skills />
         <Projects />
+        <Testimonials />
         <EducationCerts />
         <Contact onOpenCVModal={openCV} />
       </main>
@@ -63,6 +77,7 @@ export default function App() {
           <ToastProvider>
             <ProjectFilterProvider>
               <PortfolioContent />
+              <Analytics />
             </ProjectFilterProvider>
           </ToastProvider>
         </LanguageProvider>

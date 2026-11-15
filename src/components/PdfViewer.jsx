@@ -15,7 +15,7 @@ import {
 
 // Configure the worker via Vite asset URL or fallback
 if (typeof window !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker || '/pdf.worker.min.mjs';
+  pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 }
 
 export default function PdfViewer({ fileUrl, title, language = 'id' }) {

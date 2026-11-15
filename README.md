@@ -11,10 +11,12 @@ Portfolio web interaktif dan Curriculum Vitae modern untuk **Dandy Rahmat Zain**
 - 🧭 **Editorial hero + proof strip**: satu pernyataan yang jelas, dua CTA, dan angka yang bisa dicek (tahun, proyek, sertifikasi).
 - 💼 **Experience timeline**: tab ARIA vertikal di desktop, accordion di mobile, lengkap dengan tautan ke studi kasus terkait.
 - 🧩 **Skills berbasis bukti**: setiap skill menampilkan jumlah proyek yang memakainya dan langsung memfilter bagian Projects.
-- 📁 **Case studies**: 4 proyek unggulan + arsip dengan filter; dialog studi kasus dengan URL yang bisa dibagikan (`?project=lion`), tombol Back/Esc untuk menutup, dan prev/next.
+- 📁 **Case studies**: 4 proyek unggulan dengan struktur Masalah → Yang dibangun → Keputusan teknis → Hasil, screenshot asli untuk proyek yang punya demo, arsip dengan filter, dan grup terpisah untuk proyek akademik. Setiap studi kasus punya URL sendiri (`/work/lion`, `/id/work/lion`) dengan judul dan gambar share sendiri.
 - 🎓 **Kredensial**: riwayat pendidikan dan 29 sertifikat yang bisa dicari; viewer PDF dimuat hanya saat dibuka.
 - 📄 **CV**: pratinjau, unduh PDF asli, dan cetak A4 yang bersih.
-- 💬 **Kontak**: form dengan validasi yang menyiapkan draf email, kanal langsung (Email, WhatsApp, LinkedIn).
+- 💬 **Kontak**: form yang mengirim langsung lewat Resend (`/api/contact`), dengan honeypot anti-spam dan fallback otomatis ke draf email; kanal langsung (Email, WhatsApp, LinkedIn).
+- 💬 **Rekomendasi**: bagian testimoni yang otomatis tampil setelah `src/data/testimonials.js` diisi.
+- 🔎 **SEO & analytics**: halaman prerender per rute, hreflang EN/ID, JSON-LD `Person`, sitemap otomatis, dan Vercel Analytics.
 - 🌗 **Light/Dark & EN/ID**: tema mengikuti sistem dan tersimpan, tanpa kedipan saat load.
 
 ---
@@ -39,11 +41,38 @@ Struktur editorial (tipografi besar, banyak ruang, studi kasus) dengan aksen "si
 
 ---
 
+## ✍️ Mengisi konten
+
+| Yang ingin diubah | File |
+| --- | --- |
+| Masalah, keputusan teknis, dan **hasil terukur** studi kasus unggulan | `src/data/caseStudies.js` (isi `outcomes` dengan angka nyata; kosong = bagian disembunyikan) |
+| Screenshot, logo, label proyek akademik, kode internal | `src/data/projectMeta.js` (`shots`, `og`, `academic`, `internal`) |
+| Testimoni / rekomendasi | `src/data/testimonials.js` |
+| Bio, pengalaman, proyek, sertifikat | `src/data/portfolioData.js` |
+
+Screenshot disimpan sebagai `public/projects/<proyek>/shot-<nama>-960.webp` dan `-1600.webp` (rasio 16:10); gambar share 1200×630 di `og.jpg`.
+
+## 🌐 Rute
+
+`/` (EN), `/id/` (ID), `/work/<slug>`, `/id/work/<slug>`. Tautan lama `?project=<slug>` otomatis dialihkan. Setelah `vite build`, `scripts/prerender.mjs` membuat satu file HTML per rute dengan `<head>` sendiri, lalu `sitemap.xml` dan `robots.txt`.
+
+## 🔐 Environment variables (Vercel)
+
+| Variabel | Wajib | Keterangan |
+| --- | --- | --- |
+| `RESEND_API_KEY` | Ya, untuk form kontak | API key dari [resend.com](https://resend.com/api-keys). Tanpa ini form tetap jalan lewat fallback draf email. |
+| `CONTACT_TO_EMAIL` | Tidak | Tujuan pesan (default `dandyzain.work@gmail.com`). |
+| `CONTACT_FROM_EMAIL` | Tidak | Pengirim setelah domain diverifikasi di Resend, mis. `Portfolio <hello@domainanda.dev>`. |
+| `SITE_URL` | Tidak | Domain utama untuk canonical, OG, dan sitemap (default `https://dandy-portfolio.vercel.app`). Isi saat pindah ke domain sendiri. |
+
+Analytics: aktifkan **Analytics** di dashboard Vercel (tab Analytics) agar page view tercatat.
+
 ## 🛠️ Tech Stack
 
 - **Frontend**: React 18, Tailwind CSS, Framer Motion, Lucide React, pdf.js
 - **Build Tool**: Vite 5
-- **Deployment**: Vercel (SPA rewrite + cache headers di `vercel.json`)
+- **Deployment**: Vercel (rewrite SPA kecuali `/api`, cache & security headers di `vercel.json`, serverless function `api/contact.js`)
+- **Analytics**: Vercel Analytics
 
 ---
 

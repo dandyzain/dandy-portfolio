@@ -123,11 +123,39 @@ function BlocksMotif({ r }) {
 
 const MOTIFS = { map: MapMotif, graph: GraphMotif, signal: SignalMotif, device: DeviceMotif, blocks: BlocksMotif };
 
+/** Responsive <picture> for a real screenshot (`${src}-960/1600.webp`). */
+export function Screenshot({ shot, alt, sizes = '(min-width: 1024px) 60vw, 100vw', className, eager = false }) {
+  return (
+    <img
+      src={`${shot.src}-960.webp`}
+      srcSet={`${shot.src}-960.webp 960w, ${shot.src}-1600.webp 1600w`}
+      sizes={sizes}
+      alt={alt}
+      width="1600"
+      height="1000"
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      className={cn('h-full w-full object-cover object-top', className)}
+    />
+  );
+}
+
 /**
- * Generated cover art for a project (replaces stock photos). Pure SVG, themed
- * via CSS variables, deterministic per project. Shows the real logo when present.
+ * Cover for a project. Uses the first real screenshot when one exists;
+ * otherwise generated SVG art (themed via CSS variables, deterministic per
+ * project). Shows the real logo when present.
  */
-export default function ProjectCover({ project, className, showLabel = true }) {
+export default function ProjectCover({ project, className, showLabel = true, sizes }) {
+  const shot = project.shots?.[0];
+  if (shot) {
+    return (
+      <div className={cn('relative overflow-hidden bg-surface-2', className)} aria-hidden="true">
+        <Screenshot shot={shot} alt="" sizes={sizes} className="transition-transform duration-slow ease-out group-hover:scale-[1.02]" />
+        <div className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-ink/5" />
+      </div>
+    );
+  }
+
   const motif = motifFor(project);
   const Motif = MOTIFS[motif];
   const art = useMemo(() => <Motif r={rng(project.id + 7)} />, [Motif, project.id]);

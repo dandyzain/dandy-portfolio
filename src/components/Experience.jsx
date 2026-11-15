@@ -6,7 +6,7 @@ import { sectionIndex } from '../data/sections';
 import { shortTitle } from '../data/projectMeta';
 import { useCopy } from '../hooks/useCopy';
 import { useProjects } from '../hooks/useProjects';
-import { openProject } from '../lib/projectUrl';
+import { openProject, projectPath } from '../lib/projectUrl';
 import { cn } from '../lib/cn';
 import { duration, ease, spring } from '../lib/motion';
 import Section from './ui/Section';
@@ -80,7 +80,7 @@ function ExperienceDetail({ exp, related, language, ui, compact = false }) {
             {related.map((p) => (
               <li key={p.id}>
                 <a
-                  href={`?project=${p.slug}`}
+                  href={projectPath(p.slug)}
                   onClick={(e) => {
                     e.preventDefault();
                     openProject(p.slug);

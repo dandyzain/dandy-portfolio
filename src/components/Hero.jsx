@@ -8,6 +8,7 @@ import { duration, ease } from '../lib/motion';
 import Button from './ui/Button';
 import IconButton from './ui/IconButton';
 import Counter from './ui/Counter';
+import { allProjects } from '../hooks/useProjects';
 
 // Entrance choreography: one sequence (~1.2s), never repeated.
 const seq = (i) => ({
@@ -104,13 +105,15 @@ function Portrait({ alt, coords, status }) {
 
 export default function Hero({ onOpenCVModal }) {
   const { ui, language } = useCopy();
-  const { personal, projects, certifications } = portfolioData;
+  const { personal, certifications } = portfolioData;
+  // Headline count excludes coursework/exam/concept projects.
+  const projectCount = allProjects.filter((p) => !p.academic).length;
   const h = ui.hero;
 
   const years = personal.stats.find((s) => /year/i.test(s.label.en))?.value || '4+';
   const proof = [
     { value: years, label: h.proofYears, count: true },
-    { value: String(projects.length), label: h.proofProjects, count: true },
+    { value: String(projectCount), label: h.proofProjects, count: true },
     { value: String(certifications.length), label: h.proofCerts, count: true },
     { value: 'Telkominfra', label: h.proofEmployer },
   ];
