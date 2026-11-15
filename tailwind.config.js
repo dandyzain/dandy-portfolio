@@ -44,7 +44,7 @@ export default {
       },
       fontSize: {
         // Fluid display sizes for editorial headings
-        'display-xl': ['clamp(2.6rem, 6.2vw, 5.25rem)', { lineHeight: '1.02', letterSpacing: '-0.035em' }],
+        'display-xl': ['clamp(2.4rem, 5.4vw, 4.6rem)', { lineHeight: '1.02', letterSpacing: '-0.035em' }],
         'display-lg': ['clamp(2rem, 4.2vw, 3.5rem)', { lineHeight: '1.06', letterSpacing: '-0.03em' }],
         'display-md': ['clamp(1.5rem, 2.6vw, 2.25rem)', { lineHeight: '1.12', letterSpacing: '-0.02em' }],
         eyebrow: ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.08em' }],
