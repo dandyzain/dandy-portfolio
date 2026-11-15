@@ -5,7 +5,9 @@ import { ease } from '../../lib/motion';
 /** Counts up to `value` (e.g. "4+", "29") once, when it scrolls into view. */
 export default function Counter({ value, duration = 1.2 }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '0px 0px -10% 0px' });
+  // No negative margin: the proof strip often sits at the very bottom of the
+  // first screen, where a -10% margin left it stuck at "0" until scrolling.
+  const inView = useInView(ref, { once: true });
   const reduce = useReducedMotion();
   const target = parseInt(String(value).replace(/[^0-9]/g, ''), 10) || 0;
   const suffix = String(value).replace(/[0-9]/g, '');

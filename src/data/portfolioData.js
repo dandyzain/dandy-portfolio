@@ -17,8 +17,7 @@ export const portfolioData = {
     email: "dandyzain.work@gmail.com",
     linkedin: "https://www.linkedin.com/in/dandy-zain-ab380a290",
     github: "https://github.com/dandyzain",
-    avatar: "/images/dandy-profile.png",
-    avatarOriginal: "/images/dandy-original.jpg",
+    avatar: "/images/portrait-640.webp",
     status: {
       en: "Available for Hire & Collaborations",
       id: "Terbuka untuk Peluang Kerja & Kolaborasi"
@@ -39,9 +38,6 @@ export const portfolioData = {
     },
     stats: [
       { label: { en: "Years Experience", id: "Tahun Pengalaman" }, value: "4+" },
-      { label: { en: "Completed Projects", id: "Proyek Selesai" }, value: "30+" },
-      { label: { en: "Enterprise Systems", id: "Sistem Enterprise" }, value: "12+" },
-      { label: { en: "Client Satisfaction", id: "Kepuasan Klien" }, value: "99%" },
     ]
   },
 

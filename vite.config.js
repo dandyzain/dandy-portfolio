@@ -7,5 +7,17 @@ export default defineConfig({
   server: {
     port: 3000,
     open: false
-  }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        // Libraries change far less often than content: keep them in their own
+        // long-cached chunks so a copy edit doesn't re-download React/Framer.
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          motion: ['framer-motion'],
+        },
+      },
+    },
+  },
 })

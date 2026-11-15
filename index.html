@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- seo:start -->
     <title>Dandy Rahmat Zain | Full Stack & Mobile Developer Portfolio</title>
     <meta name="description" content="Portfolio & Curriculum Vitae Dandy Rahmat Zain - Full Stack Developer berpengalaman di Laravel, Express.js, React, Next.js, Flutter, dan Kotlin." />
     <link rel="canonical" href="https://dandy-portfolio.vercel.app/" />
@@ -19,11 +20,13 @@
     <meta name="twitter:title" content="Dandy Rahmat Zain — Full Stack & Mobile Developer" />
     <meta name="twitter:description" content="I build mission-critical systems — from submarine cable monitoring to mobile apps." />
     <meta name="twitter:image" content="https://dandy-portfolio.vercel.app/og-image.jpg" />
+    <!-- seo:end -->
     <link rel="preload" as="image" type="image/avif" imagesrcset="/images/portrait-640.avif 640w, /images/portrait-960.avif 960w" imagesizes="(min-width: 1024px) 420px, 80vw" />
     <meta name="theme-color" content="#F7F6F2" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#090D18" media="(prefers-color-scheme: dark)" />
     <script>
       // Apply saved/system theme and language before first paint (prevents flash).
+      // The <head> tags between seo:start/end are rewritten per route by scripts/prerender.mjs.
       (function () {
         try {
           var t = localStorage.getItem('dandy_portfolio_theme');
@@ -31,7 +34,7 @@
             t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
           }
           if (t === 'dark') document.documentElement.classList.add('dark');
-          var l = localStorage.getItem('dandy_portfolio_lang');
+          var l = /^\/id(\/|$)/.test(location.pathname) ? 'id' : localStorage.getItem('dandy_portfolio_lang');
           document.documentElement.lang = l === 'id' ? 'id' : 'en';
         } catch (e) {}
       })();

@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react';
+import React, { useId, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, Check, ChevronDown, Copy, FileText, Linkedin, Mail, MapPin, MessageCircle, Send } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
@@ -10,6 +10,7 @@ import Section from './ui/Section';
 import Button from './ui/Button';
 import Reveal from './ui/Reveal';
 import { useToast } from './ui/Toast';
+import { track } from '../lib/analytics';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -53,7 +54,9 @@ export default function Contact({ onOpenCVModal }) {
 
   const [form, setForm] = useState({ name: '', email: '', service: tc.topicOptions[2]?.value || tc.topicOptions[0].value, message: '' });
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState('idle'); // idle | opening | done
+  const [status, setStatus] = useState('idle'); // idle | opening | done | fallback
+  const [website, setWebsite] = useState(''); // honeypot — humans never see it
+  const mountedAt = useRef(Date.now());
 
   const set = (key) => (e) => {
     setForm((f) => ({ ...f, [key]: e.target.value }));
@@ -88,20 +91,49 @@ export default function Contact({ onOpenCVModal }) {
       return;
     }
     setStatus('opening');
+
+    const celebrate = async () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const { default: confetti } = await import('canvas-confetti');
+      confetti({ particleCount: 70, spread: 70, origin: { y: 0.7 }, colors: ['#14B8A6', '#F59E0B', '#0E1220', '#5EEAD4'] });
+    };
+
+    // 1) Send through /api/contact (Resend).
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          service: form.service,
+          message: form.message.trim(),
+          lang: language,
+          website,
+          elapsedMs: Date.now() - mountedAt.current,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        setStatus('done');
+        track('contact_submit', { method: 'api', topic: form.service });
+        setForm((f) => ({ ...f, message: '' }));
+        celebrate();
+        return;
+      }
+    } catch {
+      /* network error or no API in local dev → fall through */
+    }
+
+    // 2) Fallback: a ready-to-send draft in the visitor's email app.
     const subject = encodeURIComponent(`[Portfolio Inquiry] ${form.service} from ${form.name}`);
     const body = encodeURIComponent(
       `Hello Dandy,\n\nName: ${form.name}\nEmail: ${form.email}\nService Topic: ${form.service}\n\nMessage:\n${form.message}\n\nBest regards.`
     );
     // Same tab: avoids an empty new tab when no mail app handles mailto:
     window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
-
-    setTimeout(async () => {
-      setStatus('done');
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const { default: confetti } = await import('canvas-confetti');
-        confetti({ particleCount: 70, spread: 70, origin: { y: 0.7 }, colors: ['#14B8A6', '#F59E0B', '#0E1220', '#5EEAD4'] });
-      }
-    }, 600);
+    track('contact_submit', { method: 'mailto', topic: form.service });
+    setTimeout(() => setStatus('fallback'), 600);
   };
 
   const waText = language === 'id' ? 'Halo Dandy, saya tertarik bekerja sama dengan Anda.' : 'Hi Dandy, I’d like to work with you.';
@@ -171,7 +203,7 @@ export default function Contact({ onOpenCVModal }) {
         <Reveal delay={0.08} className="lg:col-span-7">
           <div className="rounded-3xl border border-line bg-surface p-6 shadow-card sm:p-8">
             <AnimatePresence mode="wait" initial={false}>
-              {status === 'done' ? (
+              {status === 'done' || status === 'fallback' ? (
                 <motion.div
                   key="done"
                   initial={{ opacity: 0, y: 8 }}
@@ -183,8 +215,8 @@ export default function Contact({ onOpenCVModal }) {
                   <span className="grid h-12 w-12 place-items-center rounded-full bg-signal/15 text-signal-ink">
                     <Check size={22} aria-hidden="true" />
                   </span>
-                  <h3 className="mt-5 text-2xl font-semibold">{c.doneTitle}</h3>
-                  <p className="mt-2 text-ink-2">{c.doneBody}</p>
+                  <h3 className="mt-5 text-2xl font-semibold">{status === 'done' ? c.doneTitle : c.fallbackTitle}</h3>
+                  <p className="mt-2 text-ink-2">{status === 'done' ? c.doneBody : c.fallbackBody}</p>
                   <div className="mt-4 flex flex-wrap items-center gap-2">
                     <code className="rounded-lg bg-surface-2 px-3 py-2 font-mono text-sm text-ink">{personal.email}</code>
                     <Button variant="secondary" size="sm" onClick={copyEmail}>
@@ -263,6 +295,13 @@ export default function Contact({ onOpenCVModal }) {
                       className={cn(inputCls(errors.message), 'resize-y')}
                     />
                   </Field>
+                  {/* Honeypot: hidden from people and assistive tech, tempting to bots */}
+                  <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                    <label>
+                      Website
+                      <input type="text" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+                    </label>
+                  </div>
                   <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={status === 'opening'}>
                     <Send size={16} aria-hidden="true" />
                     {status === 'opening' ? c.opening : c.submit}
