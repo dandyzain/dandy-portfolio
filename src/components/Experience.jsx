@@ -1,241 +1,229 @@
-import React, { useState } from 'react';
-import { 
-  Briefcase, 
-  Calendar, 
-  MapPin, 
-  Building2, 
-  CheckCircle, 
-  ChevronRight
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useId, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronDown, ArrowUpRight, MapPin, CalendarDays } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
-import { useLanguage } from '../context/LanguageContext';
+import { sectionIndex } from '../data/sections';
+import { shortTitle } from '../data/projectMeta';
+import { useCopy } from '../hooks/useCopy';
+import { useProjects } from '../hooks/useProjects';
+import { openProject } from '../lib/projectUrl';
+import { cn } from '../lib/cn';
+import { duration, ease, spring } from '../lib/motion';
+import Section from './ui/Section';
+import Chip from './ui/Chip';
+
+const isCurrent = (exp) => /present|sekarang/i.test(exp.period.en);
+
+function ExperienceDetail({ exp, related, language, ui, compact = false }) {
+  return (
+    <div>
+      {compact ? (
+        <p className="eyebrow flex flex-wrap items-center gap-2">
+          {exp.type}
+          <span aria-hidden="true">·</span>
+          {exp.location}
+        </p>
+      ) : (
+      <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-3">
+        <div>
+          <p className="eyebrow mb-2 flex items-center gap-2">
+            {exp.type}
+            {isCurrent(exp) && (
+              <Chip tone="signal" className="!py-0.5 font-sans normal-case tracking-normal">
+                {ui.current}
+              </Chip>
+            )}
+          </p>
+          <h3 className="text-2xl font-semibold sm:text-3xl">{exp.role}</h3>
+          <p className="mt-1 font-medium text-ink-2">{exp.company}</p>
+        </div>
+        <dl className="space-y-1 text-sm text-muted sm:text-right">
+          <div className="flex items-center gap-2 sm:justify-end">
+            <dt className="sr-only">{ui.period}</dt>
+            <CalendarDays size={14} aria-hidden="true" />
+            <dd>{exp.period[language]}</dd>
+          </div>
+          <div className="flex items-center gap-2 sm:justify-end">
+            <dt className="sr-only">{ui.location}</dt>
+            <MapPin size={14} aria-hidden="true" />
+            <dd>{exp.location}</dd>
+          </div>
+        </dl>
+      </div>
+      )}
+
+      <p className={cn('max-w-prose leading-relaxed text-ink-2', compact ? 'mt-4' : 'mt-6')}>{exp.description[language]}</p>
+
+      <h4 className="eyebrow mb-3 mt-8">{ui.contributions}</h4>
+      <ul className="space-y-3">
+        {exp.highlights[language].map((h) => (
+          <li key={h} className="grid grid-cols-[1rem_1fr] gap-3 text-[0.95rem] leading-relaxed text-ink">
+            <span className="mt-[0.6rem] h-px w-3 bg-signal" aria-hidden="true" />
+            {h}
+          </li>
+        ))}
+      </ul>
+
+      <h4 className="eyebrow mb-3 mt-8">{ui.stack}</h4>
+      <ul className="flex flex-wrap gap-2">
+        {exp.techStack.map((tech) => (
+          <li key={tech}>
+            <Chip mono>{tech}</Chip>
+          </li>
+        ))}
+      </ul>
+
+      {related.length > 0 && (
+        <>
+          <h4 className="eyebrow mb-3 mt-8">{ui.related}</h4>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2">
+            {related.map((p) => (
+              <li key={p.id}>
+                <a
+                  href={`?project=${p.slug}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openProject(p.slug);
+                  }}
+                  className="group inline-flex items-center gap-1 text-sm font-semibold text-signal-ink"
+                >
+                  <span className="link-underline">{shortTitle(p.title)}</span>
+                  <ArrowUpRight size={14} aria-hidden="true" className="transition-transform duration-fast group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
+}
 
 export default function Experience() {
-  const { language } = useLanguage();
+  const { t, ui, language } = useCopy();
   const { experiences } = portfolioData;
-  const t = portfolioData.translations[language].experience;
+  const projects = useProjects();
+  const [selected, setSelected] = useState(experiences[0].id);
+  const [openMobile, setOpenMobile] = useState(experiences[0].id);
+  const tabRefs = useRef([]);
+  const baseId = useId();
 
-  const [selectedId, setSelectedId] = useState(experiences[0].id);
+  const relatedFor = (exp) => projects.filter((p) => p.client.toLowerCase().includes(exp.company.toLowerCase()));
+  const activeIndex = experiences.findIndex((e) => e.id === selected);
+  const active = experiences[activeIndex];
 
-  const activeExp = experiences.find(e => e.id === selectedId) || experiences[0];
-
-  const getColorClasses = (color) => {
-    switch(color) {
-      case 'lavender':
-        return {
-          badge: 'bg-pastel-lavender dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300 border-pastel-lavender-accent/30',
-          dot: 'bg-indigo-500',
-          border: 'border-indigo-200 dark:border-indigo-800'
-        };
-      case 'mint':
-        return {
-          badge: 'bg-pastel-mint dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800',
-          dot: 'bg-emerald-500',
-          border: 'border-emerald-200 dark:border-emerald-800'
-        };
-      case 'sky':
-        return {
-          badge: 'bg-pastel-sky dark:bg-sky-950 text-sky-800 dark:text-sky-300 border-sky-300 dark:border-sky-800',
-          dot: 'bg-sky-500',
-          border: 'border-sky-200 dark:border-sky-800'
-        };
-      case 'peach':
-      default:
-        return {
-          badge: 'bg-pastel-peach dark:bg-rose-950 text-rose-800 dark:text-rose-300 border-rose-300 dark:border-rose-800',
-          dot: 'bg-rose-500',
-          border: 'border-rose-200 dark:border-rose-800'
-        };
-    }
+  const onTabKey = (e, i) => {
+    let next = null;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = (i + 1) % experiences.length;
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = (i - 1 + experiences.length) % experiences.length;
+    if (e.key === 'Home') next = 0;
+    if (e.key === 'End') next = experiences.length - 1;
+    if (next === null) return;
+    e.preventDefault();
+    setSelected(experiences[next].id);
+    tabRefs.current[next]?.focus();
   };
 
   return (
-    <section id="experience" className="py-24 bg-pastel-radial relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header with Scroll Reveal */}
-        <motion.div 
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pastel-mint dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-3">
-            <Briefcase size={14} />
-            <span>{t.badge}</span>
-          </div>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">
-            {t.title}
-          </h2>
-          <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300">
-            {t.subtitle}
-          </p>
-        </motion.div>
-
-        {/* Interactive Experience Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left: Interactive Company List (5 cols) */}
-          <div className="lg:col-span-5 space-y-3">
-            <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2 px-2">
-              {t.selectPrompt}
-            </p>
-            {experiences.map((exp, idx) => {
-              const colors = getColorClasses(exp.color);
-              const isSelected = exp.id === selectedId;
-
-              return (
-                <motion.button
-                  key={exp.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.08 }}
-                  whileHover={{ scale: 1.02, x: 4 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => setSelectedId(exp.id)}
-                  className={`w-full text-left p-4 sm:p-5 rounded-2xl sm:rounded-3xl transition-colors duration-200 flex items-start justify-between border ${
-                    isSelected
-                      ? 'bg-white dark:bg-slate-800 shadow-pastel-md border-indigo-300 dark:border-indigo-600 ring-2 ring-indigo-500/20'
-                      : 'bg-white/60 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 border-slate-200/60 dark:border-slate-700/60'
-                  }`}
-                >
-                  <div className="flex items-start gap-3.5">
-                    <div className="relative mt-1">
-                      <div className={`w-3 h-3 rounded-full ${colors.dot} shrink-0`} />
-                      {isSelected && (
-                        <motion.div 
-                          layoutId="pulseDot"
-                          className="absolute -inset-1 rounded-full bg-indigo-400/40 animate-ping" 
-                        />
-                      )}
-                    </div>
-                    <div>
-                      <h4 className="font-display font-bold text-base text-slate-900 dark:text-white">
-                        {exp.company}
-                      </h4>
-                      <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5">
-                        {exp.role}
-                      </p>
-                      <div className="flex items-center gap-2 mt-2 text-[11px] text-slate-500 dark:text-slate-400">
-                        <Calendar size={12} />
-                        <span>{exp.period[language]}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="shrink-0 flex items-center gap-1">
-                    {exp.duration[language] === (language === 'en' ? 'Active' : 'Aktif') && (
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
-                        {t.activeBadge}
-                      </span>
-                    )}
-                    <ChevronRight 
-                      size={18} 
-                      className={`transition-transform duration-200 ${
-                        isSelected ? 'text-indigo-600 translate-x-1' : 'text-slate-300'
-                      }`} 
-                    />
-                  </div>
-                </motion.button>
-              );
-            })}
-          </div>
-
-          {/* Right: Detailed Experience View with AnimatePresence (7 cols) */}
-          <div className="lg:col-span-7">
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={activeExp.id + '-' + language}
-                initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -15, scale: 0.98 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                className="p-5 sm:p-8 lg:p-10 rounded-3xl sm:rounded-4xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 shadow-pastel-lg backdrop-blur-xl"
+    <Section
+      id="experience"
+      index={sectionIndex('experience')}
+      eyebrow={ui.experience.eyebrow}
+      title={ui.experience.title}
+      intro={t.experience.subtitle}
+    >
+      {/* Desktop: vertical tabs */}
+      <div className="hidden gap-12 lg:grid lg:grid-cols-12">
+        <div role="tablist" aria-orientation="vertical" aria-label={ui.experience.listLabel} className="relative col-span-4 border-l border-line">
+          {experiences.map((exp, i) => {
+            const isSel = exp.id === selected;
+            return (
+              <button
+                key={exp.id}
+                ref={(el) => (tabRefs.current[i] = el)}
+                role="tab"
+                id={`${baseId}-tab-${exp.id}`}
+                aria-selected={isSel}
+                aria-controls={`${baseId}-panel`}
+                tabIndex={isSel ? 0 : -1}
+                onClick={() => setSelected(exp.id)}
+                onKeyDown={(e) => onTabKey(e, i)}
+                className="group relative block w-full py-4 pl-6 pr-2 text-left"
               >
-                
-                {/* Card Header */}
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pb-5 sm:pb-6 border-b border-slate-100 dark:border-slate-700">
-                  <div>
-                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold border mb-2 ${getColorClasses(activeExp.color).badge}`}>
-                      {activeExp.type}
-                    </span>
-                    <h3 className="font-display font-bold text-xl sm:text-2xl text-slate-900 dark:text-white">
-                      {activeExp.role}
-                    </h3>
-                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-400 mt-1">
-                      <Building2 size={16} />
-                      <span>{activeExp.company}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-x-4 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
-                    <div className="flex items-center gap-1.5 font-medium">
-                      <Calendar size={14} className="text-slate-400 shrink-0" />
-                      <span>{activeExp.period[language]}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <MapPin size={14} className="text-slate-400 shrink-0" />
-                      <span>{activeExp.location}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <div className="py-6">
-                  <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {activeExp.description[language]}
-                  </p>
-                </div>
-
-                {/* Key Contributions / Highlights */}
-                <div className="space-y-3 mb-6">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                    {t.contributions}
-                  </h4>
-                  <div className="space-y-2.5">
-                    {activeExp.highlights[language].map((highlight, idx) => (
-                      <motion.div 
-                        key={idx} 
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.08 }}
-                        className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 dark:text-slate-200"
-                      >
-                        <CheckCircle size={16} className="text-emerald-500 shrink-0 mt-0.5" />
-                        <span className="leading-normal">{highlight}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Tech Stack Used in this role */}
-                <div className="pt-6 border-t border-slate-100 dark:border-slate-700">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
-                    {t.techUsed}
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {activeExp.techStack.map((tech, idx) => (
-                      <motion.span
-                        key={idx}
-                        whileHover={{ scale: 1.1, y: -2 }}
-                        className="px-3 py-1 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 cursor-default"
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
-                  </div>
-                </div>
-
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
+                {isSel && (
+                  <motion.span layoutId="exp-active" transition={spring} className="absolute -left-px bottom-2 top-2 w-0.5 rounded-full bg-signal" aria-hidden="true" />
+                )}
+                <span className="block font-mono text-[0.7rem] uppercase tracking-wider text-muted">{exp.period[language]}</span>
+                <span className={cn('mt-1 block font-display text-lg font-semibold leading-snug transition-colors', isSel ? 'text-ink' : 'text-ink-2 group-hover:text-ink')}>
+                  {exp.company}
+                </span>
+                <span className="mt-0.5 block text-sm text-muted">{exp.role}</span>
+              </button>
+            );
+          })}
         </div>
 
+        <div className="col-span-8">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={active.id + language}
+              id={`${baseId}-panel`}
+              role="tabpanel"
+              aria-labelledby={`${baseId}-tab-${active.id}`}
+              tabIndex={0}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0, transition: { duration: duration.base, ease: ease.out } }}
+              exit={{ opacity: 0, y: -6, transition: { duration: duration.fast } }}
+              className="rounded-3xl border border-line bg-surface p-8 shadow-card outline-none xl:p-10"
+            >
+              <ExperienceDetail exp={active} related={relatedFor(active)} language={language} ui={ui.experience} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
-    </section>
+
+      {/* Mobile/tablet: accordion */}
+      <ul className="divide-y divide-line border-y border-line lg:hidden">
+        {experiences.map((exp) => {
+          const open = openMobile === exp.id;
+          const panelId = `${baseId}-m-${exp.id}`;
+          return (
+            <li key={exp.id}>
+              <h3>
+                <button
+                  type="button"
+                  aria-expanded={open}
+                  aria-controls={panelId}
+                  onClick={() => setOpenMobile(open ? null : exp.id)}
+                  className="flex w-full items-start justify-between gap-4 py-5 text-left"
+                >
+                  <span>
+                    <span className="block font-mono text-[0.7rem] uppercase tracking-wider text-muted">{exp.period[language]}</span>
+                    <span className="mt-1 block font-display text-lg font-semibold leading-snug">{exp.company}</span>
+                    <span className="mt-0.5 block text-sm text-muted">{exp.role}</span>
+                  </span>
+                  <ChevronDown size={20} aria-hidden="true" className={cn('mt-5 shrink-0 text-muted transition-transform duration-base', open && 'rotate-180')} />
+                </button>
+              </h3>
+              <AnimatePresence initial={false}>
+                {open && (
+                  <motion.div
+                    id={panelId}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1, transition: { duration: duration.base, ease: ease.out } }}
+                    exit={{ height: 0, opacity: 0, transition: { duration: duration.fast, ease: ease.inOut } }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-8">
+                      <ExperienceDetail exp={exp} related={relatedFor(exp)} language={language} ui={ui.experience} compact />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </li>
+          );
+        })}
+      </ul>
+    </Section>
   );
 }

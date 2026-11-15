@@ -1,498 +1,233 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import { 
-  FolderGit2, 
-  CheckCircle2, 
-  X, 
-  ArrowUpRight,
-  ExternalLink,
-  Gitlab,
-  Github,
-  FileText
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useMemo, useState } from 'react';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { ArrowUpRight, ExternalLink, X } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
-import { useLanguage } from '../context/LanguageContext';
-import Pagination from './Pagination';
+import { sectionIndex } from '../data/sections';
+import { fmt } from '../data/uiCopy';
+import { shortTitle, subtitleOf } from '../data/projectMeta';
+import { useCopy } from '../hooks/useCopy';
+import { useProjects } from '../hooks/useProjects';
+import { useProjectFilter } from '../context/ProjectFilterContext';
+import { closeProject, getProjectSlug, onProjectChange, openProject } from '../lib/projectUrl';
+import { cn } from '../lib/cn';
+import { duration, ease, spring } from '../lib/motion';
+import Section from './ui/Section';
+import Chip from './ui/Chip';
+import Button from './ui/Button';
+import Reveal from './ui/Reveal';
+import ProjectCover from './ProjectCover';
+import CaseStudyDialog from './CaseStudyDialog';
 
-const PROJECTS_PER_PAGE = 6;
+const ARCHIVE_PREVIEW = 6;
+// Category values as stored in the data (EN labels), index-aligned with translations.
+const CATEGORY_VALUES = portfolioData.translations.en.projects.categories;
+
+function caseLink(project) {
+  return {
+    href: `?project=${project.slug}`,
+    onClick: (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return; // allow open-in-new-tab
+      e.preventDefault();
+      openProject(project.slug);
+    },
+  };
+}
+
+function FeaturedProject({ project, index, flip, ui, language }) {
+  return (
+    <Reveal as="article" className="group grid items-center gap-6 lg:grid-cols-12 lg:gap-12">
+      <a
+        {...caseLink(project)}
+        className={cn('block overflow-hidden rounded-3xl border border-line shadow-card transition-shadow duration-base hover:shadow-lift lg:col-span-7', flip && 'lg:order-2')}
+        aria-label={`${ui.projects.readCase}: ${shortTitle(project.title)}`}
+        tabIndex={-1}
+      >
+        <ProjectCover project={project} className="aspect-[16/10]" />
+      </a>
+      <div className={cn('lg:col-span-5', flip && 'lg:order-1')}>
+        <p className="eyebrow flex items-center gap-3">
+          <span className="text-signal-ink">F/{String(index + 1).padStart(2, '0')}</span>
+          <span aria-hidden="true" className="h-px w-6 bg-line" />
+          {project.category}
+        </p>
+        <h3 className="mt-3 text-display-md font-semibold">
+          <a {...caseLink(project)} className="link-underline">
+            {shortTitle(project.title)}
+          </a>
+        </h3>
+        {subtitleOf(project.title) && <p className="mt-2 font-medium text-ink-2">{subtitleOf(project.title)}</p>}
+        <p className="mt-4 line-clamp-4 leading-relaxed text-ink-2">{project.description[language]}</p>
+        <p className="mt-4 text-sm text-muted">{project.client}</p>
+        <ul className="mt-5 flex flex-wrap gap-1.5">
+          {project.tags.slice(0, 5).map((tag) => (
+            <li key={tag}>
+              <Chip mono>{tag}</Chip>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-7 flex flex-wrap items-center gap-3">
+          <Button {...caseLink(project)}>
+            {ui.projects.readCase}
+            <ArrowUpRight size={16} aria-hidden="true" className="transition-transform duration-fast group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+          </Button>
+          {project.liveUrl && (
+            <Button href={project.liveUrl} variant="secondary">
+              <ExternalLink size={15} aria-hidden="true" />
+              {ui.projects.live}
+              <span className="sr-only">{ui.common.opensInNewTab}</span>
+            </Button>
+          )}
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
+function ProjectCard({ project, ui, language }) {
+  return (
+    <motion.li
+      layout="position"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0, transition: { duration: duration.base, ease: ease.out } }}
+      exit={{ opacity: 0, transition: { duration: duration.fast } }}
+      className="list-none"
+    >
+      <a
+        {...caseLink(project)}
+        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-[transform,box-shadow,border-color] duration-base ease-out hover:-translate-y-1 hover:border-ink/25 hover:shadow-lift"
+      >
+        <ProjectCover project={project} className="aspect-[16/8] border-b border-line" showLabel={false} />
+        <div className="flex flex-1 flex-col p-5">
+          <p className="font-mono text-[0.68rem] uppercase tracking-wider text-muted">{project.category}</p>
+          <h3 className="mt-1.5 text-lg font-semibold leading-snug">{shortTitle(project.title)}</h3>
+          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2">{project.description[language]}</p>
+          <div className="mt-auto flex items-center justify-between gap-3 pt-5">
+            <span className="truncate text-xs text-muted">{project.client}</span>
+            <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-signal-ink">
+              <span className="sr-only">{ui.projects.readCase}</span>
+              <ArrowUpRight size={16} aria-hidden="true" className="transition-transform duration-fast group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </span>
+          </div>
+        </div>
+      </a>
+    </motion.li>
+  );
+}
 
 export default function Projects() {
-  const { language } = useLanguage();
-  const { projects } = portfolioData;
-  const t = portfolioData.translations[language].projects;
+  const { t, ui, language } = useCopy();
+  const projects = useProjects();
+  const { skill, setSkill } = useProjectFilter();
+  const [category, setCategory] = useState(0);
+  const [expanded, setExpanded] = useState(false);
+  const [slug, setSlug] = useState(getProjectSlug);
 
-  const [activeCategory, setActiveCategory] = useState(0);
-  const [activeModalProject, setActiveModalProject] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
+  useEffect(() => onProjectChange(setSlug), []);
 
-  // Close modal on Escape key press & prevent background scroll
+  const featured = useMemo(() => projects.filter((p) => p.featured).sort((a, b) => a.featured - b.featured), [projects]);
+  const archive = useMemo(() => projects.filter((p) => !p.featured), [projects]);
+  const ordered = useMemo(() => [...featured, ...archive], [featured, archive]);
+
+  const isFiltering = category !== 0 || !!skill;
+  const filtered = useMemo(() => {
+    return ordered.filter((p) => {
+      const okCat = category === 0 || p.category === CATEGORY_VALUES[category];
+      const okSkill = !skill || skill.ids.includes(p.id);
+      return okCat && okSkill;
+    });
+  }, [ordered, category, skill]);
+
+  // When a skill filter arrives from the Skills section, reset category.
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') setActiveModalProject(null);
-    };
-    if (activeModalProject) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [activeModalProject]);
+    if (skill) setCategory(0);
+  }, [skill]);
 
-  const categories = t.categories;
+  const active = slug ? ordered.find((p) => p.slug === slug) || null : null;
+  const navList = isFiltering && active && filtered.some((p) => p.id === active.id) ? filtered : ordered;
 
-  const filteredProjects = useMemo(() => {
-    return activeCategory === 0
-      ? projects
-      : projects.filter(p => {
-          const cat = categories[activeCategory].toLowerCase();
-          const pCat = p.category.toLowerCase();
-          return pCat.includes(cat) || cat.includes(pCat);
-        });
-  }, [projects, activeCategory, categories]);
+  const gridItems = isFiltering ? filtered : expanded ? archive : archive.slice(0, ARCHIVE_PREVIEW);
 
-  const totalPages = Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE);
-
-  // Reset to page 1 whenever category changes
-  const handleCategoryChange = (idx) => {
-    setActiveCategory(idx);
-    setCurrentPage(1);
-  };
-
-  // Adjust page if current page exceeds total pages
-  useEffect(() => {
-    if (currentPage > totalPages && totalPages > 0) {
-      setCurrentPage(1);
-    }
-  }, [totalPages, currentPage]);
-
-  // Paginated slice for current page
-  const paginatedProjects = useMemo(() => {
-    const start = (currentPage - 1) * PROJECTS_PER_PAGE;
-    return filteredProjects.slice(start, start + PROJECTS_PER_PAGE);
-  }, [filteredProjects, currentPage]);
-
-  const getCardColorTheme = (color) => {
-    switch (color) {
-      case 'lavender':
-        return 'hover:border-indigo-300 dark:hover:border-indigo-600 bg-white dark:bg-slate-800';
-      case 'mint':
-        return 'hover:border-emerald-300 dark:hover:border-emerald-600 bg-white dark:bg-slate-800';
-      case 'sky':
-        return 'hover:border-sky-300 dark:hover:border-sky-600 bg-white dark:bg-slate-800';
-      case 'peach':
-        return 'hover:border-rose-300 dark:hover:border-rose-600 bg-white dark:bg-slate-800';
-      case 'butter':
-      default:
-        return 'hover:border-amber-300 dark:hover:border-amber-600 bg-white dark:bg-slate-800';
-    }
+  const navigate = (p) => {
+    openProject(p.slug, { replace: true });
+    requestAnimationFrame(() => {
+      document.querySelector('[role="dialog"] .overflow-y-auto')?.scrollTo({ top: 0 });
+    });
   };
 
   return (
-    <section id="projects" className="py-24 bg-pastel-radial relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header with Scroll Reveal */}
-        <motion.div 
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center max-w-3xl mx-auto mb-14"
-        >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pastel-peach dark:bg-rose-950 text-rose-800 dark:text-rose-300 text-xs font-bold uppercase tracking-wider mb-3">
-            <FolderGit2 size={14} />
-            <span>{t.badge}</span>
-          </div>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">
-            {t.title}
-          </h2>
-          <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300">
-            {t.subtitle}
-          </p>
-        </motion.div>
-
-        {/* Filter Buttons with Spring Pill */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          {categories.map((cat, idx) => {
-            const isActive = activeCategory === idx;
-            return (
+    <Section
+      id="projects"
+      index={sectionIndex('projects')}
+      eyebrow={ui.projects.eyebrow}
+      title={ui.projects.title}
+      intro={t.projects.subtitle}
+    >
+      {/* Filters */}
+      <div className="mb-12 flex flex-col gap-4 border-y border-line py-4 sm:flex-row sm:items-center sm:justify-between">
+        <div role="group" aria-label={ui.projects.filterLabel} className="flex flex-wrap gap-2">
+          {t.projects.categories.map((label, i) => (
+            <Chip key={label} as="button" selected={category === i} onClick={() => setCategory(i)}>
+              {i === 0 ? ui.projects.all : label}
+            </Chip>
+          ))}
+          {skill && (
+            <Chip tone="signal" className="h-9 gap-2 pl-3.5 pr-1.5 text-sm">
+              {fmt(ui.projects.skillFilter, { skill: skill.label })}
               <button
-                key={idx}
-                onClick={() => handleCategoryChange(idx)}
-                className={`relative px-4 py-2 rounded-2xl text-xs sm:text-sm font-semibold transition-colors duration-200 z-10 ${
-                  isActive
-                    ? 'text-white'
-                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700'
-                }`}
+                type="button"
+                onClick={() => setSkill(null)}
+                className="grid h-6 w-6 place-items-center rounded-full hover:bg-signal/20"
+                aria-label={ui.projects.clearFilter}
+                title={ui.projects.clearFilter}
               >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeProjectTab"
-                    className="absolute inset-0 rounded-2xl bg-indigo-600 shadow-pastel-md -z-10"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-                {cat}
+                <X size={14} aria-hidden="true" />
               </button>
-            );
-          })}
+            </Chip>
+          )}
         </div>
-
-        {/* Projects Grid with Stagger & Layout Transitions */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          <AnimatePresence mode="popLayout">
-            {paginatedProjects.map((project, pIdx) => (
-              <motion.div
-                layout
-                key={project.id}
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                transition={{ duration: 0.35, delay: pIdx * 0.05 }}
-                whileHover={{ y: -6 }}
-                className={`rounded-3xl sm:rounded-4xl border border-slate-200/80 dark:border-slate-700/80 overflow-hidden shadow-pastel-sm hover:shadow-pastel-lg transition-shadow flex flex-col group ${getCardColorTheme(project.color)}`}
-              >
-                {/* Project Image Banner with Overlay & Zoom */}
-                <div className="relative h-44 sm:h-48 overflow-hidden bg-slate-100 dark:bg-slate-900">
-                  <motion.img
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ duration: 0.4 }}
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                  
-                  <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 flex items-center gap-2">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-white backdrop-blur-md shadow-sm">
-                      {project.category}
-                    </span>
-                  </div>
-
-                  <div className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 flex items-center gap-1.5 z-10">
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="p-1.5 rounded-full bg-emerald-600/90 text-white hover:scale-110 hover:bg-emerald-600 transition-all shadow-sm inline-flex items-center justify-center"
-                        title={t.openLive || (language === 'en' ? 'Open Live Demo' : 'Buka Live Demo')}
-                      >
-                        <ExternalLink size={15} />
-                      </a>
-                    )}
-
-                    {project.gitlabUrl && (
-                      <a
-                        href={project.gitlabUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="p-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 text-orange-600 hover:scale-110 transition-transform shadow-sm inline-flex items-center justify-center"
-                        title={t.openGitLab}
-                      >
-                        <Gitlab size={15} />
-                      </a>
-                    )}
-
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="p-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-900 dark:text-white hover:scale-110 transition-transform shadow-sm inline-flex items-center justify-center"
-                        title={t.openGitHub}
-                      >
-                        <Github size={15} />
-                      </a>
-                    )}
-                  </div>
-
-                  <div className="absolute bottom-3 left-4 right-4">
-                    <span className="text-xs text-slate-200 font-medium truncate block">
-                      {project.client}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Project Content */}
-                <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
-                      {project.description[language]}
-                    </p>
-                  </div>
-
-                  <div className="mt-5 sm:mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60">
-                    {/* Tech stack badges */}
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {project.tags.slice(0, 4).map((tag, tIdx) => (
-                        <span
-                          key={tIdx}
-                          className="px-2.5 py-0.5 rounded-lg text-[11px] font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                      {project.tags.length > 4 && (
-                        <span className="px-2.5 py-0.5 rounded-lg text-[11px] font-medium bg-slate-100 dark:bg-slate-700 text-slate-500">
-                          +{project.tags.length - 4}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* View Details Button */}
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={() => setActiveModalProject(project)}
-                      className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-2xl bg-pastel-lavender-light hover:bg-pastel-lavender text-indigo-700 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-indigo-300 text-xs font-bold transition-colors"
-                    >
-                      <span>{t.studyCase}</span>
-                      <ArrowUpRight size={15} />
-                    </motion.button>
-                  </div>
-
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Projects Pagination */}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-          totalItems={filteredProjects.length}
-          itemsPerPage={PROJECTS_PER_PAGE}
-          labels={t.pagination}
-          sectionId="projects"
-        />
-
-        {/* Project Modal Detail with Spring Entrance (Mounted via Portal) */}
-        {typeof document !== 'undefined' && createPortal(
-          <AnimatePresence>
-            {activeModalProject && (
-              <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-hidden">
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  onClick={() => setActiveModalProject(null)}
-                  className="fixed inset-0 bg-slate-950/80 backdrop-blur-md cursor-pointer" 
-                />
-
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.92, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.92, y: 20 }}
-                  transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                  onClick={(e) => e.stopPropagation()}
-                  className="relative z-10 w-full max-w-2xl max-h-[90vh] flex flex-col rounded-3xl sm:rounded-4xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden"
-                >
-                  
-                  {/* Fixed Header */}
-                  <div className="px-5 sm:px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-sm shrink-0">
-                    <div className="flex flex-wrap items-center gap-2 min-w-0">
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-pastel-lavender dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
-                        {activeModalProject.category}
-                      </span>
-                      {activeModalProject.liveUrl && (
-                        <a
-                          href={activeModalProject.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 hover:bg-emerald-200 transition"
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                          <span>Live Demo</span>
-                          <ExternalLink size={11} />
-                        </a>
-                      )}
-                      {activeModalProject.gitlabUrl && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-300">
-                          <Gitlab size={13} />
-                          GitLab
-                        </span>
-                      )}
-                      {activeModalProject.githubUrl && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-800 dark:bg-slate-800 dark:text-slate-200">
-                          <Github size={13} />
-                          GitHub
-                        </span>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => setActiveModalProject(null)}
-                      className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 transition-colors shrink-0"
-                      aria-label="Close modal"
-                    >
-                      <X size={18} />
-                    </button>
-                  </div>
-
-                  {/* Scrollable Body */}
-                  <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-5">
-                    <div>
-                      <h3 className="font-display font-bold text-xl sm:text-2xl text-slate-900 dark:text-white">
-                        {activeModalProject.title}
-                      </h3>
-                      <div className="mt-2 space-y-1 text-xs">
-                        <p className="text-slate-600 dark:text-slate-300">
-                          <span className="font-semibold text-slate-400 dark:text-slate-500">{language === 'en' ? 'Client: ' : 'Perusahaan / Klien: '}</span>
-                          <span className="font-medium text-slate-800 dark:text-slate-200">{activeModalProject.client}</span>
-                        </p>
-                        <p className="text-slate-600 dark:text-slate-300">
-                          <span className="font-semibold text-slate-400 dark:text-slate-500">{language === 'en' ? 'Role: ' : 'Peran: '}</span>
-                          <span className="font-semibold text-indigo-600 dark:text-indigo-400">{activeModalProject.role[language]}</span>
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="rounded-2xl overflow-hidden h-48 sm:h-64 shadow-md bg-slate-100 dark:bg-slate-800">
-                      <img
-                        src={activeModalProject.image}
-                        alt={activeModalProject.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-
-                    <div className="space-y-4">
-                      <div>
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
-                          {t.modal.aboutProject}
-                        </h4>
-                        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                          {activeModalProject.description[language]}
-                        </p>
-                      </div>
-
-                      <div>
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                          {t.modal.keyFeatures}
-                        </h4>
-                        <div className="space-y-2">
-                          {activeModalProject.features[language].map((feat, idx) => (
-                            <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
-                              <CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5" />
-                              <span>{feat}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div>
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                          {t.modal.techUsed}
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {activeModalProject.tags.map((tTag, idx) => (
-                            <span
-                              key={idx}
-                              className="px-2.5 sm:px-3 py-1 rounded-xl text-xs font-semibold bg-pastel-lavender-light dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 border border-pastel-lavender dark:border-slate-700"
-                            >
-                              {tTag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Fixed Footer */}
-                  <div className="px-5 sm:px-6 py-3.5 sm:py-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-sm flex flex-wrap items-center justify-between gap-3 shrink-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      {activeModalProject.liveUrl && (
-                        <motion.a
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.97 }}
-                          href={activeModalProject.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors shadow-sm"
-                        >
-                          <ExternalLink size={14} />
-                          <span>{t.modal.openLiveButton || (language === 'en' ? 'Open Live App' : 'Kunjungi Live App')}</span>
-                        </motion.a>
-                      )}
-
-                      {activeModalProject.gitlabUrl && (
-                        <motion.a
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.97 }}
-                          href={activeModalProject.gitlabUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold transition-colors shadow-sm"
-                        >
-                          <Gitlab size={14} />
-                          <span>{t.modal.openGitLabButton}</span>
-                          <ExternalLink size={12} />
-                        </motion.a>
-                      )}
-
-                      {activeModalProject.githubUrl && (
-                        <motion.a
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.97 }}
-                          href={activeModalProject.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-700 text-white text-xs font-bold transition-colors shadow-sm"
-                        >
-                          <Github size={14} />
-                          <span>{t.modal.openGitHubButton}</span>
-                          <ExternalLink size={12} />
-                        </motion.a>
-                      )}
-
-                      {activeModalProject.userGuideUrl && (
-                        <motion.a
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.97 }}
-                          href={activeModalProject.userGuideUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold transition-colors shadow-sm"
-                        >
-                          <FileText size={14} />
-                          <span>{language === 'en' ? 'User Guide (PDF)' : 'Panduan Pengguna (PDF)'}</span>
-                          <ExternalLink size={12} />
-                        </motion.a>
-                      )}
-                    </div>
-
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => setActiveModalProject(null)}
-                      className="px-5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold transition-colors border border-slate-300/60 dark:border-slate-700"
-                    >
-                      {t.modal.close}
-                    </motion.button>
-                  </div>
-
-                </motion.div>
-              </div>
-            )}
-          </AnimatePresence>,
-          document.body
-        )}
-
+        <p className="font-mono text-xs text-muted" aria-live="polite">
+          {fmt(ui.projects.showing, { n: isFiltering ? filtered.length : projects.length, total: projects.length })}
+        </p>
       </div>
-    </section>
+
+      {!isFiltering && (
+        <div className="space-y-20 sm:space-y-28">
+          {featured.map((p, i) => (
+            <FeaturedProject key={p.id} project={p} index={i} flip={i % 2 === 1} ui={ui} language={language} />
+          ))}
+        </div>
+      )}
+
+      {!isFiltering && (
+        <h3 className="eyebrow mb-6 mt-24 flex items-center gap-3">
+          <span aria-hidden="true" className="h-px w-8 bg-line" />
+          {ui.projects.archive}
+        </h3>
+      )}
+
+      {gridItems.length === 0 ? (
+        <p className="rounded-2xl border border-dashed border-line py-16 text-center text-muted">{ui.projects.empty}</p>
+      ) : (
+        <LayoutGroup>
+          <motion.ul layout className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <AnimatePresence initial={false} mode="popLayout">
+              {gridItems.map((p) => (
+                <ProjectCard key={p.id} project={p} ui={ui} language={language} />
+              ))}
+            </AnimatePresence>
+          </motion.ul>
+        </LayoutGroup>
+      )}
+
+      {!isFiltering && archive.length > ARCHIVE_PREVIEW && (
+        <div className="mt-10 flex justify-center">
+          <Button variant="secondary" onClick={() => setExpanded((v) => !v)} aria-expanded={expanded}>
+            {expanded ? ui.projects.showLess : fmt(ui.projects.showMore, { n: archive.length })}
+          </Button>
+        </div>
+      )}
+
+      <CaseStudyDialog project={active} list={navList} onClose={closeProject} onNavigate={navigate} />
+    </Section>
   );
 }

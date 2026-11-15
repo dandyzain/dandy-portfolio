@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { MotionConfig } from 'framer-motion';
 import Navbar from './components/Navbar';
+import SectionRail from './components/SectionRail';
+import MobileContactBar from './components/MobileContactBar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
@@ -9,103 +12,61 @@ import EducationCerts from './components/EducationCerts';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import PrintableCVModal from './components/PrintableCVModal';
-import BackgroundOrbs from './components/BackgroundOrbs';
-import { FileText, MessageCircle } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { portfolioData } from './data/portfolioData';
-import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import NotFound from './components/NotFound';
+import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
+import { ProjectFilterProvider } from './context/ProjectFilterContext';
+import { ToastProvider } from './components/ui/Toast';
+import { useCopy } from './hooks/useCopy';
+
+const isHome = () => ['/', '/index.html'].includes(window.location.pathname.replace(/\/+$/, '/') || '/');
 
 function PortfolioContent() {
-  const [darkMode, setDarkMode] = useState(false);
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
-  const { language } = useLanguage();
+  const { ui } = useCopy();
+  const openCV = () => setIsCVModalOpen(true);
 
-  // Sync dark mode class on html tag
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
+  if (!isHome()) return <NotFound />;
 
   return (
-    <div className="min-h-screen bg-pastel-bg-light dark:bg-pastel-bg-dark text-slate-800 dark:text-slate-100 transition-colors duration-300 relative selection:bg-indigo-200 selection:text-indigo-900">
-      
-      {/* Ambient Floating Pastel Orbs */}
-      <BackgroundOrbs />
+    <div className="relative min-h-screen overflow-x-clip">
+      <a href="#main" className="skip-link">
+        {ui.common.skipToContent}
+      </a>
 
-      {/* Top Navbar */}
-      <Navbar 
-        darkMode={darkMode} 
-        setDarkMode={setDarkMode} 
-        onOpenCVModal={() => setIsCVModalOpen(true)} 
-      />
+      <Navbar onOpenCVModal={openCV} />
+      <SectionRail />
 
-      {/* Main Content Sections */}
-      <main>
-        <Hero onOpenCVModal={() => setIsCVModalOpen(true)} />
+      <main id="main" tabIndex={-1} className="outline-none">
+        <Hero onOpenCVModal={openCV} />
         <About />
         <Experience />
         <Skills />
         <Projects />
         <EducationCerts />
-        <Contact onOpenCVModal={() => setIsCVModalOpen(true)} />
+        <Contact onOpenCVModal={openCV} />
       </main>
 
-      {/* Footer */}
       <Footer />
+      <MobileContactBar onOpenCVModal={openCV} />
 
-      {/* Floating Action Quick Access (Bottom Right) with Spring Motion */}
-      <div className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2.5 no-print">
-        {/* Desktop-only CV quick action button (hidden on mobile to prevent blocking card content) */}
-        <motion.button
-          whileHover={{ scale: 1.08, x: -3 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsCVModalOpen(true)}
-          className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs shadow-pastel-md border border-pastel-lavender dark:border-slate-700 transition-shadow"
-          title={language === 'en' ? 'View Complete CV' : 'Lihat CV Lengkap'}
-        >
-          <FileText size={15} className="text-indigo-600" />
-          <span>{language === 'en' ? 'CV Document' : 'CV Dokumen'}</span>
-        </motion.button>
-
-        {/* WhatsApp Floating Button */}
-        <motion.a
-          whileHover={{ scale: 1.12, rotate: 6 }}
-          whileTap={{ scale: 0.92 }}
-          animate={{
-            boxShadow: [
-              "0 4px 14px rgba(16, 185, 129, 0.3)",
-              "0 6px 20px rgba(16, 185, 129, 0.5)",
-              "0 4px 14px rgba(16, 185, 129, 0.3)",
-            ]
-          }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20melihat%20portfolio%20web%20Anda.`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-500 text-white shadow-pastel-md"
-          title="Chat WhatsApp"
-        >
-          <MessageCircle size={22} />
-        </motion.a>
-      </div>
-
-      {/* Printable / Viewable CV Modal */}
-      <PrintableCVModal 
-        isOpen={isCVModalOpen} 
-        onClose={() => setIsCVModalOpen(false)} 
-      />
-
+      <PrintableCVModal isOpen={isCVModalOpen} onClose={() => setIsCVModalOpen(false)} />
     </div>
   );
 }
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <PortfolioContent />
-    </LanguageProvider>
+    <MotionConfig reducedMotion="user">
+      <ThemeProvider>
+        <LanguageProvider>
+          <ToastProvider>
+            <ProjectFilterProvider>
+              <PortfolioContent />
+            </ProjectFilterProvider>
+          </ToastProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </MotionConfig>
   );
 }

@@ -1,123 +1,81 @@
 import React from 'react';
-import { 
-  Linkedin, 
-  Github, 
-  Mail, 
-  ArrowUp 
-} from 'lucide-react';
+import { Linkedin, Github, Mail, ArrowUp } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
-import { useLanguage } from '../context/LanguageContext';
+import { SECTIONS } from '../data/sections';
+import { useCopy } from '../hooks/useCopy';
+import { scrollToSection } from '../hooks/useActiveSection';
 
 export default function Footer() {
-  const { language } = useLanguage();
+  const { ui, t } = useCopy();
   const { personal } = portfolioData;
-  const t = portfolioData.translations[language].footer;
-  const navT = portfolioData.translations[language].nav;
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const social = [
+    { href: personal.linkedin, label: 'LinkedIn', icon: Linkedin },
+    { href: personal.github, label: 'GitHub', icon: Github },
+    { href: `mailto:${personal.email}`, label: 'Email', icon: Mail },
+  ];
 
   return (
-    <footer className="bg-white/80 dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800 pt-16 pb-12 transition-colors relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-100 dark:border-slate-800 items-start">
-          
-          {/* Brand Info (5 cols) */}
-          <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-pink-400 flex items-center justify-center text-white font-display font-bold text-lg shadow-sm">
-                DZ
-              </div>
-              <span className="font-display font-bold text-xl text-slate-900 dark:text-white">
-                {personal.fullName}
-              </span>
-            </div>
-
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-sm leading-relaxed">
-              {t.tagline}
-            </p>
-
-            <div className="flex items-center gap-3 pt-2">
-              <a
-                href={personal.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                title="LinkedIn"
-              >
-                <Linkedin size={18} />
-              </a>
-              <a
-                href={`mailto:${personal.email}`}
-                className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-rose-500 transition-colors"
-                title="Email"
-              >
-                <Mail size={18} />
-              </a>
-              <a
-                href="https://github.com/dandyzain"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
-                title="GitHub"
-              >
-                <Github size={18} />
-              </a>
-            </div>
+    <footer className="no-print border-t border-line pb-28 pt-16 md:pb-12">
+      <div className="container-page">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-6">
+            <p className="font-display text-display-md font-semibold">{personal.fullName}</p>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-ink-2">{t.footer.tagline}</p>
           </div>
 
-          {/* Quick Links (3 cols) */}
-          <div className="md:col-span-3 space-y-3">
-            <h4 className="font-display font-bold text-sm text-slate-900 dark:text-white uppercase tracking-wider">
-              {t.quickLinks}
-            </h4>
-            <ul className="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-              <li><a href="#about" className="hover:text-indigo-600 transition-colors">{navT.about}</a></li>
-              <li><a href="#experience" className="hover:text-indigo-600 transition-colors">{navT.experience}</a></li>
-              <li><a href="#skills" className="hover:text-indigo-600 transition-colors">{navT.skills}</a></li>
-              <li><a href="#projects" className="hover:text-indigo-600 transition-colors">{navT.projects}</a></li>
-              <li><a href="#education" className="hover:text-indigo-600 transition-colors">{navT.education}</a></li>
-              <li><a href="#contact" className="hover:text-indigo-600 transition-colors">{navT.contact}</a></li>
+          <nav aria-label={ui.footer.navigate} className="md:col-span-3">
+            <p className="eyebrow mb-4">{ui.footer.navigate}</p>
+            <ul className="space-y-2.5 text-sm">
+              {SECTIONS.map((s) => (
+                <li key={s.id}>
+                  <a
+                    href={`#${s.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(s.id);
+                    }}
+                    className="link-underline text-ink-2 hover:text-ink"
+                  >
+                    {ui.nav[s.nav]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="md:col-span-3">
+            <p className="eyebrow mb-4">{ui.footer.elsewhere}</p>
+            <ul className="space-y-2.5 text-sm">
+              {social.map(({ href, label, icon: Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="inline-flex items-center gap-2 text-ink-2 hover:text-ink"
+                  >
+                    <Icon size={15} aria-hidden="true" />
+                    <span className="link-underline">{label}</span>
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
-
-          {/* Direct WhatsApp CTA & Back to Top (4 cols) */}
-          <div className="md:col-span-4 space-y-4">
-            <h4 className="font-display font-bold text-sm text-slate-900 dark:text-white uppercase tracking-wider">
-              {t.quickConsult}
-            </h4>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              {t.quickConsultDesc}
-            </p>
-            <a
-              href={`https://wa.me/${personal.rawPhone}?text=Halo%20Dandy,%20saya%20tertarik%20bekerja%20sama.`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold shadow-sm transition-all"
-            >
-              <span>{t.whatsappChat}</span>
-            </a>
-          </div>
-
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+        <div className="mt-14 flex flex-col gap-4 border-t border-line pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} Dandy Rahmat Zain. {t.copyright}
+            © {new Date().getFullYear()} {personal.fullName}. {ui.footer.built}
           </p>
-
           <button
-            onClick={scrollToTop}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors font-semibold"
+            type="button"
+            onClick={() => scrollToSection('hero')}
+            className="group inline-flex items-center gap-1.5 self-start font-mono uppercase tracking-wider text-ink-2 hover:text-ink sm:self-auto"
           >
-            <span>{t.backToTop}</span>
-            <ArrowUp size={14} />
+            {ui.footer.backToTop}
+            <ArrowUp size={14} aria-hidden="true" className="transition-transform duration-fast group-hover:-translate-y-0.5" />
           </button>
         </div>
-
       </div>
     </footer>
   );

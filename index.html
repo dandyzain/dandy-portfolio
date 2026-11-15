@@ -1,16 +1,43 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dandy Rahmat Zain | Full Stack & Mobile Developer Portfolio</title>
     <meta name="description" content="Portfolio & Curriculum Vitae Dandy Rahmat Zain - Full Stack Developer berpengalaman di Laravel, Express.js, React, Next.js, Flutter, dan Kotlin." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="canonical" href="https://dandy-portfolio.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dandy-portfolio.vercel.app/" />
+    <meta property="og:title" content="Dandy Rahmat Zain — Full Stack & Mobile Developer" />
+    <meta property="og:description" content="I build mission-critical systems — from submarine cable monitoring to mobile apps. Case studies, experience and CV." />
+    <meta property="og:image" content="https://dandy-portfolio.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Dandy Rahmat Zain — Full Stack & Mobile Developer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dandy Rahmat Zain — Full Stack & Mobile Developer" />
+    <meta name="twitter:description" content="I build mission-critical systems — from submarine cable monitoring to mobile apps." />
+    <meta name="twitter:image" content="https://dandy-portfolio.vercel.app/og-image.jpg" />
+    <link rel="preload" as="image" type="image/avif" imagesrcset="/images/portrait-640.avif 640w, /images/portrait-960.avif 960w" imagesizes="(min-width: 1024px) 420px, 80vw" />
+    <meta name="theme-color" content="#F7F6F2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#090D18" media="(prefers-color-scheme: dark)" />
+    <script>
+      // Apply saved/system theme and language before first paint (prevents flash).
+      (function () {
+        try {
+          var t = localStorage.getItem('dandy_portfolio_theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          if (t === 'dark') document.documentElement.classList.add('dark');
+          var l = localStorage.getItem('dandy_portfolio_lang');
+          document.documentElement.lang = l === 'id' ? 'id' : 'en';
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body class="bg-pastel-bg-light dark:bg-pastel-bg-dark text-slate-800 dark:text-slate-100 font-sans antialiased selection:bg-indigo-200 selection:text-indigo-900 transition-colors duration-300">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
