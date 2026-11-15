@@ -1,71 +1,157 @@
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/plus-jakarta-sans';
+@import '@fontsource-variable/jetbrains-mono';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------------------------------------------------------
+   Design tokens — "Signal Editorial"
+   Colors are RGB channels so Tailwind alpha modifiers work.
+   *-ink variants are the text-safe (WCAG AA) versions of accents.
+------------------------------------------------------------------- */
 @layer base {
+  :root {
+    --c-bg: 247 246 242;        /* paper  #F7F6F2 */
+    --c-surface: 255 255 255;
+    --c-surface-2: 239 237 231;
+    --c-ink: 14 18 32;          /* ink    #0E1220 */
+    --c-ink-2: 52 58 76;
+    --c-muted: 88 95 114;       /* 5.6:1 on paper */
+    --c-line: 221 218 209;
+    --c-signal: 20 184 166;     /* teal   #14B8A6 (decorative) */
+    --c-signal-ink: 15 118 110; /* #0F766E — 5.4:1 on white */
+    --c-amber: 245 158 11;      /* #F59E0B (decorative) */
+    --c-amber-ink: 180 83 9;    /* #B45309 */
+    --c-danger: 190 18 60;
+    --c-shadow: 14 18 32;
+    --grid-line: rgb(14 18 32 / 0.06);
+
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --nav-h: 4.25rem;
+    color-scheme: light;
+  }
+
+  .dark {
+    --c-bg: 9 13 24;            /* #090D18 */
+    --c-surface: 16 21 37;
+    --c-surface-2: 24 31 52;
+    --c-ink: 236 238 243;
+    --c-ink-2: 196 201 214;
+    --c-muted: 145 153 173;     /* 6.9:1 on bg */
+    --c-line: 39 48 74;
+    --c-signal: 45 212 191;     /* #2DD4BF */
+    --c-signal-ink: 94 234 212; /* #5EEAD4 */
+    --c-amber: 251 191 36;
+    --c-amber-ink: 252 211 77;
+    --c-danger: 251 113 133;
+    --c-shadow: 0 0 0;
+    --grid-line: rgb(148 163 184 / 0.07);
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--nav-h) + 1rem);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+
   body {
-    @apply antialiased selection:bg-indigo-200 selection:text-indigo-900;
+    @apply bg-bg text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgb(var(--c-signal) / 0.28);
+    color: rgb(var(--c-ink));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-signal-ink));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply font-mono text-eyebrow uppercase text-muted;
+  }
+
+  /* Fine coordinate grid used as the "signal" texture */
+  .bg-grid {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 280ms var(--ease-out);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  .skip-link {
+    @apply fixed left-4 top-3 z-[10000] -translate-y-24 rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-bg transition-transform duration-fast;
+  }
+  .skip-link:focus { @apply translate-y-0; }
+}
+
+@layer utilities {
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgb(var(--c-bg)); }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--c-line));
+  border-radius: 9999px;
+  border: 2px solid rgb(var(--c-bg));
+}
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--c-muted)); }
+
+/* Respect reduced motion for any CSS animation/transition */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-/* Custom Glassmorphism Pastel */
+/* ---------------- LEGACY (removed in Phase 7) ---------------- */
 .glass-pastel {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgb(var(--c-surface) / 0.8);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgb(var(--c-line));
 }
-
-.dark .glass-pastel {
-  background: rgba(30, 34, 56, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Pastel gradients */
-.bg-pastel-gradient-1 {
-  background: linear-gradient(135deg, #F4F5FF 0%, #FFF5F2 50%, #F0FDF8 100%);
-}
-
-.dark .bg-pastel-gradient-1 {
-  background: linear-gradient(135deg, #0F1222 0%, #161A30 50%, #121A28 100%);
-}
-
-.bg-pastel-radial {
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(228, 231, 255, 0.7) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(209, 250, 229, 0.6) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(255, 228, 224, 0.5) 0%, transparent 50%);
-}
-
-.dark .bg-pastel-radial {
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.12) 0%, transparent 50%);
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #FAF9F6;
-}
-.dark ::-webkit-scrollbar-track {
-  background: #0F1222;
-}
-::-webkit-scrollbar-thumb {
-  background: #C7D2FE;
-  border-radius: 9999px;
-}
-.dark ::-webkit-scrollbar-thumb {
-  background: #3730A3;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #818CF8;
-}
+.bg-pastel-gradient-1 { background: rgb(var(--c-surface-2)); }
+.bg-pastel-radial { background: transparent; }
 
 /* Print CSS for Clean A4 CV */
 @media print {

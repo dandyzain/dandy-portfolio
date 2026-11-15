@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -11,23 +11,18 @@ import Footer from './components/Footer';
 import PrintableCVModal from './components/PrintableCVModal';
 import BackgroundOrbs from './components/BackgroundOrbs';
 import { FileText, MessageCircle } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, MotionConfig } from 'framer-motion';
 import { portfolioData } from './data/portfolioData';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { ToastProvider } from './components/ui/Toast';
 
 function PortfolioContent() {
-  const [darkMode, setDarkMode] = useState(false);
+  const { isDark, toggleTheme } = useTheme();
+  const darkMode = isDark;
+  const setDarkMode = () => toggleTheme();
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
   const { language } = useLanguage();
-
-  // Sync dark mode class on html tag
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
 
   return (
     <div className="min-h-screen bg-pastel-bg-light dark:bg-pastel-bg-dark text-slate-800 dark:text-slate-100 transition-colors duration-300 relative selection:bg-indigo-200 selection:text-indigo-900">
@@ -104,8 +99,14 @@ function PortfolioContent() {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <PortfolioContent />
-    </LanguageProvider>
+    <MotionConfig reducedMotion="user">
+      <ThemeProvider>
+        <LanguageProvider>
+          <ToastProvider>
+            <PortfolioContent />
+          </ToastProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </MotionConfig>
   );
 }
