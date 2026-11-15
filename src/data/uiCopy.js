@@ -63,6 +63,8 @@ export const uiCopy = {
       current: 'Current',
       related: 'Related case studies',
       listLabel: 'Companies',
+      period: 'Period',
+      location: 'Location',
     },
     skills: {
       eyebrow: 'Skills',
@@ -213,6 +215,8 @@ export const uiCopy = {
       current: 'Saat ini',
       related: 'Studi kasus terkait',
       listLabel: 'Perusahaan',
+      period: 'Periode',
+      location: 'Lokasi',
     },
     skills: {
       eyebrow: 'Keahlian',
