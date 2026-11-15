@@ -1,289 +1,220 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Menu, 
-  X, 
-  Moon, 
-  Sun, 
-  FileText, 
-  Send, 
-  Languages 
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { Menu, Moon, Sun, FileText, ArrowUpRight } from 'lucide-react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
+import { SECTIONS, SECTION_IDS } from '../data/sections';
 import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
+import { useCopy } from '../hooks/useCopy';
+import { useActiveSection, scrollToSection } from '../hooks/useActiveSection';
+import { cn } from '../lib/cn';
+import { spring } from '../lib/motion';
+import Button from './ui/Button';
+import IconButton from './ui/IconButton';
+import Dialog from './ui/Dialog';
 
-export default function Navbar({ darkMode, setDarkMode, onOpenCVModal }) {
+function Brand() {
+  return (
+    <a
+      href="#hero"
+      onClick={(e) => {
+        e.preventDefault();
+        scrollToSection('hero');
+      }}
+      className="group flex items-center gap-3"
+      aria-label={portfolioData.personal.fullName}
+    >
+      <span className="relative grid h-9 w-9 place-items-center rounded-lg bg-ink font-mono text-[0.8rem] font-semibold tracking-tight text-bg transition-transform duration-fast ease-out group-hover:-rotate-3">
+        DZ
+        <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-signal ring-2 ring-bg" aria-hidden="true" />
+      </span>
+      <span className="leading-tight">
+        <span className="block font-display text-[0.95rem] font-semibold text-ink">{portfolioData.personal.preferredName}</span>
+        <span className="hidden font-mono text-[0.68rem] uppercase tracking-wider text-muted sm:block">Full Stack · Mobile</span>
+      </span>
+    </a>
+  );
+}
+
+export default function Navbar({ onOpenCVModal }) {
   const { language, toggleLanguage } = useLanguage();
-  const t = portfolioData.translations[language].nav;
+  const { isDark, toggleTheme } = useTheme();
+  const { ui } = useCopy();
+  const active = useActiveSection(SECTION_IDS);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
-
-  const handleNavClick = (e, sectionId) => {
-    e.preventDefault();
-    setMobileMenuOpen(false);
-    
-    setTimeout(() => {
-      const el = document.getElementById(sectionId);
-      if (el) {
-        const navOffset = 75;
-        const elementPosition = el.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }, 60);
-  };
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 40, restDelta: 0.001 });
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-
-      const sections = ['about', 'experience', 'skills', 'projects', 'education', 'contact'];
-      const scrollPos = window.scrollY + 200;
-
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-      if (window.scrollY < 200) {
-        setActiveSection('hero');
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navLinks = [
-    { name: t.about, href: '#about', id: 'about' },
-    { name: t.experience, href: '#experience', id: 'experience' },
-    { name: t.skills, href: '#skills', id: 'skills' },
-    { name: t.projects, href: '#projects', id: 'projects' },
-    { name: t.education, href: '#education', id: 'education' },
-    { name: t.contact, href: '#contact', id: 'contact' },
-  ];
+  // Skills is not in the top bar (it is in the menu); while it is in view the
+  // top bar keeps its neighbour, Experience, lit.
+  const activeTop = active === 'skills' ? 'experience' : active;
+  const navItems = SECTIONS.filter((s) => s.inNav);
+
+  const go = (e, id) => {
+    e.preventDefault();
+    scrollToSection(id);
+  };
+
+  const goFromMenu = (e, id) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    // wait for the sheet's exit so scroll lock is released
+    setTimeout(() => scrollToSection(id), 220);
+  };
+
+  const themeLabel = isDark ? ui.common.themeToLight : ui.common.themeToDark;
 
   return (
-    <motion.header 
-      initial={{ y: -70, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'glass-pastel py-3 shadow-pastel-sm' 
-          : 'bg-transparent py-5'
-      }`}
+    <header
+      className={cn(
+        'no-print fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-base',
+        scrolled ? 'border-b border-line bg-bg/80 backdrop-blur-md' : 'border-b border-transparent'
+      )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          
-          {/* Brand Logo */}
-          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group min-w-0">
-            <motion.div 
-              whileHover={{ rotate: 8, scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-pastel-lavender-accent to-pink-400 p-0.5 shadow-sm overflow-hidden flex items-center justify-center shrink-0"
-            >
-              <div className="w-full h-full rounded-[14px] overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center">
-                <img 
-                  src={portfolioData.personal.avatar} 
-                  alt={portfolioData.personal.preferredName}
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white dark:border-slate-800 sm:hidden" />
-            </motion.div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="font-display font-bold text-base sm:text-lg text-slate-800 dark:text-white tracking-tight whitespace-nowrap">
-                  {portfolioData.personal.preferredName}
-                </span>
-                <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-                  {t.available}
-                </span>
-              </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block truncate">
-                Full Stack Developer
-              </p>
-            </div>
-          </a>
+      <div className="container-page flex h-[var(--nav-h)] items-center justify-between gap-4">
+        <Brand />
 
-          {/* Desktop Navigation with Animated Spring Indicator */}
-          <nav className="hidden md:flex items-center gap-1 bg-white/70 dark:bg-slate-900/60 p-1.5 rounded-full border border-slate-200/60 dark:border-slate-800 shadow-sm backdrop-blur-md relative">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
+        <nav aria-label={ui.nav.primary} className="hidden lg:block">
+          <ul className="flex items-center gap-1">
+            {navItems.map((s) => {
+              const isActive = activeTop === s.id;
               return (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.id)}
-                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors duration-200 z-10 ${
-                    isActive
-                      ? 'text-white'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNavIndicator"
-                      className="absolute inset-0 rounded-full bg-pastel-lavender-accent shadow-sm -z-10"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  {link.name}
-                </a>
+                <li key={s.id}>
+                  <a
+                    href={`#${s.id}`}
+                    onClick={(e) => go(e, s.id)}
+                    aria-current={isActive ? 'true' : undefined}
+                    className={cn(
+                      'relative inline-flex h-10 items-center px-3 text-sm font-medium transition-colors duration-fast',
+                      isActive ? 'text-ink' : 'text-muted hover:text-ink'
+                    )}
+                  >
+                    {ui.nav[s.nav]}
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-active"
+                        transition={spring}
+                        className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-signal"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </a>
+                </li>
               );
             })}
-          </nav>
+          </ul>
+        </nav>
 
-          {/* Right Action Buttons */}
-          <div className="hidden lg:flex items-center gap-2.5">
-            {/* Language Switcher Pill */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={toggleLanguage}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-all shadow-sm text-xs font-bold"
-              title={language === 'en' ? 'Ganti ke Bahasa Indonesia' : 'Switch to English (US)'}
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="inline-flex h-9 items-center rounded-lg px-2.5 font-mono text-xs font-semibold text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink"
+            aria-label={ui.common.languageSwitch}
+            title={ui.common.languageSwitch}
+          >
+            <span className={language === 'en' ? 'text-ink' : 'text-muted'}>EN</span>
+            <span className="mx-1 text-line" aria-hidden="true">/</span>
+            <span className={language === 'id' ? 'text-ink' : 'text-muted'}>ID</span>
+          </button>
+          <IconButton label={themeLabel} onClick={toggleTheme} variant="ghost" size="sm">
+            <motion.span
+              key={isDark ? 'sun' : 'moon'}
+              initial={{ rotate: -45, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              transition={{ duration: 0.28 }}
+              className="inline-flex"
             >
-              <Languages size={14} className="text-indigo-500" />
-              <span>{language === 'en' ? '🇺🇸 EN' : '🇮🇩 ID'}</span>
-            </motion.button>
-
-            {/* Dark Mode Toggle */}
-            <motion.button
-              whileHover={{ scale: 1.05, rotate: 15 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setDarkMode(!darkMode)}
-              className="p-2.5 rounded-2xl bg-white/80 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-all shadow-sm"
-              aria-label="Toggle Dark Mode"
-            >
-              {darkMode ? <Sun size={17} /> : <Moon size={17} />}
-            </motion.button>
-
-            {/* View CV Button */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={onOpenCVModal}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl text-xs font-semibold bg-pastel-mint-light hover:bg-pastel-mint text-emerald-800 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 transition-all shadow-sm"
-            >
-              <FileText size={14} />
-              <span>{t.viewCV}</span>
-            </motion.button>
-
-            {/* Direct WhatsApp CTA */}
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={`https://wa.me/${portfolioData.personal.rawPhone}?text=Halo%20Dandy,%20saya%20tertarik%20dengan%20portfolio%20Anda.`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-pastel-sm hover:shadow-pastel-md transition-all duration-200"
-            >
-              <Send size={13} />
-              <span>{t.contactMe}</span>
-            </motion.a>
-          </div>
-
-          {/* Mobile Actions */}
-          <div className="flex items-center gap-1 sm:gap-1.5 md:hidden shrink-0">
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={toggleLanguage}
-              className="px-2 py-1.5 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-bold"
-              aria-label="Switch Language"
-            >
-              {language === 'en' ? '🇺🇸 EN' : '🇮🇩 ID'}
-            </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setDarkMode(!darkMode)}
-              className="p-1.5 sm:p-2 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 border border-slate-200 dark:border-slate-700"
-              aria-label="Toggle Dark Mode"
-            >
-              {darkMode ? <Sun size={17} /> : <Moon size={17} />}
-            </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 sm:p-2 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
-              aria-label="Toggle Menu"
-            >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </motion.button>
-          </div>
-
+              {isDark ? <Sun size={17} /> : <Moon size={17} />}
+            </motion.span>
+          </IconButton>
+          <Button variant="secondary" size="sm" onClick={onOpenCVModal} className="hidden md:inline-flex">
+            <FileText size={15} aria-hidden="true" />
+            {ui.nav.cv}
+          </Button>
+          <Button size="sm" href="#contact" onClick={(e) => go(e, 'contact')} className="hidden md:inline-flex">
+            {ui.nav.cta}
+            <ArrowUpRight size={15} aria-hidden="true" className="transition-transform duration-fast group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+          </Button>
+          <IconButton
+            label={ui.common.menuOpen}
+            onClick={() => setMenuOpen(true)}
+            variant="ghost"
+            size="sm"
+            className="lg:hidden"
+            aria-expanded={menuOpen}
+            aria-haspopup="dialog"
+          >
+            <Menu size={19} />
+          </IconButton>
         </div>
-
-        {/* Mobile Dropdown Menu with Spring Animation */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div 
-              initial={{ opacity: 0, height: 0, scale: 0.95 }}
-              animate={{ opacity: 1, height: 'auto', scale: 1 }}
-              exit={{ opacity: 0, height: 0, scale: 0.95 }}
-              transition={{ duration: 0.25, ease: "easeInOut" }}
-              className="md:hidden mt-4 p-4 rounded-3xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-xl backdrop-blur-xl overflow-hidden"
-            >
-              <div className="flex flex-col gap-1.5">
-                {navLinks.map((link) => (
-                  <button
-                    key={link.id}
-                    type="button"
-                    onClick={(e) => handleNavClick(e, link.id)}
-                    className={`w-full text-left px-4 py-2.5 rounded-2xl text-sm font-medium transition-colors flex items-center justify-between ${
-                      activeSection === link.id
-                        ? 'bg-pastel-lavender-accent text-white font-semibold shadow-sm'
-                        : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
-                    }`}
-                  >
-                    <span>{link.name}</span>
-                    {activeSection === link.id && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                    )}
-                  </button>
-                ))}
-                <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      onOpenCVModal();
-                    }}
-                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-pastel-mint-light text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 transition-colors"
-                  >
-                    <FileText size={16} />
-                    <span>{t.viewCV}</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={(e) => handleNavClick(e, 'contact')}
-                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-colors"
-                  >
-                    <Send size={16} />
-                    <span>{t.contactMe}</span>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
       </div>
-    </motion.header>
+
+      {/* Scroll progress */}
+      <motion.div
+        aria-hidden="true"
+        style={{ scaleX: progress }}
+        className="absolute inset-x-0 bottom-0 h-px origin-left bg-signal"
+      />
+
+      <Dialog
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        title={ui.common.menu}
+        closeLabel={ui.common.menuClose}
+        fullscreenMobile
+        bodyClassName="px-5 py-6 sm:px-7"
+      >
+        <nav aria-label={ui.nav.primary}>
+          <ol className="divide-y divide-line border-y border-line">
+            {SECTIONS.map((s) => (
+              <li key={s.id}>
+                <a
+                  href={`#${s.id}`}
+                  onClick={(e) => goFromMenu(e, s.id)}
+                  aria-current={active === s.id ? 'true' : undefined}
+                  className="group flex items-baseline gap-4 py-4"
+                >
+                  <span className="font-mono text-xs text-signal-ink">{s.index}</span>
+                  <span
+                    className={cn(
+                      'font-display text-2xl font-semibold transition-colors',
+                      active === s.id ? 'text-ink' : 'text-ink-2 group-hover:text-ink'
+                    )}
+                  >
+                    {ui.nav[s.nav]}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+        <div className="mt-8 grid grid-cols-2 gap-3">
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={() => {
+              setMenuOpen(false);
+              setTimeout(onOpenCVModal, 220);
+            }}
+          >
+            <FileText size={16} aria-hidden="true" />
+            {ui.nav.cv}
+          </Button>
+          <Button size="lg" href="#contact" onClick={(e) => goFromMenu(e, 'contact')}>
+            {ui.nav.cta}
+          </Button>
+        </div>
+      </Dialog>
+    </header>
   );
 }

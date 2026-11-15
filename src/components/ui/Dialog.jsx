@@ -28,7 +28,7 @@ function unlockScroll() {
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-function DialogPanel({ onClose, closeLabel = 'Close', title, hideTitle, size, className, bodyClassName, header, footer, children, initialFocusRef }) {
+function DialogPanel({ onClose, closeLabel = 'Close', fullscreenMobile = false, title, hideTitle, size, className, bodyClassName, header, footer, children, initialFocusRef }) {
   const panelRef = useRef(null);
   const titleId = useId();
   const restoreRef = useRef(null);
@@ -93,7 +93,8 @@ function DialogPanel({ onClose, closeLabel = 'Close', title, hideTitle, size, cl
         aria-labelledby={titleId}
         tabIndex={-1}
         className={cn(
-          'relative flex max-h-[92dvh] w-full flex-col overflow-hidden rounded-t-3xl border border-line bg-surface shadow-lift outline-none sm:rounded-3xl',
+          'relative flex w-full flex-col overflow-hidden border border-line bg-surface shadow-lift outline-none sm:max-h-[92dvh] sm:rounded-3xl',
+          fullscreenMobile ? 'h-[100dvh] max-sm:border-0 sm:h-auto' : 'max-h-[92dvh] rounded-t-3xl',
           widths[size] || widths.md,
           className
         )}
