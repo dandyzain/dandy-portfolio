@@ -16,9 +16,13 @@ export function projectUrl(slug) {
 
 export function openProject(slug, { replace = false } = {}) {
   const url = projectUrl(slug);
-  const state = { project: slug, fromApp: true };
-  if (replace) history.replaceState(state, '', url);
-  else history.pushState(state, '', url);
+  if (replace) {
+    // keep whether *this* entry was pushed by us, so closing a deep-linked
+    // case study never navigates away from the site
+    history.replaceState({ project: slug, fromApp: !!history.state?.fromApp }, '', url);
+  } else {
+    history.pushState({ project: slug, fromApp: true }, '', url);
+  }
   window.dispatchEvent(new Event(EVENT));
 }
 

@@ -36,7 +36,7 @@ function DialogPanel({ onClose, closeLabel = 'Close', fullscreenMobile = false, 
   useEffect(() => {
     restoreRef.current = document.activeElement;
     lockScroll();
-    const focusTarget = initialFocusRef?.current || panelRef.current?.querySelector(FOCUSABLE) || panelRef.current;
+    const focusTarget = initialFocusRef?.current || panelRef.current;
     // wait one frame so the portal is painted
     const raf = requestAnimationFrame(() => focusTarget?.focus({ preventScroll: true }));
 
