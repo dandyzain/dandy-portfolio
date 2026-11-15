@@ -1,201 +1,107 @@
-import React, { useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  X, 
-  ExternalLink, 
-  Download, 
-  Award, 
-  Calendar, 
-  Building2, 
-  CheckCircle2, 
-  ShieldCheck,
-  Eye,
-  FileText
-} from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
-import PdfViewer from './PdfViewer';
+import React, { Suspense, lazy, useRef } from 'react';
+import { Award, Building2, CalendarDays, Download, ExternalLink, ShieldCheck, Loader2 } from 'lucide-react';
+import { useCopy } from '../hooks/useCopy';
+import Dialog from './ui/Dialog';
+import Chip from './ui/Chip';
+import Button from './ui/Button';
+
+// pdf.js is heavy: load it only when a PDF certificate is opened.
+const PdfViewer = lazy(() => import('./PdfViewer'));
+
+function ViewerFallback({ label }) {
+  return (
+    <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 text-[#c4c9d6]" role="status">
+      <Loader2 size={28} className="animate-spin text-[#2dd4bf]" aria-hidden="true" />
+      <p className="text-sm">{label}</p>
+    </div>
+  );
+}
 
 export default function CertificateModal({ isOpen, onClose, certificate }) {
-  const { language } = useLanguage();
-  
-  // Retain last active certificate so exit animations finish smoothly
-  const lastCertRef = useRef(certificate);
-  if (certificate) {
-    lastCertRef.current = certificate;
-  }
-  const activeCert = certificate || lastCertRef.current;
+  const { ui, language } = useCopy();
+  const c = ui.credentials;
 
-  // Close on Escape key press & prevent background scrolling
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose();
-    };
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, onClose]);
+  // Keep the last certificate so the exit animation has content.
+  const lastRef = useRef(certificate);
+  if (certificate) lastRef.current = certificate;
+  const cert = certificate || lastRef.current;
+  if (!cert) return null;
 
-  if (typeof document === 'undefined') return null;
+  const isImage = cert.fileType === 'image' || /\.(jpe?g|png|webp)$/i.test(cert.file);
+  const fileUrl = encodeURI(cert.file);
 
-  const isImage = activeCert && (
-    activeCert.fileType === 'image' || 
-    activeCert.file.endsWith('.jpg') || 
-    activeCert.file.endsWith('.png')
-  );
-  const encodedFile = activeCert ? encodeURI(activeCert.file) : '';
-
-  return createPortal(
-    <AnimatePresence>
-      {isOpen && activeCert && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-hidden">
-          {/* Backdrop */}
-          <motion.div
-            key="cert-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-slate-950/80 backdrop-blur-md cursor-pointer"
-          />
-
-          {/* Modal Window Card */}
-          <motion.div
-            key="cert-dialog"
-            initial={{ opacity: 0, scale: 0.93, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.93, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 320 }}
-            onClick={(e) => e.stopPropagation()}
-            className="relative z-10 w-full max-w-5xl bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200/80 dark:border-slate-800 overflow-hidden flex flex-col max-h-[92vh]"
-          >
-            {/* Header */}
-            <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-start justify-between gap-4 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-sm shrink-0">
-              <div className="space-y-1.5 flex-1 min-w-0 pr-2">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${activeCert.badgeColor || 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300'}`}>
-                    {activeCert.categoryLabel ? activeCert.categoryLabel[language] : activeCert.category}
-                  </span>
-                  {activeCert.isSpecialization && (
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 flex items-center gap-1">
-                      <Award size={11} />
-                      {language === 'en' ? 'Specialization' : 'Spesialisasi'}
-                    </span>
-                  )}
-                  {activeCert.credentialId && (
-                    <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
-                      ID: {activeCert.credentialId}
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="font-display font-bold text-base sm:text-xl text-slate-900 dark:text-white leading-tight break-words">
-                  {activeCert.title}
-                </h3>
-
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
-                  <span className="flex items-center gap-1.5 font-medium text-slate-700 dark:text-slate-200">
-                    <Building2 size={13} className="text-indigo-500" />
-                    {activeCert.issuer}
-                  </span>
-                  {activeCert.issueDate && (
-                    <span className="flex items-center gap-1.5">
-                      <Calendar size={13} />
-                      {activeCert.issueDate}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-                {activeCert.credentialUrl && (
-                  <a
-                    href={activeCert.credentialUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-300 text-xs font-semibold hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-colors border border-indigo-200 dark:border-indigo-800/60"
-                    title={language === 'en' ? 'Verify Online Credential' : 'Verifikasi Kredensial Online'}
-                  >
-                    <ShieldCheck size={14} className="text-indigo-500" />
-                    <span className="hidden md:inline">{language === 'en' ? 'Verify Online' : 'Verifikasi Online'}</span>
-                    <ExternalLink size={12} className="hidden sm:inline" />
-                  </a>
-                )}
-
-                <a
-                  href={encodedFile}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-                  title={language === 'en' ? 'Open full file in new tab' : 'Buka file di tab baru'}
-                >
-                  <ExternalLink size={14} />
-                  <span className="hidden sm:inline">{language === 'en' ? 'Open Full File' : 'Buka File'}</span>
-                </a>
-
-                <a
-                  href={encodedFile}
-                  download
-                  className="inline-flex items-center gap-1.5 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-                  title={language === 'en' ? 'Download file' : 'Unduh file'}
-                >
-                  <Download size={14} />
-                </a>
-
-                <button
-                  onClick={onClose}
-                  className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                  aria-label="Close modal"
-                >
-                  <X size={18} />
-                </button>
-              </div>
-            </div>
-
-            {/* Certificate Viewer Body */}
-            <div className="flex-1 overflow-auto p-2 sm:p-4 bg-slate-950 flex flex-col items-center justify-center min-h-[50vh] sm:min-h-[60vh]">
-              {isImage ? (
-                <div className="w-full flex items-center justify-center p-2">
-                  <img
-                    src={encodedFile}
-                    alt={activeCert.title}
-                    className="max-h-[70vh] w-auto max-w-full object-contain rounded-xl shadow-2xl"
-                  />
-                </div>
-              ) : (
-                <div className="w-full h-full flex flex-col items-center">
-                  <PdfViewer 
-                    fileUrl={encodedFile} 
-                    title={activeCert.title} 
-                    language={language} 
-                  />
-                </div>
-              )}
-            </div>
-
-            {/* Footer Note */}
-            <div className="px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 shrink-0">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={13} className="text-emerald-500" />
-                {language === 'en' ? 'Verified Document from official repository' : 'Dokumen terverifikasi dari arsip resmi'}
-              </span>
-              <span className="hidden sm:inline font-mono text-[10px] text-slate-400">
-                dandy-portfolio/public/certificate
-              </span>
-            </div>
-          </motion.div>
+  return (
+    <Dialog
+      open={isOpen}
+      onClose={onClose}
+      size="xl"
+      title={cert.title}
+      closeLabel={ui.common.close}
+      bodyClassName="bg-[#090D18]"
+      header={
+        <div className="mb-1.5 flex flex-wrap items-center gap-2">
+          <Chip tone="signal" className="!py-0.5">
+            {cert.categoryLabel ? cert.categoryLabel[language] : cert.category}
+          </Chip>
+          {cert.isSpecialization && (
+            <Chip tone="amber" className="!py-0.5">
+              <Award size={12} aria-hidden="true" />
+              {c.specialization}
+            </Chip>
+          )}
         </div>
-      )}
-    </AnimatePresence>,
-    document.body
+      }
+      footer={
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <dl className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-ink-2">
+            <div className="flex items-center gap-1.5">
+              <dt className="sr-only">Issuer</dt>
+              <Building2 size={14} aria-hidden="true" />
+              <dd>{cert.issuer}</dd>
+            </div>
+            {cert.issueDate && (
+              <div className="flex items-center gap-1.5">
+                <dt className="sr-only">Date</dt>
+                <CalendarDays size={14} aria-hidden="true" />
+                <dd>{cert.issueDate}</dd>
+              </div>
+            )}
+            {cert.credentialId && (
+              <div className="font-mono text-xs text-muted">
+                <dt className="sr-only">Credential ID</dt>
+                <dd>ID {cert.credentialId}</dd>
+              </div>
+            )}
+          </dl>
+          <div className="flex flex-wrap gap-2">
+            {cert.credentialUrl && (
+              <Button href={cert.credentialUrl} size="sm">
+                <ShieldCheck size={15} aria-hidden="true" />
+                {c.verify}
+                <span className="sr-only">{ui.common.opensInNewTab}</span>
+              </Button>
+            )}
+            <Button href={fileUrl} variant="secondary" size="sm" external>
+              <ExternalLink size={15} aria-hidden="true" />
+              {c.openFile}
+            </Button>
+            <Button href={fileUrl} variant="secondary" size="sm" download external={false}>
+              <Download size={15} aria-hidden="true" />
+              {c.download}
+            </Button>
+          </div>
+        </div>
+      }
+    >
+      <div className="flex min-h-[50vh] flex-col items-center justify-center p-2 sm:p-4">
+        {isImage ? (
+          <img src={fileUrl} alt={cert.title} className="max-h-[68vh] w-auto max-w-full rounded-lg object-contain shadow-lift" />
+        ) : (
+          <Suspense fallback={<ViewerFallback label={c.loading} />}>
+            <PdfViewer fileUrl={fileUrl} title={cert.title} language={language} />
+          </Suspense>
+        )}
+      </div>
+    </Dialog>
   );
 }

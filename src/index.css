@@ -153,25 +153,26 @@
 .bg-pastel-gradient-1 { background: rgb(var(--c-surface-2)); }
 .bg-pastel-radial { background: transparent; }
 
-/* Print CSS for Clean A4 CV */
+/* ---------------- Print: clean A4 CV ----------------
+   The CV dialog mounts a .print-only copy directly under <body>.
+   When printing, every other top-level node is removed from layout. */
+.print-only { display: none; }
+
 @media print {
-  body * {
-    visibility: hidden;
+  @page { size: A4; margin: 12mm 12mm 14mm; }
+  html, body {
+    background: #fff !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    height: auto !important;
   }
-  #printable-cv, #printable-cv * {
-    visibility: visible;
+  body > *:not(.print-only) { display: none !important; }
+  .print-only { display: block !important; }
+  .print-only .cv-paper { padding: 0 !important; }
+  .cv-avoid-break { break-inside: avoid; }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
-  #printable-cv {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: white !important;
-    color: black !important;
-  }
-  .no-print {
-    display: none !important;
-  }
+  .no-print { display: none !important; }
 }

@@ -121,6 +121,7 @@ export const uiCopy = {
       loading: 'Loading document…',
       verifiedNote: 'Original document from the portfolio archive',
       clearSearch: 'Clear search',
+      showAll: 'Show all {n} certifications',
     },
     contact: {
       eyebrow: 'Contact',
@@ -273,6 +274,7 @@ export const uiCopy = {
       loading: 'Memuat dokumen…',
       verifiedNote: 'Dokumen asli dari arsip portofolio',
       clearSearch: 'Hapus pencarian',
+      showAll: 'Tampilkan semua {n} sertifikasi',
     },
     contact: {
       eyebrow: 'Kontak',

@@ -159,7 +159,7 @@ export default function PdfViewer({ fileUrl, title, language = 'id' }) {
       {/* Loading Spinner */}
       {loading && (
         <div className="flex flex-col items-center justify-center p-8 text-slate-300 gap-3">
-          <Loader2 size={36} className="animate-spin text-indigo-400" />
+          <Loader2 size={36} className="animate-spin text-[#2dd4bf]" />
           <p className="text-xs sm:text-sm font-medium">
             {language === 'en' ? 'Rendering Certificate...' : 'Memuat Dokumen Sertifikat...'}
           </p>
@@ -182,7 +182,7 @@ export default function PdfViewer({ fileUrl, title, language = 'id' }) {
             href={fileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition-colors shadow-md"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#2dd4bf] hover:brightness-105 text-[#04201d] text-xs font-bold transition-colors shadow-md"
           >
             <ExternalLink size={14} />
             <span>{language === 'en' ? 'Open Official PDF' : 'Buka PDF Resmi'}</span>
@@ -204,6 +204,8 @@ export default function PdfViewer({ fileUrl, title, language = 'id' }) {
                     disabled={currentPage <= 1}
                     className="p-1 rounded hover:bg-slate-800 disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
                     title="Previous page"
+                    aria-label="Previous page"
+                    type="button"
                   >
                     <ChevronLeft size={16} />
                   </button>
@@ -215,6 +217,8 @@ export default function PdfViewer({ fileUrl, title, language = 'id' }) {
                     disabled={currentPage >= numPages}
                     className="p-1 rounded hover:bg-slate-800 disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
                     title="Next page"
+                    aria-label="Next page"
+                    type="button"
                   >
                     <ChevronRight size={16} />
                   </button>
@@ -233,6 +237,8 @@ export default function PdfViewer({ fileUrl, title, language = 'id' }) {
                 disabled={scaleMultiplier <= 0.6}
                 className="p-1 rounded hover:bg-slate-800 disabled:opacity-30 transition-colors"
                 title="Zoom Out"
+                    aria-label="Zoom Out"
+                    type="button"
               >
                 <ZoomOut size={15} />
               </button>
@@ -240,6 +246,8 @@ export default function PdfViewer({ fileUrl, title, language = 'id' }) {
                 onClick={handleResetZoom}
                 className="px-1.5 py-0.5 rounded text-[10px] font-mono hover:bg-slate-800 transition-colors"
                 title="Reset Zoom"
+                    aria-label="Reset Zoom"
+                    type="button"
               >
                 {Math.round(scaleMultiplier * 100)}%
               </button>
@@ -248,6 +256,8 @@ export default function PdfViewer({ fileUrl, title, language = 'id' }) {
                 disabled={scaleMultiplier >= 2.5}
                 className="p-1 rounded hover:bg-slate-800 disabled:opacity-30 transition-colors"
                 title="Zoom In"
+                    aria-label="Zoom In"
+                    type="button"
               >
                 <ZoomIn size={15} />
               </button>
