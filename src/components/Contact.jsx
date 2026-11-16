@@ -150,6 +150,7 @@ export default function Contact({ onOpenCVModal }) {
         <Reveal className="lg:col-span-5">
           <h3 className="eyebrow mb-3">{c.channels}</h3>
           <motion.ul
+            key={language}
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}

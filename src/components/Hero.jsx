@@ -235,6 +235,7 @@ export default function Hero({ onOpenCVModal }) {
 
         {/* Proof strip */}
         <motion.dl
+          key={language}
           initial="hidden"
           animate="visible"
           variants={stagger(0.09, 0.6)}

@@ -6,15 +6,19 @@ import { stagger, viewportOnce, wordRise } from '../../lib/motion';
 /**
  * Heading text that rises in word by word from behind a mask.
  *
- * - `trigger="inherit"` (default) waits for a parent motion element's
- *   hidden → visible variants (e.g. the Section header's whileInView).
+ * - `trigger="view"` (default) plays once when scrolled into view.
  * - `trigger="mount"` plays on first render (hero).
- * - `trigger="view"` plays once when scrolled into view.
+ * - `trigger="inherit"` follows a parent's hidden → visible variants. Avoid it
+ *   for text that changes (e.g. on language switch): words mounted after the
+ *   parent has already played would stay hidden.
+ *
+ * The root is keyed by `text`, so a language switch remounts it and the
+ * words animate in again instead of getting stuck behind the mask.
  *
  * Screen readers get the plain text once (aria-label); the animated word
  * spans are hidden from them.
  */
-export default function SplitText({ text, as = 'span', className, wordClassName, step = 0.045, delay = 0, trigger = 'inherit', ...rest }) {
+export default function SplitText({ text, as = 'span', className, wordClassName, step = 0.045, delay = 0, trigger = 'view', ...rest }) {
   const Comp = motion[as] || motion.span;
   const words = String(text).split(/\s+/).filter(Boolean);
 
@@ -26,7 +30,7 @@ export default function SplitText({ text, as = 'span', className, wordClassName,
         : {};
 
   return (
-    <Comp aria-label={text} className={className} variants={stagger(step, delay)} {...triggerProps} {...rest}>
+    <Comp key={text} aria-label={text} className={className} variants={stagger(step, delay)} {...triggerProps} {...rest}>
       {words.map((word, i) => (
         <React.Fragment key={`${word}-${i}`}>
           {/* Hyphenated words ("mission-critical") may still break after the hyphen */}

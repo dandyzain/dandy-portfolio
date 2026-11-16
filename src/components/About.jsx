@@ -33,6 +33,7 @@ export default function About() {
           <div className="mt-10 border-t border-line pt-6">
             <h3 className="eyebrow mb-4">{ui.about.principles}</h3>
             <motion.ul
+              key={language}
               initial="hidden"
               whileInView="visible"
               viewport={viewportOnce}
@@ -61,6 +62,7 @@ export default function About() {
         <div className="lg:col-span-5">
           <h3 className="eyebrow mb-2">{ui.about.whatIDo}</h3>
           <motion.ol
+            key={language}
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}

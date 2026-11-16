@@ -55,7 +55,7 @@ function ExperienceDetail({ exp, related, language, ui, compact = false }) {
       <p className={cn('max-w-prose leading-relaxed text-ink-2', compact ? 'mt-4' : 'mt-6')}>{exp.description[language]}</p>
 
       <h4 className="eyebrow mb-3 mt-8">{ui.contributions}</h4>
-      <motion.ul initial="hidden" animate="visible" variants={stagger(0.07, 0.1)} className="space-y-3">
+      <motion.ul key={language} initial="hidden" animate="visible" variants={stagger(0.07, 0.1)} className="space-y-3">
         {exp.highlights[language].map((h) => (
           <motion.li key={h} variants={rowRise} className="grid grid-cols-[1rem_1fr] gap-3 text-[0.95rem] leading-relaxed text-ink">
             <motion.span variants={drawLine} className="mt-[0.6rem] h-px w-3 origin-left bg-signal" aria-hidden="true" />
