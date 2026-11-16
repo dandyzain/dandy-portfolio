@@ -4,11 +4,13 @@ import { ArrowDown, FileText, Github, Linkedin, Mail } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import { useCopy } from '../hooks/useCopy';
 import { scrollToSection } from '../hooks/useActiveSection';
-import { duration, ease, rowRise, stagger } from '../lib/motion';
+import { duration, ease, pop, rowRise, stagger } from '../lib/motion';
 import Button from './ui/Button';
 import IconButton from './ui/IconButton';
 import Counter from './ui/Counter';
 import SplitText from './ui/SplitText';
+import ScrambleText from './ui/ScrambleText';
+import MarkedText from './ui/MarkedText';
 import Magnetic from './ui/Magnetic';
 import { useTilt } from '../hooks/usePointerFx';
 import { allProjects } from '../hooks/useProjects';
@@ -26,6 +28,29 @@ const PROOF_CELL = [
   'border-t lg:border-l lg:border-t-0 lg:pl-6',
   'border-l border-t pl-5 sm:pl-6 lg:border-t-0',
 ];
+
+/** Hand-drawn stroke under a headline word; draws itself after the words rise. */
+function HeadlineUnderline() {
+  return (
+    <svg
+      viewBox="0 0 200 14"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      className="pointer-events-none absolute -bottom-[0.06em] left-0 h-[0.22em] w-full overflow-visible"
+    >
+      <motion.path
+        d="M3 9 C 40 3, 78 3, 112 7 S 176 12, 197 5"
+        fill="none"
+        stroke="rgb(var(--c-amber))"
+        strokeWidth="4"
+        strokeLinecap="round"
+        vectorEffect="non-scaling-stroke"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1, transition: { duration: 0.7, ease: ease.out, delay: 1.05 } }}
+      />
+    </svg>
+  );
+}
 
 const CABLE = 'M-10 215 C 30 195, 40 145, 70 132 S 200 62, 262 72 S 318 84, 340 70 S 398 38, 420 30';
 
@@ -179,19 +204,36 @@ export default function Hero({ onOpenCVModal }) {
                 </span>
                 <span className="font-sans text-xs font-semibold">{h.status}</span>
               </span>
-              <span>{h.eyebrow}</span>
+              <ScrambleText lines={h.roles} />
             </motion.p>
 
             <h1 id="hero-heading" className="text-display-xl font-semibold" key={language}>
-              <SplitText text={h.titleA} trigger="mount" delay={0.12} step={0.06} className="block" />
+              <SplitText
+                text={h.titleA}
+                trigger="mount"
+                delay={0.12}
+                step={0.06}
+                className="block"
+                decorate={(word) => ({
+                  className: h.titleAccent.includes(word) ? 'text-accent' : undefined,
+                  after: word === h.titleUnderline ? <HeadlineUnderline /> : null,
+                })}
+              />
               <motion.span {...seq(2)} className="mt-4 block max-w-[30ch] text-display-md font-medium text-muted">
-                <span className="text-signal-ink" aria-hidden="true">— </span>
-                {h.titleB}
+                <motion.span
+                  aria-hidden="true"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1, transition: { duration: duration.slow, ease: ease.out, delay: 0.75 } }}
+                  className="inline-block origin-left text-signal-ink"
+                >
+                  —
+                </motion.span>{' '}
+                <MarkedText text={h.titleB} marks={h.titleBMarks} delay={1.25} step={0.35} markClassName="text-ink-2" />
               </motion.span>
             </h1>
 
             <motion.p {...seq(3)} className="mt-7 max-w-prose text-base leading-relaxed text-ink-2 sm:text-lg">
-              {h.lead}
+              <MarkedText text={h.lead} marks={h.leadTerms} variant="underline" delay={1.9} step={0.09} duration={0.45} markClassName="font-medium text-ink" />
             </motion.p>
 
             <motion.div {...seq(4)} className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -205,7 +247,13 @@ export default function Hero({ onOpenCVModal }) {
                   }}
                 >
                   {h.ctaWork}
-                  <ArrowDown size={17} aria-hidden="true" className="transition-transform duration-fast group-hover/btn:translate-y-0.5" />
+                  <motion.span
+                    aria-hidden="true"
+                    className="inline-flex"
+                    animate={{ y: [0, 4, 0], transition: { duration: 0.9, ease: 'easeInOut', delay: 2.6, repeat: Infinity, repeatDelay: 2.8 } }}
+                  >
+                    <ArrowDown size={17} />
+                  </motion.span>
                 </Button>
               </Magnetic>
               <Magnetic className="flex sm:inline-flex [&>*]:flex-1">
@@ -214,17 +262,19 @@ export default function Hero({ onOpenCVModal }) {
                   {h.ctaCV}
                 </Button>
               </Magnetic>
-              <div className="flex items-center gap-1 sm:ml-2">
-                <IconButton label="LinkedIn" href={personal.linkedin} variant="ghost">
-                  <Linkedin size={18} />
-                </IconButton>
-                <IconButton label="GitHub" href={personal.github} variant="ghost">
-                  <Github size={18} />
-                </IconButton>
-                <IconButton label="Email" href={`mailto:${personal.email}`} variant="ghost">
-                  <Mail size={18} />
-                </IconButton>
-              </div>
+              <motion.div initial="hidden" animate="visible" variants={stagger(0.08, 0.9)} className="flex items-center gap-1 sm:ml-2">
+                {[
+                  { label: 'LinkedIn', href: personal.linkedin, Icon: Linkedin },
+                  { label: 'GitHub', href: personal.github, Icon: Github },
+                  { label: 'Email', href: `mailto:${personal.email}`, Icon: Mail },
+                ].map(({ label, href, Icon }) => (
+                  <motion.span key={label} variants={pop} whileHover={{ y: -3, rotate: -8 }} whileTap={{ scale: 0.9 }} className="inline-flex">
+                    <IconButton label={label} href={href} variant="ghost">
+                      <Icon size={18} />
+                    </IconButton>
+                  </motion.span>
+                ))}
+              </motion.div>
             </motion.div>
           </div>
 
