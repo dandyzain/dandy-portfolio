@@ -68,6 +68,15 @@ Screenshot disimpan sebagai `public/projects/<proyek>/shot-<nama>-960.webp` dan 
 
 Analytics: aktifkan **Analytics** di dashboard Vercel (tab Analytics) agar page view tercatat.
 
+## 🔁 Mirror ke GitLab
+
+Setiap push ke `main` otomatis dikirim ke GitLab lewat `.github/workflows/mirror-gitlab.yml`. Sekali setup di GitHub → Settings → Secrets and variables → Actions:
+
+- Secret `GITLAB_TOKEN`: Personal Access Token GitLab dengan scope `write_repository`.
+- Variable `GITLAB_REPO` (opsional): `namespace/proyek` di gitlab.com, default `dandyzain.personal/dandy-portfolio`.
+
+Selama secret belum diisi, workflow dilewati tanpa error. Jalankan manual lewat tab **Actions → Mirror to GitLab → Run workflow**.
+
 ## 🛠️ Tech Stack
 
 - **Frontend**: React 18, Tailwind CSS, Framer Motion, Lucide React, pdf.js

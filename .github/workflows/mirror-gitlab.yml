@@ -1,0 +1,63 @@
+# Mirror this repository to GitLab on every push to main (and on demand).
+#
+# One-time setup (GitHub → Settings → Secrets and variables → Actions):
+#   Secret   GITLAB_TOKEN  GitLab Personal Access Token with scope `write_repository`
+#                          (GitLab → Preferences → Access tokens)
+#   Variable GITLAB_REPO   optional, "namespace/project" on gitlab.com
+#                          (default: dandyzain.personal/dandy-portfolio)
+#
+# If the GitLab project doesn't exist yet, GitLab creates it (private) on the
+# first push to your personal namespace. GitHub stays the source of truth: if
+# GitLab has commits GitHub doesn't, the push is rejected instead of overwriting
+# them — run the workflow manually with "force" to overwrite on purpose.
+
+name: Mirror to GitLab
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Overwrite GitLab's main if it has diverged
+        type: boolean
+        default: false
+
+concurrency:
+  group: mirror-gitlab
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check token
+        id: check
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+        run: |
+          if [ -z "$GITLAB_TOKEN" ]; then
+            echo "::notice::GITLAB_TOKEN secret is not set yet — skipping the GitLab mirror."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout full history
+        if: steps.check.outputs.skip != 'true'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to GitLab
+        if: steps.check.outputs.skip != 'true'
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          GITLAB_REPO: ${{ vars.GITLAB_REPO || 'dandyzain.personal/dandy-portfolio' }}
+          FORCE: ${{ github.event.inputs.force == 'true' && '--force' || '' }}
+        run: |
+          git remote add gitlab "https://oauth2:${GITLAB_TOKEN}@gitlab.com/${GITLAB_REPO}.git"
+          git push $FORCE gitlab HEAD:refs/heads/main
+          git push gitlab --tags
+          echo "::notice::Mirrored $(git rev-parse --short HEAD) to https://gitlab.com/${GITLAB_REPO}"
