@@ -47,6 +47,14 @@ export const uiCopy = {
       proofEmployer: 'currently at Telkom Group',
       coords: 'JAKARTA · 6.12°S 106.88°E',
       portraitAlt: 'Portrait of Dandy Rahmat Zain',
+      // Animated hero text: eyebrow lines decode in turn; accent words get the
+      // teal gradient; the underline word gets a drawn stroke; marks/terms get
+      // a highlighter sweep.
+      roles: ['Full Stack & Mobile Developer', 'Web GIS & Real-time Telemetry', 'RAG Search & AI Integration', 'Laravel · Vue · React · Flutter'],
+      titleAccent: ['mission-critical'],
+      titleUnderline: 'systems',
+      titleBMarks: ['submarine cable monitoring', 'mobile apps'],
+      leadTerms: ['GIS', 'real-time telemetry', 'Laravel', 'Vue', 'React', 'React Native', 'Flutter', 'Kotlin'],
     },
     about: {
       eyebrow: 'About',
@@ -216,6 +224,11 @@ export const uiCopy = {
       proofEmployer: 'saat ini di Telkom Group',
       coords: 'JAKARTA · 6.12°LS 106.88°BT',
       portraitAlt: 'Foto Dandy Rahmat Zain',
+      roles: ['Full Stack & Mobile Developer', 'Web GIS & Telemetri Real-time', 'Pencarian RAG & Integrasi AI', 'Laravel · Vue · React · Flutter'],
+      titleAccent: ['misi-kritis'],
+      titleUnderline: 'sistem',
+      titleBMarks: ['pemantauan kabel bawah laut', 'aplikasi mobile'],
+      leadTerms: ['GIS', 'telemetri real-time', 'Laravel', 'Vue', 'React', 'React Native', 'Flutter', 'Kotlin'],
     },
     about: {
       eyebrow: 'Tentang',

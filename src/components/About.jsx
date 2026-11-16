@@ -4,7 +4,7 @@ import { MapPin, Check } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import { useCopy } from '../hooks/useCopy';
 import { sectionIndex } from '../data/sections';
-import { reveal, stagger, viewportOnce } from '../lib/motion';
+import { pop, reveal, rowRise, stagger, viewportOnce } from '../lib/motion';
 import Section from './ui/Section';
 import Reveal from './ui/Reveal';
 
@@ -32,14 +32,23 @@ export default function About() {
 
           <div className="mt-10 border-t border-line pt-6">
             <h3 className="eyebrow mb-4">{ui.about.principles}</h3>
-            <ul className="grid gap-x-6 gap-y-3 sm:grid-cols-2">
+            <motion.ul
+              key={language}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={stagger(0.08, 0.1)}
+              className="grid gap-x-6 gap-y-3 sm:grid-cols-2"
+            >
               {t.about.principles.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm font-medium text-ink">
-                  <Check size={16} className="mt-0.5 shrink-0 text-signal-ink" aria-hidden="true" />
+                <motion.li key={item} variants={rowRise} className="flex items-start gap-2.5 text-sm font-medium text-ink">
+                  <motion.span variants={pop} className="mt-0.5 shrink-0">
+                    <Check size={16} className="text-signal-ink" aria-hidden="true" />
+                  </motion.span>
                   {item}
-                </li>
+                </motion.li>
               ))}
-            </ul>
+            </motion.ul>
           </div>
 
           <p className="mt-8 inline-flex items-center gap-2 text-sm text-muted">
@@ -53,6 +62,7 @@ export default function About() {
         <div className="lg:col-span-5">
           <h3 className="eyebrow mb-2">{ui.about.whatIDo}</h3>
           <motion.ol
+            key={language}
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
